@@ -1,9 +1,16 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import Header from "./components/commons/Header";
+import NfastCard from "./components/NfastCard";
 
 function App() {
   return (
     <div>
-      <h1>하이</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<NfastCard />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
