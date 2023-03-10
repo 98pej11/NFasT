@@ -1,7 +1,11 @@
 import React from "react";
 
 function App() {
-  return <div>하이루</div>;
+  return (
+    <div>
+      <h1>하이</h1>
+    </div>
+  );
 }
 
 export default App;
