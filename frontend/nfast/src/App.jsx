@@ -1,9 +1,17 @@
 import React from "react";
+// import { BrowserView, MobileView } from "react-device-detect";
+import Header from "./components/common/Header";
+import Mainpage from "./pages/mainpage";
 
 function App() {
   return (
     <div>
-      <h1>하이</h1>
+      <div>
+        <Header />
+      </div>
+      <div style={{ marginTop: "3%" }}>
+        <Mainpage />
+      </div>
     </div>
   );
 }
