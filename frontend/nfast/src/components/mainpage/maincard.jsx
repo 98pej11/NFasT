@@ -23,7 +23,7 @@ const cards = [
   },
 ];
 
-const maincard = () => {
+function MainCard() {
   return (
     <Grid container spacing={2}>
       {cards.map((card) => (
@@ -48,6 +48,6 @@ const maincard = () => {
       ))}
     </Grid>
   );
-};
+}
 
-export default maincard;
+export default MainCard;

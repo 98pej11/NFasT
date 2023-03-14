@@ -1,7 +1,7 @@
 import React from "react";
-import MainComp from "../components/mainpage/maincomp";
+import MainComp from "../components/mainpage/MainComp";
 
-function mainpage() {
+function MainPage() {
   return (
     <div>
       <MainComp />
@@ -9,4 +9,4 @@ function mainpage() {
   );
 }
 
-export default mainpage;
+export default MainPage;

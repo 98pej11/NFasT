@@ -1,7 +1,7 @@
 import React from "react";
-import MainCard from "./maincard";
+import MainCard from "./MainCard";
 
-function maincomp() {
+function MainComp() {
   return (
     <div>
       <h4>거리순</h4>
@@ -12,4 +12,4 @@ function maincomp() {
   );
 }
 
-export default maincomp;
+export default MainComp;
