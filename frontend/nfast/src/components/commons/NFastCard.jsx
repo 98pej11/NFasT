@@ -6,43 +6,57 @@ import CardImg from "../../assets/NFast_Card.png";
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
-  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
-const Card = styled.div`
+const Cards = styled.div`
+  position: relative;
   width: 100%;
   height: 100vh;
-  position: fixed;
-  top: 280px;
-  right: -250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
 const Img = styled.img`
   position: absolute;
 `;
 const TopText = styled.div`
   position: relative;
   color: lightCyan;
-  top: 20px;
+  top: -90px;
   left: 10px;
 `;
-const BottomText = styled(TopText)`
+const Qr = styled.div`
   position: relative;
-  top: 150px;
-  left: 100px;
+  top: 0
+  left: 10px;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+`;
+const BottomText = styled.div`
+  position: relative;
+  bottom: -85px;
+  left: -50px;
+  color: lightCyan;
 `;
 function NFastCard({ name, date, price }) {
   return (
     <Wrapper>
-      <Card>
+      <Cards>
         <Img src={CardImg} alt="car!" />
         <TopText>
           <h2>{name}</h2>
           <h3>{date}</h3>
         </TopText>
+        <Qr>큐알</Qr>
         <BottomText>
           <button type="button">확인</button>
           <div>{price} Eth</div>
         </BottomText>
-      </Card>
+      </Cards>
     </Wrapper>
   );
 }

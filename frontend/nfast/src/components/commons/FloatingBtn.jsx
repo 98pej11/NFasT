@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import FloatingIcon from "../assets/FloatingIcon.png";
-import NFastForUse from "./NFastForUse";
+import { Link } from "react-router-dom";
+import FloatingIcon from "../../assets/FloatingIcon.png";
+import FloatingCards from "./FloatingCards";
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
+  margin-top: 60px;
+  padding-bottom: 700px;
+  background-color: red;
 `;
-
 const Floating = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background-color: blue;
+`;
+const Cards = styled.div`
   width: 100%;
   height: 100vh;
   display: ${(props) => props.isDisplay};
@@ -17,13 +28,14 @@ const Floating = styled.div`
 const Btn = styled.button`
   background-color: transparent;
   border: none;
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
   &:hover {
     cursor: pointer;
     opacity: 80%;
   }
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+
   img {
     width: 80px;
     height: 80px;
@@ -42,12 +54,16 @@ function FloatingBtn() {
   };
   return (
     <Wrapper>
-      <Floating isDisplay={floating}>
-        <NFastForUse />
+      <Floating>
+        <Cards isDisplay={floating}>
+          <FloatingCards />
+        </Cards>
       </Floating>
       <Btn type="button" onClick={handleClick}>
         <img src={FloatingIcon} alt="floatingIcon" />
       </Btn>
+      <Link to="/nFastCard">Go to NFastCard</Link>
+      <Link to="/review">Go to review</Link>
     </Wrapper>
   );
 }

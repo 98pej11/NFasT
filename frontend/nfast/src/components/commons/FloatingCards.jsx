@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import NFastCard from "./commons/NFastCard";
+import NFastCard from "./NFastCard";
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +14,7 @@ const Cards = styled.div`
   position: fixed;
   top: 0;
 `;
-function NFastForUse() {
+function FloatingCards() {
   return (
     <Wrapper>
       <Cards>
@@ -26,4 +24,4 @@ function NFastForUse() {
   );
 }
 
-export default NFastForUse;
+export default FloatingCards;

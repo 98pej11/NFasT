@@ -1,10 +1,13 @@
 import React from "react";
+import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/commons/Header";
-// import NFastCard from "./components/commons/NFastCard";
-// import NFastForUse from "./components/NFastForUse";
+import Footer from "./components/commons/Footer";
+import NFastCard from "./components/commons/NFastCard";
+// import FloatingCards from "./components/FloatingCards";
 // import Header from "./components/commons/Header";
-import Main from "./pages/Main";
+import FloatingBtn from "./components/commons/FloatingBtn";
+import Review from "./pages/ReviewPage";
 
 function App() {
   return (
@@ -12,8 +15,11 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<FloatingBtn />} />
+          <Route path="/nFastCard" element={<NFastCard />} />
+          <Route path="/review" element={<Review />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

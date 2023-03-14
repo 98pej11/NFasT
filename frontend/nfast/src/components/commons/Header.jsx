@@ -4,10 +4,13 @@ import Logo from "../../assets/NFast_Logo.png";
 
 const Wrapper = styled.div`
   height: 60px;
+  width: 100%;
   background-color: #ffcb45;
   display: flex;
   align-items: center;
   padding: 10px;
+  position: fixed;
+  top: 0;
   img {
     margin-left: 10px;
     width: 50px;
