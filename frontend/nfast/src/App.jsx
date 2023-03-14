@@ -15,9 +15,14 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<FloatingBtn />} />
-          <Route path="/nFastCard" element={<NFastCard />} />
-          <Route path="/review" element={<Review />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/floating" element={<FloatingBtn />} />
+        <Route path="/nFastCard" element={<NFastCard />} />
+        <Route path="/review" element={<Review />} />
+        <Route path="/mynft" element={<MyNftPage />} />
+        <Route path="/mytrans" element={<MyTransPage />} />
+        <Route path="/mybookmark" element={<MyBookmarkPage />} />
+        <Route path="/myinfo" element={<MyInfoPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
