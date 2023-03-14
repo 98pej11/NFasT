@@ -13,8 +13,8 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/mynft" element={<MainPage />} />
-        <Route path="/" element={<MyNftPage />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/mynft" element={<MyNftPage />} />
         <Route path="/mytrans" element={<MyTransPage />} />
         <Route path="/mybookmark" element={<MyBookmarkPage />} />
         <Route path="/myinfo" element={<MyInfoPage />} />
