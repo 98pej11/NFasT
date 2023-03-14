@@ -1,15 +1,17 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 // import MenuIcon from "@mui/icons-material/Menu";
 import EditIcon from "@mui/icons-material/Edit";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+
 // import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
@@ -109,7 +111,11 @@ function Header() {
           </Typography>
 
           {/* 모바일화면 */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            component={Link}
+            to="/"
+          >
             {/* 로고이미지가 나와야되는데? */}
             <img src="logo.png" alt="logo" height="60px" />
           </Box>
@@ -141,20 +147,40 @@ function Header() {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose} disableRipple>
+              <MenuItem
+                onClick={handleClose}
+                component={Link}
+                to="/mynft"
+                disableRipple
+              >
                 <EditIcon />
                 나의 NFT
               </MenuItem>
-              <MenuItem onClick={handleClose} disableRipple>
+              <MenuItem
+                onClick={handleClose}
+                component={Link}
+                to="/mytrans"
+                disableRipple
+              >
                 <EditIcon />
                 거래 내역
               </MenuItem>
               <Divider sx={{ my: 0.5 }} />
-              <MenuItem onClick={handleClose} disableRipple>
+              <MenuItem
+                onClick={handleClose}
+                component={Link}
+                to="/mybookmark"
+                disableRipple
+              >
                 <EditIcon />
                 나의 북마크
               </MenuItem>
-              <MenuItem onClick={handleClose} disableRipple>
+              <MenuItem
+                onClick={handleClose}
+                component={Link}
+                to="/myinfo"
+                disableRipple
+              >
                 <EditIcon />
                 정보수정
               </MenuItem>
