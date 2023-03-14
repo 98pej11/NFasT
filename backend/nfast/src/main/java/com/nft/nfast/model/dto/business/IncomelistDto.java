@@ -18,7 +18,7 @@ public class IncomelistDto {
     private BigDecimal incomeListPrice;
     private Date incomeListDate;
     private Byte incomeListType;
-    private long ownerSequence;
+    private long storeSequence;
 
     public Incomelist toEntity(){
         Incomelist incomelist = Incomelist.builder()
@@ -26,7 +26,7 @@ public class IncomelistDto {
                 .incomeListPrice(incomeListPrice)
                 .incomeListDate(incomeListDate)
                 .incomeListType(incomeListType)
-                .ownerSequence(ownerSequence)
+                .storeSequence(storeSequence)
                 .build();
         return incomelist;
     }

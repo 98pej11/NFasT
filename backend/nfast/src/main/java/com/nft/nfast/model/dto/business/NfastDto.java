@@ -22,7 +22,7 @@ public class NfastDto {
     private long nfastTransactionCount;
     private BigDecimal nfastDefaultPrice;
     private String nfastQr;
-    private long ownerSequence;
+    private long storeSequence;
     private long userSequence;
 
     public Nfast toEntity(){
@@ -36,7 +36,7 @@ public class NfastDto {
                 .nfastTransactionCount(nfastTransactionCount)
                 .nfastDefaultPrice(nfastDefaultPrice)
                 .nfastQr(nfastQr)
-                .ownerSequence(ownerSequence)
+                .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
         return nfast;

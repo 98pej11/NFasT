@@ -17,22 +17,22 @@ public class Bookmark {
     private long bookmarkSequence;
 
     @Column(nullable = false)
-    private long ownerSequence;
+    private long storeSequence;
 
     @Column(nullable = false)
     private long userSequence;
 
     @Builder
-    public Bookmark(long bookmarkSequence, long ownerSequence, long userSequence) {
+    public Bookmark(long bookmarkSequence, long storeSequence, long userSequence) {
         this.bookmarkSequence = bookmarkSequence;
-        this.ownerSequence = ownerSequence;
+        this.storeSequence = storeSequence;
         this.userSequence = userSequence;
     }
 
     public BookmarkDto toDto(){
         BookmarkDto bookmarkDto = BookmarkDto.builder()
                 .bookmarkSequence(bookmarkSequence)
-                .ownerSequence(ownerSequence)
+                .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
         return bookmarkDto;

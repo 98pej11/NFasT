@@ -16,7 +16,7 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger reviewSequence;
+    private long reviewSequence;
 
     @Column(nullable = false)
     private int reviewTopic;
@@ -28,18 +28,18 @@ public class Review {
     private String reviewContent;
 
     @Column(nullable = false)
-    private BigInteger ownerSequence;
+    private long storeSequence;
 
     @Column
-    private BigInteger userSequence;
+    private long userSequence;
 
     @Builder
-    public Review(BigInteger reviewSequence, int reviewTopic, int reviewSubTopic, String reviewContent, BigInteger ownerSequence, BigInteger userSequence) {
+    public Review(long reviewSequence, int reviewTopic, int reviewSubTopic, String reviewContent, long storeSequence, long userSequence) {
         this.reviewSequence = reviewSequence;
         this.reviewTopic = reviewTopic;
         this.reviewSubTopic = reviewSubTopic;
         this.reviewContent = reviewContent;
-        this.ownerSequence = ownerSequence;
+        this.storeSequence = storeSequence;
         this.userSequence = userSequence;
     }
 
@@ -49,7 +49,7 @@ public class Review {
                 .reviewTopic(reviewTopic)
                 .reviewSubTopic(reviewSubTopic)
                 .reviewContent(reviewContent)
-                .ownerSequence(ownerSequence)
+                .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
         return reviewDto;

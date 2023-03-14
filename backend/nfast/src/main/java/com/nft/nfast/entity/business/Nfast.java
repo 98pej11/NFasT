@@ -47,13 +47,13 @@ public class Nfast {
     private String nfastQr;
 
     @Column
-    private long ownerSequence;
+    private long storeSequence;
 
     @Column
     private long userSequence;
 
     @Builder
-    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, long ownerSequence, long userSequence) {
+    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, long storeSequence, long userSequence) {
         this.nfastSequence = nfastSequence;
         this.nfastPrice = nfastPrice;
         this.nfastEigenvalue = nfastEigenvalue;
@@ -63,7 +63,7 @@ public class Nfast {
         this.nfastTransactionCount = nfastTransactionCount;
         this.nfastDefaultPrice = nfastDefaultPrice;
         this.nfastQr = nfastQr;
-        this.ownerSequence = ownerSequence;
+        this.storeSequence = storeSequence;
         this.userSequence = userSequence;
     }
 
@@ -78,7 +78,7 @@ public class Nfast {
                 .nfastTransactionCount(nfastTransactionCount)
                 .nfastDefaultPrice(nfastDefaultPrice)
                 .nfastQr(nfastQr)
-                .ownerSequence(ownerSequence)
+                .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
         return nfastDto;

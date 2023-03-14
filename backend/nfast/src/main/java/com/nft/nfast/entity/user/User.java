@@ -17,7 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger userSequence;
+    private long userSequence;
 
     @Column(nullable = false)
     private String userWallet;
@@ -30,7 +30,7 @@ public class User {
     private String userNickname;
 
     @Builder
-    public User(BigInteger userSequence, String userWallet, String userImage, String userNickname) {
+    public User(long userSequence, String userWallet, String userImage, String userNickname) {
         this.userSequence = userSequence;
         this.userWallet = userWallet;
         this.userImage = userImage;

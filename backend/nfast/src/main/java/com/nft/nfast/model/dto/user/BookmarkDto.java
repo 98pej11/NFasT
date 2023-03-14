@@ -11,13 +11,13 @@ import lombok.*;
 @Builder
 public class BookmarkDto {
     private long bookmarkSequence;
-    private long ownerSequence;
+    private long storeSequence;
     private long userSequence;
 
     public Bookmark toEntity(){
         Bookmark bookmark = Bookmark.builder()
                 .bookmarkSequence(bookmarkSequence)
-                .ownerSequence(ownerSequence)
+                .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
         return bookmark;

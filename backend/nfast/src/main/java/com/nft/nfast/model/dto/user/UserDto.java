@@ -14,7 +14,7 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @Builder
 public class UserDto {
-    private BigInteger userSequence;
+    private long userSequence;
     private String userWallet;
     private String userImage;
     private String userNickname;

@@ -12,12 +12,12 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @Builder
 public class ReviewDto {
-    private BigInteger reviewSequence;
+    private long reviewSequence;
     private int reviewTopic;
     private int reviewSubTopic;
     private String reviewContent;
-    private BigInteger ownerSequence;
-    private BigInteger userSequence;
+    private long storeSequence;
+    private long userSequence;
 
     public Review toEntity(){
         Review review = Review.builder()
@@ -25,7 +25,7 @@ public class ReviewDto {
                 .reviewTopic(reviewTopic)
                 .reviewSubTopic(reviewSubTopic)
                 .reviewContent(reviewContent)
-                .ownerSequence(ownerSequence)
+                .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
         return review;
