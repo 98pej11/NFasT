@@ -6,3 +6,4 @@
     - [API명세서](./명세서/API명세서.md)
     - [ERD](./ERD/NFasT%20v1.0.png)
     - [IPFS 학습](./IPFS 학습/IPFS학습.md)
+    - [스켈레톤학습](./명세서/스켈레톤학습.md)
