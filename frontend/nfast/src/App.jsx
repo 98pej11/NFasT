@@ -3,16 +3,17 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/commons/Header";
 import Footer from "./components/commons/Footer";
-import NFastCard from "./components/commons/NFastCard";
+import NFastCard from "./components/floating/NFastCard";
 // import FloatingCards from "./components/FloatingCards";
 // import Header from "./components/commons/Header";
-import FloatingBtn from "./components/commons/FloatingBtn";
+import FloatingBtn from "./components/floating/FloatingBtn";
 import Review from "./pages/ReviewPage";
 import MyNftPage from "./pages/MyNftPage";
 import MyTransPage from "./pages/MyTransPage";
 import MyBookmarkPage from "./pages/MyBookmarkPage";
 import MainPage from "./pages/Mainpage";
 import MyInfoPage from "./pages/MyInfoPage";
+import StorePage from "./pages/StorePage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/mytrans" element={<MyTransPage />} />
           <Route path="/mybookmark" element={<MyBookmarkPage />} />
           <Route path="/myinfo" element={<MyInfoPage />} />
+          <Route path="/store" element={<StorePage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
