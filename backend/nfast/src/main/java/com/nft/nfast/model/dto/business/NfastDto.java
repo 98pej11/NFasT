@@ -1,6 +1,7 @@
 package com.nft.nfast.model.dto.business;
 
 import com.nft.nfast.entity.business.Nfast;
+import com.nft.nfast.entity.business.Store;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -22,7 +23,7 @@ public class NfastDto {
     private long nfastTransactionCount;
     private BigDecimal nfastDefaultPrice;
     private String nfastQr;
-    private long storeSequence;
+    private Store storeSequence;
     private long userSequence;
 
     public Nfast toEntity(){
