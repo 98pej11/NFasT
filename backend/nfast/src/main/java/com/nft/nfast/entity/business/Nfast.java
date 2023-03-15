@@ -8,7 +8,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+<<<<<<< Updated upstream
 import org.springframework.format.annotation.DateTimeFormat;
+=======
+import org.hibernate.annotations.DynamicUpdate;
+>>>>>>> Stashed changes
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -18,7 +22,12 @@ import java.util.Date;
 @Setter
 @Entity
 @NoArgsConstructor
+<<<<<<< Updated upstream
 @Table(name = "nfast")
+=======
+@Builder
+@DynamicUpdate
+>>>>>>> Stashed changes
 public class Nfast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

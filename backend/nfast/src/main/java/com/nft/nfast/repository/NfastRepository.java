@@ -1,6 +1,7 @@
 package com.nft.nfast.repository;
 
 import com.nft.nfast.entity.business.Nfast;
+<<<<<<< Updated upstream
 import com.nft.nfast.model.dto.business.NfastPurchase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,3 +21,17 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
     List<NfastPurchase> findAllByNfastDate(String nfastDate);
 
 }
+=======
+import com.nft.nfast.entity.business.Store;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface NfastRepository extends JpaRepository<Nfast,Long> {
+
+}
+
+>>>>>>> Stashed changes
