@@ -5,3 +5,4 @@
     - [요구사항명세서](./명세서/요구사항명세서.md) 
     - [API명세서](./명세서/API명세서.md)
     - [ERD](./ERD/NFasT%20v1.0.png)
+    - [IPFS 학습](./IPFS 학습/IPFS학습.md)
