@@ -1,5 +1,6 @@
 package com.nft.nfast.entity.business;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nft.nfast.model.dto.business.NfastDto;
 import com.nft.nfast.model.dto.business.NfastGetDto;
 import lombok.Builder;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

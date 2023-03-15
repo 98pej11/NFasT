@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public interface NfastPurchase {
-    BigDecimal getMinPrice();
+    BigDecimal getPrice();
     Date getNfastDate();
     int getAmount();
 }

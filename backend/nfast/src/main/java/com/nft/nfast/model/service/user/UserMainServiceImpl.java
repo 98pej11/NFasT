@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -57,7 +58,22 @@ public class UserMainServiceImpl implements UserMainService{
         for(NfastPurchase nfast: nfasts){
             nfastPurchaseDtoList.add(NfastPurchaseDto.builder()
                     .nfastDate(nfast.getNfastDate().toString())
-                    .nfastPrice(nfast.getMinPrice())
+                    .nfastPrice(nfast.getPrice())
+                    .amount(nfast.getAmount())
+                    .build());
+        }
+        return nfastPurchaseDtoList;
+    }
+
+    @Override
+    public List<NfastPurchaseDto> findAllByNfastDate(String nfastDate) {
+        List<NfastPurchase> nfasts = nfastRepository.findAllByNfastDate(nfastDate);
+        System.out.println("NFASTS "+nfasts);
+        List<NfastPurchaseDto> nfastPurchaseDtoList = new ArrayList<>();
+        for(NfastPurchase nfast: nfasts){
+            nfastPurchaseDtoList.add(NfastPurchaseDto.builder()
+                    .nfastDate(nfast.getNfastDate().toString())
+                    .nfastPrice(nfast.getPrice())
                     .amount(nfast.getAmount())
                     .build());
         }

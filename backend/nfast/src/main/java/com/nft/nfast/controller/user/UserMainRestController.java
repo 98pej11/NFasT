@@ -9,10 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -46,6 +44,16 @@ public class UserMainRestController {
     public ResponseEntity<Map<String,Object>> availableNftList(@PathVariable long store_sequence){
         List<NfastPurchaseDto> nfastPurchaseDtoList = userMainService.findPurchaseNfast(store_sequence);
         Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result",SUCCESS);
+        resultMap.put("NFasT",nfastPurchaseDtoList);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/store/{store_sequence}/purchase/detail")
+    public ResponseEntity<Map<String,Object>> availableNftDateList(@PathVariable long store_sequence, @RequestBody NfastDto nfast){
+        SimpleDateFormat tranSimpleFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+        List<NfastPurchaseDto> nfastPurchaseDtoList = userMainService.findAllByNfastDate(tranSimpleFormat.format(nfast.getNfastDate()));
+        Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
         resultMap.put("NFasT",nfastPurchaseDtoList);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
