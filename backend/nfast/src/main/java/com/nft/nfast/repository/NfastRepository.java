@@ -20,3 +20,4 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
     List<NfastPurchase> findAllByNfastDate(String nfastDate);
 
 }
+
