@@ -27,17 +27,20 @@ public class Nfast {
     @Column(nullable = false)
     private BigDecimal nfastPrice;
 
+    @Column
+    private BigDecimal nfastHopePrice;
+
     @Column(nullable = false)
     private String nfastEigenvalue;
 
     @Column(nullable = false)
     private Date nfastDate;
 
-    @Column
+    @Column(columnDefinition = "TINYINT")
     @ColumnDefault("0")
     private Byte nfastUseState;
 
-    @Column
+    @Column(columnDefinition = "TINYINT")
     @ColumnDefault("0")
     private Byte nfastSaleState;
 
@@ -59,9 +62,10 @@ public class Nfast {
     private Store storeSequence;
 
     @Builder
-    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, Store storeSequence, long userSequence) {
+    public Nfast(long nfastSequence, BigDecimal nfastPrice, BigDecimal nfastHopePrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, Store storeSequence, long userSequence) {
         this.nfastSequence = nfastSequence;
         this.nfastPrice = nfastPrice;
+        this.nfastHopePrice = nfastHopePrice;
         this.nfastEigenvalue = nfastEigenvalue;
         this.nfastDate = nfastDate;
         this.nfastUseState = nfastUseState;
@@ -77,6 +81,7 @@ public class Nfast {
         NfastDto nfastDto = NfastDto.builder()
                 .nfastSequence(nfastSequence)
                 .nfastPrice(nfastPrice)
+                .nfastHopePrice(nfastHopePrice)
                 .nfastEigenvalue(nfastEigenvalue)
                 .nfastDate(nfastDate)
                 .nfastUseState(nfastUseState)
