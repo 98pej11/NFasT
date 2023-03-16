@@ -2,7 +2,7 @@ import React from "react";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/commons/Header";
-import Footer from "./components/commons/Footer";
+// import Footer from "./components/commons/Footer";
 import NFastCard from "./components/commons/NFastCard";
 // import FloatingCards from "./components/FloatingCards";
 // import Header from "./components/commons/Header";
@@ -29,7 +29,7 @@ function App() {
           <Route path="/mybookmark" element={<MyBookmarkPage />} />
           <Route path="/myinfo" element={<MyInfoPage />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   );
