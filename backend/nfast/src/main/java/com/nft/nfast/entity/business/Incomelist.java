@@ -21,6 +21,9 @@ public class Incomelist {
     private long incomeListSequence;
 
     @Column(nullable = false)
+    private String incomeListTransaction;
+
+    @Column(nullable = false)
     private BigDecimal incomeListPrice;
 
     @Column(nullable = false)
@@ -33,8 +36,9 @@ public class Incomelist {
     private long storeSequence;
 
     @Builder
-    public Incomelist(long incomeListSequence, BigDecimal incomeListPrice, Date incomeListDate, Byte incomeListType, long storeSequence) {
+    public Incomelist(long incomeListSequence, String incomeListTransaction,BigDecimal incomeListPrice, Date incomeListDate, Byte incomeListType, long storeSequence) {
         this.incomeListSequence = incomeListSequence;
+        this.incomeListTransaction=incomeListTransaction;
         this.incomeListPrice = incomeListPrice;
         this.incomeListDate = incomeListDate;
         this.incomeListType = incomeListType;
@@ -44,6 +48,7 @@ public class Incomelist {
     public IncomelistDto toDto(){
         IncomelistDto incomelistDto = IncomelistDto.builder()
                 .incomeListSequence(incomeListSequence)
+                .incomeListTransaction(incomeListTransaction)
                 .incomeListPrice(incomeListPrice)
                 .incomeListDate(incomeListDate)
                 .incomeListType(incomeListType)

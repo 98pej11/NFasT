@@ -2,6 +2,7 @@ package com.nft.nfast.controller.business;
 
 import com.nft.nfast.model.dto.business.NfastMintDto;
 import com.nft.nfast.model.dto.business.StoreFindDto;
+import com.nft.nfast.model.dto.business.StoreIncomeDto;
 import com.nft.nfast.model.service.store.StoreMainService;
 import com.nft.nfast.model.service.user.UserMainServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -27,17 +28,19 @@ public class StoreMainRestController {
 
     // 가게 NFast 발행
     @PostMapping("/{store_sequence}/mint")
-    public ResponseEntity<String> mintNfast(@RequestBody NfastMintDto mintDto, @PathVariable String store_sequence){
-//        log.info( mintDto.getStoreSequence());
-        System.out.println("check1 "+mintDto.getStoreWallet());
-        System.out.println("check22 "+store_sequence);
-
+    public ResponseEntity<String> mintNfast(@RequestBody NfastMintDto mintDto, @PathVariable Long store_sequence){
         storeMainService.saveNfast(mintDto);
-//        Map<String, Object> resultMap = new HashMap<>();
-//        resultMap.put("result",SUCCESS);
-//        resultMap.put("stores",null);
         String result=SUCCESS;
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("{store_sequence}/incomes")
+    public ResponseEntity<Map<String, Object>> incomeList(@PathVariable Long store_sequence){
+        Map<String, Object> resultMap = new HashMap<>();
+        List<StoreIncomeDto> incomeGetDtoList=storeMainService.findAllIncomes(store_sequence);
+
+        resultMap.put("result", SUCCESS);
+        resultMap.put("incomes", incomeGetDtoList);
+        return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+    }
 }
