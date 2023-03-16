@@ -1,21 +1,19 @@
 package com.nft.nfast.entity.business;
 
-import com.nft.nfast.model.dto.business.IncomelistDto;
+import com.nft.nfast.model.dto.business.IncomeListDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import software.amazon.ion.Decimal;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 
 @Getter
 @Entity
 @NoArgsConstructor
 @Builder
-public class Incomelist {
+public class IncomeList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long incomeListSequence;
@@ -36,7 +34,7 @@ public class Incomelist {
     private long storeSequence;
 
     @Builder
-    public Incomelist(long incomeListSequence, String incomeListTransaction,BigDecimal incomeListPrice, Date incomeListDate, Byte incomeListType, long storeSequence) {
+    public IncomeList(long incomeListSequence, String incomeListTransaction, BigDecimal incomeListPrice, Date incomeListDate, Byte incomeListType, long storeSequence) {
         this.incomeListSequence = incomeListSequence;
         this.incomeListTransaction=incomeListTransaction;
         this.incomeListPrice = incomeListPrice;
@@ -45,15 +43,15 @@ public class Incomelist {
         this.storeSequence = storeSequence;
     }
 
-    public IncomelistDto toDto(){
-        IncomelistDto incomelistDto = IncomelistDto.builder()
-                .incomeListSequence(incomeListSequence)
-                .incomeListTransaction(incomeListTransaction)
-                .incomeListPrice(incomeListPrice)
-                .incomeListDate(incomeListDate)
-                .incomeListType(incomeListType)
-                .storeSequence(storeSequence)
-                .build();
-        return incomelistDto;
-    }
+//    public IncomelistDto toDto(){
+//        IncomelistDto incomelistDto = IncomelistDto.builder()
+//                .incomeListSequence(incomeListSequence)
+//                .incomeListTransaction(incomeListTransaction)
+//                .incomeListPrice(incomeListPrice)
+//                .incomeListDate(incomeListDate)
+//                .incomeListType(incomeListType)
+//                .storeSequence(storeSequence)
+//                .build();
+//        return incomelistDto;
+//    }
 }

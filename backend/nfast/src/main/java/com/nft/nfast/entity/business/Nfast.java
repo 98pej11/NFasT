@@ -38,8 +38,8 @@ public class Nfast {
     private Byte nfastUseState;
 
     @Column
-    @ColumnDefault("0")
-    private Byte nfastSaleState;
+    @ColumnDefault(0)
+    private int nfastSaleState;
 
     @Column
     @ColumnDefault("0")
