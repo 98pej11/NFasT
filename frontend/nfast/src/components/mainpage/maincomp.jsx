@@ -1,5 +1,5 @@
 import React from "react";
-import MainCard from "./Maincard";
+import MainCard from "./MainCard";
 
 function MainComp() {
   return (

@@ -1,7 +1,12 @@
-import React from "react";
+import * as React from "react";
+import MyTrans from "../components/mypage/MyTrans";
 
 function MyTransPage() {
-  return <div> </div>;
+  return (
+    <div>
+      <MyTrans />
+    </div>
+  );
 }
 
 export default MyTransPage;
