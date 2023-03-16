@@ -4,7 +4,7 @@ import { Global } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { grey } from "@mui/material/colors";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
@@ -12,16 +12,16 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import PurchaseModal from "./PurchaseModal";
 
 const drawerBleeding = 56;
-const StyleBtn = styled(Button)`
-  margin: 17%;
-  Button {
-    width: 150px;
-    height: 60px;
-    background-color: #ffcb45;
-    color: black;
-    font-size: 20px;
-  }
-`;
+// const StyleBtn = styled(Button)`
+//   margin: 17%;
+//   Button {
+//     width: 150px;
+//     height: 60px;
+//     background-color: #ffcb45;
+//     color: black;
+//     font-size: 20px;
+//   }
+// `;
 const Root = styled("div")(({ theme }) => ({
   height: "100%",
   backgroundColor:
@@ -68,7 +68,7 @@ function SwipeableEdgeDrawer(props) {
         }}
       />
       <Box sx={{ textAlign: "center", pt: 1 }}>
-        <StyleBtn onClick={toggleDrawer(true)}>구매하기</StyleBtn>
+        <Box onClick={toggleDrawer(true)}>구매하기</Box>
       </Box>
       <SwipeableDrawer
         container={container}
