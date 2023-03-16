@@ -73,7 +73,7 @@ export default function StickyHeadTable() {
   return (
     <div>
       <Styledh2>
-        <h3>거래 금액</h3>
+        <h3>거래 내역</h3>
       </Styledh2>
       <Filter>
         <FormControl sx={{ m: 1, width: 150, mt: 1 }}>
