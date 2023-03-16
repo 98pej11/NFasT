@@ -10,7 +10,7 @@ import KakaoMap from "../components/storepage/KakaoMap";
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
-  height: 2000px;
+  height: 1500px;
   display: flex;
   flex-direction: column;
   align-items: center;

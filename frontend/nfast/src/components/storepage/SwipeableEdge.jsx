@@ -4,12 +4,13 @@ import { Global } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { grey } from "@mui/material/colors";
-// import Button from "@mui/material/Button";
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Skeleton from "@mui/material/Skeleton";
+// import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import PurchaseModal from "./PurchaseModal";
+import PurchaseList from "./PurchaseList";
 
 const drawerBleeding = 56;
 // const StyleBtn = styled(Button)`
@@ -68,7 +69,12 @@ function SwipeableEdgeDrawer(props) {
         }}
       />
       <Box sx={{ textAlign: "center", pt: 1 }}>
-        <Box onClick={toggleDrawer(true)}>구매하기</Box>
+        <Box onClick={toggleDrawer(true)}>
+          {" "}
+          <Button variant="contained" disableElevation>
+            구매하기
+          </Button>
+        </Box>
       </Box>
       <SwipeableDrawer
         container={container}
@@ -95,7 +101,7 @@ function SwipeableEdgeDrawer(props) {
         >
           <Puller />
           <Typography sx={{ p: 2, color: "text.secondary" }}>
-            구매하기
+            <Box sx={{ textAlign: "center", pt: 1 }}>&nbsp;</Box>
           </Typography>
         </StyledBox>
         <StyledBox
@@ -106,8 +112,12 @@ function SwipeableEdgeDrawer(props) {
             overflow: "auto",
           }}
         >
+          <h2>날짜 선택</h2>
           <PurchaseModal />
-          <Skeleton variant="rectangular" height="100%" />
+          <h2>상품 선택</h2>
+          <PurchaseModal />
+          <h2>장바구니</h2>
+          <PurchaseList />
         </StyledBox>
       </SwipeableDrawer>
     </Root>

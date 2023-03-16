@@ -95,26 +95,28 @@ function Header() {
           disableGutters
           sx={{ height: "80px", display: "flex", alignItems: "center" }}
         >
-          {/* 웹 로고 */}
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-
+          {" "}
+          <Link to="login">
+            {/* 웹 로고 */}
+            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              LOGO
+            </Typography>
+          </Link>
           {/* 모바일화면 */}
           <Box
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
@@ -122,9 +124,9 @@ function Header() {
             to="/"
           >
             {/* 로고이미지가 나와야되는데? */}
+
             <img src="logo.png" alt="logo" height="60px" />
           </Box>
-
           {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -136,7 +138,6 @@ function Header() {
               </Button>
             ))}
           </Box> */}
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleClick} sx={{ p: 0 }}>
