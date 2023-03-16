@@ -11,8 +11,9 @@ import Review from "./pages/ReviewPage";
 import MyNftPage from "./pages/MyNftPage";
 import MyTransPage from "./pages/MyTransPage";
 import MyBookmarkPage from "./pages/MyBookmarkPage";
-import MainPage from "./pages/MainPage";
+import MainPage from "./pages/Mainpage";
 import MyInfoPage from "./pages/MyInfoPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/mytrans" element={<MyTransPage />} />
           <Route path="/mybookmark" element={<MyBookmarkPage />} />
           <Route path="/myinfo" element={<MyInfoPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
