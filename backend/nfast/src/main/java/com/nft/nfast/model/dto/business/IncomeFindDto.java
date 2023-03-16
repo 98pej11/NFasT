@@ -18,5 +18,4 @@ public class IncomeFindDto {
     private Date incomeListDate;
     private Byte incomeListType;
 
-
 }
