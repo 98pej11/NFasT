@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 const Styledh2 = styled.div`
   text-align: center;
   margin: 10%;
-  h2 {
+  h3 {
     margin-bottom: 50px;
   }
   p {
@@ -32,7 +32,7 @@ function MyInfo() {
   return (
     <div>
       <Styledh2>
-        <h2>정보 수정</h2>
+        <h3>정보 수정</h3>
         <IconButton sx={{ width: 200, height: 200 }}>
           <Avatar
             alt="Remy Sharp"
