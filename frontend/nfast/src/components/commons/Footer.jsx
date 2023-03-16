@@ -10,8 +10,7 @@ const Wrapper = styled.div`
   padding: 20px;
   display: flex;
   justify-content: flex-right;
-  background-color: blue;
-
+  background-color: whitesmoke;
   img {
     margin-left: 10px;
     padding-bottom: 10px;
