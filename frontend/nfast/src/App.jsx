@@ -11,7 +11,7 @@ import Review from "./pages/ReviewPage";
 import MyNftPage from "./pages/MyNftPage";
 import MyTransPage from "./pages/MyTransPage";
 import MyBookmarkPage from "./pages/MyBookmarkPage";
-import MainPage from "./pages/Mainpage";
+import MainPage from "./pages/MainPage";
 import MyInfoPage from "./pages/MyInfoPage";
 
 function App() {
