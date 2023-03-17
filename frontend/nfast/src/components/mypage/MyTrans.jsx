@@ -49,14 +49,9 @@ const rows = [
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
   const Styledh2 = styled.div`
     text-align: center;
     margin-top: 10%;
-    p {
-      font-size: 22px;
-      margin-top: 50px;
-    }
   `;
   const Filter = styled.div`
     float: right;
@@ -69,14 +64,13 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
   return (
     <div>
       <Styledh2>
-        <h3>거래 내역</h3>
+        <h4>거래 내역</h4>
       </Styledh2>
       <Filter>
-        <FormControl sx={{ m: 1, width: 150, mt: 1 }}>
+        <FormControl sx={{ m: 1, width: 150 }}>
           <Select>
             <MenuItem disabled value="">
               <em>filter</em>

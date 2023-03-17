@@ -33,12 +33,10 @@ function MyNft() {
         )}
         {selectedTabIndex === 1 && (
           <div>
-            <div>
-              <MyNftCard2 />
-              <MyNftCard2 />
-              <MyNftCard2 />
-              <MyNftCard2 />
-            </div>
+            <MyNftCard2 />
+            <MyNftCard2 />
+            <MyNftCard2 />
+            <MyNftCard2 />
           </div>
         )}
       </Box>
