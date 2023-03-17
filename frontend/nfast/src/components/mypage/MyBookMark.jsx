@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+// import Stack from "@mui/material/Stack";
 import MainCard from "../mainpage/MainCard";
 
 function MyBookmark() {
@@ -10,8 +10,10 @@ function MyBookmark() {
     margin: 10%;
   `;
   const Pag = styled.div`
-    text-align: center;
-    margin: 10%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    spacing: 2;
   `;
   return (
     <div>
@@ -21,9 +23,7 @@ function MyBookmark() {
       <MainCard />
       <MainCard />
       <Pag>
-        <Stack spacing={2}>
-          <Pagination count={10} variant="outlined" color="secondary" />
-        </Stack>
+        <Pagination count={10} variant="outlined" color="secondary" />
       </Pag>
     </div>
   );

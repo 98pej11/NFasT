@@ -27,8 +27,20 @@ function MainCard() {
   return (
     <Grid container spacing={2}>
       {cards.map((card) => (
-        <Grid item xs={12} sm={4} md={4}>
-          <Card sx={{ maxWidth: 345 }}>
+        <Grid
+          item
+          xs={12}
+          sm={4}
+          md={4}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Card
+            sx={{
+              maxWidth: 345,
+            }}
+          >
             <CardMedia
               component="img"
               height="140"

@@ -6,16 +6,20 @@ import Divider from "@mui/material/Divider";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+// import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 // import MenuIcon from "@mui/icons-material/Menu";
 import EditIcon from "@mui/icons-material/Edit";
 import Container from "@mui/material/Container";
-
+import ListItemIcon from "@mui/material/ListItemIcon";
 // import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+// import AdbIcon from "@mui/icons-material/Adb";
+import Logout from "@mui/icons-material/Logout";
 import { styled, alpha } from "@mui/material/styles";
 
 // const pages = ["Products", "Pricing", "Blog"];
@@ -91,24 +95,6 @@ function Header() {
           sx={{ height: "80px", display: "flex", alignItems: "center" }}
         >
           {/* 웹 로고 */}
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
 
           {/* 모바일화면 */}
           <Box
@@ -153,7 +139,9 @@ function Header() {
                 to="/mynft"
                 disableRipple
               >
-                <EditIcon />
+                <ListItemIcon>
+                  <MonetizationOnIcon fontSize="small" />
+                </ListItemIcon>
                 나의 NFT
               </MenuItem>
               <MenuItem
@@ -162,7 +150,9 @@ function Header() {
                 to="/mytrans"
                 disableRipple
               >
-                <EditIcon />
+                <ListItemIcon>
+                  <ReceiptIcon fontSize="small" />
+                </ListItemIcon>
                 거래 내역
               </MenuItem>
               <Divider sx={{ my: 0.5 }} />
@@ -172,7 +162,9 @@ function Header() {
                 to="/mybookmark"
                 disableRipple
               >
-                <EditIcon />
+                <ListItemIcon>
+                  <BookmarkAddIcon fontSize="small" />
+                </ListItemIcon>
                 나의 북마크
               </MenuItem>
               <MenuItem
@@ -181,11 +173,15 @@ function Header() {
                 to="/myinfo"
                 disableRipple
               >
-                <EditIcon />
+                <ListItemIcon>
+                  <EditIcon fontSize="small" />
+                </ListItemIcon>
                 정보수정
               </MenuItem>
               <MenuItem onClick={handleClose} disableRipple>
-                <EditIcon />
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
                 로그아웃
               </MenuItem>
             </StyledMenu>
