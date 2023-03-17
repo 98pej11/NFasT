@@ -26,7 +26,6 @@ import { styled, alpha } from "@mui/material/styles";
 //   "정보 수정",
 //   "로그아웃",
 // ];
-
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -83,7 +82,13 @@ function Header() {
   return (
     <AppBar
       position="static"
-      style={{ backgroundColor: "#FFCB45", height: "80px" }}
+      sx={{
+        backgroundColor: "#FFCB45",
+        height: "80px",
+        width: "100%",
+        position: "fixed",
+        top: 0,
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar
@@ -112,7 +117,6 @@ function Header() {
               LOGO
             </Typography>
           </Link>
-
           {/* 모바일화면 */}
           <Box
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
@@ -124,7 +128,6 @@ function Header() {
               <img src="logo.png" alt="logo" height="60px" />
             </Link>
           </Box>
-
           {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -136,7 +139,6 @@ function Header() {
               </Button>
             ))}
           </Box> */}
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleClick} sx={{ p: 0 }}>
