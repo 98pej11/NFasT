@@ -30,7 +30,6 @@ import { styled, alpha } from "@mui/material/styles";
 //   "정보 수정",
 //   "로그아웃",
 // ];
-
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -87,7 +86,13 @@ function Header() {
   return (
     <AppBar
       position="static"
-      style={{ backgroundColor: "#FFCB45", height: "80px" }}
+      sx={{
+        backgroundColor: "#FFCB45",
+        height: "80px",
+        width: "100%",
+        position: "fixed",
+        top: 0,
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar
@@ -95,7 +100,27 @@ function Header() {
           sx={{ height: "80px", display: "flex", alignItems: "center" }}
         >
           {/* 웹 로고 */}
+          <Link to="/login">
+            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
 
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              LOGO
+            </Typography>
+          </Link>
           {/* 모바일화면 */}
           <Box
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
@@ -103,9 +128,10 @@ function Header() {
             to="/"
           >
             {/* 로고이미지가 나와야되는데? */}
-            <img src="logo.png" alt="logo" height="60px" />
+            <Link to="/login">
+              <img src="logo.png" alt="logo" height="60px" />
+            </Link>
           </Box>
-
           {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -117,7 +143,6 @@ function Header() {
               </Button>
             ))}
           </Box> */}
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleClick} sx={{ p: 0 }}>

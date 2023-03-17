@@ -1,5 +1,5 @@
 import * as React from "react";
-import MyTrans from "../components/mypage/MyTrans";
+import MyTrans from "../../components/mypage/MyTrans";
 
 function MyTransPage() {
   return (
