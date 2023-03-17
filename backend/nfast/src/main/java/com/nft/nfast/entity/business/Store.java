@@ -5,15 +5,19 @@ import com.nft.nfast.model.dto.business.StoreFindDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
-@Builder
+@Table(name="store")
 public class Store {
 
     @Id
@@ -52,6 +56,14 @@ public class Store {
 
     @Column(nullable = false, length = 25)
     private String storeLng;
+
+//    @OneToMany(mappedBy = "storeSequence", cascade = CascadeType.ALL)
+//    private List<Nfast> nfasts = new ArrayList<>();
+
+//    public void addStudent(Student student){
+//        this.students.add(student);
+//        student.updateSchool(this);
+//    }
 
     @Builder
     public Store(long storeSequence, String storeWallet, String storeName, String storeCategory, String storeAddress, String storePhone, String storeImage, String storeDetail, String storeOfficeHours, Date storeDate, String storeLat, String storeLng) {

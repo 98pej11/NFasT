@@ -1,18 +1,23 @@
 package com.nft.nfast.entity.business;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nft.nfast.model.dto.business.NfastDto;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.nft.nfast.model.dto.business.NfastGetDto;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "nfast")
+@DynamicUpdate
 @Builder
 public class Nfast {
     @Id
@@ -47,13 +52,14 @@ public class Nfast {
     private String nfastQr;
 
     @Column
-    private long storeSequence;
-
-    @Column
     private long userSequence;
 
+    @ManyToOne
+    @JoinColumn(name="store_sequence", referencedColumnName = "storeSequence")
+    private Store storeSequence;
+
     @Builder
-    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, long storeSequence, long userSequence) {
+    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, Store storeSequence, long userSequence) {
         this.nfastSequence = nfastSequence;
         this.nfastPrice = nfastPrice;
         this.nfastEigenvalue = nfastEigenvalue;
@@ -82,5 +88,17 @@ public class Nfast {
                 .userSequence(userSequence)
                 .build();
         return nfastDto;
+    }
+
+    public NfastGetDto toGetDto(){
+        NfastGetDto nfastGetDto = NfastGetDto.builder()
+                .nfastSequence(nfastSequence)
+                .nfastPrice(nfastPrice)
+                .nfastEigenvalue(nfastEigenvalue)
+                .nfastDate(nfastDate)
+                .nfastQr(nfastQr)
+                .storeName(storeSequence.getStoreName())
+                .build();
+        return nfastGetDto;
     }
 }

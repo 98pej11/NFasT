@@ -48,8 +48,8 @@ function NFastCard({ name, date, price }) {
       <Cards>
         <Img src={CardImg} alt="car!" />
         <TopText>
-          <h2>{name}</h2>
-          <h3>{date}</h3>
+          <h2>{date}</h2>
+          <h3>{name}</h3>
         </TopText>
         <Qr>큐알</Qr>
         <BottomText>

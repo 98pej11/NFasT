@@ -95,10 +95,10 @@ function Header() {
           disableGutters
           sx={{ height: "80px", display: "flex", alignItems: "center" }}
         >
-          {" "}
-          <Link to="login">
-            {/* 웹 로고 */}
+          {/* 웹 로고 */}
+          <Link to="/login">
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+
             <Typography
               variant="h6"
               noWrap
@@ -124,8 +124,9 @@ function Header() {
             to="/"
           >
             {/* 로고이미지가 나와야되는데? */}
-
-            <img src="logo.png" alt="logo" height="60px" />
+            <Link to="/login">
+              <img src="logo.png" alt="logo" height="60px" />
+            </Link>
           </Box>
           {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
