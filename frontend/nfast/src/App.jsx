@@ -7,19 +7,24 @@ import NFastCard from "./components/commons/NFastCard";
 // import FloatingCards from "./components/FloatingCards";
 // import Header from "./components/commons/Header";
 import FloatingBtn from "./components/commons/FloatingBtn";
-import Review from "./pages/ReviewPage";
-import MyNftPage from "./pages/MyNftPage";
-import MyTransPage from "./pages/MyTransPage";
-import MyBookmarkPage from "./pages/MyBookmarkPage";
-import MainPage from "./pages/Mainpage";
-import MyInfoPage from "./pages/MyInfoPage";
-import LoginPage from "./pages/LoginPage";
+import Review from "./pages/customer/ReviewPage";
+import MyNftPage from "./pages/customer/MyNftPage";
+import MyTransPage from "./pages/customer/MyTransPage";
+import MyBookmarkPage from "./pages/customer/MyBookmarkPage";
+import MainPage from "./pages/customer/Mainpage";
+import MyInfoPage from "./pages/customer/MyInfoPage";
+import LoginPage from "./pages/customer/LoginPage";
+import LoginSeller from "./pages/seller/LoginPage_Seller";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header />
+        {window.location.pathname === "/login" ||
+        window.location.pathname === "/login-seller" ? null : (
+          <Header />
+        )}
+
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/floating" element={<FloatingBtn />} />
@@ -30,6 +35,7 @@ function App() {
           <Route path="/mybookmark" element={<MyBookmarkPage />} />
           <Route path="/myinfo" element={<MyInfoPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/login-seller" element={<LoginSeller />} />
         </Routes>
         <Footer />
       </BrowserRouter>
