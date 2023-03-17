@@ -2,8 +2,8 @@ import React from "react";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/commons/Header";
-import Footer from "./components/commons/Footer";
-import NFastCard from "./components/floating/NFastCard";
+// import Footer from "./components/commons/Footer";
+import NFastCard from "./components/commons/NFastCard";
 // import FloatingCards from "./components/FloatingCards";
 // import Header from "./components/commons/Header";
 // import FloatingBtn from "./components/commons/FloatingBtn";
@@ -39,7 +39,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/login-seller" element={<LoginSeller />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   );

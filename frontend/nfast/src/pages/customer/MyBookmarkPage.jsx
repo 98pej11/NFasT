@@ -1,7 +1,12 @@
 import React from "react";
+import MyBookMark from "../components/mypage/MyBookMark";
 
 function MyBookmarkPage() {
-  return <div> </div>;
+  return (
+    <div>
+      <MyBookMark />{" "}
+    </div>
+  );
 }
 
 export default MyBookmarkPage;
