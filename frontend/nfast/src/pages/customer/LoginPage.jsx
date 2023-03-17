@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import LoginButton from "../components/LoginPage/LoginButton";
-import MetamaskLogo from "../assets/Metamask_Logo.png";
+import LoginButton from "../../components/LoginPage/LoginButton";
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
@@ -42,17 +41,12 @@ const YellowBox = styled.div`
   }
 `;
 
-const Img = styled.img`
-  width: 200px;
-  background-color: whitesmoke;
-  border-radius: 50px;
-  padding: 0px 10px;
-  margin: 20px 0px;
-`;
-
 function MyInfoPage() {
   return (
     <Wrapper>
+      <Link to="/login-seller">
+        <Button>사장님 로그인</Button>
+      </Link>
       <Logo>
         <Link to="/login">
           <img src="logo.png" alt="logo" width="100px" />
@@ -62,7 +56,6 @@ function MyInfoPage() {
         <h1>HELLO</h1>
         <h2>Welcome to NFasT!</h2>
         <h3>기다리지 말고 먹자</h3>
-        <Img src={MetamaskLogo} alt="gg" />
         <LoginButton />
         <div>
           <Button

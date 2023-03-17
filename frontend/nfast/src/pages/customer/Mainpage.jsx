@@ -1,5 +1,5 @@
 import React from "react";
-import MainComp from "../components/mainpage/Maincomp";
+import MainComp from "../../components/mainpage/Maincomp";
 
 function MainPage() {
   return (
