@@ -3,7 +3,7 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/commons/Header";
 import Footer from "./components/commons/Footer";
-import NFastCard from "./components/commons/NFastCard";
+import NFastCard from "./components/floating/NFastCard";
 // import FloatingCards from "./components/FloatingCards";
 // import Header from "./components/commons/Header";
 import FloatingBtn from "./components/commons/FloatingBtn";
@@ -34,6 +34,7 @@ function App() {
           <Route path="/mytrans" element={<MyTransPage />} />
           <Route path="/mybookmark" element={<MyBookmarkPage />} />
           <Route path="/myinfo" element={<MyInfoPage />} />
+          <Route path="/store" element={<StorePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/login-seller" element={<LoginSeller />} />
         </Routes>
