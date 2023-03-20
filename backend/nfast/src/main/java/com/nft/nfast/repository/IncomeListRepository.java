@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface IncomeListRepository extends JpaRepository<IncomeList,Long> {
     List<IncomeList> findAllByStoreSequence(Long storeSequence);
+
 }
