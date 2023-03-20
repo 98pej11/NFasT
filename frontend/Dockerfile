@@ -12,6 +12,6 @@ COPY /nfast/ /front
 
 RUN npm run build
 
-CMD ["serve", "-s"]
+CMD ["serve", "-s", "build", "-l", "3000"]
 
 EXPOSE 3000

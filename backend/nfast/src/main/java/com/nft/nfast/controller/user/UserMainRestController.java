@@ -87,10 +87,20 @@ public class UserMainRestController {
     //판매 확정
     @PostMapping("/store/{storeSequence}/sale")
     public ResponseEntity<Map<String,Object>> tradeDone(@PathVariable("storeSequence") long storeSequence, @RequestBody NfastTradeDoneDto nfastTradeDoneDto){
-        System.out.println(nfastTradeDoneDto);                                                                                                                                ;
         userMainService.saveTradeNfast(nfastTradeDoneDto);
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
+
+    //북마크 등록
+    @PostMapping("/store/{storeSequence}/bookmark/{userSequence}")
+    public ResponseEntity<Map<String,Object>> bookmarkCheck(@PathVariable("storeSequence") long storeSequence, @PathVariable("userSeqeunce") long userSequence){
+
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("result",SUCCESS);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
+
+    //북마크 해제
 }
