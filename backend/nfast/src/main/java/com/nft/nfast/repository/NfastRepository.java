@@ -1,6 +1,7 @@
 package com.nft.nfast.repository;
 
 import com.nft.nfast.entity.business.Nfast;
+import com.nft.nfast.model.dto.business.NfastMinted;
 import com.nft.nfast.model.dto.business.NfastMintedDto;
 import com.nft.nfast.model.dto.business.NfastPurchase;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,11 +24,14 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
     List<NfastPurchase> findAllByNfastDate(String nfastDate);
 
     @Query(value=
-            "select nfast_date as nfastDate, nfast_price as nfastPrice, count(case when nfast_sale_state=0 then 1 end) as nfastSaleCount, count(*) as nfastTotalCount from nfast where store_sequence=:store group by nfast_date ", nativeQuery = true)
-    List<NfastMintedDto> findUsedByNfastDate(@Param("store") Long store);
+            "select nfast_date as nfastDate, count(case when nfast_sale_state=0 then 1 end) as nfastSaleCount, count(*) as nfastTotalCount from nfast where store_sequence=:store group by nfast_date ", nativeQuery = true)
+    List<NfastMinted> findUsedByNfastDate(@Param("store") Long store);
 //    count(case when nfast_sale_state=0 then 1 end) as nfastSaleCount, count(*) as nfastTotalCount
 
     @Query(value="select * from nfast where nfast_sale_state!=2 and store_sequence=?1 and nfast_date=?2 and nfast_price=?3 limit ?4", nativeQuery = true)
     List<Nfast> findTopAmountNfastByParam(long storeSequence, String nfastDate, BigDecimal nfastPrice, int amount);
+
+    @Query(value = "select max(nfast_default_price) as nfastDefaultPrice from nfast where nfast_date=:mintedDate", nativeQuery = true)
+    BigDecimal findDefaultPriceByNfastDate(@Param("mintedDate") Date mintedDate);
 }
 

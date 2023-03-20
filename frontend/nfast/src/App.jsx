@@ -2,17 +2,20 @@ import React from "react";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/commons/Header";
-import Footer from "./components/commons/Footer";
+// import Footer from "./components/commons/Footer";
 import NFastCard from "./components/commons/NFastCard";
 // import FloatingCards from "./components/FloatingCards";
 // import Header from "./components/commons/Header";
 import FloatingBtn from "./components/commons/FloatingBtn";
-import Review from "./pages/ReviewPage";
-import MyNftPage from "./pages/MyNftPage";
-import MyTransPage from "./pages/MyTransPage";
-import MyBookmarkPage from "./pages/MyBookmarkPage";
-import MainPage from "./pages/MainPage";
-import MyInfoPage from "./pages/MyInfoPage";
+import Review from "./pages/customer/ReviewPage";
+import MyNftPage from "./pages/customer/MyNftPage";
+import MyTransPage from "./pages/customer/MyTransPage";
+import MyBookmarkPage from "./pages/customer/MyBookmarkPage";
+import MainPage from "./pages/customer/MainPage";
+import MyInfoPage from "./pages/customer/MyInfoPage";
+import StorePage from "./pages/customer/StorePage";
+import LoginCustomer from "./pages/customer/LoginPageCustomer";
+import LoginSeller from "./pages/seller/LoginPageSeller";
 
 function App() {
   return (
@@ -28,8 +31,11 @@ function App() {
           <Route path="/mytrans" element={<MyTransPage />} />
           <Route path="/mybookmark" element={<MyBookmarkPage />} />
           <Route path="/myinfo" element={<MyInfoPage />} />
+          <Route path="/store" element={<StorePage />} />
+          <Route path="/loginCustomer" element={<LoginCustomer />} />
+          <Route path="/loginSeller" element={<LoginSeller />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   );

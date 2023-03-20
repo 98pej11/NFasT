@@ -5,7 +5,7 @@ import java.util.Date;
 
 public interface NfastMinted {
     Date getNfastDate();
-    BigDecimal nfastPrice();
-    int nfastSaleCount();
-    int nfastTotalCount();
+    BigDecimal getNfastDefaultPrice();
+    int getNfastSaleCount();
+    int getNfastTotalCount();
 }

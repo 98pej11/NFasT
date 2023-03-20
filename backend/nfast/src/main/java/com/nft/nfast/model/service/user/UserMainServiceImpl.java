@@ -164,7 +164,6 @@ public class UserMainServiceImpl implements UserMainService{
     @Override
     public void findBookmark(long storeSeqeuence, long userSequence) {
         Optional<Bookmark> bookmarkWrapper = bookmarkRepository.findByUserSequenceAndStoreSequence(storeSeqeuence,userSequence);
-
         if(bookmarkWrapper.isPresent()){
             Bookmark bookmark = bookmarkWrapper.get();
             BookmarkDto dto = bookmark.toDto();

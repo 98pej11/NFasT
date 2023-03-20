@@ -43,15 +43,15 @@ public class IncomeList {
         this.storeSequence = storeSequence;
     }
 
-//    public IncomelistDto toDto(){
-//        IncomelistDto incomelistDto = IncomelistDto.builder()
-//                .incomeListSequence(incomeListSequence)
-//                .incomeListTransaction(incomeListTransaction)
-//                .incomeListPrice(incomeListPrice)
-//                .incomeListDate(incomeListDate)
-//                .incomeListType(incomeListType)
-//                .storeSequence(storeSequence)
-//                .build();
-//        return incomelistDto;
-//    }
+    public IncomeListDto toDto(){
+        IncomeListDto incomelistDto = IncomeListDto.builder()
+                .incomeListSequence(incomeListSequence)
+                .incomeListTransaction(incomeListTransaction)
+                .incomeListPrice(incomeListPrice)
+                .incomeListDate(incomeListDate)
+                .incomeListType(incomeListType)
+                .storeSequence(storeSequence)
+                .build();
+        return incomelistDto;
+    }
 }
