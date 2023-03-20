@@ -1,12 +1,11 @@
 import React from "react";
-import MainComp from "../../components/mainpage/Maincomp";
-import Floating from "../../components/floating/FloatingBtn";
+import MainComp from "../../components/mainpage/MainComp";
+// import Floating from "../../components/floating/FloatingBtn";
 
 function MainPage() {
   return (
     <div>
       <MainComp />
-      <Floating />
     </div>
   );
 }

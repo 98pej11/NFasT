@@ -16,14 +16,12 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
+    "@web3-react/core": "^6.1.9",
     "autosuggest-highlight": "^3.3.4",
-=======
     "chart.js": "^4.2.1",
+    "ethereumjs-tx": "^2.1.2",
     "kakao-maps-sdk": "^1.0.1",
     "moment": "^2.29.4",
-    "@web3-react/core": "^6.1.9",
->>>>>>> 2367da756df1e60bdfe5b5588d5102f04882dfe4
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -71,6 +69,14 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "prettier": "^2.8.4"
-  }
+    "jest": "^27.5.1",
+    "prettier": "^2.8.4",
+    "source-map": "^0.7.4",
+    "source-map-loader": "^4.0.1"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

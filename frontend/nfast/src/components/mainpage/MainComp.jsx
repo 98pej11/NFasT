@@ -6,9 +6,6 @@ import Burger from "../../assets/Burger.png";
 import MainCard from "./MainCard";
 import SearchBar from "../commons/SearchBar";
 
-const Wrapper = styled.div`
-  margin-top: "800px";
-`;
 function MainComp() {
   const Styledh2 = styled.div`
     display: flex;

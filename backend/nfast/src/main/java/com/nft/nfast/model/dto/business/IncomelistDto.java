@@ -1,9 +1,8 @@
 package com.nft.nfast.model.dto.business;
 
-import com.nft.nfast.entity.business.Incomelist;
+import com.nft.nfast.entity.business.IncomeList;
 import lombok.*;
 
-import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class IncomelistDto {
+public class IncomeListDto {
     private long incomeListSequence;
 
     private String incomeListTransaction;
@@ -22,8 +21,8 @@ public class IncomelistDto {
     private Byte incomeListType;
     private long storeSequence;
 
-    public Incomelist toEntity(){
-        Incomelist incomelist = Incomelist.builder()
+    public IncomeList toEntity(){
+        IncomeList incomelist = IncomeList.builder()
                 .incomeListSequence(incomeListSequence)
                 .incomeListTransaction(incomeListTransaction)
                 .incomeListPrice(incomeListPrice)
