@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "NFasTfont";
+  src: url(./assets/fonts/NanumSquareNeo-cBd.ttf) format("truetype");
+}
+
+* {
+  font-family: "NFasTfont" !important;
+}
