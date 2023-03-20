@@ -76,6 +76,7 @@ function LoginPageSeller() {
               backgroundColor: "#8E8AFF",
             }}
             disableElevation
+            href="./publishNft"
           >
             로그인
           </Button>
