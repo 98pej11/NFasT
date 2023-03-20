@@ -18,7 +18,7 @@ public class TradeListDto {
     private BigDecimal tradeListPrice;
     private Date tradeListDate;
     private Byte tradeListType;
-    private Byte userSequence;
+    private long userSequence;
 
     public TradeList toEntity(){
         TradeList tradeList = TradeList.builder()

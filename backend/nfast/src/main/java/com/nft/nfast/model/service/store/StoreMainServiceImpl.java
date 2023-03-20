@@ -1,10 +1,10 @@
 package com.nft.nfast.model.service.store;
 
-import com.nft.nfast.entity.business.Incomelist;
+import com.nft.nfast.entity.business.IncomeList;
 import com.nft.nfast.entity.business.Store;
 import com.nft.nfast.model.dto.business.NfastMintDto;
-import com.nft.nfast.model.dto.business.StoreIncomeDto;
-import com.nft.nfast.repository.IncomelistRepository;
+import com.nft.nfast.model.dto.business.IncomeFindDto;
+import com.nft.nfast.repository.IncomeListRepository;
 import com.nft.nfast.repository.NfastRepository;
 import com.nft.nfast.repository.StoreRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ public class StoreMainServiceImpl implements StoreMainService {
     StoreRepository storeRepository;
 
     @Autowired
-    IncomelistRepository incomelistRepository;
+    IncomeListRepository incomelistRepository;
 
     // 발행한 nft 저장
     @Override
@@ -47,15 +47,16 @@ public class StoreMainServiceImpl implements StoreMainService {
     }
 
     @Override
-    public List<StoreIncomeDto> findAllIncomes(Long storeSequence) {
+    public List<IncomeFindDto> findAllIncomes(Long storeSequence) {
         // 해당 가게의 수입 내역 저장
-        List<Incomelist> incomes = incomelistRepository.findAllByStoreSequence(storeSequence);
-        List<StoreIncomeDto> incomeListGetDto = new ArrayList<>();
-        for (Incomelist income : incomes) {
-            incomeListGetDto.add(StoreIncomeDto.builder()
+        List<IncomeList> incomes = incomelistRepository.findAllByStoreSequence(storeSequence);
+        List<IncomeFindDto> incomeListGetDto = new ArrayList<>();
+        for (IncomeList income : incomes) {
+            incomeListGetDto.add(IncomeFindDto.builder()
                     .incomeListPrice(income.getIncomeListPrice())
                     .incomeListDate(income.getIncomeListDate())
                     .incomeListType(income.getIncomeListType())
+                    .incomeListTransaction(income.getIncomeListTransaction())
                     .build());
         }
         return incomeListGetDto;
