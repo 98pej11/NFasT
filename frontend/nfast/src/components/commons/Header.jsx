@@ -91,7 +91,6 @@ function Header() {
         backgroundColor: "#FFCB45",
         height: "80px",
         width: "100%",
-        position: "fixed",
         top: 0,
       }}
     >
