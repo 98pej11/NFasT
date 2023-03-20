@@ -17,6 +17,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { styled, alpha } from "@mui/material/styles";
+import LoginBtn from "../loginpage/LoginButton";
 
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = [
@@ -131,7 +132,7 @@ function Header() {
               </Button>
             ))}
           </Box> */}
-
+          <LoginBtn />
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleClick} sx={{ p: 0 }}>
