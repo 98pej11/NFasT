@@ -14,6 +14,7 @@ import MyBookmarkPage from "./pages/customer/MyBookmarkPage";
 import MainPage from "./pages/customer/MainPage";
 import MyInfoPage from "./pages/customer/MyInfoPage";
 import StorePage from "./pages/customer/StorePage";
+import IntroducePage from "./pages/seller/IntroducePage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/mybookmark" element={<MyBookmarkPage />} />
           <Route path="/myinfo" element={<MyInfoPage />} />
           <Route path="/store" element={<StorePage />} />
+          <Route path="/introduce" element={<IntroducePage />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
