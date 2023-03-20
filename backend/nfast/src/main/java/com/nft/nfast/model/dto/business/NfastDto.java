@@ -24,6 +24,7 @@ public class NfastDto {
     private long nfastTransactionCount;
     private BigDecimal nfastDefaultPrice;
     private String nfastQr;
+    private Byte nfastTime;
     private Store storeSequence;
     private long userSequence;
 
@@ -39,6 +40,7 @@ public class NfastDto {
                 .nfastTransactionCount(nfastTransactionCount)
                 .nfastDefaultPrice(nfastDefaultPrice)
                 .nfastQr(nfastQr)
+                .nfastTime(nfastTime)
                 .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
