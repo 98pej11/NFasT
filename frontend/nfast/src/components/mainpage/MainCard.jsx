@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 
 const cards = [
   {
@@ -27,8 +28,21 @@ function MainCard() {
   return (
     <Grid container spacing={2}>
       {cards.map((card) => (
-        <Grid item xs={12} sm={4} md={4}>
-          <Card sx={{ maxWidth: 345 }}>
+        <Grid
+          item
+          xs={12}
+          sm={4}
+          md={4}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+           <Link to="/store">
+          <Card
+            sx={{
+              maxWidth: 345,
+            }}
+          >
             <CardMedia
               component="img"
               height="140"
@@ -43,7 +57,8 @@ function MainCard() {
                 {card.description}
               </Typography>
             </CardContent>
-          </Card>
+            </Card>
+            </Link>
         </Grid>
       ))}
     </Grid>
