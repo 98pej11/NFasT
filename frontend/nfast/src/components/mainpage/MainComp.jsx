@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import IconButton from "@material-ui/core/IconButton";
+import { Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Burger from "../../assets/Burger.png";
 import MainCard from "./MainCard";
@@ -35,9 +35,9 @@ function MainComp() {
           }}
         >
           <SearchBar />
-          <IconButton color="primary" aria-label="search">
+          <Box>
             <SearchIcon />
-          </IconButton>
+          </Box>
         </div>
       </div>
       <Line>

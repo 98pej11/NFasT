@@ -4,14 +4,17 @@ import FooterLogo from "../../assets/NFasT_footer_logo.png";
 
 const Wrapper = styled.div`
   width: 100%;
-  margin-left: 0;
+  height: 25px;
+  position: fixed;
+  bottom: 0;
+  padding: 20px;
   display: flex;
   justify-content: flex-right;
-  background-color: whitesmoke;
+  background-color: blue;
+
   img {
-    width: 70px;
-    padding-bottom: 20px;
-    padding-left: 20px;
+    margin-left: 10px;
+    padding-bottom: 10px;
   }
 `;
 
