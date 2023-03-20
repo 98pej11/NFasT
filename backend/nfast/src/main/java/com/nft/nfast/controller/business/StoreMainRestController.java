@@ -1,10 +1,8 @@
 package com.nft.nfast.controller.business;
 
 import com.nft.nfast.model.dto.business.NfastMintDto;
-import com.nft.nfast.model.dto.business.StoreFindDto;
-import com.nft.nfast.model.dto.business.StoreIncomeDto;
+import com.nft.nfast.model.dto.business.IncomeFindDto;
 import com.nft.nfast.model.service.store.StoreMainService;
-import com.nft.nfast.model.service.user.UserMainServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +35,7 @@ public class StoreMainRestController {
     @GetMapping("{store_sequence}/incomes")
     public ResponseEntity<Map<String, Object>> incomeList(@PathVariable Long store_sequence){
         Map<String, Object> resultMap = new HashMap<>();
-        List<StoreIncomeDto> incomeGetDtoList=storeMainService.findAllIncomes(store_sequence);
+        List<IncomeFindDto> incomeGetDtoList=storeMainService.findAllIncomes(store_sequence);
 
         resultMap.put("result", SUCCESS);
         resultMap.put("incomes", incomeGetDtoList);
