@@ -6,21 +6,16 @@ import Divider from "@mui/material/Divider";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import AdbIcon from "@mui/icons-material/Adb";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 // import MenuIcon from "@mui/icons-material/Menu";
 import EditIcon from "@mui/icons-material/Edit";
 import Container from "@mui/material/Container";
-import ListItemIcon from "@mui/material/ListItemIcon";
+
 // import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-// import AdbIcon from "@mui/icons-material/Adb";
-import Logout from "@mui/icons-material/Logout";
+import AdbIcon from "@mui/icons-material/Adb";
 import { styled, alpha } from "@mui/material/styles";
 
 // const pages = ["Products", "Pricing", "Blog"];
@@ -31,6 +26,7 @@ import { styled, alpha } from "@mui/material/styles";
 //   "정보 수정",
 //   "로그아웃",
 // ];
+
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -87,12 +83,7 @@ function Header() {
   return (
     <AppBar
       position="static"
-      sx={{
-        backgroundColor: "#FFCB45",
-        height: "80px",
-        width: "100%",
-        top: 0,
-      }}
+      style={{ backgroundColor: "#FFCB45", height: "80px" }}
     >
       <Container maxWidth="xl">
         <Toolbar
@@ -100,27 +91,25 @@ function Header() {
           sx={{ height: "80px", display: "flex", alignItems: "center" }}
         >
           {/* 웹 로고 */}
-          <Link to="/login">
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            LOGO
+          </Typography>
 
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              LOGO
-            </Typography>
-          </Link>
           {/* 모바일화면 */}
           <Box
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
@@ -128,10 +117,9 @@ function Header() {
             to="/"
           >
             {/* 로고이미지가 나와야되는데? */}
-            <Link to="/login">
-              <img src="logo.png" alt="logo" height="60px" />
-            </Link>
+            <img src="logo.png" alt="logo" height="60px" />
           </Box>
+
           {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -143,6 +131,7 @@ function Header() {
               </Button>
             ))}
           </Box> */}
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleClick} sx={{ p: 0 }}>
@@ -164,9 +153,7 @@ function Header() {
                 to="/mynft"
                 disableRipple
               >
-                <ListItemIcon>
-                  <MonetizationOnIcon fontSize="small" />
-                </ListItemIcon>
+                <EditIcon />
                 나의 NFT
               </MenuItem>
               <MenuItem
@@ -175,9 +162,7 @@ function Header() {
                 to="/mytrans"
                 disableRipple
               >
-                <ListItemIcon>
-                  <ReceiptIcon fontSize="small" />
-                </ListItemIcon>
+                <EditIcon />
                 거래 내역
               </MenuItem>
               <Divider sx={{ my: 0.5 }} />
@@ -187,9 +172,7 @@ function Header() {
                 to="/mybookmark"
                 disableRipple
               >
-                <ListItemIcon>
-                  <BookmarkAddIcon fontSize="small" />
-                </ListItemIcon>
+                <EditIcon />
                 나의 북마크
               </MenuItem>
               <MenuItem
@@ -198,15 +181,11 @@ function Header() {
                 to="/myinfo"
                 disableRipple
               >
-                <ListItemIcon>
-                  <EditIcon fontSize="small" />
-                </ListItemIcon>
+                <EditIcon />
                 정보수정
               </MenuItem>
               <MenuItem onClick={handleClose} disableRipple>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
+                <EditIcon />
                 로그아웃
               </MenuItem>
             </StyledMenu>

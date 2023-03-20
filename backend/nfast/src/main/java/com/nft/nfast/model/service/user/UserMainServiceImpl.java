@@ -2,14 +2,13 @@ package com.nft.nfast.model.service.user;
 
 import com.nft.nfast.entity.business.Nfast;
 import com.nft.nfast.entity.business.Store;
+import com.nft.nfast.entity.user.Bookmark;
 import com.nft.nfast.entity.user.TradeList;
 import com.nft.nfast.model.dto.business.*;
+import com.nft.nfast.model.dto.user.BookmarkDto;
 import com.nft.nfast.model.dto.user.TradeFindDto;
 import com.nft.nfast.model.dto.user.TradeListDto;
-import com.nft.nfast.repository.IncomeListRepository;
-import com.nft.nfast.repository.NfastRepository;
-import com.nft.nfast.repository.StoreRepository;
-import com.nft.nfast.repository.TradeListRepository;
+import com.nft.nfast.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +31,9 @@ public class UserMainServiceImpl implements UserMainService{
 
     @Autowired
     TradeListRepository tradeListRepository;
+
+    @Autowired
+    BookmarkRepository bookmarkRepository;
 
     @Override
     public List<StoreFindDto> findAllStore(String storeName) {
@@ -158,4 +160,16 @@ public class UserMainServiceImpl implements UserMainService{
             nfastRepository.save(dto.toEntity());
         }
     }
+
+    @Override
+    public void findBookmark(long storeSeqeuence, long userSequence) {
+        Optional<Bookmark> bookmarkWrapper = bookmarkRepository.findByUserSequenceAndStoreSequence(storeSeqeuence,userSequence);
+        
+        if(bookmarkWrapper.isPresent()){
+            Bookmark bookmark = bookmarkWrapper.get();
+            BookmarkDto dto = bookmark.toDto();
+        }
+    }
+
+
 }

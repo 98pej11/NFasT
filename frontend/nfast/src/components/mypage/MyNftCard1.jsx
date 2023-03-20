@@ -52,15 +52,8 @@ function MyNftCard1() {
               <Typography component="div" variant="h5">
                 연돈
               </Typography>
-              <Typography
-                variant="subtitle1"
-                color="text.secondary"
-                component="div"
-              >
-                30.143 Eth
-              </Typography>
             </CardContent>
-            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+            <Box sx={{ display: "flex", pl: 1, pb: 1 }}>
               <StyledChip
                 style={{ backgroundColor: "white" }}
                 icon={<PaidIcon />}
@@ -73,13 +66,9 @@ function MyNftCard1() {
                 variant="overline"
                 display="block"
                 gutterBottom
-                style={{
-                  paddingLeft: 8,
-                  fontSize: 1,
-                  textDecoration: "underline",
-                }}
+                style={{ paddingLeft: 8 }}
               >
-                환불하기
+                30.143 Eth
               </Typography>
             </Box>
           </Box>
