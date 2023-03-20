@@ -33,5 +33,8 @@ ipfs daemon
     - 그러나 다음 명령어를 통해 업로드된 파일을 다운은 가능하다.
     - sudo docker exec ipfs_host ipfs get <CID> -o /export
     - sudo docker exec ipfs_host를 사용하는 이유는 ubuntu 위에 ipfs가 docker container 위에 설치되어져 있기 때문이다.
-     
 
+ 
+### ipfs 업로드 및 계좌 불러오기 api
+
+- my-app과 package.json이 개발 중인 api 
