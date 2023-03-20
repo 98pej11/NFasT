@@ -4,6 +4,7 @@ import com.nft.nfast.entity.business.IncomeList;
 import com.nft.nfast.entity.business.Store;
 import com.nft.nfast.model.dto.business.NfastMintDto;
 import com.nft.nfast.model.dto.business.IncomeFindDto;
+import com.nft.nfast.model.dto.business.NfastMinted;
 import com.nft.nfast.model.dto.business.NfastMintedDto;
 import com.nft.nfast.repository.IncomeListRepository;
 import com.nft.nfast.repository.NfastRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -88,9 +90,20 @@ public class StoreMainServiceImpl implements StoreMainService {
     // 발행한 NFT 보기 (날짜별 가격, 판매 현황)
     @Override
     public List<NfastMintedDto> findMintedNfast(Long storeSequence) {
-        List<NfastMintedDto> mintedNfast=nfastRepository.findUsedByNfastDate(storeSequence);
-
-        return mintedNfast;
+        List<NfastMinted> mintedNfast=nfastRepository.findUsedByNfastDate(storeSequence);
+        List<NfastMintedDto> mintedNfastList=new ArrayList<>();
+        for (NfastMinted m:mintedNfast){
+            Date mintedDate = m.getNfastDate();
+            BigDecimal defaultPrice = nfastRepository.findDefaultPriceByNfastDate(mintedDate);
+            mintedNfastList.add(NfastMintedDto.builder()
+                    .nfastDate(m.getNfastDate())
+                    .nfastDefaultPrice(defaultPrice)
+                    .nfastSaleCount(m.getNfastSaleCount())
+                    .nfastTotalCount(m.getNfastTotalCount())
+                    .build());
+            System.out.println(m);
+        }
+        return mintedNfastList;
     }
 
 
