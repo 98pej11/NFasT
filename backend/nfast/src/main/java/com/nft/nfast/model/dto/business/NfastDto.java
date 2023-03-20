@@ -16,6 +16,7 @@ import java.util.Date;
 public class NfastDto {
     private long nfastSequence;
     private BigDecimal nfastPrice;
+    private BigDecimal nfastHopePrice;
     private String nfastEigenvalue;
     private Date nfastDate;
     private Byte nfastUseState;
@@ -23,6 +24,7 @@ public class NfastDto {
     private long nfastTransactionCount;
     private BigDecimal nfastDefaultPrice;
     private String nfastQr;
+    private Byte nfastTime;
     private Store storeSequence;
     private long userSequence;
 
@@ -30,6 +32,7 @@ public class NfastDto {
         Nfast nfast = Nfast.builder()
                 .nfastSequence(nfastSequence)
                 .nfastPrice(nfastPrice)
+                .nfastHopePrice(nfastHopePrice)
                 .nfastEigenvalue(nfastEigenvalue)
                 .nfastDate(nfastDate)
                 .nfastUseState(nfastUseState)
@@ -37,6 +40,7 @@ public class NfastDto {
                 .nfastTransactionCount(nfastTransactionCount)
                 .nfastDefaultPrice(nfastDefaultPrice)
                 .nfastQr(nfastQr)
+                .nfastTime(nfastTime)
                 .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();

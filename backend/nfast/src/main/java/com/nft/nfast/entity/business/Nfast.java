@@ -27,19 +27,22 @@ public class Nfast {
     @Column(nullable = false)
     private BigDecimal nfastPrice;
 
+    @Column
+    private BigDecimal nfastHopePrice;
+
     @Column(nullable = false)
     private String nfastEigenvalue;
 
     @Column(nullable = false)
     private Date nfastDate;
 
-    @Column
+    @Column(columnDefinition = "TINYINT")
     @ColumnDefault("0")
     private Byte nfastUseState;
 
-    @Column
-    @ColumnDefault(0)
-    private int nfastSaleState;
+    @Column(columnDefinition = "TINYINT")
+    @ColumnDefault("0")
+    private Byte nfastSaleState;
 
     @Column
     @ColumnDefault("0")
@@ -51,6 +54,9 @@ public class Nfast {
     @Column(nullable = false)
     private String nfastQr;
 
+    @Column(columnDefinition = "TINYINT")
+    private Byte nfastTime;
+
     @Column
     private long userSequence;
 
@@ -59,7 +65,7 @@ public class Nfast {
     private Store storeSequence;
 
     @Builder
-    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, Store storeSequence, long userSequence) {
+    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, Byte nfastTime, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, Store storeSequence, long userSequence) {
         this.nfastSequence = nfastSequence;
         this.nfastPrice = nfastPrice;
         this.nfastEigenvalue = nfastEigenvalue;
@@ -69,6 +75,7 @@ public class Nfast {
         this.nfastTransactionCount = nfastTransactionCount;
         this.nfastDefaultPrice = nfastDefaultPrice;
         this.nfastQr = nfastQr;
+        this.nfastTime=nfastTime;
         this.storeSequence = storeSequence;
         this.userSequence = userSequence;
     }
@@ -84,6 +91,7 @@ public class Nfast {
                 .nfastTransactionCount(nfastTransactionCount)
                 .nfastDefaultPrice(nfastDefaultPrice)
                 .nfastQr(nfastQr)
+                .nfastTime(nfastTime)
                 .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();

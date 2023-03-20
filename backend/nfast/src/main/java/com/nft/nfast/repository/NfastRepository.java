@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -25,5 +26,8 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
             "select nfast_date as nfastDate, nfast_price as nfastPrice, count(case when nfast_sale_state=0 then 1 end) as nfastSaleCount, count(*) as nfastTotalCount from nfast where store_sequence=:store group by nfast_date ", nativeQuery = true)
     List<NfastMintedDto> findUsedByNfastDate(@Param("store") Long store);
 //    count(case when nfast_sale_state=0 then 1 end) as nfastSaleCount, count(*) as nfastTotalCount
+
+    @Query(value="select * from nfast where nfast_sale_state!=2 and store_sequence=?1 and nfast_date=?2 and nfast_price=?3 limit ?4", nativeQuery = true)
+    List<Nfast> findTopAmountNfastByParam(long storeSequence, String nfastDate, BigDecimal nfastPrice, int amount);
 }
 
