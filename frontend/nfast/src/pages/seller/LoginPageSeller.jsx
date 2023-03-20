@@ -45,9 +45,7 @@ const PurpleBox = styled.div`
 function LoginPageSeller() {
   return (
     <Wrapper>
-      <Link to="/login">
-        <Button>손님 로그인</Button>
-      </Link>
+      <Button href="/loginCustomer">손님 로그인</Button>
       <Logo>
         <Link to="/login">
           <img src="logo.png" alt="logo" width="100px" />
@@ -79,7 +77,7 @@ function LoginPageSeller() {
             }}
             disableElevation
           >
-            회원가입
+            로그인
           </Button>
         </div>
       </PurpleBox>

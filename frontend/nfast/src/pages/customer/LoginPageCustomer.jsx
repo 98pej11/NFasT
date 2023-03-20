@@ -44,9 +44,7 @@ const YellowBox = styled.div`
 function LoginPageCustomer() {
   return (
     <Wrapper>
-      <Link to="/login-seller">
-        <Button>사장님 로그인</Button>
-      </Link>
+      <Button href="/loginSeller">사장님 로그인</Button>
       <Logo>
         <Link to="/login">
           <img src="logo.png" alt="logo" width="100px" />
