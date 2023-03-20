@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk:11
+FROM openjdk:11.0.15-jre
 
 WORKDIR /server
 
