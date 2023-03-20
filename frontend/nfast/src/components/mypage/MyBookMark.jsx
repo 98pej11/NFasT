@@ -4,7 +4,7 @@ import Pagination from "@mui/material/Pagination";
 // import Stack from "@mui/material/Stack";
 import MainCard from "../mainpage/MainCard";
 
-function MyBookmark() {
+function MyBookMark() {
   const Styledh2 = styled.div`
     text-align: center;
     margin: 10%;
@@ -29,4 +29,4 @@ function MyBookmark() {
   );
 }
 
-export default MyBookmark;
+export default MyBookMark;
