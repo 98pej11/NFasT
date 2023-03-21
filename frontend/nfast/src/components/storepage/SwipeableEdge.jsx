@@ -1,6 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { Global } from "@emotion/react";
+// import { Global } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { grey } from "@mui/material/colors";
@@ -60,7 +60,7 @@ function SwipeableEdgeDrawer(props) {
   return (
     <Root>
       <CssBaseline />
-      <Global
+      <div
         styles={{
           ".MuiDrawer-root > .MuiPaper-root": {
             height: `calc(50% - ${drawerBleeding}px)`,
