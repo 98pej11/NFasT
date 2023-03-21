@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import HeaderSeller from "../../components/commons/HeaderSeller";
-import NFastCard1 from "../../components/mypage/MyNftCard1";
+import SellerMain from "../../components/sellerpage/SellerMain";
 
 const PublishNft = styled.div`
   width: 100%;
@@ -9,14 +8,12 @@ const PublishNft = styled.div`
   background-color: white;
   margin-top: 200px;
 `;
-function MakedNft() {
+function SellerPage() {
   return (
     <PublishNft>
-      <HeaderSeller />
-      <NFastCard1 />
-      발행한
+      <SellerMain />
     </PublishNft>
   );
 }
 
-export default MakedNft;
+export default SellerPage;
