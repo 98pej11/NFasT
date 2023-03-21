@@ -6,6 +6,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import SellerPublish from "./publishpage/SellerPublish";
+import SellerIncome from "./incomepage/SellerIncome";
+import SellerMaked from "./makedpage/SellerMaked";
+import SellerMypage from "./mypage/SellerMypage";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,7 +65,7 @@ const HeaderTab = styled(Tab)`
   width: 25%;
 `;
 
-export default function HeaderSeller() {
+export default function SellerMain() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -85,16 +89,16 @@ export default function HeaderSeller() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          NFasT 발행
+          <SellerPublish />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          현재 수익
+          <SellerIncome />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          뱔행한 NFasT
+          <SellerMaked />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          마이페이지
+          <SellerMypage />
         </TabPanel>
       </Box>
     </Header>
