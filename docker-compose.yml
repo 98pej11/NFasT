@@ -21,7 +21,7 @@ services:
     container_name: db
     image: mysql:8.0.30
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - /mysql:/var/lib/mysql
       - /mysql/config/my.cnf:/etc/mysql/my.cnf
