@@ -12,32 +12,44 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface NfastRepository extends JpaRepository<Nfast,Long> {
+    //거래 내역 리스트
     List<Nfast> findAllByUserSequence(long userSequence);
 
-    @Query(value="select nfast_date as nfastDate,count(*) as amount, min(nfast_price) as price from nfast where store_sequence=?1 group by nfast_date",nativeQuery = true)
-    List<NfastPurchase> findAllByStoreSequence(long storeSequence);
+    //구매 가능한 NFast 리스트 출력
+    @Query(value="select nfast_date as nfastDate,count(*) as amount, min(nfast_hope_price) as price from nfast where store_sequence=?1 and nfast_sale_state!=1 group by nfast_date order by nfast_date",nativeQuery = true)
+    List<NfastPurchase> findAllByStoreSequenceOrderByNfastDateDesc(long storeSequence);
 
-    @Query(value="select nfast_date as nfastDate, count(*) as amount, nfast_price as price from nfast where nfast_date=?1 group by nfast_price", nativeQuery = true)
+    //구매할 날짜 nft 상세 정보 출력
+    @Query(value="select nfast_date as nfastDate, count(*) as amount, nfast_hope_price as price from nfast where nfast_date=?1 and nfast_sale_state!=1 group by nfast_hope_price order by nfast_hope_price", nativeQuery = true)
     List<NfastPurchase> findAllByNfastDate(String nfastDate);
 
+    // 발행한 NFT 보기 (날짜별 가격, 판매 현황)
     @Query(value=
-            "select nfast_date as nfastDate, count(case when nfast_sale_state=0 then 1 end) as nfastSaleCount, count(*) as nfastTotalCount from nfast where store_sequence=:store group by nfast_date ", nativeQuery = true)
+            "select nfast_date as nfastDate, count(case when nfast_sale_state!=0 then 1 end) as nfastSaleCount, count(*) as nfastTotalCount from nfast where store_sequence=:store group by nfast_date ", nativeQuery = true)
     List<NfastMinted> findUsedByNfastDate(@Param("store") Long store);
 //    count(case when nfast_sale_state=0 then 1 end) as nfastSaleCount, count(*) as nfastTotalCount
 
-    @Query(value="select * from nfast where nfast_sale_state!=2 and store_sequence=?1 and nfast_date=?2 and nfast_price=?3 limit ?4", nativeQuery = true)
+    //구매할 금액 nft 개수 입력 후 구매 확정
+    @Query(value="select * from nfast where nfast_sale_state!=1 and store_sequence=?1 and nfast_date=?2 and nfast_hope_price=?3 limit ?4", nativeQuery = true)
     List<Nfast> findTopAmountNfastByParam(long storeSequence, String nfastDate, BigDecimal nfastPrice, int amount);
 
+    // 발행한 NFT 보기 (해당 날짜에 발행된 초기 비용)
     @Query(value = "select max(nfast_default_price) as nfastDefaultPrice from nfast where nfast_date=:mintedDate", nativeQuery = true)
     BigDecimal findDefaultPriceByNfastDate(@Param("mintedDate") Date mintedDate);
 
+    //가게명 검색(일주일치 최고 가격)
     @Query(value="SELECT MAX(nfast_price) as nfastPrice FROM nfast GROUP BY nfast_date HAVING nfast_date BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 7) DAY), '%Y-%m-%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 1) DAY), '%Y-%m-%d');", nativeQuery = true)
     List<Object> findMaxNfastPriceGroupByNfastDate();
 
+    //가게명 검색(일주일치 최저 가격)
     @Query(value="SELECT MIN(nfast_price) as nfast_price FROM nfast GROUP BY nfast_date HAVING nfast_date BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 7) DAY), '%Y-%m-%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 1) DAY), '%Y-%m-%d');", nativeQuery = true)
     List<Object> findMinNfastPriceGroupByNfastDate();
+
+    //NFT 사용 완료 확인
+    Optional<Nfast> findByUserSequenceAndNfastSequence(long userSequence, long nfastSequence);
 }
 

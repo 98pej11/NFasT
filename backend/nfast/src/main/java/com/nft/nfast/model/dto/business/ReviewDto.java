@@ -15,7 +15,6 @@ public class ReviewDto {
     private long reviewSequence;
     private int reviewTopic;
     private int reviewSubTopic;
-    private String reviewContent;
     private long storeSequence;
     private long userSequence;
 
@@ -24,7 +23,6 @@ public class ReviewDto {
                 .reviewSequence(reviewSequence)
                 .reviewTopic(reviewTopic)
                 .reviewSubTopic(reviewSubTopic)
-                .reviewContent(reviewContent)
                 .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
