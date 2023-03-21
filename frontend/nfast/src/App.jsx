@@ -46,7 +46,6 @@ function App() {
           <Route path="/currentIncome" element={<CurrentIncome />} />
           <Route path="/makedNft" element={<MakedNft />} />
           <Route path="/mypageSeller" element={<MypageSeller />} />
-
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
