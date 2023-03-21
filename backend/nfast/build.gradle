@@ -5,7 +5,7 @@ plugins {
 }
 
 bootJar {
-	mainClass = 'com.nft.NfastApplication'
+	mainClass = 'com.nft.nfast.NfastApplication'
 }
 
 group = 'com.nft'
