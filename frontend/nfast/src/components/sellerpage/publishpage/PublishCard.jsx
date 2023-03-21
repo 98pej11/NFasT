@@ -9,22 +9,23 @@ import Chip from "@mui/material/Chip";
 // import DoneIcon from "@mui/icons-material/Done";
 import PaidIcon from "@mui/icons-material/Paid";
 
+const NFT1 = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+`;
+const StyledChip = styled(Chip)`
+  margin: 30px;
+  padding: 10px;
+  width: 100px;
+`;
 function PublishCard() {
-  const NFT1 = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-  `;
-  const StyledChip = styled(Chip)`
-    margin: 30px;
-    padding: 10px;
-    width: 100px;
-  `;
   const handleClick = () => {
     // eslint-disable-next-line no-console
     console.log("You clicked the Chip.");
   };
+
   return (
     <div>
       <NFT1>
