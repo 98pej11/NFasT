@@ -8,6 +8,8 @@ RUN npm i -g npm@8.19.3
 
 RUN npm install -g serve
 
+RUN npm i react-scripts -f
+
 COPY /nfast/ /front
 
 RUN npm run build
