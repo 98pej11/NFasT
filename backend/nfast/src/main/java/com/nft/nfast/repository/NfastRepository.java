@@ -33,5 +33,11 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
 
     @Query(value = "select max(nfast_default_price) as nfastDefaultPrice from nfast where nfast_date=:mintedDate", nativeQuery = true)
     BigDecimal findDefaultPriceByNfastDate(@Param("mintedDate") Date mintedDate);
+
+    @Query(value="SELECT MAX(nfast_price) as nfastPrice FROM nfast GROUP BY nfast_date HAVING nfast_date BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 7) DAY), '%Y-%m-%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 1) DAY), '%Y-%m-%d');", nativeQuery = true)
+    List<Object> findMaxNfastPriceGroupByNfastDate();
+
+    @Query(value="SELECT MIN(nfast_price) as nfast_price FROM nfast GROUP BY nfast_date HAVING nfast_date BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 7) DAY), '%Y-%m-%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 1) DAY), '%Y-%m-%d');", nativeQuery = true)
+    List<Object> findMinNfastPriceGroupByNfastDate();
 }
 
