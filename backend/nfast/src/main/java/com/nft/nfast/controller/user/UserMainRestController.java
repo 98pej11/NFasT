@@ -34,6 +34,17 @@ public class UserMainRestController {
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
+    //가게명 검색
+    @GetMapping("/main/search-list/store/{storeSequence}")
+    public ResponseEntity<Map<String, Object>> storeSearch(@PathVariable("storeSequence") long storeSequence){
+        StoreDetailDto storeDetailDto = userMainService.findStoreDetail(storeSequence);
+        System.out.println("StoreDetail "+storeDetailDto);
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result",SUCCESS);
+        resultMap.put("detail",storeDetailDto);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
+
     //사용 가능 NFasT 리스트
     @GetMapping("/available-NFasT/{user_sequence}")
     public ResponseEntity<Map<String, Object>> nftList(@PathVariable long user_sequence){
@@ -95,12 +106,20 @@ public class UserMainRestController {
 
     //북마크 등록
     @PostMapping("/store/{storeSequence}/bookmark/{userSequence}")
-    public ResponseEntity<Map<String,Object>> bookmarkCheck(@PathVariable("storeSequence") long storeSequence, @PathVariable("userSeqeunce") long userSequence){
-
+    public ResponseEntity<Map<String,Object>> bookmarkCheck(@PathVariable("storeSequence") long storeSequence, @PathVariable("userSequence") long userSequence){
+        userMainService.saveBookmark(storeSequence,userSequence);
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
     //북마크 해제
+    @DeleteMapping("/store/{storeSequence}/bookmark/{userSequence}")
+    public ResponseEntity<Map<String,Object>> bookmarkUnCheck(@PathVariable("storeSequence") long storeSequence, @PathVariable("userSequence") long userSequence){
+        userMainService.deleteBookmark(storeSequence,userSequence);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("result",SUCCESS);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
+
 }

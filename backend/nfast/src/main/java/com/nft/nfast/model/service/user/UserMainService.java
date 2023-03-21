@@ -16,5 +16,7 @@ public interface UserMainService {
     void savePurchaseNfast(long storeSequence, long userSequence, NfastPurchaseDto nfast);
     List<TradeFindDto> findAllTrade(long userSequence) throws ParseException;
     void saveTradeNfast(NfastTradeDoneDto nfastTradeDoneDto);
-    void findBookmark(long storeSeqeuence, long useSequence);
+    void saveBookmark(long storeSeqeuence, long useSequence);
+    void deleteBookmark(long storeSeqeuence, long useSequence);
+    StoreDetailDto findStoreDetail(long storeSequence);
 }
