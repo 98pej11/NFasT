@@ -53,8 +53,8 @@ public class UserMainServiceImpl implements UserMainService{
         List<NfastGetDto> nfastGetDtoList = new ArrayList<>();
 
         for(Nfast nfast: nfasts){
-             NfastGetDto dto = nfast.toGetDto();
-             nfastGetDtoList.add(dto);
+            NfastGetDto dto = nfast.toGetDto();
+            nfastGetDtoList.add(dto);
         }
         return nfastGetDtoList;
     }
@@ -101,13 +101,13 @@ public class UserMainServiceImpl implements UserMainService{
                 //2-1. 사장님 -> income_list에 추가
                 incomeListRepository.save(
                         IncomeListDto.builder()
-                            .incomeListPrice(nfastPrice)
-                            .incomeListDate(new Date())
-                            .incomeListType((byte) 0)
-                            .storeSequence(storeSequence)
-                            .incomeListTransaction("TRANSACTION")
-                            .build()
-                            .toEntity()
+                                .incomeListPrice(nfastPrice)
+                                .incomeListDate(new Date())
+                                .incomeListType((byte) 0)
+                                .storeSequence(storeSequence)
+                                .incomeListTransaction("TRANSACTION")
+                                .build()
+                                .toEntity()
                 );
                 //3. price 만큼 지갑에서 차감(metamask)
 
@@ -164,7 +164,6 @@ public class UserMainServiceImpl implements UserMainService{
     @Override
     public void findBookmark(long storeSeqeuence, long userSequence) {
         Optional<Bookmark> bookmarkWrapper = bookmarkRepository.findByUserSequenceAndStoreSequence(storeSeqeuence,userSequence);
-        
         if(bookmarkWrapper.isPresent()){
             Bookmark bookmark = bookmarkWrapper.get();
             BookmarkDto dto = bookmark.toDto();
