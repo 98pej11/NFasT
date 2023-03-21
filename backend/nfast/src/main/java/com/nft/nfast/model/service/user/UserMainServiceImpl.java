@@ -1,6 +1,7 @@
 package com.nft.nfast.model.service.user;
 
 import com.nft.nfast.entity.business.Nfast;
+import com.nft.nfast.entity.business.Review;
 import com.nft.nfast.entity.business.Store;
 import com.nft.nfast.entity.user.Bookmark;
 import com.nft.nfast.entity.user.TradeList;
@@ -35,6 +36,9 @@ public class UserMainServiceImpl implements UserMainService{
     @Autowired
     BookmarkRepository bookmarkRepository;
 
+    @Autowired
+    ReviewRepository reviewRepository;
+
     @Override
     public List<StoreFindDto> findAllStore(String storeName) {
         List<Store> stores = storeRepository.findAllByStoreNameContaining(storeName);
@@ -53,8 +57,8 @@ public class UserMainServiceImpl implements UserMainService{
         List<NfastGetDto> nfastGetDtoList = new ArrayList<>();
 
         for(Nfast nfast: nfasts){
-             NfastGetDto dto = nfast.toGetDto();
-             nfastGetDtoList.add(dto);
+            NfastGetDto dto = nfast.toGetDto();
+            nfastGetDtoList.add(dto);
         }
         return nfastGetDtoList;
     }
@@ -101,13 +105,13 @@ public class UserMainServiceImpl implements UserMainService{
                 //2-1. 사장님 -> income_list에 추가
                 incomeListRepository.save(
                         IncomeListDto.builder()
-                            .incomeListPrice(nfastPrice)
-                            .incomeListDate(new Date())
-                            .incomeListType((byte) 0)
-                            .storeSequence(storeSequence)
-                            .incomeListTransaction("TRANSACTION")
-                            .build()
-                            .toEntity()
+                                .incomeListPrice(nfastPrice)
+                                .incomeListDate(new Date())
+                                .incomeListType((byte) 0)
+                                .storeSequence(storeSequence)
+                                .incomeListTransaction("TRANSACTION")
+                                .build()
+                                .toEntity()
                 );
                 //3. price 만큼 지갑에서 차감(metamask)
 
@@ -162,14 +166,58 @@ public class UserMainServiceImpl implements UserMainService{
     }
 
     @Override
-    public void findBookmark(long storeSeqeuence, long userSequence) {
-        Optional<Bookmark> bookmarkWrapper = bookmarkRepository.findByUserSequenceAndStoreSequence(storeSeqeuence,userSequence);
+    public void saveBookmark(long storeSeqeuence, long userSequence) {
+        Optional<Bookmark> bookmarkWrapper = bookmarkRepository.findByStoreSequenceAndUserSequence(storeSeqeuence,userSequence);
         
-        if(bookmarkWrapper.isPresent()){
-            Bookmark bookmark = bookmarkWrapper.get();
-            BookmarkDto dto = bookmark.toDto();
+        if(!bookmarkWrapper.isPresent()){
+            BookmarkDto dto = BookmarkDto.builder().storeSequence(storeSeqeuence).userSequence(userSequence).build();
+            bookmarkRepository.save(dto.toEntity());
         }
     }
 
+    @Override
+    public void deleteBookmark(long storeSeqeuence, long userSequence) {
+        Optional<Bookmark> bookmarkWrapper = bookmarkRepository.findByStoreSequenceAndUserSequence(storeSeqeuence,userSequence);
 
+        if(bookmarkWrapper.isPresent()){
+            Bookmark bookmark = bookmarkWrapper.get();
+            BookmarkDto dto = bookmark.toDto();
+            bookmarkRepository.deleteById(dto.getBookmarkSequence());
+        }
+    }
+
+    @Override
+    public StoreDetailDto findStoreDetail(long storeSequence) {
+        String[][] contents = {{"바로 들어갔어요","10분 이내로 들어갔어요","20분 이내로 들어갔어요"},{"주차하기 편해요","좌석이 편안해요","교통이 편리해요"},{"친절해요","응대가 빨라요","매장이 청결해요"},{"뷰가 좋아요","인테리어가 잘 나와요","사진이 잘 나와요"}};
+        Optional<Store> storeWrapper = storeRepository.findById(storeSequence);
+        List<ReviewFind> reviewList = reviewRepository.findByStoreSequence(storeSequence);
+        ReviewFindDto reviewFindDto = new ReviewFindDto();
+
+        List<Object> nfastMaxList = nfastRepository.findMaxNfastPriceGroupByNfastDate();
+        List<Object> nfastMinList = nfastRepository.findMinNfastPriceGroupByNfastDate();
+
+        StoreDetailDto storeDetailDto = new StoreDetailDto();
+        if(storeWrapper.isPresent()){
+            Store store = storeWrapper.get();
+            for(ReviewFind review:reviewList){
+                String[] str=new String[2];
+                str[0]=contents[review.getReviewTopic()][review.getReviewSubTopic()];
+                str[1]=review.getCnt().toString();
+                if(review.getReviewTopic()==0) {
+                    reviewFindDto.setReviewTime(str);
+                }
+                if(review.getReviewTopic()==1) {
+                    reviewFindDto.setReviewConvenience(str);
+                }
+                if(review.getReviewTopic()==2) {
+                    reviewFindDto.setReviewService(str);
+                }
+                if(review.getReviewTopic()==3) {
+                    reviewFindDto.setReviewMood(str);
+                }
+            }
+            storeDetailDto = StoreDetailDto.builder().store(store.toDto()).review(reviewFindDto).storeNfastPriceMax(nfastMaxList).storeNfastPriceMin(nfastMinList).build();
+        }
+        return storeDetailDto;
+    }
 }

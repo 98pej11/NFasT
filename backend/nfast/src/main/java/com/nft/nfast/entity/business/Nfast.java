@@ -54,6 +54,9 @@ public class Nfast {
     @Column(nullable = false)
     private String nfastQr;
 
+    @Column(columnDefinition = "TINYINT")
+    private Byte nfastTime;
+
     @Column
     private long userSequence;
 
@@ -62,10 +65,9 @@ public class Nfast {
     private Store storeSequence;
 
     @Builder
-    public Nfast(long nfastSequence, BigDecimal nfastPrice, BigDecimal nfastHopePrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, Store storeSequence, long userSequence) {
+    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, Byte nfastTime, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, Store storeSequence, long userSequence) {
         this.nfastSequence = nfastSequence;
         this.nfastPrice = nfastPrice;
-        this.nfastHopePrice = nfastHopePrice;
         this.nfastEigenvalue = nfastEigenvalue;
         this.nfastDate = nfastDate;
         this.nfastUseState = nfastUseState;
@@ -73,6 +75,7 @@ public class Nfast {
         this.nfastTransactionCount = nfastTransactionCount;
         this.nfastDefaultPrice = nfastDefaultPrice;
         this.nfastQr = nfastQr;
+        this.nfastTime=nfastTime;
         this.storeSequence = storeSequence;
         this.userSequence = userSequence;
     }
@@ -81,7 +84,6 @@ public class Nfast {
         NfastDto nfastDto = NfastDto.builder()
                 .nfastSequence(nfastSequence)
                 .nfastPrice(nfastPrice)
-                .nfastHopePrice(nfastHopePrice)
                 .nfastEigenvalue(nfastEigenvalue)
                 .nfastDate(nfastDate)
                 .nfastUseState(nfastUseState)
@@ -89,6 +91,7 @@ public class Nfast {
                 .nfastTransactionCount(nfastTransactionCount)
                 .nfastDefaultPrice(nfastDefaultPrice)
                 .nfastQr(nfastQr)
+                .nfastTime(nfastTime)
                 .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
