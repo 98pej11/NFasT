@@ -43,8 +43,10 @@ const Price = styled(Count)``;
 function SellerPublish() {
   const handleRegist = (e) => {
     e.preventDefault();
+    console.log(e.target[2].checked);
     const data = {
       date: e.target[0].value,
+      time: e.target[2].checked === false ? 0 : 1,
       start: e.target[3].value,
       end: e.target[5].value,
       count: e.target[7].value,
