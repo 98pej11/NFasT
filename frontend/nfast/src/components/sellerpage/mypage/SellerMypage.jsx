@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "@mui/material/Button";
 import UploadPhoto from "./UploadPhoto";
 import InfoField from "./InfoField";
-import TimeField from "../publishpage/TimeField";
+// import TimeField from "../publishpage/TimeField";
 
 const Publish = styled.div`
   display: flex;
@@ -76,11 +76,11 @@ function SellerMypage() {
         </Title>
         <Time>
           <h3>런치 시간</h3>
-          <TimeField />
+          {/* <TimeField /> */}
         </Time>
         <Time>
           <h3>디너 시간</h3>
-          <TimeField />
+          {/* <TimeField /> */}
         </Time>
         <Num>
           <h3>전화번호</h3>
