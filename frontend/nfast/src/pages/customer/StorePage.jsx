@@ -7,6 +7,7 @@ import ReviewButton from "../../components/storepage/ReviewButton";
 import SwipeableEdge from "../../components/storepage/SwipeableEdge";
 import PriceChart from "../../components/storepage/PriceChart";
 import KakaoMap from "../../components/storepage/KakaoMap";
+import Header from "../../components/commons/Header2";
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
@@ -28,18 +29,21 @@ const Map = styled.div`
 
 function StorePage() {
   return (
-    <Wrapper>
-      <AboutStore />
-      <ReviewButton />
-      <Graph>
-        <PriceChart />
-      </Graph>
-      <Map>
-        <h3>지도</h3>
-        <KakaoMap />
-      </Map>
-      <SwipeableEdge />
-    </Wrapper>
+    <div>
+      <Header />
+      <Wrapper>
+        <AboutStore />
+        <ReviewButton />
+        <Graph>
+          <PriceChart />
+        </Graph>
+        <Map>
+          <h3>지도</h3>
+          <KakaoMap />
+        </Map>
+        <SwipeableEdge />
+      </Wrapper>
+    </div>
   );
 }
 
