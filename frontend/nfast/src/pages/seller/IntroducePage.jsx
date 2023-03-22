@@ -1,35 +1,20 @@
 import React from "react";
-// import { autoPlay, virtualize } from "react-swipeable-views-utils";
-// import SwipeableViews from "react-swipeable-views";
+// import styled from "styled-components";
+// import HeaderSeller from "../../components/commons/HeaderSeller";
+// import NFastCard1 from "../../components/mypage/MyNftCard1";
 import Intro1 from "../../components/intropage/Intro1";
 // import Intro2 from "../../components/intropage/Intro2";
 // import Intro3 from "../../components/intropage/Intro3";
+// import Intro4 from "../../components/intropage/Intro4";
+// import Intro5 from "../../components/intropage/Intro5";
+// import Intro6 from "../../components/intropage/Intro6";
 
-// const VirtualizeSwipeableViews = virtualize(SwipeableViews);
-// const AutoPlaySwipeableViews = autoPlay(VirtualizeSwipeableViews);
-
-function IntroducePage() {
-  //   // eslint-disable-next-line no-unused-vars
-  //   const [index, setIndex] = React.useState(0);
-
-  //   // eslint-disable-next-line no-unused-vars
-  //   const handleChangeIndex = (index) => {
-  //     setIndex(index);
-  //   };
+function CurrentIncome() {
   return (
-    // <AutoPlaySwipeableViews onChangeIndex={handleChangeIndex}>
     <div>
-      <div>
-        <Intro1 />{" "}
-      </div>
-      {/* <div>
-        <Intro2 />{" "}
-      </div> */}
-      {/* <div>
-        <Intro3 />{" "}
-      </div> */}
+      <Intro1 />
     </div>
   );
 }
 
-export default IntroducePage;
+export default CurrentIncome;

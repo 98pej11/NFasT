@@ -4,6 +4,7 @@ import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TradeFindDto;
 import com.nft.nfast.model.dto.user.TradeListDto;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -16,5 +17,10 @@ public interface UserMainService {
     void savePurchaseNfast(long storeSequence, long userSequence, NfastPurchaseDto nfast);
     List<TradeFindDto> findAllTrade(long userSequence) throws ParseException;
     void saveTradeNfast(NfastTradeDoneDto nfastTradeDoneDto);
-    void findBookmark(long storeSeqeuence, long useSequence);
+    void saveBookmark(long storeSeqeuence, long useSequence);
+    void deleteBookmark(long storeSeqeuence, long useSequence);
+    StoreDetailDto findStoreDetail(long storeSequence);
+    BigDecimal findNfastPrice(long nfastSequence);
+    void saveReview(ReviewGetDto reviewGetDto);
+    Byte findNfastUseState(long userSequence, long nfastSequence);
 }

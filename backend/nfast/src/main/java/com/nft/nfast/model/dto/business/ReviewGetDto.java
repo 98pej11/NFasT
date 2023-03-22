@@ -1,6 +1,5 @@
 package com.nft.nfast.model.dto.business;
 
-import com.nft.nfast.entity.business.Store;
 import lombok.*;
 
 @Setter
@@ -9,7 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class StoreFindDto {
+public class ReviewGetDto {
     private long storeSequence;
-    private String storeName;
+    private long userSequence;
+    private ReviewFindDto reviews;
 }
