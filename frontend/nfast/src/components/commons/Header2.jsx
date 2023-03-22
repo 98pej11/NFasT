@@ -86,6 +86,7 @@ function Header() {
         height: "80px",
         boxShadow: "none",
         marginTop: 15,
+        marginBottom: 10,
       }}
     >
       <Container maxWidth="xl">
