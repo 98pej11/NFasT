@@ -23,4 +23,6 @@ public interface UserMainService {
     BigDecimal findNfastPrice(long nfastSequence);
     void saveReview(ReviewGetDto reviewGetDto);
     Byte findNfastUseState(long userSequence, long nfastSequence);
+    List<StoreDto> findAllBookmarkStore(long userSequence);
+    List<NfastUsedDto> findUnAvailableNfast(long userSequence);
 }

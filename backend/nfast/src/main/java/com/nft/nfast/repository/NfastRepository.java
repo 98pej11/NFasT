@@ -1,6 +1,7 @@
 package com.nft.nfast.repository;
 
 import com.nft.nfast.entity.business.Nfast;
+import com.nft.nfast.entity.business.Review;
 import com.nft.nfast.model.dto.business.NfastMinted;
 import com.nft.nfast.model.dto.business.NfastMintedDto;
 import com.nft.nfast.model.dto.business.NfastPurchase;
@@ -51,5 +52,9 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
 
     //NFT 사용 완료 확인
     Optional<Nfast> findByUserSequenceAndNfastSequence(long userSequence, long nfastSequence);
+
+    //사용한 NFast 리스트
+    @Query(value = "select * from nfast where user_sequence=?1 and nfast_use_state=1;",nativeQuery = true)
+    List<Nfast> findAllNfastByUserSequenceAndNfastUseState(long userSequence);
 }
 
