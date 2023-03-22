@@ -2,11 +2,9 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 // import MenuIcon from "@mui/icons-material/Menu";
 import EditIcon from "@mui/icons-material/Edit";
@@ -15,10 +13,9 @@ import Container from "@mui/material/Container";
 // import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { styled, alpha } from "@mui/material/styles";
 import LoginBtn from "../loginpage/LoginButton";
-
+import cat from "../../assets/cat.png";
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = [
 //   "사용한 NFT",
@@ -53,9 +50,9 @@ function Header() {
     />
   ))(({ theme }) => ({
     "& .MuiPaper-root": {
-      borderRadius: 6,
-      marginTop: theme.spacing(1),
-      minWidth: 180,
+      borderRadius: 10,
+      minWidth: 300,
+      minHeight: 600,
       color:
         theme.palette.mode === "light"
           ? "rgb(55, 65, 81)"
@@ -83,37 +80,22 @@ function Header() {
 
   return (
     <AppBar
-      position="static"
-      style={{ backgroundColor: "#FFCB45", height: "80px" }}
+      position="absolute"
+      style={{
+        backgroundColor: "transparent",
+        height: "80px",
+        boxShadow: "none",
+        marginTop: 15,
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar
           disableGutters
           sx={{ height: "80px", display: "flex", alignItems: "center" }}
         >
-          {/* 웹 로고 */}
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-
-          {/* 모바일화면 */}
+          {/* 로고 */}
           <Box
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            sx={{ flexGrow: 1, display: { xs: "flex" } }}
             component={Link}
             to="/"
           >
@@ -121,22 +103,11 @@ function Header() {
             <img src="logo.png" alt="logo" height="60px" />
           </Box>
 
-          {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box> */}
           <LoginBtn />
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleClick} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="cat.png" />
+                <Avatar alt="Remy Sharp" src={cat} />
               </IconButton>
             </Tooltip>
             <StyledMenu
@@ -148,44 +119,58 @@ function Header() {
               open={open}
               onClose={handleClose}
             >
+              <img src={cat} alt="v" style={{ height: "300px" }} />
               <MenuItem
+                sx={{ height: 70, fontSize: 20 }}
                 onClick={handleClose}
                 component={Link}
                 to="/mynft"
                 disableRipple
+                divider
               >
                 <EditIcon />
                 나의 NFT
               </MenuItem>
               <MenuItem
+                sx={{ height: 70, fontSize: 20 }}
                 onClick={handleClose}
                 component={Link}
                 to="/mytrans"
                 disableRipple
+                divider
               >
                 <EditIcon />
                 거래 내역
               </MenuItem>
-              <Divider sx={{ my: 0.5 }} />
+
               <MenuItem
+                sx={{ height: 70, fontSize: 20 }}
                 onClick={handleClose}
                 component={Link}
                 to="/mybookmark"
                 disableRipple
+                divider
               >
                 <EditIcon />
                 나의 북마크
               </MenuItem>
               <MenuItem
+                sx={{ height: 70, fontSize: 20 }}
                 onClick={handleClose}
                 component={Link}
                 to="/myinfo"
                 disableRipple
+                divider
               >
                 <EditIcon />
                 정보수정
               </MenuItem>
-              <MenuItem onClick={handleClose} disableRipple>
+              <MenuItem
+                sx={{ height: 70, fontSize: 20 }}
+                onClick={handleClose}
+                disableRipple
+                divider
+              >
                 <EditIcon />
                 로그아웃
               </MenuItem>
