@@ -36,10 +36,13 @@ function App() {
           <Route path="/introduce" element={<IntroducePage />} />
           <Route path="/loginCustomer" element={<LoginCustomer />} />
           <Route path="/loginSeller" element={<LoginSeller />} />
+<<<<<<< HEAD
+=======
           {/* <Route path="/publishNft" element={<PublishNft />} />
           <Route path="/currentIncome" element={<CurrentIncome />} />
           <Route path="/makedNft" element={<MakedNft />} />
           <Route path="/mypageSeller" element={<MypageSeller />} /> */}
+>>>>>>> d13dbeabebb0c16b454c0d199ddea51e78a87540
           <Route path="/sellerPage" element={<SellerPage />} />
         </Routes>
         {/* <Footer /> */}
