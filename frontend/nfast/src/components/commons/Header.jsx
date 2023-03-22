@@ -80,8 +80,13 @@ function Header() {
 
   return (
     <AppBar
-      position="static"
-      style={{ backgroundColor: "#FFCB45", height: "80px" }}
+      position="absolute"
+      style={{
+        backgroundColor: "transparent",
+        height: "80px",
+        boxShadow: "none",
+        marginTop: 15,
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar

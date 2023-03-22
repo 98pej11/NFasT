@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/commons/Header";
+// import Header from "./components/commons/Header";
 // import Footer from "./components/commons/Footer";
 import NFastCard from "./components/commons/NFastCard";
 // import FloatingCards from "./components/FloatingCards";
@@ -23,7 +23,6 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/floating" element={<FloatingBtn />} />
