@@ -1,52 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-import { Box } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import Burger from "../../assets/Burger.png";
+import DepartureBoardTwoToneIcon from "@mui/icons-material/DepartureBoardTwoTone";
+import RecordVoiceOverTwoToneIcon from "@mui/icons-material/RecordVoiceOverTwoTone";
 import MainCard from "./MainCard";
-import SearchBar from "../commons/SearchBar";
+// import Trans from "../../assets/trans.png";
+// import Distance from "../../assets/distance.png";
 
 function MainComp() {
-  const Styledh2 = styled.div`
-    display: flex;
-    align-items: center; /* 수직 중앙 정렬 */
-    justify-content: center;
-    text-align: center;
-    margin-top: 10%;
-  `;
   const Line = styled.div`
-    h3 {
-      margin: 5%;
+    margin: 5%;
+    p {
+      font-size: 1.3rem;
     }
   `;
   return (
     <div>
-      <div>
-        <Styledh2>
-          <img src={Burger} alt="logo" />
-          <h3>~ 줄서지 말고 먹쟈 ~</h3>
-          <img src={Burger} alt="logo" />
-        </Styledh2>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <SearchBar />
-          <Box>
-            <SearchIcon />
-          </Box>
-        </div>
-      </div>
       <Line>
-        <h3>거리순</h3>
+        <DepartureBoardTwoToneIcon />
+        <p>거리순</p>
+        가까운 거리의 맛집들을 빠르게 만나보세요.
       </Line>
       <MainCard />
-      <div style={{ marginBottom: 80 }}> </div>
+      <div style={{ marginBottom: 50 }}> </div>
       <Line>
-        <h3>거래순</h3>
+        <RecordVoiceOverTwoToneIcon />
+        <p>거래순</p>
+        최신 가장 많은 거래가 있는 맛집들을 만나보세요.
       </Line>
       <MainCard />
     </div>

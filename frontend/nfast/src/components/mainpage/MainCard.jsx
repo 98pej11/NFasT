@@ -5,22 +5,25 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import img1 from "../../assets/연돈.png";
+import img2 from "../../assets/호호식당.jpg";
+import img3 from "../../assets/솔솥.png";
 
 const cards = [
   {
     title: "Card 1",
     description: "This is the description of card 1",
-    imageUrl: "https://picsum.photos/200/300?random=1",
+    imageUrl: img1,
   },
   {
     title: "Card 2",
     description: "This is the description of card 2",
-    imageUrl: "https://picsum.photos/200/300?random=2",
+    imageUrl: img2,
   },
   {
     title: "Card 3",
     description: "This is the description of card 3",
-    imageUrl: "https://picsum.photos/200/300?random=3",
+    imageUrl: img3,
   },
 ];
 

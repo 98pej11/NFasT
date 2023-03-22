@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/commons/Header";
+// import Header from "./components/commons/Header";
 // import Footer from "./components/commons/Footer";
 import NFastCard from "./components/commons/NFastCard";
 // import FloatingCards from "./components/FloatingCards";
@@ -23,7 +23,6 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/floating" element={<FloatingBtn />} />
@@ -37,6 +36,13 @@ function App() {
           <Route path="/introduce" element={<IntroducePage />} />
           <Route path="/loginCustomer" element={<LoginCustomer />} />
           <Route path="/loginSeller" element={<LoginSeller />} />
+<<<<<<< HEAD
+=======
+          {/* <Route path="/publishNft" element={<PublishNft />} />
+          <Route path="/currentIncome" element={<CurrentIncome />} />
+          <Route path="/makedNft" element={<MakedNft />} />
+          <Route path="/mypageSeller" element={<MypageSeller />} /> */}
+>>>>>>> d13dbeabebb0c16b454c0d199ddea51e78a87540
           <Route path="/sellerPage" element={<SellerPage />} />
         </Routes>
         {/* <Footer /> */}

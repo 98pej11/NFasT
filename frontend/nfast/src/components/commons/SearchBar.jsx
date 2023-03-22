@@ -139,12 +139,18 @@ function SearchBar() {
       id="highlights-demo"
       sx={{
         width: 480,
+        // backgroundColor: "white",
       }}
       options={top100Films}
       getOptionLabel={(option) => option.title}
       renderInput={(params) => (
         /* eslint-disable react/jsx-props-no-spreading */
-        <TextField {...params} label="식당명을 입력하세요." margin="normal" />
+        <TextField
+          {...params}
+          label="식당명을 입력하세요."
+          margin="normal"
+          style={{ backgroundColor: "white" }}
+        />
       )}
       renderOption={(props, option, { inputValue }) => {
         const matches = match(option.title, inputValue, { insideWords: true });
