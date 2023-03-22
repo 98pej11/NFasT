@@ -36,7 +36,7 @@ public class Store {
     @Column(nullable = false)
     private String storeAddress;
 
-    @Column(nullable = false, length = 13)
+    @Column(nullable = false, length = 20)
     private String storePhone;
 
     @Column
@@ -48,7 +48,7 @@ public class Store {
     @Column
     private String storeOfficeHours;
 
-    @Column(nullable = false)
+    @Column
     private Date storeDate;
 
     @Column(nullable = false, length = 25)

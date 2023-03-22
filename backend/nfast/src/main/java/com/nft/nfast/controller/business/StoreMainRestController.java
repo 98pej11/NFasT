@@ -3,20 +3,23 @@ package com.nft.nfast.controller.business;
 import com.nft.nfast.model.dto.business.NfastMintDto;
 import com.nft.nfast.model.dto.business.IncomeFindDto;
 import com.nft.nfast.model.dto.business.NfastMintedDto;
+import com.nft.nfast.model.dto.business.StoreRegistDto;
 import com.nft.nfast.model.service.store.StoreMainService;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Slf4j
 @RestController
-@RequestMapping("/api/store")
+@RequestMapping("/api/owner")
 @CrossOrigin(origins = "*")
 public class StoreMainRestController {
     private static final String SUCCESS = "success";
@@ -77,4 +80,16 @@ public class StoreMainRestController {
 
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
+
+    // 가게 등록
+    @GetMapping("/introduction-store/application")
+    public ResponseEntity<String> applyStore(@RequestBody StoreRegistDto store) throws URISyntaxException, ParseException {
+//        Map<String, Object> resultMap=new HashMap<>();
+        storeMainService.saveStore(store);
+        String result=SUCCESS;
+
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+    }
+
+
 }
