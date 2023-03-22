@@ -19,6 +19,7 @@ public class NfastMintDto {
     private Date nfastDate;
     private BigDecimal nfastPrice;
     private BigDecimal nfastDefaultPrice;
+    private BigDecimal nfastHopePrice;
     private String nfastQr;
     private List<String> nfastEigenvalue;
     private int nfastSupply;
@@ -26,8 +27,9 @@ public class NfastMintDto {
 
     public Nfast toEntity(Store store, String eigenvalue){
         Nfast nfast = Nfast.builder()
-                .nfastPrice(nfastPrice)
-                .nfastDefaultPrice(nfastPrice)
+                .nfastPrice(nfastDefaultPrice)
+                .nfastDefaultPrice(nfastDefaultPrice)
+                .nfastHopePrice(nfastDefaultPrice)
                 .nfastDate(nfastDate)
                 .nfastQr(nfastQr)
                 .nfastEigenvalue(eigenvalue)

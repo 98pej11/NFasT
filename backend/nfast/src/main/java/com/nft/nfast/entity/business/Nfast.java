@@ -27,20 +27,20 @@ public class Nfast {
     @Column(nullable = false)
     private BigDecimal nfastPrice;
 
-    @Column
-    private BigDecimal nfastHopePrice;
-
     @Column(nullable = false)
     private String nfastEigenvalue;
 
     @Column(nullable = false)
     private Date nfastDate;
 
-    @Column(columnDefinition = "TINYINT")
+    @Column(nullable = false)
+    private Byte nfastTime;
+
+    @Column
     @ColumnDefault("0")
     private Byte nfastUseState;
 
-    @Column(columnDefinition = "TINYINT")
+    @Column
     @ColumnDefault("0")
     private Byte nfastSaleState;
 
@@ -51,11 +51,11 @@ public class Nfast {
     @Column(nullable = false)
     private BigDecimal nfastDefaultPrice;
 
+    @Column(nullable=false)
+    private BigDecimal nfastHopePrice;
+
     @Column(nullable = false)
     private String nfastQr;
-
-    @Column(columnDefinition = "TINYINT")
-    private Byte nfastTime;
 
     @Column
     private long userSequence;
@@ -65,17 +65,18 @@ public class Nfast {
     private Store storeSequence;
 
     @Builder
-    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, Byte nfastUseState, Byte nfastSaleState, Byte nfastTime, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, Store storeSequence, long userSequence) {
+    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate,Byte nfastTime, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, BigDecimal nfastHopePrice, String nfastQr, Store storeSequence, long userSequence) {
         this.nfastSequence = nfastSequence;
         this.nfastPrice = nfastPrice;
         this.nfastEigenvalue = nfastEigenvalue;
         this.nfastDate = nfastDate;
+        this.nfastTime=nfastTime;
         this.nfastUseState = nfastUseState;
         this.nfastSaleState = nfastSaleState;
         this.nfastTransactionCount = nfastTransactionCount;
         this.nfastDefaultPrice = nfastDefaultPrice;
+        this.nfastHopePrice = nfastHopePrice;
         this.nfastQr = nfastQr;
-        this.nfastTime=nfastTime;
         this.storeSequence = storeSequence;
         this.userSequence = userSequence;
     }
@@ -86,12 +87,13 @@ public class Nfast {
                 .nfastPrice(nfastPrice)
                 .nfastEigenvalue(nfastEigenvalue)
                 .nfastDate(nfastDate)
+                .nfastTime(nfastTime)
                 .nfastUseState(nfastUseState)
                 .nfastSaleState(nfastSaleState)
                 .nfastTransactionCount(nfastTransactionCount)
                 .nfastDefaultPrice(nfastDefaultPrice)
                 .nfastQr(nfastQr)
-                .nfastTime(nfastTime)
+                .nfastHopePrice(nfastHopePrice)
                 .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
