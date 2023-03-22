@@ -17,3 +17,4 @@ public class TradeFindDto {
     private Date tradeListDate;
     private Byte tradeListType;
 }
+

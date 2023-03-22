@@ -6,7 +6,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import SellerPublish from "./publishpage/SellerPublish";
+import PublishPage from "./publishpage/PublishPage";
 import SellerIncome from "./incomepage/SellerIncome";
 import SellerMaked from "./makedpage/SellerMaked";
 import SellerMypage from "./mypage/SellerMypage";
@@ -89,7 +89,7 @@ export default function SellerMain() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <SellerPublish />
+          <PublishPage />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <SellerIncome />
