@@ -76,6 +76,8 @@ function SellerPublish() {
     };
     // rest api
     // data.storeName = 가게이름
+    console.log(e.target[2]);
+    console.log(e.target[2].value);
     const tempData = jsonSubmit(data);
     data.cid = (await tempData).cid;
     data.walletAddress = (await tempData).walletAddress;
