@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import PublishCard from "./PublishCard";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
+import web3 from "../../axios/web3";
+import ipfs from "../../axios/ipfs";
 
 const Publish = styled.div`
   display: flex;
@@ -40,8 +42,26 @@ const Count = styled(Date)`
 
 const Price = styled(Count)``;
 
+const jsonSubmit = async (data) => {
+  const accounts = await web3.eth.getAccounts();
+  // const ethAddress = await storehash.options.address; CA주소
+
+  const file = {
+    path: "/tmp/myfile.txt",
+    content: JSON.stringify(data),
+  };
+  const testc = await ipfs.add(file);
+  console.log(testc.cid.string);
+  console.log(accounts[0]);
+  return { cid: testc.cid.string, walletAddress: accounts[0] };
+  // setInput({
+  //   external_url: testc.cid.string,
+  //   image: accounts[0],
+  // });
+};
+
 function SellerPublish() {
-  const handleRegist = (e) => {
+  const handleRegist = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line
     console.log(e.target[2].checked);
@@ -52,7 +72,17 @@ function SellerPublish() {
       end: e.target[5].value,
       count: e.target[7].value,
       price: e.target[9].value,
+      cid: "",
+      walletAddress: "",
+      storeName: "",
     };
+    // rest api
+    // data.storeName = 가게이름
+    console.log(e.target[2]);
+    console.log(e.target[2].value);
+    const tempData = jsonSubmit(data);
+    data.cid = (await tempData).cid;
+    data.walletAddress = (await tempData).walletAddress;
     // eslint-disable-next-line no-console
     console.log(data);
   };
