@@ -6,8 +6,8 @@
 const { create } = require("ipfs-http-client");
 
 const ipfs = create({
-  host: "j8a307.p.ssafy.io",
-  port: "8082",
+  host: "j8a307.p.ssafy.io/api/v0",
+  port: "",
   protocol: "http",
 });
 
