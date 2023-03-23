@@ -24,7 +24,7 @@ public class Nfast {
     private long nfastSequence;
 
     @Column(nullable = false)
-    private Byte nfastTime;
+    private Byte nfastMealType;
 
     @Column(nullable = false)
     private BigDecimal nfastPrice;
@@ -69,13 +69,13 @@ public class Nfast {
     private long userSequence;
 
     @ManyToOne
-    @JoinColumn(name="store_sequence", referencedColumnName = "storeSequence")
+    @JoinColumn(name="store_sequence", referencedColumnName = "storeSequence", nullable = false)
     private Store storeSequence;
 
     @Builder
-    public Nfast(long nfastSequence, Byte nfastTime, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, String nfastStartTime, String nfastEndTime, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, String nfastRefundQr, BigDecimal nfastHopePrice, long userSequence, Store storeSequence) {
+    public Nfast(long nfastSequence, Byte nfastMealType, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, String nfastStartTime, String nfastEndTime, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, String nfastRefundQr, BigDecimal nfastHopePrice, long userSequence, Store storeSequence) {
         this.nfastSequence = nfastSequence;
-        this.nfastTime = nfastTime;
+        this.nfastMealType = nfastMealType;
         this.nfastPrice = nfastPrice;
         this.nfastEigenvalue = nfastEigenvalue;
         this.nfastDate = nfastDate;
@@ -98,7 +98,7 @@ public class Nfast {
                 .nfastPrice(nfastPrice)
                 .nfastEigenvalue(nfastEigenvalue)
                 .nfastDate(nfastDate)
-                .nfastTime(nfastTime)
+                .nfastMealType(nfastMealType)
                 .nfastUseState(nfastUseState)
                 .nfastSaleState(nfastSaleState)
                 .nfastTransactionCount(nfastTransactionCount)

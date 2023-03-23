@@ -2,11 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import AboutStore from "../../components/storepage/AboutStore";
 import ReviewButton from "../../components/storepage/ReviewButton";
-// import PurchaseModal from "../components/storepage/PurchaseModal";
-// import StoreButtom from "../components/storepage/StoreButtom";
 import PriceChart from "../../components/storepage/PriceChart";
 // import KakaoMap from "../../components/storepage/KakaoMap";
-import Header from "../../components/commons/Header2";
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
@@ -29,7 +26,6 @@ const Map = styled.div`
 function StorePage() {
   return (
     <div>
-      <Header />
       <Wrapper>
         <AboutStore />
         <ReviewButton />

@@ -13,17 +13,17 @@ import img3 from "../../assets/솔솥.png";
 const cards = [
   {
     title: "연돈",
-    description: "This is the description of card 1",
+    description: "제주 서귀포시 일주서로 968-10",
     imageUrl: img1,
   },
   {
     title: "호호식당",
-    description: "This is the description of card 2",
+    description: "맛있는 가정식을 호호 불어먹어요",
     imageUrl: img2,
   },
   {
     title: "솔솥",
-    description: "This is the description of card 3",
+    description: "원하는 토핑을 얹은 솥밥을 솔솔 비벼목어용",
     imageUrl: img3,
   },
 ];
@@ -31,7 +31,7 @@ const cards = [
 export default function MainCard() {
   return (
     <div style={{ marginTop: 30 }}>
-      <Grid container>
+      <Grid container spacing={7}>
         {cards.map((card) => (
           <Grid
             item
@@ -42,13 +42,13 @@ export default function MainCard() {
             justifyContent="center"
             alignItems="center"
           >
-            <Link to="/store">
-              <Card
-                sx={{
-                  width: "100%",
-                  height: "300px",
-                }}
-              >
+            <Card
+              sx={{
+                width: "100%",
+                height: "300px",
+              }}
+            >
+              <Link to="/store">
                 <CardMedia
                   component="img"
                   height="140"
@@ -59,25 +59,26 @@ export default function MainCard() {
                     height: "200px",
                   }}
                 />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    fontSize="large"
-                    component="div"
-                    sx={{ textDecoration: "none" }}
-                  >
-                    {card.title}
-                  </Typography>
-                  <Typography
-                    fontSize="medium"
-                    color="text.secondary"
-                    sx={{ textDecoration: "none" }}
-                  >
-                    {card.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Link>
+              </Link>
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  fontSize="20"
+                  component="div"
+                  sx={{ textDecoration: "none" }}
+                >
+                  {card.title}
+                </Typography>
+                <Typography
+                  gutterBottom
+                  fontSize="9"
+                  color="text.secondary"
+                  sx={{ textDecoration: "none" }}
+                >
+                  {card.description}
+                </Typography>
+              </CardContent>
+            </Card>
           </Grid>
         ))}
       </Grid>

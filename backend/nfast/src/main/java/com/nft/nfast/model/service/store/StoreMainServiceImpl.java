@@ -23,6 +23,8 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.net.*;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 @Slf4j
@@ -41,19 +43,26 @@ public class StoreMainServiceImpl implements StoreMainService {
     public void saveNfast(NfastMintDto mintDto) {
         // 발행 개수, Store객체, 고유값 리스트 불러오기
         int nFastSupply = mintDto.getNfastSupply();
+        System.out.println("check "+ mintDto);
         Store store = storeRepository.findByStoreSequence(mintDto.getStoreSequence());
         List<String> eigenvalueList = mintDto.getNfastEigenvalue();
+        List<String> nfastQrList= mintDto.getNfastQr();
+        List<String> nfastRefundQrList= mintDto.getNfastRefundQr();
+        mintDto.setNfastUseState((byte) 0);
+        mintDto.setNfastSaleState((byte) 0);
 
         // DB에 저장
         for (int i = 0; i < nFastSupply; i++) {
             // 고유값 리스트
             String eigenvalue = eigenvalueList.get(i);
-            System.out.println("고유값!!!!!!!!!!!" + eigenvalue);
 
-            // QR 만들어야되면 여기서 추가해야됨....
-            String temp = "qrqrqrqr";
-            mintDto.setNfastQr(temp);
-            nfastRepository.save(mintDto.toEntity(store, eigenvalue));
+            // QR 리스트
+            String nfastQr=nfastQrList.get(i);
+
+            // 환불 QR 리스트
+            String nfastRefundQr = nfastRefundQrList.get(i);
+
+            nfastRepository.save(mintDto.toMintEntity(store, eigenvalue, nfastQr, nfastRefundQr));
         }
     }
 
@@ -271,6 +280,8 @@ public class StoreMainServiceImpl implements StoreMainService {
         JSONArray docu = (JSONArray) body.get("documents");
         System.out.println("크기!!!!!!!!!!!" + body.size());
         System.out.println("바디 " + body);
+        Date date=new Date();
+
         if (docu.size() != 0) {
             JSONObject addr = (JSONObject) docu.get(0);
             System.out.println(addr);
@@ -287,10 +298,7 @@ public class StoreMainServiceImpl implements StoreMainService {
             store.setStorePhone(storePhone);
             store.setStoreLng(storeLng);
             store.setStoreLat(storeLat);
-//            if (addr.size()!=0){
-//                JSONObject addr1 = (JSONObject) addr.get("address");
-//
-//            }
+            store.setStoreDate(date);
         }
         return store;
     }
