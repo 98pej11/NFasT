@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import MainComp from "../../components/mainpage/MainComp";
 import SearchBar from "../../components/commons/SearchBar";
-import mainImg from "../../assets/mainimg.jpg";
+// import mainImg from "../../assets/mainimg.jpg";
 import Header from "../../components/commons/Header";
 
 function MainPage() {
@@ -15,8 +15,8 @@ function MainPage() {
         minHeight="75vh"
         width="100%"
         sx={{
-          backgroundImage: `url(${mainImg})`,
-          backgroundColor: "#FFF3D3",
+          // backgroundImage: `url(${mainImg})`,
+          // backgroundColor: "#FFF3D3",
           backgroundSize: "cover",
           backgroundPosition: "top",
           display: "grid",
@@ -26,12 +26,12 @@ function MainPage() {
         <Header />
         <Container>
           {/* <Grid container item xs={12} lg={7} justifyContent="center" mx="auto"> */}
-          <Typography variant="h4" color="white" mb={1} align="center">
+          <Typography variant="h4" color="black" mb={1} align="center">
             줄서지 말고 먹자{" "}
           </Typography>
           <Typography
             variant="body1"
-            color="white"
+            color="black"
             align="center"
             // px={{ xs: 6, lg: 12 }}
             mt={1}
