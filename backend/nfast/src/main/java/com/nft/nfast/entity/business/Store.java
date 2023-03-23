@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -40,45 +41,56 @@ public class Store {
     private String storePhone;
 
     @Column
+    private String storeInformation;
+    @Column
     private String storeImage;
 
     @Column
     private String storeDetail;
 
-    @Column
-    private String storeOfficeHours;
-
-    @Column
+    @Column(nullable = false)
     private Date storeDate;
-
     @Column(nullable = false, length = 25)
     private String storeLat;
 
     @Column(nullable = false, length = 25)
     private String storeLng;
 
-//    @OneToMany(mappedBy = "storeSequence", cascade = CascadeType.ALL)
-//    private List<Nfast> nfasts = new ArrayList<>();
+    @Column(length = 20)
+    private String storeLunchStart;
 
-//    public void addStudent(Student student){
-//        this.students.add(student);
-//        student.updateSchool(this);
-//    }
+    @Column(length = 20)
+    private String storeLunchEnd;
+
+    @Column(length = 20)
+    private String storeDinnerStart;
+
+    @Column(length = 20)
+    private String storeDinnerEnd;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private long storeCount;
 
     @Builder
-    public Store(long storeSequence, String storeWallet, String storeName, String storeCategory, String storeAddress, String storePhone, String storeImage, String storeDetail, String storeOfficeHours, Date storeDate, String storeLat, String storeLng) {
+    public Store(long storeSequence, String storeWallet, String storeName, String storeCategory, String storeAddress, String storePhone, String storeInformation, String storeImage, String storeDetail, Date storeDate, String storeLat, String storeLng, String storeLunchStart, String storeLunchEnd, String storeDinnerStart, String storeDinnerEnd, long storeCount) {
         this.storeSequence = storeSequence;
         this.storeWallet = storeWallet;
         this.storeName = storeName;
         this.storeCategory = storeCategory;
         this.storeAddress = storeAddress;
         this.storePhone = storePhone;
+        this.storeInformation = storeInformation;
         this.storeImage = storeImage;
         this.storeDetail = storeDetail;
-        this.storeOfficeHours = storeOfficeHours;
         this.storeDate = storeDate;
         this.storeLat = storeLat;
         this.storeLng = storeLng;
+        this.storeLunchStart = storeLunchStart;
+        this.storeLunchEnd = storeLunchEnd;
+        this.storeDinnerStart = storeDinnerStart;
+        this.storeDinnerEnd = storeDinnerEnd;
+        this.storeCount = storeCount;
     }
 
     public StoreDto toDto(){
@@ -91,10 +103,19 @@ public class Store {
                 .storePhone(storePhone)
                 .storeImage(storeImage)
                 .storeDetail(storeDetail)
-                .storeOfficeHours(storeOfficeHours)
+                .storeLunchStart(storeLunchStart)
+                .storeLunchEnd(storeLunchEnd)
+                .storeDinnerStart(storeDinnerStart)
+                .storeDinnerEnd(storeDinnerEnd)
                 .storeDate(storeDate)
                 .storeLat(storeLat)
                 .storeLng(storeLng)
+                .storeInformation(storeInformation)
+                .storeLunchStart(storeLunchStart)
+                .storeLunchEnd(storeLunchEnd)
+                .storeDinnerStart(storeDinnerStart)
+                .storeDinnerEnd(storeDinnerEnd)
+                .storeCount(storeCount)
                 .build();
         return storeDto;
     }
