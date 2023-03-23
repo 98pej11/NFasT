@@ -35,7 +35,7 @@ public class TradeList {
     @Column(nullable = false)
     private Byte tradeListType;
 
-    @Column
+    @Column(nullable = false)
     private long userSequence;
 
     @Builder
