@@ -91,17 +91,17 @@ function Header() {
       <Container maxWidth="xl">
         <Toolbar
           disableGutters
-          sx={{ height: "80px", display: "flex", alignItems: "center" }}
+          sx={{ height: "80px", display: "flex", float: "right" }}
         >
           {/* 로고 */}
-          <Box
+          {/* <Box
             sx={{ flexGrow: 1, display: { xs: "flex" } }}
             component={Link}
             to="/"
-          >
-            {/* 로고이미지가 나와야되는데? */}
-            <img src="logo.png" alt="logo" height="60px" />
-          </Box>
+          > */}
+          {/* 로고이미지가 나와야되는데? */}
+          {/* <img src="logo.png" alt="logo" height="60px" />
+          </Box> */}
 
           <LoginBtn />
           <Box sx={{ flexGrow: 0 }}>

@@ -8,7 +8,7 @@ import MainCard from "./MainCard";
 
 function MainComp() {
   const Line = styled.div`
-    margin: 5%;
+    margin: 3%;
     p {
       font-size: 1.3rem;
     }
@@ -18,6 +18,7 @@ function MainComp() {
       <Line>
         <DepartureBoardTwoToneIcon />
         <p>거리순</p>
+        <p> </p>
         가까운 거리의 맛집들을 빠르게 만나보세요.
       </Line>
       <MainCard />
