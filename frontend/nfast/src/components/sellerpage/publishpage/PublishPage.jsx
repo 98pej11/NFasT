@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import PublishCard from "./PublishCard";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
+import web3 from "../../axios/web3";
+import ipfs from "../../axios/ipfs";
 
 const Publish = styled.div`
   display: flex;
@@ -40,16 +42,43 @@ const Count = styled(Date)`
 
 const Price = styled(Count)``;
 
+const jsonSubmit = async (data) => {
+  const accounts = await web3.eth.getAccounts();
+  // const ethAddress = await storehash.options.address; CA주소
+
+  const file = {
+    path: "/tmp/myfile.txt",
+    content: JSON.stringify(data),
+  };
+  const testc = await ipfs.add(file);
+  console.log(testc.cid.string);
+  console.log(accounts[0]);
+  return { cid: testc.cid.string, walletAddress: accounts[0] };
+  // setInput({
+  //   external_url: testc.cid.string,
+  //   image: accounts[0],
+  // });
+};
+
 function SellerPublish() {
-  const handleRegist = (e) => {
+  const handleRegist = async (e) => {
     e.preventDefault();
     const data = {
       date: e.target[0].value,
-      start: e.target[3].value,
-      end: e.target[5].value,
+      // 점심인지 저녁인지 TINYINT 값으로 들어가야함
+      start: e.target[3].value, // 사용가능시작시
+      end: e.target[5].value, // 사용가능 끝나는 시
       count: e.target[7].value,
       price: e.target[9].value,
+      cid: "",
+      walletAddress: "",
+      storeName: "",
     };
+    // rest api
+    // data.storeName = 가게이름
+    const tempData = jsonSubmit(data);
+    data.cid = (await tempData).cid;
+    data.walletAddress = (await tempData).walletAddress;
     // eslint-disable-next-line no-console
     console.log(data);
   };

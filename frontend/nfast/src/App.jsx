@@ -37,10 +37,10 @@ function App() {
           <Route path="/introduce" element={<IntroducePage />} />
           <Route path="/loginCustomer" element={<LoginCustomer />} />
           <Route path="/loginSeller" element={<LoginSeller />} />
-          <Route path="/publishNft" element={<PublishNft />} />
+          {/* <Route path="/publishNft" element={<PublishNft />} />
           <Route path="/currentIncome" element={<CurrentIncome />} />
           <Route path="/makedNft" element={<MakedNft />} />
-          <Route path="/mypageSeller" element={<MypageSeller />} />
+          <Route path="/mypageSeller" element={<MypageSeller />} /> */}
           <Route path="/sellerPage" element={<SellerPage />} />
         </Routes>
         {/* <Footer /> */}

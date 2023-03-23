@@ -4,7 +4,6 @@ import AboutStore from "../../components/storepage/AboutStore";
 import ReviewButton from "../../components/storepage/ReviewButton";
 // import PurchaseModal from "../components/storepage/PurchaseModal";
 // import StoreButtom from "../components/storepage/StoreButtom";
-import SwipeableEdge from "../../components/storepage/SwipeableEdge";
 import PriceChart from "../../components/storepage/PriceChart";
 import KakaoMap from "../../components/storepage/KakaoMap";
 
@@ -38,7 +37,6 @@ function StorePage() {
         <h3>지도</h3>
         <KakaoMap />
       </Map>
-      <SwipeableEdge />
     </Wrapper>
   );
 }
