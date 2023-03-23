@@ -359,6 +359,15 @@ public class UserMainServiceImpl implements UserMainService {
         return nfastUsedDtoList;
     }
 
-    //거래순 추천 리스트
-
+//    //거래순 추천 리스트
+//    @Override
+//    public List<StoreDto> findAllTransactionRecommendation() {
+//        List<StoreDto> storeDtoList = new ArrayList<>();
+//        List<Store> storeList = storeRepository.findAllByStoreSequenceOrderByStoreCountDesc();
+//        for(Store store:storeList){
+//            StoreDto storeDto = store.toDto();
+//            storeDtoList.add(storeDto);
+//        }
+//        return storeDtoList;
+//    }
 }

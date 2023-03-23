@@ -25,5 +25,5 @@ public interface UserMainService {
     Byte findNfastUseState(long userSequence, long nfastSequence);
     List<StoreDto> findAllBookmarkStore(long userSequence);
     List<NfastUsedDto> findUnAvailableNfast(long userSequence);
-//    List<StoreDto>
+//    List<StoreDto> findAllTransactionRecommendation();
 }

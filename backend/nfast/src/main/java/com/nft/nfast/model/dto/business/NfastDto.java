@@ -17,7 +17,7 @@ import java.util.Date;
 @Builder
 public class NfastDto {
     private long nfastSequence;
-    private Byte nfastTime;
+    private Byte nfastMealType;
     private BigDecimal nfastPrice;
     private String nfastEigenvalue;
     private Date nfastDate;
@@ -45,7 +45,7 @@ public class NfastDto {
                 .nfastTransactionCount(nfastTransactionCount)
                 .nfastDefaultPrice(nfastDefaultPrice)
                 .nfastQr(nfastQr)
-                .nfastTime(nfastTime)
+                .nfastMealType(nfastMealType)
                 .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .nfastStartTime(nfastStartTime)
