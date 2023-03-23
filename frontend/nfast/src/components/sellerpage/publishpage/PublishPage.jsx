@@ -63,6 +63,7 @@ const jsonSubmit = async (data) => {
 function SellerPublish() {
   const handleRegist = async (e) => {
     e.preventDefault();
+    // eslint-disable-next-line
     console.log(e.target[2].checked);
     const data = {
       date: e.target[0].value,
