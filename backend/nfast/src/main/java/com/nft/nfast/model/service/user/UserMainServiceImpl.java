@@ -359,4 +359,6 @@ public class UserMainServiceImpl implements UserMainService {
         return nfastUsedDtoList;
     }
 
+    //거래순 추천 리스트
+
 }
