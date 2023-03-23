@@ -171,4 +171,13 @@ public class UserMainRestController {
         resultMap.put("NFasT",nfastUsedDtoList);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
+
+    //거래순 추천 리스트
+    @GetMapping("/main/transaction-recomendation-list")
+    public ResponseEntity<Map<String, Object>> transactionRecommendationList(){
+//        List<StoreDto> storeDtoList = userMainService.
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result",SUCCESS);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
 }
