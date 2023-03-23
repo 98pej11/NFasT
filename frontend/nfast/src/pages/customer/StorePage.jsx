@@ -5,7 +5,7 @@ import ReviewButton from "../../components/storepage/ReviewButton";
 // import PurchaseModal from "../components/storepage/PurchaseModal";
 // import StoreButtom from "../components/storepage/StoreButtom";
 import PriceChart from "../../components/storepage/PriceChart";
-import KakaoMap from "../../components/storepage/KakaoMap";
+// import KakaoMap from "../../components/storepage/KakaoMap";
 import Header from "../../components/commons/Header2";
 
 const Wrapper = styled.div`
@@ -38,7 +38,7 @@ function StorePage() {
         </Graph>
         <Map>
           <h3>지도</h3>
-          <KakaoMap />
+          {/* <KakaoMap /> */}
         </Map>
       </Wrapper>
     </div>

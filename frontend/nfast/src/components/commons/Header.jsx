@@ -9,14 +9,6 @@ import Container from "@mui/material/Container";
 import LoginBtn from "../loginpage/LoginButton";
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
-// const pages = ["Products", "Pricing", "Blog"];
-// const settings = [
-//   "사용한 NFT",
-//   "거래 내역",
-//   "나의 북마크",
-//   "정보 수정",
-//   "로그아웃",
-// ];
 
 function Header() {
   return (

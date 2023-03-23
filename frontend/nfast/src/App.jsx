@@ -18,11 +18,14 @@ import IntroducePage from "./pages/seller/IntroducePage";
 import LoginCustomer from "./pages/customer/LoginPageCustomer";
 import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
+import Header from "./components/commons/Header";
+import Footer from "./components/commons/Footer";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/floating" element={<FloatingBtn />} />
@@ -38,7 +41,7 @@ function App() {
           <Route path="/loginSeller" element={<LoginSeller />} />
           <Route path="/sellerPage" element={<SellerPage />} />
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
     </div>
   );

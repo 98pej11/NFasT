@@ -4,14 +4,10 @@ import Container from "@mui/material/Container";
 // import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import MainComp from "../../components/mainpage/MainComp";
-// import SearchBar from "../../components/commons/SearchBar";
-// import mainImg from "../../assets/mainimg.jpg";
-import Header from "../../components/commons/Header";
 
 function MainPage() {
   return (
     <div>
-      <Header />
       <Box
         minHeight="60vh"
         width="100%"

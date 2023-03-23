@@ -38,6 +38,7 @@ function MainComp() {
         최신 가장 많은 거래가 있는 맛집들을 만나보세요.
       </Line>
       <MainCard />
+      <div style={{ marginBottom: 160 }}> </div>
     </div>
   );
 }
