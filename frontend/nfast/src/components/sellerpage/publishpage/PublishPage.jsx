@@ -79,9 +79,9 @@ function SellerPublish() {
     // data.storeName = 가게이름
     console.log(e.target[2]);
     console.log(e.target[2].value);
-    const tempData = jsonSubmit(data);
-    data.cid = (await tempData).cid;
-    data.walletAddress = (await tempData).walletAddress;
+    const tempData = await jsonSubmit(data);
+    data.cid = tempData.cid;
+    data.walletAddress = tempData.walletAddress;
     // eslint-disable-next-line no-console
     console.log(data);
   };
