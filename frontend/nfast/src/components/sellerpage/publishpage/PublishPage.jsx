@@ -43,6 +43,7 @@ const Price = styled(Count)``;
 function SellerPublish() {
   const handleRegist = (e) => {
     e.preventDefault();
+    // eslint-disable-next-line
     console.log(e.target[2].checked);
     const data = {
       date: e.target[0].value,

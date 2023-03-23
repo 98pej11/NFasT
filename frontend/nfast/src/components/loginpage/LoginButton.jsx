@@ -14,7 +14,7 @@ function LoginButton() {
     <div>
       <LoginBtn
         variant="contained"
-        sx={{ backgroundColor: "#ff9e45" }}
+        sx={{ backgroundColor: "#BCB6FF" }}
         href="/loginCustomer"
         disableElevation
       >
