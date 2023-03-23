@@ -4,15 +4,16 @@ import Container from "@mui/material/Container";
 // import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import MainComp from "../../components/mainpage/MainComp";
-import SearchBar from "../../components/commons/SearchBar";
+// import SearchBar from "../../components/commons/SearchBar";
 // import mainImg from "../../assets/mainimg.jpg";
 import Header from "../../components/commons/Header";
 
 function MainPage() {
   return (
     <div>
+      <Header />
       <Box
-        minHeight="75vh"
+        minHeight="60vh"
         width="100%"
         sx={{
           // backgroundImage: `url(${mainImg})`,
@@ -23,10 +24,9 @@ function MainPage() {
           placeItems: "center",
         }}
       >
-        <Header />
         <Container>
           {/* <Grid container item xs={12} lg={7} justifyContent="center" mx="auto"> */}
-          <Typography variant="h4" color="black" mb={1} align="center">
+          <Typography fontSize={25} color="black" align="center">
             줄서지 말고 먹자{" "}
           </Typography>
           <Typography
@@ -38,9 +38,7 @@ function MainPage() {
           >
             NFasT를 통해 더욱 빠른 서비스를 이용해보세요!
           </Typography>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <SearchBar />
-          </Box>
+
           {/* </Grid> */}
         </Container>
       </Box>

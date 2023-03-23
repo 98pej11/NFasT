@@ -28,7 +28,7 @@ const cards = [
   },
 ];
 
-function MainCard() {
+export default function MainCard() {
   return (
     <div style={{ marginTop: 30 }}>
       <Grid container>
@@ -46,6 +46,7 @@ function MainCard() {
               <Card
                 sx={{
                   width: "100%",
+                  height: "300px",
                 }}
               >
                 <CardMedia
@@ -53,12 +54,25 @@ function MainCard() {
                   height="140"
                   image={card.imageUrl}
                   alt="random image"
+                  sx={{
+                    width: "100%",
+                    height: "200px",
+                  }}
                 />
                 <CardContent>
-                  <Typography gutterBottom fontSize="large" component="div">
+                  <Typography
+                    gutterBottom
+                    fontSize="large"
+                    component="div"
+                    sx={{ textDecoration: "none" }}
+                  >
                     {card.title}
                   </Typography>
-                  <Typography fontSize="medium" color="text.secondary">
+                  <Typography
+                    fontSize="medium"
+                    color="text.secondary"
+                    sx={{ textDecoration: "none" }}
+                  >
                     {card.description}
                   </Typography>
                 </CardContent>
@@ -70,5 +84,3 @@ function MainCard() {
     </div>
   );
 }
-
-export default MainCard;
