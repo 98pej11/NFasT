@@ -46,14 +46,13 @@ const Price = styled(Count)``;
 const jsonSubmit = async (data) => {
   const accounts = await web3.eth.getAccounts();
   // const ethAddress = await storehash.options.address; CA주소
-
+  console.log(accounts[0]);
   const file = {
     path: "/tmp/myfile.txt",
     content: JSON.stringify(data),
   };
   const testc = await ipfs.add(file);
   console.log(testc.cid.string);
-  console.log(accounts[0]);
   return { cid: testc.cid.string, walletAddress: accounts[0] };
   // setInput({
   //   external_url: testc.cid.string,

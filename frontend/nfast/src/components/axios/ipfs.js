@@ -5,11 +5,7 @@
 // import client from "ipfs-http-client/dist/src";
 const { create } = require("ipfs-http-client");
 
-const ipfs = create({
-  host: "j8a307.p.ssafy.io/api/v0",
-  port: "",
-  protocol: "http",
-});
+const ipfs = create({ url: "http://j8a307.p.ssafy.io:8082/api/v0" });
 
 // run with local daemon
 // const ipfsApi = require('ipfs-api');
