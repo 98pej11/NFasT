@@ -30,8 +30,9 @@ public class StoreMainRestController {
     StoreMainService storeMainService;
 
     // 가게 NFast 발행
-    @PostMapping("/{store_sequence}/mint")
-    public ResponseEntity<String> mintNfast(@RequestBody NfastMintDto mintDto, @PathVariable Long store_sequence){
+    @PostMapping("/{storeSequence}/mint")
+    public ResponseEntity<String> mintNfast(@RequestBody NfastMintDto mintDto, @PathVariable Long storeSequence){
+        System.out.println("Controller "+mintDto);
         storeMainService.saveNfast(mintDto);
         String result=SUCCESS;
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
@@ -82,7 +83,7 @@ public class StoreMainRestController {
     }
 
     // 가게 등록
-    @GetMapping("/introduction-store/application")
+    @PostMapping("/introduction-store/application")
     public ResponseEntity<String> applyStore(@RequestBody StoreRegistDto store) throws URISyntaxException, ParseException {
 //        Map<String, Object> resultMap=new HashMap<>();
         storeMainService.saveStore(store);
