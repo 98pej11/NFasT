@@ -2,7 +2,12 @@ package com.nft.nfast.model.dto.business;
 
 import com.nft.nfast.entity.business.Store;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Setter
@@ -18,12 +23,17 @@ public class StoreDto {
     private String storeCategory;
     private String storeAddress;
     private String storePhone;
+    private String storeInformation;
     private String storeImage;
     private String storeDetail;
-    private String storeOfficeHours;
     private Date storeDate;
     private String storeLat;
     private String storeLng;
+    private String storeLunchStart;
+    private String storeLunchEnd;
+    private String storeDinnerStart;
+    private String storeDinnerEnd;
+    private long storeCount;
 
     public Store toEntity(){
         Store owner = Store.builder()
@@ -35,10 +45,15 @@ public class StoreDto {
                 .storePhone(storePhone)
                 .storeImage(storeImage)
                 .storeDetail(storeDetail)
-                .storeOfficeHours(storeOfficeHours)
                 .storeDate(storeDate)
                 .storeLat(storeLat)
                 .storeLng(storeLng)
+                .storeInformation(storeInformation)
+                .storeLunchStart(storeLunchStart)
+                .storeLunchEnd(storeLunchEnd)
+                .storeDinnerStart(storeDinnerStart)
+                .storeDinnerEnd(storeDinnerEnd)
+                .storeCount(storeCount)
                 .build();
         return owner;
     }

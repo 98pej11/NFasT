@@ -27,7 +27,7 @@ public class Review {
     @Column(nullable = false)
     private long storeSequence;
 
-    @Column
+    @Column(nullable = false)
     private long userSequence;
 
     @Builder
