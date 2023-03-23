@@ -15,7 +15,6 @@ import java.util.Date;
 @Setter
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "nfast")
 @DynamicUpdate
 @Builder
@@ -23,6 +22,9 @@ public class Nfast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long nfastSequence;
+
+    @Column(nullable = false)
+    private Byte nfastTime;
 
     @Column(nullable = false)
     private BigDecimal nfastPrice;
@@ -33,8 +35,11 @@ public class Nfast {
     @Column(nullable = false)
     private Date nfastDate;
 
-    @Column(nullable = false)
-    private Byte nfastTime;
+    @Column(nullable = false, length = 20)
+    private String nfastStartTime;
+
+    @Column(nullable = false, length = 20)
+    private String nfastEndTime;
 
     @Column
     @ColumnDefault("0")
@@ -51,11 +56,14 @@ public class Nfast {
     @Column(nullable = false)
     private BigDecimal nfastDefaultPrice;
 
-    @Column(nullable=false)
-    private BigDecimal nfastHopePrice;
-
     @Column(nullable = false)
     private String nfastQr;
+
+    @Column(nullable = false)
+    private String nfastRefundQr;
+
+    @Column(nullable=false)
+    private BigDecimal nfastHopePrice;
 
     @Column
     private long userSequence;
@@ -65,20 +73,23 @@ public class Nfast {
     private Store storeSequence;
 
     @Builder
-    public Nfast(long nfastSequence, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate,Byte nfastTime, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, BigDecimal nfastHopePrice, String nfastQr, Store storeSequence, long userSequence) {
+    public Nfast(long nfastSequence, Byte nfastTime, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, String nfastStartTime, String nfastEndTime, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, String nfastRefundQr, BigDecimal nfastHopePrice, long userSequence, Store storeSequence) {
         this.nfastSequence = nfastSequence;
+        this.nfastTime = nfastTime;
         this.nfastPrice = nfastPrice;
         this.nfastEigenvalue = nfastEigenvalue;
         this.nfastDate = nfastDate;
-        this.nfastTime=nfastTime;
+        this.nfastStartTime = nfastStartTime;
+        this.nfastEndTime = nfastEndTime;
         this.nfastUseState = nfastUseState;
         this.nfastSaleState = nfastSaleState;
         this.nfastTransactionCount = nfastTransactionCount;
         this.nfastDefaultPrice = nfastDefaultPrice;
-        this.nfastHopePrice = nfastHopePrice;
         this.nfastQr = nfastQr;
-        this.storeSequence = storeSequence;
+        this.nfastRefundQr = nfastRefundQr;
+        this.nfastHopePrice = nfastHopePrice;
         this.userSequence = userSequence;
+        this.storeSequence = storeSequence;
     }
 
     public NfastDto toDto(){
@@ -96,6 +107,9 @@ public class Nfast {
                 .nfastHopePrice(nfastHopePrice)
                 .storeSequence(storeSequence)
                 .userSequence(userSequence)
+                .nfastStartTime(nfastStartTime)
+                .nfastEndTime(nfastEndTime)
+                .nfastRefundQr(nfastRefundQr)
                 .build();
         return nfastDto;
     }

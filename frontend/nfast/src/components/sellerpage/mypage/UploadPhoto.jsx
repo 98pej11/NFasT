@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 function UploadPhoto() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -12,8 +12,8 @@ function UploadPhoto() {
     const formData = new FormData();
     formData.append("image", selectedFile);
 
-    const response = await axios.post("/api/upload", formData);
-    console.log(response.data);
+    // const response = await axios.post("/api/upload", formData);
+    // console.log(response.data);
   };
 
   return (

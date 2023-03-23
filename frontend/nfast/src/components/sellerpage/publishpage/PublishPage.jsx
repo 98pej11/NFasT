@@ -63,11 +63,12 @@ const jsonSubmit = async (data) => {
 function SellerPublish() {
   const handleRegist = async (e) => {
     e.preventDefault();
+    console.log(e.target[2].checked);
     const data = {
       date: e.target[0].value,
-      // 점심인지 저녁인지 TINYINT 값으로 들어가야함
-      start: e.target[3].value, // 사용가능시작시
-      end: e.target[5].value, // 사용가능 끝나는 시
+      time: e.target[2].checked === false ? 0 : 1,
+      start: e.target[3].value,
+      end: e.target[5].value,
       count: e.target[7].value,
       price: e.target[9].value,
       cid: "",

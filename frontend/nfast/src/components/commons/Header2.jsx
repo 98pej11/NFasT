@@ -80,28 +80,29 @@ function Header() {
 
   return (
     <AppBar
-      position="absolute"
+      position="relative"
       style={{
-        backgroundColor: "transparent",
+        backgroundColor: "#FFCB45",
         height: "80px",
         boxShadow: "none",
         marginTop: 15,
+        marginBottom: 10,
       }}
     >
       <Container maxWidth="xl">
         <Toolbar
           disableGutters
-          sx={{ height: "80px", display: "flex", float: "right" }}
+          sx={{ height: "80px", display: "flex", alignItems: "center" }}
         >
           {/* 로고 */}
-          {/* <Box
+          <Box
             sx={{ flexGrow: 1, display: { xs: "flex" } }}
             component={Link}
             to="/"
-          > */}
-          {/* 로고이미지가 나와야되는데? */}
-          {/* <img src="logo.png" alt="logo" height="60px" />
-          </Box> */}
+          >
+            {/* 로고이미지가 나와야되는데? */}
+            <img src="logo.png" alt="logo" height="60px" />
+          </Box>
 
           <LoginBtn />
           <Box sx={{ flexGrow: 0 }}>
