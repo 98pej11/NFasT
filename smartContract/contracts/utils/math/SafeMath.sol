@@ -69,7 +69,7 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the remainder of dividing two unsigned integers, with a division by zero flag.
+     * @dev Returns the remainder of dividing two unsigned integers, with a divisi`on by zero flag.
      *
      * _Available since v3.4._
      */
