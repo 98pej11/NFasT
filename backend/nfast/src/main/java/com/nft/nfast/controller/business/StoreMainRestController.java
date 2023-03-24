@@ -4,6 +4,7 @@ import com.nft.nfast.model.dto.business.NfastMintDto;
 import com.nft.nfast.model.dto.business.IncomeFindDto;
 import com.nft.nfast.model.dto.business.NfastMintedDto;
 import com.nft.nfast.model.dto.business.StoreRegistDto;
+import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.service.store.StoreMainService;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
@@ -84,13 +85,34 @@ public class StoreMainRestController {
 
     // 가게 등록
     @PostMapping("/introduction-store/application")
-    public ResponseEntity<String> applyStore(@RequestBody StoreRegistDto store) throws URISyntaxException, ParseException {
-//        Map<String, Object> resultMap=new HashMap<>();
+    public ResponseEntity<Map<String,Object>> applyStore(@RequestBody StoreRegistDto store) throws URISyntaxException, ParseException {
+        Map<String, Object> resultMap=new HashMap<>();
         storeMainService.saveStore(store);
-        String result=SUCCESS;
-
-        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+        System.out.println("wALLET "+store.getStoreWallet());
+        TokenDto tokenDto=storeMainService.storeLogin(store.getStoreWallet());
+        System.out.println("TOKENDTO "+tokenDto);
+        resultMap.put("result", SUCCESS);
+        resultMap.put("jwt-auth-token", tokenDto.getTokenAccess());
+        resultMap.put("jwt-refresh-token", tokenDto.getTokenRefresh());
+        resultMap.put("wallet", tokenDto.getTokenWallet());
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
 
+    //로그인
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> storeLogin(@RequestBody Map<String,String> wallet) {
+        Map<String, Object> resultMap = new HashMap<>();
+        TokenDto tokenDto=storeMainService.storeLogin(wallet.get("wallet"));
+        if(tokenDto==null){
+            resultMap.put("result",FAIL);
+        }
+        else{
+            resultMap.put("result", SUCCESS);
+            resultMap.put("jwt-auth-token", tokenDto.getTokenAccess());
+            resultMap.put("jwt-refresh-token", tokenDto.getTokenRefresh());
+            resultMap.put("wallet", tokenDto.getTokenWallet());
+        }
+        return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+    }
 }

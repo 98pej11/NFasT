@@ -1,6 +1,7 @@
 package com.nft.nfast.controller.user;
 
 import com.nft.nfast.model.dto.business.*;
+import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.dto.user.TradeFindDto;
 import com.nft.nfast.model.dto.user.UserDto;
 import com.nft.nfast.model.service.user.UserMainService;
@@ -62,15 +63,14 @@ public class UserMainRestController {
         List<NfastPurchaseDto> nfastPurchaseDtoList = userMainService.findPurchaseNfast(store_sequence);
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
-        resultMap.put("NFasT",nfastPurchaseDtoList);
+        resultMap.put("nfasts",nfastPurchaseDtoList);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
     //구매할 날짜 nft 상세 정보 출력
-    @GetMapping("/store/{store_sequence}/purchase/detail")
-    public ResponseEntity<Map<String,Object>> availableNftDateList(@PathVariable long store_sequence, @RequestBody NfastDto nfast){
-        SimpleDateFormat tranSimpleFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
-        List<NfastPurchaseDto> nfastPurchaseDtoList = userMainService.findAllByNfastDate(tranSimpleFormat.format(nfast.getNfastDate()));
+    @PostMapping("/store/{storeSequence}/purchase/detail")
+    public ResponseEntity<Map<String,Object>> availableNftDateList(@PathVariable("storeSequence") long storeSequence, @RequestBody NfastDetailDto nfast){
+        List<NfastPurchaseDto> nfastPurchaseDtoList = userMainService.findAllByNfastDate(storeSequence,nfast);
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
         resultMap.put("NFasT",nfastPurchaseDtoList);
@@ -181,4 +181,24 @@ public class UserMainRestController {
 //        resultMap.put("stores",storeDtoList);
 //        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
 //    }
+
+    //로그인
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> userLogin(@RequestBody Map<String,String> wallet) {
+        Map<String, Object> resultMap = new HashMap<>();
+        TokenDto tokenDto=userMainService.userLogin(wallet.get("wallet"));
+        resultMap.put("result", SUCCESS);
+        resultMap.put("jwt-auth-token", tokenDto.getTokenAccess());
+        resultMap.put("jwt-refresh-token", tokenDto.getTokenRefresh());
+        resultMap.put("wallet", tokenDto.getTokenWallet());
+
+        return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+    }
+
+    //로그아웃
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@RequestBody Map<String,String> wallet) {
+        userMainService.logout(wallet.get("wallet"));
+        return new ResponseEntity<>(SUCCESS,HttpStatus.ACCEPTED);
+    }
 }
