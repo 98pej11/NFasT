@@ -1,6 +1,7 @@
 package com.nft.nfast.model.service.user;
 
 import com.nft.nfast.model.dto.business.*;
+import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.dto.user.TradeFindDto;
 import com.nft.nfast.model.dto.user.TradeListDto;
 
@@ -13,7 +14,7 @@ public interface UserMainService {
     List<StoreFindDto> findAllStore(String storeName);
     List<NfastGetDto> findAvailableNfast(long userSequence);
     List<NfastPurchaseDto> findPurchaseNfast(long storeSequence);
-    List<NfastPurchaseDto> findAllByNfastDate(String nfastDate);
+    List<NfastPurchaseDto> findAllByNfastDate(long storeSequence, NfastDetailDto nfastDto);
     void savePurchaseNfast(long storeSequence, long userSequence, NfastPurchaseDto nfast);
     List<TradeFindDto> findAllTrade(long userSequence) throws ParseException;
     void saveTradeNfast(NfastTradeDoneDto nfastTradeDoneDto);
@@ -26,4 +27,6 @@ public interface UserMainService {
     List<StoreDto> findAllBookmarkStore(long userSequence);
     List<NfastUsedDto> findUnAvailableNfast(long userSequence);
 //    List<StoreDto> findAllTransactionRecommendation();
+    TokenDto userLogin(String wallet);
+    void logout(String wallet);
 }

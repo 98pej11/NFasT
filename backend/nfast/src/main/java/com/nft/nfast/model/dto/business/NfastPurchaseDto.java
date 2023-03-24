@@ -13,6 +13,7 @@ import java.util.Date;
 @Builder
 public class NfastPurchaseDto {
     private BigDecimal nfastPrice;
+    private Byte nfastMealType;
     private String nfastDate;
     private int amount;
 }

@@ -1,6 +1,7 @@
 package com.nft.nfast.model.service.store;
 
 import com.nft.nfast.model.dto.business.*;
+import com.nft.nfast.model.dto.user.TokenDto;
 import org.json.simple.parser.ParseException;
 
 import java.math.BigDecimal;
@@ -15,4 +16,5 @@ public interface StoreMainService {
     BigDecimal findResellIncome(Long storeSequence);
     List<NfastMintedDto> findMintedNfast(Long storeSequence);
     void saveStore(StoreRegistDto storeInfo) throws URISyntaxException, ParseException;
+    TokenDto storeLogin(String wallet);
 }
