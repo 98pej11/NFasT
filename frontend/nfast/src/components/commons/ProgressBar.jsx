@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
+const ProgressBarBox = styled.div`
+  width: 100%;
+  height: 5px;
+  background-color: var(--color-back-dark);
+  z-index: 1;
+`;
+const Progress = styled.div`
+  width: ${(props) => props.size};
+  height: 5px;
+  background-color: var(--color-main-dark);
+  position: absolute;
+`;
+
 // eslint-disable-next-line react/prop-types
 export default function ProgressBar({ OuterPageBoxRef }) {
   const [progressed, setProgressed] = useState("0");
   useEffect(() => {
-    // eslint-disable-next-line no-unused-vars
-    const wheelHandler = (e) => {
+    const wheelHandler = () => {
       // eslint-disable-next-line react/prop-types
       const { scrollTop, scrollHeight, clientHeight } = OuterPageBoxRef.current;
       setProgressed(
@@ -32,18 +44,3 @@ export default function ProgressBar({ OuterPageBoxRef }) {
     </ProgressBarBox>
   );
 }
-const ProgressBarBox = styled.div`
-  width: 100%;
-  height: 5px;
-  background-color: var(--color-back-dark);
-
-  position: fixed;
-  z-index: 1;
-`;
-const Progress = styled.div`
-  width: ${(props) => props.size};
-  height: 5px;
-  background-color: var(--color-main-dark);
-
-  position: absolute;
-`;
