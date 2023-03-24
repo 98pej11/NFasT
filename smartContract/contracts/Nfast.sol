@@ -3,6 +3,7 @@ pragma solidity ^0.8.4;
 
 import "./token/ERC721/ERC721.sol";
 
+
 contract Nfast is ERC721 {
     uint256 private tokenIds;
     //URI에 들어가는 정보
@@ -38,6 +39,7 @@ contract Nfast is ERC721 {
 
     function create(address _to, string memory _tokenURI, address _storeAddress, uint256 _date, bool _mealType, uint256 _startTime, uint256 _endTime, uint256 _price,uint _charge)
     public
+    payable
     returns (uint256)
     {
         tokenIds++;
