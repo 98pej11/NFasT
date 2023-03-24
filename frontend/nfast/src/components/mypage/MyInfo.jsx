@@ -8,9 +8,9 @@ import Button from "@mui/material/Button";
 
 const Styledh2 = styled.div`
   text-align: center;
-  margin: 10%;
   h4 {
-    margin-bottom: 10%;
+    margin-top: 150px;
+    margin-bottom: 70px;
   }
   p {
     font-size: 16px;
@@ -21,10 +21,10 @@ const Styledh2 = styled.div`
 const StyleBtn = styled.div`
   margin: 17%;
   Button {
-    width: 150px;
-    height: 60px;
-    background-color: #ffcb45;
-    color: black;
+    width: 120px;
+    height: 50px;
+    background-color: #bcb6ff;
+    color: white;
     font-size: 20px;
   }
 `;
