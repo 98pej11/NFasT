@@ -15,8 +15,8 @@ export default function Footer() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 10,
-        position: "absolute",
+        marginBottom: 0,
+        position: "relative",
       }}
     >
       <Typography

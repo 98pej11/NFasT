@@ -45,7 +45,7 @@ export default function Example() {
                 flexDirection: "column",
                 gap: "30px",
                 padding: "16px",
-                height: "40%",
+                height: "20%",
                 backgroundColor: "#EAEAED",
               }}
             >
@@ -54,21 +54,23 @@ export default function Example() {
                 src={cat}
                 sx={{ width: "80px", height: "80px" }}
               />
-              <Typography fontSize={20}>
+              <Typography fontSize={15}>
                 <span style={{ color: "purple" }}>은동동</span>님, 환영합니다.
               </Typography>
             </Box>
             <Divider />
             <List>
-              <ListItem disablePadding sx={{ height: "64px" }}>
+              <ListItem disablePadding sx={{ height: "50px" }}>
                 <ListItemButton component={Link} href="/mynft">
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
-                  <ListItemText>사용한 NFT</ListItemText>
+                  <ListItemText sx={{ fontSize: "50px" }}>
+                    사용한 NFT
+                  </ListItemText>
                 </ListItemButton>
               </ListItem>
-              <ListItem disablePadding sx={{ height: "64px" }}>
+              <ListItem disablePadding sx={{ height: "50px" }}>
                 <ListItemButton component={Link} href="/mytrans">
                   <ListItemIcon>
                     <InboxIcon />
@@ -77,7 +79,7 @@ export default function Example() {
                 </ListItemButton>
               </ListItem>
 
-              <ListItem disablePadding sx={{ height: "64px" }}>
+              <ListItem disablePadding sx={{ height: "50px" }}>
                 <ListItemButton component={Link} href="/mybookmark">
                   <ListItemIcon>
                     <InboxIcon />
@@ -85,7 +87,7 @@ export default function Example() {
                   <ListItemText>나의 북마크</ListItemText>
                 </ListItemButton>
               </ListItem>
-              <ListItem disablePadding sx={{ height: "64px" }}>
+              <ListItem disablePadding sx={{ height: "50px" }}>
                 <ListItemButton component={Link} href="/myinfo">
                   <ListItemIcon>
                     <InboxIcon />
@@ -93,7 +95,7 @@ export default function Example() {
                   <ListItemText>나의 정보수정</ListItemText>
                 </ListItemButton>
               </ListItem>
-              <ListItem disablePadding sx={{ height: "64px" }}>
+              <ListItem disablePadding sx={{ height: "50px" }}>
                 <ListItemButton>
                   <ListItemIcon>
                     <InboxIcon />
@@ -110,7 +112,7 @@ export default function Example() {
                 justifyContent: "center",
                 flexDirection: "column",
                 gap: "5px",
-                padding: "16px",
+                padding: "10px",
                 height: "60%",
                 backgroundColor: "#EAEAED",
               }}

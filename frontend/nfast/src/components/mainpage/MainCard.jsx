@@ -4,6 +4,8 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
+// import StorefrontIcon from "@mui/icons-material/Storefront";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import img1 from "../../assets/연돈.png";
@@ -17,13 +19,13 @@ const cards = [
     imageUrl: img1,
   },
   {
-    title: "호호식당",
-    description: "맛있는 가정식을 호호 불어먹어요",
+    title: "호호식당 성수",
+    description: "서울 성동구 서울숲4길 25",
     imageUrl: img2,
   },
   {
-    title: "솔솥",
-    description: "원하는 토핑을 얹은 솥밥을 솔솔 비벼목어용",
+    title: "솔솥 연남",
+    description: "서울 마포구 동교로38길 35 지1층 2호, 3호",
     imageUrl: img3,
   },
 ];
@@ -60,21 +62,22 @@ export default function MainCard() {
                   }}
                 />
               </Link>
-              <CardContent>
+              <CardContent style={{ padding: 20 }}>
                 <Typography
                   gutterBottom
-                  fontSize="20"
                   component="div"
-                  sx={{ textDecoration: "none" }}
+                  sx={{ fontSize: 15, marginBottom: 2 }}
                 >
+                  {/* <StorefrontIcon style={{ color: "purple" }} /> */}
                   {card.title}
                 </Typography>
+
                 <Typography
                   gutterBottom
-                  fontSize="9"
                   color="text.secondary"
-                  sx={{ textDecoration: "none" }}
+                  style={{ fontSize: 11, display: "flex" }}
                 >
+                  <LocationOnIcon style={{ color: "orange", fontSize: 14 }} />
                   {card.description}
                 </Typography>
               </CardContent>

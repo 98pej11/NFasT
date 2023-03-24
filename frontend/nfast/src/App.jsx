@@ -23,6 +23,9 @@ const Pages = styled.div`
   margin-left: 10%;
   margin-right: 10%;
   position: relative;
+  @media (max-width: 100px) {
+    margin: 20px;
+  }
 `;
 function App() {
   return (

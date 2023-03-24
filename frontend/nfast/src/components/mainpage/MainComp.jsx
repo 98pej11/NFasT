@@ -8,7 +8,8 @@ import MainCard from "./MainCard";
 
 function MainComp() {
   const Line = styled.div`
-    margin: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
     text-align: center;
     p {
       font-size: 1.1rem;
@@ -48,6 +49,7 @@ function MainComp() {
       <Card>
         <MainCard />
       </Card>
+      <div style={{ marginBottom: 100 }}> </div>
     </div>
   );
 }
