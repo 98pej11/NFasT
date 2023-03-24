@@ -31,10 +31,16 @@ export default function SearchBar() {
         ),
         sx: {
           borderRadius: 9999,
-          marginLeft: 5,
+          marginLeft: 3,
           disableUnderline: "true",
           bgcolor: IsClicked ? "white" : "#E9E7FF",
           bordercolor: IsClicked ? "white" : "#E9E7FF",
+          "& .MuiInputLabel-outlined": {
+            display: "none",
+          },
+          "& ::placeholder": {
+            fontSize: 14,
+          },
         },
       }}
     />
