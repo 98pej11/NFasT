@@ -65,6 +65,7 @@ function LoginPageSeller() {
               backgroundColor: "#B8B6F5",
             }}
             disableElevation
+            href="./introduce"
           >
             소개보기
           </Button>
