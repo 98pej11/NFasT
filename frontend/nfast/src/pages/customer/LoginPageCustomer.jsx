@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 // import LoginButton from "../../components/LoginPage/LoginButton";
+<<<<<<< HEAD
+=======
+import Header from "../../components/commons/Header2";
+import Metamask from "../../components/loginpage/Metamask";
+>>>>>>> 0590aeecafd2ac59bf85e68ca1a40483dfded944
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
@@ -70,6 +75,7 @@ function LoginPageCustomer() {
           >
             회원가입
           </Button>
+          <Metamask />
         </div>
       </YellowBox>
     </Wrapper>
