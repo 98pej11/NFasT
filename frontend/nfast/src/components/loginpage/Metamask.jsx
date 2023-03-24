@@ -15,6 +15,7 @@ function Metamask() {
         });
         setAddress(accounts[0]);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error(error);
       }
     }
