@@ -5,6 +5,8 @@
 // const ipfsClient = require("ipfs-http-client");
 import { Buffer } from "buffer";
 
+// require("dotenv").config();
+
 const ipfsClient = require("ipfs-http-client");
 
 // const ipfs = create(new URL("https://j8a307.p.ssafy.io/api/v0"));
@@ -20,8 +22,9 @@ const ipfsClient = require("ipfs-http-client");
 //     authorization: auth,
 //   },
 // });
-const INFURA_ID = "hyueongkyun";
-const INFURA_SECRET_KEY = "17d0a575c0f5483780a2505dd61ce588";
+const INFURA_ID = process.env.REACT_APP_INFURA_ID;
+const INFURA_SECRET_KEY = process.env.REACT_APP_INFURA_SECRET_KEY;
+
 const auth = `Basic ${Buffer.from(`${INFURA_ID}:${INFURA_SECRET_KEY}`).toString(
   "base64"
 )}`;
