@@ -48,8 +48,8 @@ contract Sale is Ownable,IERC721Receiver {
 
 
     constructor (uint256 _nftId, uint256 _price, bool _isStore, uint256 _startDate, uint256 _endDate, address _currencyAddress, address _nftAddress, address _sellerAddress){
-        require(_price > 0);
-        require(_endDate > block.timestamp);
+        require(_price > 0, "price error");
+//        require(_endDate > block.timestamp,"time error");
         nftId = _nftId;
         price = _price;
         sellerAddress = _sellerAddress;
@@ -92,7 +92,7 @@ contract Sale is Ownable,IERC721Receiver {
         require(erc721Contract.getIsUse(nftId) == false, "nfast already used");
         //티켓 소유주인지 확인
         require(buyerAddress == erc721Contract.ownerOf(nftId), "buyer is not owner");
-        // 티켓사용완료 처리
+        // todo 티켓사용완료 처리 백에서 해주세요...
         erc721Contract.setIsUse(nftId);
         // 현재 티켓 소유주에게 첫금액 환불
         erc20Contract.transferFrom(msg.sender, buyerAddress, erc721Contract.getPrice(nftId));
@@ -109,11 +109,12 @@ contract Sale is Ownable,IERC721Receiver {
         uint256 nowPrice = price;
         if (isStore == false) {
             //거래 금액에서 수수료만큼 차감된 금액 구하기
-            nowPrice=nowPrice.mul(erc721Contract.getCharge(nftId)).div(100);
+            uint256 subPrice = nowPrice.mul(erc721Contract.getCharge(nftId)).div(100);
+            nowPrice=price - subPrice;
             //전송
             erc20Contract.transfer(msg.sender, nowPrice);
             //수수료만큼 사장님에게 전송
-            erc20Contract.transfer(erc721Contract.getStoreAddress(nftId), price.sub(nowPrice));
+            erc20Contract.transfer(erc721Contract.getStoreAddress(nftId),subPrice);
         }
         else {
             // 사용가능한 날짜가 지났을 시만 가능(환불문제)
