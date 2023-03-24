@@ -16,7 +16,7 @@ import LoginCustomer from "./pages/customer/LoginPageCustomer";
 import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
 import Header from "./components/commons/Header";
-import Footer from "./components/commons/Footer";
+// import Footer from "./components/commons/Footer";
 
 const Pages = styled.div`
   margin-top: 80px;
@@ -49,7 +49,7 @@ function App() {
             <Route path="/sellerPage" element={<SellerPage />} />
           </Routes>
         </Pages>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   );

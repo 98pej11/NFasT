@@ -3,13 +3,8 @@ import styled from "styled-components";
 import AboutStore from "../../components/storepage/AboutStore";
 import ReviewButton from "../../components/storepage/ReviewButton";
 import PriceChart from "../../components/storepage/PriceChart";
-<<<<<<< HEAD
-// import KakaoMap from "../../components/storepage/KakaoMap";
-=======
 import KaKaoMap from "../../components/storepage/KaKaoMap";
-import Header from "../../components/commons/Header2";
 import CalendarList from "../../components/storepage/CalendarList";
->>>>>>> 0590aeecafd2ac59bf85e68ca1a40483dfded944
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
