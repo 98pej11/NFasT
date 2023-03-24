@@ -4,10 +4,12 @@ pragma solidity ^0.8.4;
 import "./access/Ownable.sol";
 import "./token/ERC20/ERC20.sol";
 import "./token/ERC721/ERC721.sol";
-import ".\Nfast.sol";
-
+import "./Nfast.sol";
+import "./SaleFactory.sol";
+import "./utils/math/SafeMath.sol";
 
 contract Sale is Ownable,IERC721Receiver {
+    using SafeMath for uint256;
     //nft id
     uint256 private nftId;
     //가게 주소
@@ -37,8 +39,13 @@ contract Sale is Ownable,IERC721Receiver {
     IERC20 public erc20Contract;
     Nfast public erc721Contract;
 
-    //todo event 판매 완료시
-    //todo event 시간초과시
+    // event 판매 완료시
+    event Purchase(uint256 indexed _nftId, address _seller, address _buyer);
+    // event 송금시
+    event Withdraw(address indexed _to, uint256 _price);
+    // event 환불시
+    event Refund(uint256 indexed _nftId,address _to);
+
 
     constructor (uint256 _nftId, address _storeAddress, uint256 _price, bool _isStore, uint256 _startDate, uint256 _endDate, address _currencyAddress, address _nftAddress, address _sellerAddress){
         require(_storeAddress != address(0));
@@ -89,23 +96,34 @@ contract Sale is Ownable,IERC721Receiver {
         // 티켓사용완료 처리
         erc721Contract.setIsUse(nftId);
         // 현재 티켓 소유주에게 첫금액 환불
-        erc20Contract.transferFrom(msg.sender, address(this), erc721Contract.getPrice(nftId));
+        erc20Contract.transferFrom(msg.sender, buyerAddress, erc721Contract.getPrice(nftId));
 
+        emit Refund(nftId,buyerAddress);
     }
 
     function withdraw()
     public
     payable
-    onlySellerAddress onlyIsEnd onlyEndDate {
-        //판매자만 호출 ,거래 종료시, 사용가능한 날짜가 지났을 시
-        //todo 가게가 아닐시 수수료를 제외한 만큼의 토큰을 전송
+    onlySellerAddress onlyIsEnd  {
+        // 판매자만 호출 ,거래 종료시
+        // 가게가 아닐시 수수료를 제외한 만큼의 토큰을 전송
+        uint256 nowPrice = price;
         if (isStore == false) {
-            payable(msg.sender).transfer(address(this).balance);
+            //거래 금액에서 수수료만큼 차감된 금액 구하기
+            nowPrice=nowPrice.mul(erc721Contract.getCharge(nftId)).div(100);
+            //전송
+            erc20Contract.transferFrom(address(this),msg.sender, nowPrice);
+            //수수료만큼 사장님에게 전송
+            erc20Contract.transferFrom(address(this),storeAddress, price.sub(nowPrice));
         }
         else {
-            //수수료 제외
-            payable(msg.sender).transfer(address(this).balance);
+            // 사용가능한 날짜가 지났을 시만 가능(환불문제)
+            require(block.timestamp > endDate, "sale is not finished");
+            //가게일경우 모두 전송
+            // payable(msg.sender).transfer(address(this).balance);
+            erc20Contract.transferFrom(address(this),msg.sender, nowPrice);
         }
+        emit Withdraw(msg.sender,nowPrice);
     }
 
     function getSaleInfo()
@@ -121,7 +139,7 @@ contract Sale is Ownable,IERC721Receiver {
 
     function end() private {
         isEnd = true;
-        //        emit Ended(_ticketId);
+        emit Purchase(nftId,sellerAddress,buyerAddress);
     }
 
     function onERC721Received (address operator, address from, uint256 tokenId, bytes memory data)

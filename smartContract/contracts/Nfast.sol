@@ -22,6 +22,8 @@ contract Nfast is ERC721 {
     mapping(uint256 => bool) mealType;
     //초기값
     mapping(uint256 => uint256) price;
+    //수수료
+    mapping(uint256 => uint) charge;
 
     constructor(string memory name_, string memory symbol_)
     ERC721(name_, symbol_)
@@ -34,7 +36,7 @@ contract Nfast is ERC721 {
     }
 
 
-    function create(address _to, string memory _tokenURI, address _storeAddress, uint256 _date, bool _mealType, uint256 _startTime, uint256 _endTime, uint256 _price)
+    function create(address _to, string memory _tokenURI, address _storeAddress, uint256 _date, bool _mealType, uint256 _startTime, uint256 _endTime, uint256 _price,uint _charge)
     public
     returns (uint256)
     {
@@ -50,6 +52,7 @@ contract Nfast is ERC721 {
         endTime[newTokenId] = _endTime;
         mealType[newTokenId] = _mealType;
         price[newTokenId] = _price;
+        charge[newTokenId]=_charge;
 
         //가게에게 판매 허용
         approve(_to, newTokenId);
@@ -133,6 +136,13 @@ contract Nfast is ERC721 {
         return price[_tokenId];
     }
 
+    function getCharge(uint256 _tokenId)
+    public
+    view
+    returns (uint)
+    {
+        return charge[_tokenId];
+    }
     modifier onlyNotUse(uint256 _tokenId){
         require(isUse[_tokenId]==true, "already used");
         _;

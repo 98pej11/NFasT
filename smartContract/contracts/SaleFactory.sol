@@ -4,7 +4,9 @@ pragma solidity ^0.8.4;
 import "./access/Ownable.sol";
 import "./token/ERC20/ERC20.sol";
 import "./token/ERC721/ERC721.sol";
-import ".\Nfast.sol";
+import "./Nfast.sol";
+import "./Sale.sol";
+
 
 contract SaleFactory is Ownable {
     address public admin;
@@ -25,7 +27,8 @@ contract SaleFactory is Ownable {
 
         Sale newSale = new Sale(_nftId, _storeAddress, _price, isStore, _startTime, _endTime, _currencyAddress, _nftAddress, msg.sender);
         sales.push(address(newSale));
-        // emit NewSale(address(newSale), msg.sender, itemId);
+
+        emit NewSale(address(newSale), msg.sender, _nftId);
         return address(newSale);
     }
 
@@ -36,4 +39,3 @@ contract SaleFactory is Ownable {
         return sales;
     }
 }
-
