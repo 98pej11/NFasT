@@ -12,7 +12,7 @@ import MainPage from "./pages/customer/MainPage";
 import MyInfoPage from "./pages/customer/MyInfoPage";
 import StorePage from "./pages/customer/StorePage";
 import IntroducePage from "./pages/seller/IntroducePage";
-import LoginCustomer from "./pages/customer/LoginPageCustomer";
+import LoginCustomer from "./pages/customer/LoginPage";
 import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
 import Header from "./components/commons/Header";

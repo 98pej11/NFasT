@@ -24,7 +24,7 @@ const YellowBox = styled.div`
   padding-top: 50px;
   flex-direction: column;
   align-items: center;
-  background-color: #ffcb45;
+  background-color: #bcb6ff;
   border-top-left-radius: 120px;
   height: 420px;
 
