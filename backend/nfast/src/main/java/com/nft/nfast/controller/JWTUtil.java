@@ -19,7 +19,7 @@ public class JWTUtil {
     private Long expireMin;//2시간
 
     //access 토큰 생성
-    public String createAuthToken(int userId) {
+    public String createAuthToken(long userId) {
         return create(userId, "authToken",expireMin * 60 * 1000);
     }
 
@@ -39,7 +39,7 @@ public class JWTUtil {
      * @param expireMin
      * @return
      */
-    private String create(int userId,String subject,long expireMin) {
+    private String create(long userId,String subject,long expireMin) {
         final JwtBuilder builder = Jwts.builder();
         //Header , Payload 설정
         builder.setSubject(subject)

@@ -4,15 +4,16 @@ import com.nft.nfast.model.dto.business.IncomeListDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
-@Builder
 public class IncomeList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

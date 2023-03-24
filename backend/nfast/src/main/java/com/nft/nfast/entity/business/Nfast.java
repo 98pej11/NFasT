@@ -16,8 +16,6 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @Table(name = "nfast")
-@DynamicUpdate
-@Builder
 public class Nfast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

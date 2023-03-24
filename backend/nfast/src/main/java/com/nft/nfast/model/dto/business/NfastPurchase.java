@@ -7,4 +7,5 @@ public interface NfastPurchase {
     BigDecimal getPrice();
     Date getNfastDate();
     int getAmount();
+    Byte getNfastMealType();
 }
