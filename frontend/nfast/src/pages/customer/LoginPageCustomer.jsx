@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import styled from "styled-components";
 // import LoginButton from "../../components/LoginPage/LoginButton";
 import Header from "../../components/commons/Header2";
+import Metamask from "../../components/loginpage/Metamask";
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
@@ -72,6 +73,7 @@ function LoginPageCustomer() {
           >
             회원가입
           </Button>
+          <Metamask />
         </div>
       </YellowBox>
     </Wrapper>
