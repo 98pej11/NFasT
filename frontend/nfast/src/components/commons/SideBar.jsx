@@ -13,7 +13,7 @@ import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import Drawer from "@mui/material/Drawer";
 import Tooltip from "@mui/material/Tooltip";
-import Link from "@mui/material/Link";
+
 import cat from "../../assets/cat.png";
 
 export default function Example() {
@@ -61,7 +61,7 @@ export default function Example() {
             <Divider />
             <List>
               <ListItem disablePadding sx={{ height: "50px" }}>
-                <ListItemButton component={Link} href="/mynft">
+                <ListItemButton href="/mynft">
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
@@ -71,7 +71,7 @@ export default function Example() {
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding sx={{ height: "50px" }}>
-                <ListItemButton component={Link} href="/mytrans">
+                <ListItemButton href="/mytrans">
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
@@ -80,7 +80,7 @@ export default function Example() {
               </ListItem>
 
               <ListItem disablePadding sx={{ height: "50px" }}>
-                <ListItemButton component={Link} href="/mybookmark">
+                <ListItemButton href="/mybookmark">
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
@@ -88,7 +88,7 @@ export default function Example() {
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding sx={{ height: "50px" }}>
-                <ListItemButton component={Link} href="/myinfo">
+                <ListItemButton href="/myinfo">
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>

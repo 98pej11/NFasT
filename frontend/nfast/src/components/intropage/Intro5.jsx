@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import intro4 from "../../assets/intro4.png";
+import intro5 from "../../assets/intro5.png";
 // import HighLight from "../commons/HighLight";
 
 export default function Intro5() {
@@ -12,7 +12,7 @@ export default function Intro5() {
     <ProfilBox>
       <ContentBox>
         <Img>
-          <img src={intro4} alt="프로필 이미지" />
+          <img src={intro5} alt="프로필 이미지" />
         </Img>
         <TitleBox>
           <h3>NFasT를 이용하는</h3>
