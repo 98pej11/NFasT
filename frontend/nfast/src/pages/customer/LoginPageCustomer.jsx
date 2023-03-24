@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 // import LoginButton from "../../components/LoginPage/LoginButton";
-import Header from "../../components/commons/Header2";
 import Metamask from "../../components/loginpage/Metamask";
 
 const Wrapper = styled.div`
@@ -46,7 +45,6 @@ const YellowBox = styled.div`
 function LoginPageCustomer() {
   return (
     <Wrapper>
-      <Header />
       <Button href="/loginSeller">사장님 로그인</Button>
       <Logo>
         <Link to="/login">

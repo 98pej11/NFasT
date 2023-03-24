@@ -3,12 +3,11 @@ import styled from "styled-components";
 import StoreImg from "../../assets/StoreImage.png";
 
 const Wrapper = styled.div`
-  background-color: whitesmoke;
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     height: auto;
   }
   @media only screen and (min-width: 768px) {
-    height: 1500px;
+    height: auto;
   }
 `;
 

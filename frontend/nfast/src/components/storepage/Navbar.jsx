@@ -15,7 +15,7 @@ export default function Navbar() {
   };
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box sx={{ width: "100%" }}>
       {showCalendar && <CalendarList />}
       <BottomNavigation
         showLabels
