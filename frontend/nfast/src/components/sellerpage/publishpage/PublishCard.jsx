@@ -49,7 +49,7 @@ function PublishCard() {
                 2023.03.13
               </Typography>
               <Typography component="div" variant="h5">
-                연돈
+                가게이름
               </Typography>
             </CardContent>
             <Box sx={{ display: "flex", pl: 1, pb: 1 }}>

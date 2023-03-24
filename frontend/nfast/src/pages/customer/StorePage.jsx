@@ -2,18 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import AboutStore from "../../components/storepage/AboutStore";
 import ReviewButton from "../../components/storepage/ReviewButton";
-// import PurchaseModal from "../components/storepage/PurchaseModal";
-// import StoreButtom from "../components/storepage/StoreButtom";
-import SwipeableEdge from "../../components/storepage/SwipeableEdge";
 import PriceChart from "../../components/storepage/PriceChart";
-import KakaoMap from "../../components/storepage/KakaoMap";
+import KaKaoMap from "../../components/storepage/KaKaoMap";
+import Header from "../../components/commons/Header2";
+import CalendarList from "../../components/storepage/CalendarList";
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
-  height: 1500px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media only screen and (min-width: 320px) and (max-width: 768px) {
+    height: auto;
+  }
+  @media only screen and (min-width: 768px) {
+    height: 1500px;
+  }
 `;
 
 const Graph = styled.div`
@@ -21,6 +26,8 @@ const Graph = styled.div`
 `;
 
 const Map = styled.div`
+  width: 400px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,18 +35,21 @@ const Map = styled.div`
 
 function StorePage() {
   return (
-    <Wrapper>
-      <AboutStore />
-      <ReviewButton />
-      <Graph>
-        <PriceChart />
-      </Graph>
-      <Map>
-        <h3>지도</h3>
-        <KakaoMap />
-      </Map>
-      <SwipeableEdge />
-    </Wrapper>
+    <div>
+      <Header />
+      <Wrapper>
+        <AboutStore />
+        <ReviewButton />
+        <Graph>
+          <PriceChart />
+        </Graph>
+        <Map>
+          <h3>지도</h3>
+          <KaKaoMap />
+        </Map>
+        <CalendarList />
+      </Wrapper>
+    </div>
   );
 }
 

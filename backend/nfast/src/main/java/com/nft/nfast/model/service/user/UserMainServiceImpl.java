@@ -283,6 +283,7 @@ public class UserMainServiceImpl implements UserMainService {
         );
     }
 
+    //NFT 사용 완료 확인
     @Override
     public Byte findNfastUseState(long userSequence, long nfastSequence) {
         Optional<Nfast> nfastWrapper = nfastRepository.findByUserSequenceAndNfastSequence(userSequence,nfastSequence);
@@ -294,5 +295,79 @@ public class UserMainServiceImpl implements UserMainService {
         return nfastUseState;
     }
 
+    //북마크 리스트
+    @Override
+    public List<StoreDto> findAllBookmarkStore(long userSequence) {
+        List<Bookmark> bookmarkList = bookmarkRepository.findAllByUserSequence(userSequence);
+        List<Store> storeList = new ArrayList<>();
+        for(Bookmark bookmark:bookmarkList){
+            Optional<Store> storeWrapper = storeRepository.findById(bookmark.getStoreSequence());
+            if(storeWrapper.isPresent()){
+                storeList.add(storeWrapper.get());
+            }
+        }
+        List<StoreDto> storeDtoList = new ArrayList<>();
+        for(Store store:storeList){
+            StoreDto storeDto = store.toDto();
+            storeDtoList.add(storeDto);
+        }
+        return storeDtoList;
+    }
 
+    //사용한 NFasT 리스트
+    @Override
+    public List<NfastUsedDto> findUnAvailableNfast(long userSequence) {
+        String[][] contents = {{"바로 들어갔어요", "10분 이내로 들어갔어요", "20분 이내로 들어갔어요"}, {"주차하기 편해요", "좌석이 편안해요", "교통이 편리해요"}, {"친절해요", "응대가 빨라요", "매장이 청결해요"}, {"뷰가 좋아요", "인테리어가 잘 나와요", "사진이 잘 나와요"}};
+        List<NfastUsedDto> nfastUsedDtoList = new ArrayList<>();
+        List<Review> reviewList = new ArrayList<>();
+        List<Nfast> nfastList = nfastRepository.findAllNfastByUserSequenceAndNfastUseState(userSequence);
+        NfastUsedDto nfastUsedDto = new NfastUsedDto();
+
+        for(Nfast nfast: nfastList){
+            NfastGetDto nfastGetDto = new NfastGetDto();
+            ReviewFindDto reviewFindDto = new ReviewFindDto();
+
+            long storeSequence=nfast.getStoreSequence().getStoreSequence();
+            nfastGetDto = NfastGetDto.builder()
+                    .nfastPrice(nfast.getNfastPrice())
+                    .nfastEigenvalue(nfast.getNfastEigenvalue())
+                    .nfastDate(nfast.getNfastDate())
+                    .nfastQr(nfast.getNfastQr())
+                    .storeName(nfast.getStoreSequence().getStoreName())
+                    .build();
+
+            reviewList = reviewRepository.findAllByUserSequenceAndStoreSequence(userSequence, storeSequence);
+            for (Review review : reviewList) {
+                String[] str = new String[1];
+                str[0] = contents[review.getReviewTopic()][review.getReviewSubTopic()];
+                if (review.getReviewTopic() == 0) {
+                    reviewFindDto.setReviewTime(str);
+                }
+                if (review.getReviewTopic() == 1) {
+                    reviewFindDto.setReviewConvenience(str);
+                }
+                if (review.getReviewTopic() == 2) {
+                    reviewFindDto.setReviewService(str);
+                }
+                if (review.getReviewTopic() == 3) {
+                    reviewFindDto.setReviewMood(str);
+                }
+            }
+            nfastUsedDto = NfastUsedDto.builder().nfast(nfastGetDto).review(reviewFindDto).build();
+            nfastUsedDtoList.add(nfastUsedDto);
+        }
+        return nfastUsedDtoList;
+    }
+
+//    //거래순 추천 리스트
+//    @Override
+//    public List<StoreDto> findAllTransactionRecommendation() {
+//        List<StoreDto> storeDtoList = new ArrayList<>();
+//        List<Store> storeList = storeRepository.findAllByStoreSequenceOrderByStoreCountDesc();
+//        for(Store store:storeList){
+//            StoreDto storeDto = store.toDto();
+//            storeDtoList.add(storeDto);
+//        }
+//        return storeDtoList;
+//    }
 }

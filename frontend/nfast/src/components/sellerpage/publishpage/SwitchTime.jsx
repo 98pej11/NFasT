@@ -51,6 +51,9 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
+const Label = styled(FormControlLabel)`
+  width: 110px;
+`;
 export default function CustomizedSwitches() {
   const [time, setTime] = useState("디너");
   const handleSwitch = () => {
@@ -63,9 +66,14 @@ export default function CustomizedSwitches() {
   };
   return (
     <FormGroup>
-      <FormControlLabel
-        onClick={handleSwitch}
-        control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+      <Label
+        control={
+          <MaterialUISwitch
+            sx={{ m: 1 }}
+            onClick={handleSwitch}
+            defaultChecked
+          />
+        }
         label={time}
       />
     </FormGroup>

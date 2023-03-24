@@ -151,4 +151,34 @@ public class UserMainRestController {
         resultMap.put("nfastUseState",nfastUseState);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
+
+    //북마크 리스트
+    @GetMapping("/bookmark-list/{userSequence}")
+    public ResponseEntity<Map<String,Object>> bookmarkList(@PathVariable("userSequence") long userSequence){
+        List<StoreDto> storeDtoList = userMainService.findAllBookmarkStore(userSequence);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("result",SUCCESS);
+        resultMap.put("stores",storeDtoList);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
+
+    //사용한 NFasT 리스트
+    @GetMapping("/unavailable-NFasT/{userSequence}")
+    public ResponseEntity<Map<String, Object>> usedNftList(@PathVariable("userSequence") long userSequence){
+        List<NfastUsedDto> nfastUsedDtoList = userMainService.findUnAvailableNfast(userSequence);
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result",SUCCESS);
+        resultMap.put("NFasT",nfastUsedDtoList);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
+
+//    //거래순 추천 리스트
+//    @GetMapping("/main/transaction-recommendation-list")
+//    public ResponseEntity<Map<String, Object>> transactionRecommendationList(){
+//        List<StoreDto> storeDtoList = userMainService.findAllTransactionRecommendation();
+//        Map<String, Object> resultMap = new HashMap<>();
+//        resultMap.put("result",SUCCESS);
+//        resultMap.put("stores",storeDtoList);
+//        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+//    }
 }

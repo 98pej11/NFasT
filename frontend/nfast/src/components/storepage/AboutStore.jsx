@@ -4,10 +4,22 @@ import StoreImg from "../../assets/StoreImage.png";
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
+  @media only screen and (min-width: 320px) and (max-width: 768px) {
+    height: auto;
+  }
+  @media only screen and (min-width: 768px) {
+    height: 1500px;
+  }
 `;
 
 const Img = styled.img`
   width: 100%;
+  @media only screen and (min-width: 320px) and (max-width: 768px) {
+    height: auto;
+  }
+  @media only screen and (min-width: 768px) {
+    height: 500px;
+  }
 `;
 const Info = styled.div`
   display: flex;
