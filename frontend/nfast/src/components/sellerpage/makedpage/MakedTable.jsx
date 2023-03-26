@@ -49,10 +49,7 @@ const rows = [
 export default function MakedTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const Styledh2 = styled.div`
-    text-align: center;
-    margin-top: 10%;
-  `;
+
   const Filter = styled.div`
     float: right;
   `;
@@ -66,9 +63,6 @@ export default function MakedTable() {
   };
   return (
     <div>
-      <Styledh2>
-        <h4>발행한 NFAST</h4>
-      </Styledh2>
       <Filter>
         <FormControl sx={{ m: 1, width: 150 }}>
           <Select>
