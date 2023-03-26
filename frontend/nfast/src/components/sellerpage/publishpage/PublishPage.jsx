@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import PublishCard from "./PublishCard";
+import NewTicket from "../../commons/NewTicket";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
 import web3 from "../../axios/web3";
@@ -89,7 +89,7 @@ function SellerPublish() {
 
   return (
     <div>
-      <PublishCard />
+      <NewTicket />
       <Publish>
         <Form onSubmit={handleRegist}>
           <Date>
