@@ -12,8 +12,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Metamask from "../../components/loginpage/Metamask";
-import logo from "../../assets/logo.png";
 import moneylogin from "../../assets/moneylogin.png";
+import business from "../../assets/business.png";
 
 const theme = createTheme();
 
@@ -23,14 +23,14 @@ export default function LoginPage() {
       <Container component="main" maxWidth="xs" m={30}>
         <Box
           sx={{
-            marginTop: 25,
+            marginTop: 15,
             gap: 3,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <img src={logo} alt="" />
+          <img src={business} alt="" style={{ width: 200, height: 200 }} />
           <Typography variant="h6">쉽고 빠른 수익을 만나보세요!</Typography>
 
           <div

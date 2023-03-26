@@ -7,6 +7,7 @@ function Metamask() {
   const [flag, setFlag] = useState(false);
   useEffect(() => {
     if (flag) {
+      // eslint-disable-next-line
       console.log(address);
     }
   }, [address]);
@@ -20,6 +21,7 @@ function Metamask() {
         const accounts = await window.ethereum.request({
           method: "eth_accounts",
         });
+        // eslint-disable-next-line
         console.log("ACCOUNT ", accounts);
         setFlag(true);
         setAddress(accounts[0]);
