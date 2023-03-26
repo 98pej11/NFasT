@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
 import styled, { keyframes } from "styled-components";
-import SwitchTimeStore from "./SwitchTimeStore";
+import StoreSwitch from "./StoreSwitch";
 
 const slideUpAnimation = keyframes`
   from {
@@ -20,12 +20,12 @@ const Wrapper = styled.div`
   bottom: 56px; // Height of the BottomNavigation component
   left: 0;
   right: 0;
-  height: calc(100% - 56px); // Height of the BottomNavigation component
+  height: calc(100% - 136px); // Height of the BottomNavigation component
   animation: ${slideUpAnimation} 0.5s;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  overflow-y: scroll;
   h2 {
     display: flex;
     flex-direction: column;
@@ -65,7 +65,7 @@ function CalendarList() {
     <Wrapper>
       <h2>구매하기</h2>
       <Calendar onClickDay={handleDayClick} value={value} />
-      {showButtons && <SwitchTimeStore />}
+      {showButtons && <StoreSwitch />}
       {/* {mealData && <p>선택한 식사: {mealData}</p>} */}
     </Wrapper>
   );

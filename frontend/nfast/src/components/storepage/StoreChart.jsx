@@ -58,6 +58,7 @@ const data = {
 function LineGraph() {
   return (
     <Wrapper>
+      <h4>시세</h4>
       <Line data={data} options={data.options} />
     </Wrapper>
   );

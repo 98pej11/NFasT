@@ -3,7 +3,13 @@ import { styled } from "@mui/material/styles";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import SalesDetails from "./SalesDetails";
+import SalesList from "./SalesList";
+import BtnBuy from "./BtnBuy";
+import QtyPicker from "./QtyPicker";
+
+const Btn = styled(BtnBuy)`
+  width: 100%;
+`;
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -80,7 +86,9 @@ export default function CustomizedSwitches() {
         }
         label={time}
       />
-      {checked && <SalesDetails />}
+      {checked ? <SalesList /> : <SalesList />}
+      <QtyPicker />
+      <Btn />
     </FormGroup>
   );
 }
