@@ -47,7 +47,7 @@ export default function MainCard() {
             <Card
               sx={{
                 width: "100%",
-                height: "300px",
+                height: "250px",
               }}
             >
               <Link to="/store">
@@ -58,15 +58,15 @@ export default function MainCard() {
                   alt="random image"
                   sx={{
                     width: "100%",
-                    height: "200px",
+                    height: "150px",
                   }}
                 />
               </Link>
-              <CardContent style={{ padding: 20 }}>
+              <CardContent style={{}}>
                 <Typography
                   gutterBottom
                   component="div"
-                  sx={{ fontSize: 15, marginBottom: 2 }}
+                  sx={{ fontSize: 15, marginBottom: 1 }}
                 >
                   {/* <StorefrontIcon style={{ color: "purple" }} /> */}
                   {card.title}

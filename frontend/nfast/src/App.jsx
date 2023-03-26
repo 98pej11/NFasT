@@ -20,8 +20,8 @@ import Header from "./components/commons/Header";
 
 const Pages = styled.div`
   margin-top: 80px;
-  margin-left: 10%;
-  margin-right: 10%;
+  // margin-left: 10%;
+  // margin-right: 10%;
   position: relative;
 `;
 const IntroPage = styled.div`
