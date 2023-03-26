@@ -12,7 +12,7 @@ import MainPage from "./pages/customer/MainPage";
 import MyInfoPage from "./pages/customer/MyInfoPage";
 import StorePage from "./pages/customer/StorePage";
 import IntroducePage from "./pages/seller/IntroducePage";
-import LoginCustomer from "./pages/customer/LoginPage";
+import LoginCustomer from "./pages/customer/LoginPageCustomer";
 import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
 import Header from "./components/commons/Header";
@@ -23,9 +23,12 @@ const Pages = styled.div`
   margin-left: 10%;
   margin-right: 10%;
   position: relative;
-  @media (max-width: 100px) {
-    margin: 20px;
-  }
+`;
+const IntroPage = styled.div`
+  // margin-top: 80px;
+  // margin-left: 10%;
+  // margin-right: 10%;
+  position: relative;
 `;
 function App() {
   return (
@@ -43,12 +46,17 @@ function App() {
             <Route path="/mybookmark" element={<MyBookmarkPage />} />
             <Route path="/myinfo" element={<MyInfoPage />} />
             <Route path="/store" element={<StorePage />} />
-            <Route path="/introduce" element={<IntroducePage />} />
+
             <Route path="/loginCustomer" element={<LoginCustomer />} />
             <Route path="/loginSeller" element={<LoginSeller />} />
             <Route path="/sellerPage" element={<SellerPage />} />
           </Routes>
         </Pages>
+        <IntroPage>
+          <Routes>
+            <Route path="/introduce" element={<IntroducePage />} />
+          </Routes>
+        </IntroPage>
         {/* <Footer /> */}
       </BrowserRouter>
     </div>

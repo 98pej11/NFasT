@@ -33,7 +33,7 @@ const cards = [
 export default function MainCard() {
   return (
     <div style={{ marginTop: 30 }}>
-      <Grid container spacing={7}>
+      <Grid container spacing={3}>
         {cards.map((card) => (
           <Grid
             item

@@ -36,7 +36,7 @@ function Header() {
               flexGrow: 1,
               display: "flex",
               alignItems: "center",
-              marginLeft: "10%",
+              // marginLeft: "10%",
             }}
           >
             <Box component={Link} to="/">
@@ -48,7 +48,7 @@ function Header() {
             </Box>
           </Box>
 
-          <div style={{ marginRight: "14%", display: "flex" }}>
+          <div style={{ display: "flex" }}>
             <LoginBtn />
             <SideBar />
           </div>

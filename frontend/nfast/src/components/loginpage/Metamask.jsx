@@ -32,7 +32,6 @@ function Metamask() {
           type="submit"
           onClick={handleConnectMetamask}
           variant="contained"
-          href="/introduce"
           sx={{
             backgroundColor: "#F3EAD1",
             color: "black",
