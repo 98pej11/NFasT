@@ -3,6 +3,7 @@ import styled from "styled-components";
 import StoreImg from "../../assets/StoreImage.png";
 
 const Wrapper = styled.div`
+  margin-top: 20px;
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     height: auto;
   }

@@ -2,10 +2,7 @@ package com.nft.nfast.entity.business;
 
 import com.nft.nfast.model.dto.business.StoreDto;
 import com.nft.nfast.model.dto.business.StoreFindDto;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -42,6 +39,7 @@ public class Store {
 
     @Column
     private String storeInformation;
+
     @Column
     private String storeImage;
 
@@ -50,6 +48,7 @@ public class Store {
 
     @Column(nullable = false)
     private Date storeDate;
+
     @Column(nullable = false, length = 25)
     private String storeLat;
 

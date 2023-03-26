@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import AboutStore from "../../components/storepage/AboutStore";
-import ReviewButton from "../../components/storepage/ReviewButton";
-import PriceChart from "../../components/storepage/PriceChart";
+import StoreInfo from "../../components/storepage/StoreInfo";
+import StoreReview from "../../components/storepage/StoreReview";
+import StoreChart from "../../components/storepage/StoreChart";
 // import KakaoMap from "../../components/storepage/KakaoMap";
 import KaKaoMap from "../../components/storepage/KaKaoMap";
-import Navbar from "../../components/storepage/Navbar";
+import StoreNav from "../../components/storepage/StoreNav";
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,36 +19,42 @@ const Wrapper = styled.div`
   @media only screen and (min-width: 768px) {
     min-height: 100vh; /* set minimum height to fill entire viewport */
   }
+
+  h4 {
+    width: 100%;
+    border-top : solid 1px black"
+  }
+`;
+const Divider = styled.div`
+  border-top: 1px solid #ccc;
+  width: 100%;
+  margin-top: 20px;
 `;
 
+const Review = styled(StoreReview)`
+  width: 80%;
+`;
 const Graph = styled.div`
-  width: 90%;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Chart = styled(PriceChart)`
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: center;
+`;
+
+const Chart = styled(StoreChart)`
+  width: 100%;
+  height: 100%;
 `;
 
 const MapWrapper = styled.div`
-  position: relative; /* Set position to relative */
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1; /* Set z-index to 1 */
 `;
 
 const Map = styled.div`
-  position: absolute; /* Set position to absolute */
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   z-index: 0; /* Set z-index to 0 */
@@ -65,20 +71,22 @@ function StorePage() {
   return (
     <div>
       <Wrapper>
-        <AboutStore />
-        <ReviewButton />
+        <StoreInfo />
+        <Divider />
+        <Review />
+        <Divider />
         <Graph>
           <Chart />
         </Graph>
-
+        <Divider />
+        <h4>지도</h4>
         <MapWrapper>
-          <h3>지도</h3>
           <Map>
             <KaKaoMap />
           </Map>
         </MapWrapper>
         <Footer>
-          <Navbar />
+          <StoreNav />
         </Footer>
       </Wrapper>
     </div>

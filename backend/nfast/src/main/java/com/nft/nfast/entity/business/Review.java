@@ -4,14 +4,15 @@ import com.nft.nfast.model.dto.business.ReviewDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigInteger;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
-@Builder
 public class Review {
 
     @Id
