@@ -15,6 +15,7 @@ public class TokenDto {
     private String tokenRefresh;
     private long tokenUserSequence;
     private Byte tokenType;
+    private String tokenWallet;
 
     public Token toEntity(){
         Token token = Token.builder()
@@ -23,6 +24,7 @@ public class TokenDto {
                 .tokenRefresh(tokenRefresh)
                 .tokenUserSequence(tokenUserSequence)
                 .tokenType(tokenType)
+                .tokenWallet(tokenWallet)
                 .build();
         return token;
     }

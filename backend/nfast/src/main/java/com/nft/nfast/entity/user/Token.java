@@ -23,14 +23,17 @@ public class Token {
     private long tokenUserSequence;
     @Column(nullable = false)
     private Byte tokenType;
+    @Column(nullable = false)
+    private String tokenWallet;
 
     @Builder
-    public Token(long tokenSequence, String tokenAccess, String tokenRefresh, long tokenUserSequence, Byte tokenType) {
+    public Token(long tokenSequence, String tokenAccess, String tokenRefresh, long tokenUserSequence, Byte tokenType, String tokenWallet) {
         this.tokenSequence = tokenSequence;
         this.tokenAccess = tokenAccess;
         this.tokenRefresh = tokenRefresh;
         this.tokenUserSequence = tokenUserSequence;
         this.tokenType = tokenType;
+        this.tokenWallet = tokenWallet;
     }
 
     public TokenDto toDto(){
@@ -40,6 +43,7 @@ public class Token {
                 .tokenRefresh(tokenRefresh)
                 .tokenUserSequence(tokenUserSequence)
                 .tokenType(tokenType)
+                .tokenWallet(tokenWallet)
                 .build();
         return tokenDto;
     }
