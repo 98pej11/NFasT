@@ -56,5 +56,8 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
     //사용한 NFast 리스트
     @Query(value = "select * from nfast where user_sequence=?1 and nfast_use_state=1;",nativeQuery = true)
     List<Nfast> findAllNfastByUserSequenceAndNfastUseState(long userSequence);
+
+    @Query(value="select * from nfast where nfast_use_state=0 and nfast_sale_state=1 and user_sequence=:userSequence order by nfast_date LIMIT 1", nativeQuery = true)
+    Optional<Nfast> findOneByUser(@Param("userSequence") long userSequence);
 }
 

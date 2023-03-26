@@ -476,4 +476,28 @@ public class UserMainServiceImpl implements UserMainService {
             tokenRepository.save(tokenDto.toEntity());
         }
     }
+
+    @Override
+    public NfastGetDto findNowAvailableNfast(long userSequence) {
+        Optional<Nfast> nfastWrapper = nfastRepository.findOneByUser(userSequence);
+        NfastGetDto nfastGetDto=null;
+        if (nfastWrapper.isPresent()){
+            Nfast nfast=nfastWrapper.get();
+            Store store=storeRepository.findByStoreSequence(nfast.getStoreSequence().getStoreSequence());
+            String storeName=store.getStoreName();
+            nfastGetDto = NfastGetDto.builder()
+                    .nfastSequence(nfast.getNfastSequence())
+                    .nfastDate(nfast.getNfastDate())
+                    .nfastStartTime(nfast.getNfastStartTime())
+                    .nfastEndTime(nfast.getNfastEndTime())
+                    .nfastMealType(nfast.getNfastMealType())
+                    .nfastPrice(nfast.getNfastPrice())
+                    .nfastQr(nfast.getNfastQr())
+                    .nfastRefundQr(nfast.getNfastRefundQr())
+                    .storeName(storeName)
+                    .build();
+
+        }
+        return nfastGetDto;
+    }
 }

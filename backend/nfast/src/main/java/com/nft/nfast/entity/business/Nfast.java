@@ -120,6 +120,10 @@ public class Nfast {
                 .nfastDate(nfastDate)
                 .nfastQr(nfastQr)
                 .storeName(storeSequence.getStoreName())
+                .nfastRefundQr(nfastRefundQr)
+                .nfastStartTime(nfastStartTime)
+                .nfastRefundQr(nfastRefundQr)
+                .nfastMealType(nfastMealType)
                 .build();
         return nfastGetDto;
     }

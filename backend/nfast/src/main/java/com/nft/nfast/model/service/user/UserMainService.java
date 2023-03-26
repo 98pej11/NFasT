@@ -29,4 +29,6 @@ public interface UserMainService {
 //    List<StoreDto> findAllTransactionRecommendation();
     TokenDto userLogin(String wallet);
     void logout(String wallet);
+
+    NfastGetDto findNowAvailableNfast(long userSequence);
 }

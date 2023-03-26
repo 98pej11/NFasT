@@ -1,5 +1,6 @@
 package com.nft.nfast.controller.user;
 
+import com.amazonaws.Response;
 import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.dto.user.TradeFindDto;
@@ -200,5 +201,16 @@ public class UserMainRestController {
     public ResponseEntity<String> logout(@RequestBody Map<String,String> wallet) {
         userMainService.logout(wallet.get("wallet"));
         return new ResponseEntity<>(SUCCESS,HttpStatus.ACCEPTED);
+    }
+
+    //플로팅 버튼
+    @GetMapping("floating-button/{userSequence}")
+    public ResponseEntity<Map<String, Object>> floating(@PathVariable long userSequence){
+        Map<String, Object> resultMap=new HashMap<>();
+        NfastGetDto availabeNow = userMainService.findNowAvailableNfast(userSequence);
+        resultMap.put("result",SUCCESS);
+        resultMap.put("nfast", availabeNow);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+
     }
 }
