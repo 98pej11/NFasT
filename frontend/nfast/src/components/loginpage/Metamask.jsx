@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import MetaMask from "../../assets/Metamask.png";
-import { authAction } from "./../../redux/actions/authAction";
+import { authAction } from "../../redux/actions/authAction";
 
 function Metamask() {
   const [address, setAddress] = useState("");

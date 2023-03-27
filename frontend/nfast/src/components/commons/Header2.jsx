@@ -16,6 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { styled, alpha } from "@mui/material/styles";
 import LoginBtn from "../loginpage/LoginButton";
 import cat from "../../assets/cat.png";
+import NFastLogo from "../../assets/NFast_Logo.png";
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = [
 //   "사용한 NFT",
@@ -101,7 +102,7 @@ function Header() {
             to="/"
           >
             {/* 로고이미지가 나와야되는데? */}
-            <img src="logo.png" alt="logo" height="60px" />
+            <img src={NFastLogo} alt="logo" height="60px" />
           </Box>
 
           <LoginBtn />

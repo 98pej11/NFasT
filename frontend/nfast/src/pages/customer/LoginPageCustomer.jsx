@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 // import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/NFast_Logo.png";
 import moneylogin from "../../assets/moneylogin.png";
 import Metamask from "../../components/loginpage/Metamask";
 
