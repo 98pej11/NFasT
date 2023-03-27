@@ -7,19 +7,33 @@ function KaKaoMap() {
       center: new window.kakao.maps.LatLng(33.450701, 126.570667),
       level: 3,
     };
-
     const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
-    const markerPosition = new window.kakao.maps.LatLng(33.450701, 126.570667);
+    function locationLoadSuccess(pos) {
+      const currentPos = new window.kakao.maps.LatLng(
+        pos.coords.latitude,
+        pos.coords.longitude
+      );
 
-    const marker = new window.kakao.maps.Marker({
-      position: markerPosition,
-    });
+      // 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
+      map.panTo(currentPos);
 
-    marker.setMap(map);
+      // 마커 생성
+      const marker = new window.kakao.maps.Marker({
+        position: currentPos,
+      });
 
-    // To remove the marker from the map, uncomment the line below
-    // marker.setMap(null);
+      // 기존에 마커가 있다면 제거
+      marker.setMap(null);
+      marker.setMap(map);
+    }
+    function locationLoadError() {
+      alert("위치 정보를 가져오는데 실패했습니다.");
+    }
+    navigator.geolocation.getCurrentPosition(
+      locationLoadSuccess,
+      locationLoadError
+    );
   }, []);
 
   return (

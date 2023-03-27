@@ -4,6 +4,7 @@ import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.dto.user.TradeFindDto;
 import com.nft.nfast.model.dto.user.TradeListDto;
+import com.nft.nfast.model.dto.user.UserDto;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -26,7 +27,10 @@ public interface UserMainService {
     Byte findNfastUseState(long userSequence, long nfastSequence);
     List<StoreDto> findAllBookmarkStore(long userSequence);
     List<NfastUsedDto> findUnAvailableNfast(long userSequence);
-//    List<StoreDto> findAllTransactionRecommendation();
+    List<StoreDto> findAllTransactionRecommendation();
+    List<StoreDto> findAllDistanceRecommendation(String lat, String lng);
     TokenDto userLogin(String wallet);
     void logout(String wallet);
+    UserDto userDetail(long userSequence);
+    void userModify(UserDto user);
 }

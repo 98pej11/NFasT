@@ -172,15 +172,27 @@ public class UserMainRestController {
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
-//    //거래순 추천 리스트
-//    @GetMapping("/main/transaction-recommendation-list")
-//    public ResponseEntity<Map<String, Object>> transactionRecommendationList(){
-//        List<StoreDto> storeDtoList = userMainService.findAllTransactionRecommendation();
-//        Map<String, Object> resultMap = new HashMap<>();
-//        resultMap.put("result",SUCCESS);
-//        resultMap.put("stores",storeDtoList);
-//        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
-//    }
+    //거래순 추천 리스트
+    @GetMapping("/main/transacftion-recommendation-list")
+    public ResponseEntity<Map<String, Object>> transactionRecommendationList(){
+        List<StoreDto> storeDtoList = userMainService.findAllTransactionRecommendation();
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result",SUCCESS);
+        resultMap.put("stores",storeDtoList);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
+
+    //거리순 추천 리스트
+    @PostMapping("/main/distance-recommendation-list")
+    public ResponseEntity<Map<String, Object>> distanceRecommendationList(@RequestBody Map<String,String> location){
+        String lat = location.get("lat");
+        String lng = location.get("lng");
+        List<StoreDto> storeDtoList = userMainService.findAllDistanceRecommendation(lat,lng);
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result",SUCCESS);
+        resultMap.put("stores",storeDtoList);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
 
     //로그인
     @PostMapping("/login")
@@ -191,14 +203,35 @@ public class UserMainRestController {
         resultMap.put("jwt-auth-token", tokenDto.getTokenAccess());
         resultMap.put("jwt-refresh-token", tokenDto.getTokenRefresh());
         resultMap.put("wallet", tokenDto.getTokenWallet());
-
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
     }
 
     //로그아웃
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestBody Map<String,String> wallet) {
+    public ResponseEntity<Map<String, Object>> logout(@RequestBody Map<String,String> wallet) {
+        Map<String, Object> resultMap = new HashMap<>();
         userMainService.logout(wallet.get("wallet"));
-        return new ResponseEntity<>(SUCCESS,HttpStatus.ACCEPTED);
+        resultMap.put("result", SUCCESS);
+        return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+    }
+
+    //내 정보 출력
+    @GetMapping("/my-data/{userSequence}")
+    public ResponseEntity<Map<String, Object>> userDetail(@PathVariable("userSequence") long userSequence) {
+        Map<String, Object> resultMap = new HashMap<>();
+        UserDto userDto = userMainService.userDetail(userSequence);
+        resultMap.put("result", SUCCESS);
+        resultMap.put("user",userDto);
+        return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+    }
+
+    //내 정보 수정
+    @PatchMapping("/my-data/{userSequence}")
+    public ResponseEntity<Map<String, Object>> userModify(@PathVariable("userSequence") long userSequence, @RequestBody UserDto user) {
+        Map<String, Object> resultMap = new HashMap<>();
+        System.out.println("USER "+ user);
+        userMainService.userModify(user);
+        resultMap.put("result", SUCCESS);
+        return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
     }
 }
