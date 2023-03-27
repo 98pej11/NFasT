@@ -13,5 +13,4 @@ public interface StoreRepository extends JpaRepository<Store,Long> {
     Optional<Store> findByStoreName(String storeName);
     Store findByStoreSequence(Long storeSequence);
     Optional<Store> findByStoreWallet(String storeWallet);
-//    List<Store> findAllByStoreSequenceOrderByStoreCountDesc();
 }
