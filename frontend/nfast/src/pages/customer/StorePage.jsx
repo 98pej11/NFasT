@@ -12,13 +12,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0;
-
-  @media only screen and (min-width: 320px) and (max-width: 768px) {
-    height: auto;
-  }
-  @media only screen and (min-width: 768px) {
-    min-height: 100vh; /* set minimum height to fill entire viewport */
-  }
+  height :auto;
 
   h4 {
     width: 100%;
@@ -26,13 +20,13 @@ const Wrapper = styled.div`
   }
 `;
 const Divider = styled.div`
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #bcb6ff;
   width: 100%;
   margin-top: 20px;
 `;
 
 const Review = styled(StoreReview)`
-  width: 80%;
+  width: 100%;
 `;
 const Graph = styled.div`
   width: 100%;
@@ -52,6 +46,7 @@ const MapWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 100px;
 `;
 
 const Map = styled.div`
@@ -59,7 +54,6 @@ const Map = styled.div`
   height: 100%;
   z-index: 0; /* Set z-index to 0 */
 `;
-
 const Footer = styled.div`
   position: fixed;
   bottom: 0;
