@@ -5,6 +5,7 @@
   },
   "rules": {
     "no-shadow": "off",
+    "import/prefer-default-export": "off",
     "prettier/prettier": [
             "error",
             {
@@ -12,5 +13,12 @@
             }
         ],
         "react/function-component-definition":[2, {"namedcomponents":"arrow-function"}]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }

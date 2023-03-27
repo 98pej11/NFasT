@@ -20,6 +20,7 @@ public class NfastDto {
     private Byte nfastMealType;
     private BigDecimal nfastPrice;
     private String nfastEigenvalue;
+    private String nfastHash;
     private Date nfastDate;
     private String nfastStartTime;
     private String nfastEndTime;
@@ -39,6 +40,7 @@ public class NfastDto {
                 .nfastPrice(nfastPrice)
                 .nfastHopePrice(nfastHopePrice)
                 .nfastEigenvalue(nfastEigenvalue)
+                .nfastHash(nfastHash)
                 .nfastDate(nfastDate)
                 .nfastUseState(nfastUseState)
                 .nfastSaleState(nfastSaleState)
