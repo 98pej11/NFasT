@@ -2,9 +2,13 @@
 pragma solidity ^0.8.4;
 
 import "./token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+
 
 contract Nfast is ERC721 {
-    uint256 private tokenIds;
+    using Counters for Counters.Counter;
+
+    Counters.Counter private tokenIds;
     //URI에 들어가는 정보
     //{가게 주소, 초기값, 사용가능날짜, 가게이름}이 포함된 ipfs 주소
     mapping(uint256 => string) tokenURIs;
@@ -28,20 +32,21 @@ contract Nfast is ERC721 {
     constructor(string memory name_, string memory symbol_)
     ERC721(name_, symbol_)
     {
-        tokenIds = 0;
     }
 
     function current() public view returns (uint256) {
-        return tokenIds;
+        return tokenIds.current();
     }
 
 
-    function create(address _to, string memory _tokenURI, address _storeAddress, uint256 _date, bool _mealType, uint256 _startTime, uint256 _endTime, uint256 _price,uint _charge)
+    function create(address _to, string memory _tokenURI, address _storeAddress, uint256 _date, bool _mealType, uint256 _startTime, uint256 _endTime, uint256 _price, uint _charge)
     public
+    payable
     returns (uint256)
     {
-        tokenIds++;
-        uint256 newTokenId = tokenIds;
+
+        tokenIds.increment();
+        uint256 newTokenId = tokenIds.current();
         _mint(_storeAddress, newTokenId);
 
         tokenURIs[newTokenId] = _tokenURI;
@@ -52,10 +57,10 @@ contract Nfast is ERC721 {
         endTime[newTokenId] = _endTime;
         mealType[newTokenId] = _mealType;
         price[newTokenId] = _price;
-        charge[newTokenId]=_charge;
+        charge[newTokenId] = _charge;
 
         //가게에게 판매 허용
-        approve(_to, newTokenId);
+        //        approve(_to, newTokenId);
         return newTokenId;
     }
 
@@ -68,7 +73,7 @@ contract Nfast is ERC721 {
 
     function setIsUse(uint256 _tokenId)
     public
-    onlyStoreAddress(_tokenId) onlyNotUse(_tokenId) {
+    onlyNotUse(_tokenId) {
         isUse[_tokenId] = true;
     }
 
@@ -144,12 +149,12 @@ contract Nfast is ERC721 {
         return charge[_tokenId];
     }
     modifier onlyNotUse(uint256 _tokenId){
-        require(isUse[_tokenId]==true, "already used");
+        require(isUse[_tokenId] == false, "already used");
         _;
     }
 
-    modifier onlyStoreAddress(uint256 _tokenId){
-        require(msg.sender == storeAddress[_tokenId], "only store address");
+    modifier onlyStoreAddressInNfast(uint256 _tokenId){
+        require(msg.sender == storeAddress[_tokenId], "only store address in nfast");
         _;
     }
 }

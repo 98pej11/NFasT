@@ -1,5 +1,6 @@
 package com.nft.nfast.controller.business;
 
+import com.nft.nfast.entity.business.Store;
 import com.nft.nfast.model.dto.business.NfastMintDto;
 import com.nft.nfast.model.dto.business.IncomeFindDto;
 import com.nft.nfast.model.dto.business.NfastMintedDto;
@@ -114,5 +115,16 @@ public class StoreMainRestController {
             resultMap.put("wallet", tokenDto.getTokenWallet());
         }
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+    }
+
+    // nft 발행 페이지
+    @GetMapping("/{store_sequence}/mint")
+    public ResponseEntity<Map<String, Object>> showMint(@PathVariable long store_sequence ){
+        Store store = storeMainService.getStore(store_sequence);
+        String storeName=store.getStoreName();
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result", SUCCESS);
+        resultMap.put("storeName",storeName);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 }

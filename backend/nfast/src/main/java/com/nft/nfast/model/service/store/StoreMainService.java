@@ -1,5 +1,6 @@
 package com.nft.nfast.model.service.store;
 
+import com.nft.nfast.entity.business.Store;
 import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
 import org.json.simple.parser.ParseException;
@@ -17,4 +18,5 @@ public interface StoreMainService {
     List<NfastMintedDto> findMintedNfast(Long storeSequence);
     void saveStore(StoreRegistDto storeInfo) throws URISyntaxException, ParseException;
     TokenDto storeLogin(String wallet);
+    Store getStore(long storeSequence);
 }
