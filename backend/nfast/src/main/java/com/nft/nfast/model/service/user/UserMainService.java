@@ -31,6 +31,10 @@ public interface UserMainService {
     List<StoreDto> findAllDistanceRecommendation(String lat, String lng);
     TokenDto userLogin(String wallet);
     void logout(String wallet);
+
+    NfastGetDto findNowAvailableNfast(long userSequence);
+
     UserDto userDetail(long userSequence);
     void userModify(UserDto user);
+
 }

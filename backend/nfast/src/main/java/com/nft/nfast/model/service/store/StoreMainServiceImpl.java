@@ -335,4 +335,13 @@ public class StoreMainServiceImpl implements StoreMainService {
         }
         return tokenDto;
     }
+
+    @Override
+    public Store getStore(long storeSequence) {
+        Store store = storeRepository.findByStoreSequence(storeSequence);
+        return store;
+    }
+
+    // nft 발행 페이지
+
 }

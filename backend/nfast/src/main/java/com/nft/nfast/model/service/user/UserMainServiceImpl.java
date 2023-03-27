@@ -504,6 +504,31 @@ public class UserMainServiceImpl implements UserMainService {
         }
     }
 
+
+    @Override
+    public NfastGetDto findNowAvailableNfast(long userSequence) {
+        Optional<Nfast> nfastWrapper = nfastRepository.findOneByUser(userSequence);
+        NfastGetDto nfastGetDto = null;
+        if (nfastWrapper.isPresent()) {
+            Nfast nfast = nfastWrapper.get();
+            Store store = storeRepository.findByStoreSequence(nfast.getStoreSequence().getStoreSequence());
+            String storeName = store.getStoreName();
+            nfastGetDto = NfastGetDto.builder()
+                    .nfastSequence(nfast.getNfastSequence())
+                    .nfastDate(nfast.getNfastDate())
+                    .nfastStartTime(nfast.getNfastStartTime())
+                    .nfastEndTime(nfast.getNfastEndTime())
+                    .nfastMealType(nfast.getNfastMealType())
+                    .nfastPrice(nfast.getNfastPrice())
+                    .nfastQr(nfast.getNfastQr())
+                    .nfastRefundQr(nfast.getNfastRefundQr())
+                    .storeName(storeName)
+                    .build();
+
+        }
+        return nfastGetDto;
+    }
+
     //내 정보 출력
     @Override
     public UserDto userDetail(long userSequence) {
@@ -531,6 +556,7 @@ public class UserMainServiceImpl implements UserMainService {
         dist = dist * 60 * 1.1515 * 1.609344;   //km 계산
         return (dist);
     }
+
     // decimal degrees to radians 변환 공식
     private static double deg2rad(double deg) {
         return (deg * Math.PI / 180.0);
