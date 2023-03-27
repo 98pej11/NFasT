@@ -1,58 +1,39 @@
 import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
-import Marker from "../../assets/marker.png";
 
 function KaKaoMap() {
   useEffect(() => {
     const mapContainer = document.getElementById("map");
     const mapOption = {
-      center: new window.kakao.maps.LatLng(37.54699, 127.09598),
-      level: 4,
+      center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+      level: 3,
     };
-
     const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
-    const imageSrc = Marker;
-    const imageSize = new window.kakao.maps.Size(64, 69);
-    const imageOption = { offset: new window.kakao.maps.Point(27, 69) };
-    const markerImage = new window.kakao.maps.MarkerImage(
-      imageSrc,
-      imageSize,
-      imageOption
+    function locationLoadSuccess(pos) {
+      const currentPos = new window.kakao.maps.LatLng(
+        pos.coords.latitude,
+        pos.coords.longitude
+      );
+
+      // 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
+      map.panTo(currentPos);
+
+      // 마커 생성
+      const marker = new window.kakao.maps.Marker({
+        position: currentPos,
+      });
+
+      // 기존에 마커가 있다면 제거
+      marker.setMap(null);
+      marker.setMap(map);
+    }
+    function locationLoadError() {
+      alert("위치 정보를 가져오는데 실패했습니다.");
+    }
+    navigator.geolocation.getCurrentPosition(
+      locationLoadSuccess,
+      locationLoadError
     );
-    const markerPosition = new window.kakao.maps.LatLng(37.54699, 127.09598);
-
-    const marker = new window.kakao.maps.Marker({
-      position: markerPosition,
-      image: markerImage,
-    });
-
-    marker.setMap(map);
-
-    const content = (
-      <div className="customoverlay">
-        <a
-          href="https://map.kakao.com/link/map/11394059"
-          rel="noreferrer"
-          target="_blank"
-        >
-          <span className="title">구의야구공원</span>
-        </a>
-      </div>
-    );
-
-    const position = new window.kakao.maps.LatLng(37.54699, 127.09598);
-
-    const node = document.createElement("div");
-    ReactDOM.render(content, node);
-
-    // eslint-disable-next-line no-unused-vars
-    const customOverlay = new window.kakao.maps.CustomOverlay({
-      map,
-      position,
-      content: node,
-      yAnchor: 1,
-    });
   }, []);
 
   return (

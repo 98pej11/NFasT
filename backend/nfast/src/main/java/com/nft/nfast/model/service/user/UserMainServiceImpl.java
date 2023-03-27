@@ -1,20 +1,24 @@
 package com.nft.nfast.model.service.user;
 
+import com.nft.nfast.controller.JWTUtil;
 import com.nft.nfast.entity.business.Nfast;
 import com.nft.nfast.entity.business.Review;
 import com.nft.nfast.entity.business.Store;
 import com.nft.nfast.entity.user.Bookmark;
+import com.nft.nfast.entity.user.Token;
 import com.nft.nfast.entity.user.TradeList;
+import com.nft.nfast.entity.user.User;
 import com.nft.nfast.model.dto.business.*;
-import com.nft.nfast.model.dto.user.BookmarkDto;
-import com.nft.nfast.model.dto.user.TradeFindDto;
-import com.nft.nfast.model.dto.user.TradeListDto;
+import com.nft.nfast.model.dto.user.*;
 import com.nft.nfast.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.xml.stream.Location;
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -39,6 +43,15 @@ public class UserMainServiceImpl implements UserMainService {
 
     @Autowired
     ReviewRepository reviewRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    TokenRepository tokenRepository;
+
+    @Autowired
+    JWTUtil jwtUtil;
 
     @Override
     public List<StoreFindDto> findAllStore(String storeName) {
@@ -75,20 +88,25 @@ public class UserMainServiceImpl implements UserMainService {
                     .nfastDate(nfast.getNfastDate().toString())
                     .nfastPrice(nfast.getPrice())
                     .amount(nfast.getAmount())
+                    .nfastMealType(nfast.getNfastMealType())
                     .build());
         }
         return nfastPurchaseDtoList;
     }
 
+    //구매할 날짜 상세 정보 출력
     @Override
-    public List<NfastPurchaseDto> findAllByNfastDate(String nfastDate) {
-        List<NfastPurchase> nfasts = nfastRepository.findAllByNfastDate(nfastDate);
+    public List<NfastPurchaseDto> findAllByNfastDate(long storeSequence, NfastDetailDto nfastDto) {
+        SimpleDateFormat tranSimpleFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+        String nfastDate = tranSimpleFormat.format(nfastDto.getNfastDate());
+        List<NfastPurchase> nfasts = nfastRepository.findAllByNfastDate(storeSequence, nfastDate, nfastDto.getNfastMealType());
         List<NfastPurchaseDto> nfastPurchaseDtoList = new ArrayList<>();
         for (NfastPurchase nfast : nfasts) {
             nfastPurchaseDtoList.add(NfastPurchaseDto.builder()
                     .nfastDate(nfast.getNfastDate().toString())
                     .nfastPrice(nfast.getPrice())
                     .amount(nfast.getAmount())
+                    .nfastMealType(nfast.getNfastMealType())
                     .build());
         }
         return nfastPurchaseDtoList;
@@ -100,7 +118,8 @@ public class UserMainServiceImpl implements UserMainService {
         String nfastDate = nfastPurchaseDto.getNfastDate().toString();
         BigDecimal nfastPrice = nfastPurchaseDto.getNfastPrice();
         int amount = nfastPurchaseDto.getAmount();
-        List<Nfast> nfasts = nfastRepository.findTopAmountNfastByParam(storeSequence, nfastDate, nfastPrice, amount);
+        Byte nfastMealType = nfastPurchaseDto.getNfastMealType();
+        List<Nfast> nfasts = nfastRepository.findTopAmountNfastByParam(storeSequence, nfastDate, nfastPrice, nfastMealType, amount);
         //1. 사장님이 판매하고 있는 nft 판단(nfast_price와 nfast_default_price 비교)
 
         for (Nfast nfast : nfasts) {
@@ -116,10 +135,6 @@ public class UserMainServiceImpl implements UserMainService {
                                 .build()
                                 .toEntity()
                 );
-                //3. price 만큼 지갑에서 차감(metamask)
-
-            } else if (nfast.getNfastSaleState() == 1) {
-                //2-2. 사용자 -> trade_list에 추가
                 tradeListRepository.save(
                         TradeListDto.builder()
                                 .tradeListPrice(nfastPrice)
@@ -132,13 +147,56 @@ public class UserMainServiceImpl implements UserMainService {
                 );
                 //3. price 만큼 지갑에서 차감(metamask)
 
+            } else if (nfast.getNfastSaleState() == 2) {
+                //2-2. 사용자 -> trade_list에 추가
+                System.out.println("inputtttttttt");
+                tradeListRepository.save(
+                        TradeListDto.builder()
+                                .tradeListPrice(nfastPrice)
+                                .tradeListDate(new Date())
+                                .tradeListType((byte) 0)    //구매
+                                .userSequence(userSequence)
+                                .tradeListTransaction("TRANSACTION")
+                                .build()
+                                .toEntity()
+                );
+                tradeListRepository.save(
+                        TradeListDto.builder()
+                                .tradeListPrice(nfastPrice)
+                                .tradeListDate(new Date())
+                                .tradeListType((byte) 1)    //판매
+                                .userSequence(nfast.getUserSequence())
+                                .tradeListTransaction("TRANSACTION")
+                                .build()
+                                .toEntity()
+                );
+                incomeListRepository.save(
+                        IncomeListDto.builder()
+                                .incomeListPrice(nfastPrice)
+                                .incomeListDate(new Date())
+                                .incomeListType((byte) 1)   //리셀
+                                .storeSequence(storeSequence)
+                                .incomeListTransaction("TRANSACTION")
+                                .build()
+                                .toEntity()
+                );
+                //3. price 만큼 지갑에서 차감(metamask)
+
             }
             //4. nfast의 nfast_sale_state 2로 변경, 거래횟수 +1, 판매희망가->금액
             nfast.setNfastSaleState((byte) 1);
             nfast.setNfastTransactionCount(nfast.getNfastTransactionCount() + 1);
             nfast.setNfastPrice(nfast.getNfastHopePrice());
-            System.out.println("checkccccccccccc");
+            nfast.setUserSequence(userSequence);
             nfastRepository.save(nfast);
+
+            //가게 거래횟수+1
+            Optional<Store> storeWrapper = storeRepository.findById(storeSequence);
+            if(storeWrapper.isPresent()){
+                Store store = storeWrapper.get();
+                store.setStoreCount(store.getStoreCount()+1);
+                storeRepository.save(store);
+            }
         }
     }
 
@@ -147,6 +205,7 @@ public class UserMainServiceImpl implements UserMainService {
     public List<TradeFindDto> findAllTrade(long userSequence) throws ParseException {
         SimpleDateFormat tranSimpleFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
         List<TradeList> tradeLists = tradeListRepository.findAllByUserSequence(userSequence);
+        System.out.println("USERSEQUENCE "+ userSequence);
         List<TradeFindDto> tradeDtoList = new ArrayList<>();
 
         for (TradeList tradeList : tradeLists) {
@@ -240,7 +299,7 @@ public class UserMainServiceImpl implements UserMainService {
         BigDecimal nfastPrice = null;
         if (nfastWrapper.isPresent()) {
             Nfast nfast = nfastWrapper.get();
-            nfastPrice = nfast.getNfastPrice();
+            nfastPrice = nfast.getNfastHopePrice().subtract(nfast.getNfastPrice());
         }
         return nfastPrice;
     }
@@ -359,15 +418,151 @@ public class UserMainServiceImpl implements UserMainService {
         return nfastUsedDtoList;
     }
 
-//    //거래순 추천 리스트
-//    @Override
-//    public List<StoreDto> findAllTransactionRecommendation() {
-//        List<StoreDto> storeDtoList = new ArrayList<>();
-//        List<Store> storeList = storeRepository.findAllByStoreSequenceOrderByStoreCountDesc();
-//        for(Store store:storeList){
-//            StoreDto storeDto = store.toDto();
-//            storeDtoList.add(storeDto);
-//        }
-//        return storeDtoList;
-//    }
+    //거래순 추천 리스트
+    @Override
+    public List<StoreDto> findAllTransactionRecommendation() {
+        List<StoreDto> storeDtoList = new ArrayList<>();
+        List<Store> storeList = storeRepository.findAll(Sort.by(Sort.Direction.DESC,"storeCount"));
+        for(Store store:storeList){
+            StoreDto storeDto = store.toDto();
+            storeDtoList.add(storeDto);
+        }
+        return storeDtoList;
+    }
+
+    //거리순 추천 리스트
+    @Override
+    public List<StoreDto> findAllDistanceRecommendation(String lat, String lng) {
+        List<StoreDto> storeDtoList = new ArrayList<>();
+        List<Store> storeList = storeRepository.findAll();
+        Map<Double, Store> stores = new TreeMap<>();
+
+        for(Store store: storeList){
+            double distance = getDistance(Double.parseDouble(lat),Double.parseDouble(lng),Double.parseDouble(store.getStoreLat()),Double.parseDouble(store.getStoreLng()));
+            stores.put(distance,store);
+        }
+        for(double key: stores.keySet()){
+            storeDtoList.add(stores.get(key).toDto());
+        }
+        return storeDtoList;
+    }
+
+    //로그인
+    @Override
+    public TokenDto userLogin(String wallet) {
+        Optional<User> userWrapper = userRepository.findByUserWallet(wallet);
+        TokenDto tokenDto = null;
+
+        if(userWrapper.isPresent()){
+            //로그인
+            User user = userWrapper.get();
+            String authToken = jwtUtil.createAuthToken(user.getUserSequence());
+            String refreshToken = jwtUtil.createRefreshToken();
+            Optional<Token> tokenWrapper = tokenRepository.findByTokenWallet(wallet);
+            if(tokenWrapper.isPresent()){
+                Token token = tokenWrapper.get();
+                tokenDto = token.toDto();
+                tokenDto.setTokenAccess(authToken);
+                tokenDto.setTokenRefresh(refreshToken);
+                tokenRepository.save(tokenDto.toEntity());
+            }
+        }
+        else{
+            //회원가입 and 로그인
+            UserDto userDto = new UserDto();
+            userDto.setUserWallet(wallet);
+            userDto.setUserNickname("unNamed");
+            userRepository.save(userDto.toEntity());
+            userWrapper = userRepository.findByUserWallet(wallet);
+            if(userWrapper.isPresent()) {
+                User user = userWrapper.get();
+                String authToken = jwtUtil.createAuthToken(user.getUserSequence());
+                String refreshToken = jwtUtil.createRefreshToken();
+                tokenDto = TokenDto.builder()
+                        .tokenAccess(authToken)
+                        .tokenRefresh(refreshToken)
+                        .tokenUserSequence(user.getUserSequence())
+                        .tokenType((byte) 0)
+                        .tokenWallet(wallet)
+                        .build();
+                tokenRepository.save(tokenDto.toEntity());
+            }
+        }
+        return tokenDto;
+    }
+
+    //로그아웃
+    public void logout(String wallet){
+        Optional<Token> tokenWrapper = tokenRepository.findByTokenWallet(wallet);
+        TokenDto tokenDto = null;
+        if(tokenWrapper.isPresent()){
+            Token token = tokenWrapper.get();
+            tokenDto = token.toDto();
+            tokenDto.setTokenAccess(null);
+            tokenDto.setTokenRefresh(null);
+            tokenRepository.save(tokenDto.toEntity());
+        }
+    }
+
+
+    @Override
+    public NfastGetDto findNowAvailableNfast(long userSequence) {
+        Optional<Nfast> nfastWrapper = nfastRepository.findOneByUser(userSequence);
+        NfastGetDto nfastGetDto = null;
+        if (nfastWrapper.isPresent()) {
+            Nfast nfast = nfastWrapper.get();
+            Store store = storeRepository.findByStoreSequence(nfast.getStoreSequence().getStoreSequence());
+            String storeName = store.getStoreName();
+            nfastGetDto = NfastGetDto.builder()
+                    .nfastSequence(nfast.getNfastSequence())
+                    .nfastDate(nfast.getNfastDate())
+                    .nfastStartTime(nfast.getNfastStartTime())
+                    .nfastEndTime(nfast.getNfastEndTime())
+                    .nfastMealType(nfast.getNfastMealType())
+                    .nfastPrice(nfast.getNfastPrice())
+                    .nfastQr(nfast.getNfastQr())
+                    .nfastRefundQr(nfast.getNfastRefundQr())
+                    .storeName(storeName)
+                    .build();
+
+        }
+        return nfastGetDto;
+    }
+
+    //내 정보 출력
+    @Override
+    public UserDto userDetail(long userSequence) {
+        Optional<User> userWrapper = userRepository.findById(userSequence);
+        UserDto userDto = null;
+        if(userWrapper.isPresent()){
+            User user=userWrapper.get();
+            userDto = user.toDto();
+        }
+        return userDto;
+    }
+
+    @Override
+    public void userModify(UserDto userDto) {
+        userRepository.save(userDto.toEntity());
+    }
+
+    //거리 계산
+    private static double getDistance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515 * 1.609344;   //km 계산
+        return (dist);
+    }
+
+    // decimal degrees to radians 변환 공식
+    private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+    // radians to decimal degrees 변환 공식
+    private static double rad2deg(double rad) {
+        return (rad * 180 / Math.PI);
+    }
 }

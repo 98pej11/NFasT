@@ -48,20 +48,22 @@ const contentUpAnimation = keyframes`
 `;
 const Img = styled.div`
   img {
-    width: 750px;
-    height: 750px;
+    width: 350px;
+    height: 400px;
     position: absolute;
     top: 10vw;
-    left: 23vw;
+    left: 30vw;
     opacity: 80%;
+  }
+  @media screen and (max-width: 200px) {
+    width: 200px;
+    height: 250px;
   }
 `;
 const ContentBox = styled.div`
   width: 100%;
-  height: 100%;
+  height: 65%;
   display: flex;
-  margin-left: 10%;
-  margin-top: 30%;
   flex-direction: column;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
   @media screen and (max-width: 682px) {
@@ -73,25 +75,26 @@ const ProfilBox = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
+  margin: 10%;
   position: relative; /* contact box 고정시키기위해서 */
 `;
-
 const TitleBox = styled.div`
-  font-size: 2.5rem;
+  font-size: 1.4rem;
   line-height: 1rem;
   position: relative; /* 포지션 설정 */
   z-index: 1;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
-    font-size: 45px;
-    line-height: 45px;
+  @media screen and (max-width: 200px) {
+    font-size: 20px;
+    line-height: 10px;
   }
 `;
 const SubTitleBox = styled.div`
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   line-height: 0.8rem;
   animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
+  @media screen and (max-width: 200px) {
     font-size: 18px;
   }
 `;

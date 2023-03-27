@@ -16,8 +16,6 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @Table(name = "nfast")
-@DynamicUpdate
-@Builder
 public class Nfast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -122,6 +120,10 @@ public class Nfast {
                 .nfastDate(nfastDate)
                 .nfastQr(nfastQr)
                 .storeName(storeSequence.getStoreName())
+                .nfastRefundQr(nfastRefundQr)
+                .nfastStartTime(nfastStartTime)
+                .nfastRefundQr(nfastRefundQr)
+                .nfastMealType(nfastMealType)
                 .build();
         return nfastGetDto;
     }

@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import PublishCard from "./PublishCard";
+import NewTicket from "../../commons/NewTicket";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
 import web3 from "../../axios/web3";
@@ -22,22 +22,22 @@ const Form = styled.form`
 const Date = styled.div`
   display: flex;
   align-items: center;
-
   h3 {
-    width: 30%;
-    margin-right: 20px;
+    width: 20%;
+    // margin-right: 20px;
   }
 `;
 
 const Time = styled(Date)`
   h3 {
-    width: 30%;
+    width: 20%;
   }
 `;
 
 const Count = styled(Date)`
   h3 {
-    margin-right: 50px;
+    width: 20%;
+    // margin-right: 50px;
   }
 `;
 
@@ -89,7 +89,7 @@ function SellerPublish() {
 
   return (
     <div>
-      <PublishCard />
+      <NewTicket />
       <Publish>
         <Form onSubmit={handleRegist}>
           <Date>
@@ -118,7 +118,12 @@ function SellerPublish() {
             <h3>가격</h3>
             <PublishField content="price" variant="outlined" />
           </Price>
-          <Button type="submit" variant="contained" disableElevation>
+          <Button
+            sx={{ backgroundColor: "#BCB6FF" }}
+            type="submit"
+            variant="contained"
+            disableElevation
+          >
             발행하기
           </Button>
         </Form>

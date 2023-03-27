@@ -46,10 +46,8 @@ function a11yProps(index) {
 
 const Header = styled.div`
   width: 100%;
-  height: 150px;
-  position: fixed;
+  margin-top: 0;
   background-color: white;
-  top: 90px;
 `;
 
 const Profit = styled.div`
@@ -58,7 +56,6 @@ const Profit = styled.div`
   align-items: center;
   width: 100%;
   height: 80px;
-  top: 90px;
 `;
 
 const HeaderTab = styled(Tab)`

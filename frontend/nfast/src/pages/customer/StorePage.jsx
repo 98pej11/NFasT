@@ -1,53 +1,87 @@
 import React from "react";
 import styled from "styled-components";
-import AboutStore from "../../components/storepage/AboutStore";
-import ReviewButton from "../../components/storepage/ReviewButton";
-import PriceChart from "../../components/storepage/PriceChart";
+import StoreInfo from "../../components/storepage/StoreInfo";
+import StoreReview from "../../components/storepage/StoreReview";
+import StoreChart from "../../components/storepage/StoreChart";
+// import KakaoMap from "../../components/storepage/KakaoMap";
 import KaKaoMap from "../../components/storepage/KaKaoMap";
-import Header from "../../components/commons/Header2";
-import CalendarList from "../../components/storepage/CalendarList";
+import StoreNav from "../../components/storepage/StoreNav";
 
 const Wrapper = styled.div`
-  background-color: whitesmoke;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;
+  height :auto;
 
-  @media only screen and (min-width: 320px) and (max-width: 768px) {
-    height: auto;
-  }
-  @media only screen and (min-width: 768px) {
-    height: 1500px;
+  h4 {
+    width: 100%;
+    border-top : solid 1px black"
   }
 `;
+const Divider = styled.div`
+  border-top: 1px solid #bcb6ff;
+  width: 100%;
+  margin-top: 20px;
+`;
 
+const Review = styled(StoreReview)`
+  width: 100%;
+`;
 const Graph = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
+  justify-content: center;
+`;
+
+const Chart = styled(StoreChart)`
+  width: 100%;
+  height: 100%;
+`;
+
+const MapWrapper = styled.div`
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
 `;
 
 const Map = styled.div`
-  width: 400px;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Set z-index to 0 */
+`;
+const Footer = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1; /* Set z-index to 1 */
 `;
 
 function StorePage() {
   return (
     <div>
-      <Header />
       <Wrapper>
-        <AboutStore />
-        <ReviewButton />
+        <StoreInfo />
+        <Divider />
+        <Review />
+        <Divider />
         <Graph>
-          <PriceChart />
+          <Chart />
         </Graph>
-        <Map>
-          <h3>지도</h3>
-          <KaKaoMap />
-        </Map>
-        <CalendarList />
+        <Divider />
+        <h4>지도</h4>
+        <MapWrapper>
+          <Map>
+            <KaKaoMap />
+          </Map>
+        </MapWrapper>
+        <Footer>
+          <StoreNav />
+        </Footer>
       </Wrapper>
     </div>
   );

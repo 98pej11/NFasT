@@ -1,101 +1,130 @@
-import * as React from "react";
+/* eslint-disable no-console */
+import React from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import UploadPhoto from "./UploadPhoto";
-import InfoField from "./InfoField";
-// import TimeField from "../publishpage/TimeField";
+import MyField from "./MyField";
+// import SwitchTime from "./SwitchTime";
+import web3 from "../../axios/web3";
+import ipfs from "../../axios/ipfs";
 
 const Publish = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
-const Input = styled.div`
-  display: flex;
+const Form = styled.form`
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 `;
 
-const Wallet = styled.div`
+const Date = styled.div`
   display: flex;
   align-items: center;
 
-  h3 {
-    margin-right: 10px;
-  }
-`;
-
-const Title = styled.div`
-  display: flex;
-  align-items: center;
-
-  h3 {
+  h5 {
+    width: 30%;
     margin-right: 20px;
   }
 `;
 
-const Time = styled.div`
-  display: flex;
-  align-items: center;
-
-  h3 {
-    margin-right: 50px;
+const Time = styled(Date)`
+  h5 {
+    width: 30%;
   }
 `;
 
-const Intro = styled.div`
-  display: flex;
-  align-items: center;
-
-  h3 {
-    margin-right: 50px;
+const Count = styled(Date)`
+  h5 {
+    margin-right: 20px;
   }
 `;
 
-const Num = styled.div`
-  display: flex;
-  align-items: center;
+const Price = styled(Count)``;
 
-  h3 {
-    margin-right: 50px;
-  }
-`;
+const jsonSubmit = async (data) => {
+  const accounts = await web3.eth.getAccounts();
+  // const ethAddress = await storehash.options.address; CA주소
+  console.log(accounts[0]);
+  const file = {
+    path: "/tmp/myfile.txt",
+    content: JSON.stringify(data),
+  };
+  const testc = await ipfs.add(file);
+  console.log(testc.cid.string);
+  return { cid: testc.cid.string, walletAddress: accounts[0] };
+  // setInput({
+  //   external_url: testc.cid.string,
+  //   image: accounts[0],
+  // });
+};
 
-function SellerMypage() {
+function SellerPublish() {
+  const handleRegist = async (e) => {
+    e.preventDefault();
+    // eslint-disable-next-line
+    console.log(e.target[2].checked);
+    const data = {
+      date: e.target[0].value,
+      time: e.target[2].checked === false ? 0 : 1,
+      start: e.target[3].value,
+      end: e.target[5].value,
+      count: e.target[7].value,
+      price: e.target[9].value,
+      cid: "",
+      walletAddress: "",
+      storeName: "",
+    };
+    // rest api
+    // data.storeName = 가게이름
+    console.log(e.target[2]);
+    console.log(e.target[2].value);
+    const tempData = await jsonSubmit(data);
+    data.cid = tempData.cid;
+    data.walletAddress = tempData.walletAddress;
+    // eslint-disable-next-line no-console
+    console.log(data);
+  };
+
   return (
-    <Publish>
-      <UploadPhoto />
-      <Input>
-        <Wallet>
-          <h3>지갑주소</h3>
-          <InfoField />
-        </Wallet>
-        <Title>
-          <h3>가게이름</h3>
-          <InfoField />
-        </Title>
-        <Time>
-          <h3>런치 시간</h3>
-          {/* <TimeField /> */}
-        </Time>
-        <Time>
-          <h3>디너 시간</h3>
-          {/* <TimeField /> */}
-        </Time>
-        <Num>
-          <h3>전화번호</h3>
-          <InfoField />
-        </Num>
-        <Intro>
-          <h3>가게 소개</h3>
-          <InfoField />
-        </Intro>
-      </Input>
-      <Button variant="contained" disableElevation>
-        수정하기
-      </Button>
-    </Publish>
+    <div>
+      <Publish>
+        <Form onSubmit={handleRegist}>
+          <Date>
+            <h5>지갑 주소</h5>
+            <MyField content="count" variant="outlined" />
+          </Date>
+          <Count>
+            <h5>가게 이름</h5>
+            <MyField content="count" variant="outlined" />
+          </Count>
+          <Time>
+            <h5>런치</h5>
+            <MyField sx={{}} content="time" variant="outlined" />
+            <div style={{ marginLeft: 30 }} />
+            <h5>디너</h5>
+            <MyField sx={{}} content="time" variant="outlined" />
+          </Time>
+          <Count>
+            <h5>전화 번호</h5>
+            <MyField content="count" variant="outlined" />
+          </Count>
+          <Price>
+            <h5>가게 소개</h5>
+            <MyField content="price" variant="outlined" />
+          </Price>
+          <Button
+            sx={{ backgroundColor: "#BCB6FF" }}
+            type="submit"
+            variant="contained"
+            disableElevation
+          >
+            수정하기
+          </Button>
+        </Form>
+      </Publish>
+    </div>
   );
 }
-
-export default SellerMypage;
+export default SellerPublish;

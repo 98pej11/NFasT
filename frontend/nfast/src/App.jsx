@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NFastCard from "./components/commons/NFastCard";
@@ -14,26 +15,48 @@ import IntroducePage from "./pages/seller/IntroducePage";
 import LoginCustomer from "./pages/customer/LoginPageCustomer";
 import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
+import Header from "./components/commons/Header";
+// import Footer from "./components/commons/Footer";
 
+const Pages = styled.div`
+  margin-top: 80px;
+  // margin-left: 10%;
+  // margin-right: 10%;
+  position: relative;
+`;
+const IntroPage = styled.div`
+  // margin-top: 80px;
+  // margin-left: 10%;
+  // margin-right: 10%;
+  position: relative;
+`;
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/floating" element={<FloatingBtn />} />
-          <Route path="/nFastCard" element={<NFastCard />} />
-          <Route path="/review" element={<Review />} />
-          <Route path="/mynft" element={<MyNftPage />} />
-          <Route path="/mytrans" element={<MyTransPage />} />
-          <Route path="/mybookmark" element={<MyBookmarkPage />} />
-          <Route path="/myinfo" element={<MyInfoPage />} />
-          <Route path="/store" element={<StorePage />} />
-          <Route path="/introduce" element={<IntroducePage />} />
-          <Route path="/loginCustomer" element={<LoginCustomer />} />
-          <Route path="/loginSeller" element={<LoginSeller />} />
-          <Route path="/sellerPage" element={<SellerPage />} />
-        </Routes>
+        <Header />
+        <Pages>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/floating" element={<FloatingBtn />} />
+            <Route path="/nFastCard" element={<NFastCard />} />
+            <Route path="/review" element={<Review />} />
+            <Route path="/mynft" element={<MyNftPage />} />
+            <Route path="/mytrans" element={<MyTransPage />} />
+            <Route path="/mybookmark" element={<MyBookmarkPage />} />
+            <Route path="/myinfo" element={<MyInfoPage />} />
+            <Route path="/store" element={<StorePage />} />
+
+            <Route path="/loginCustomer" element={<LoginCustomer />} />
+            <Route path="/loginSeller" element={<LoginSeller />} />
+            <Route path="/sellerPage" element={<SellerPage />} />
+          </Routes>
+        </Pages>
+        <IntroPage>
+          <Routes>
+            <Route path="/introduce" element={<IntroducePage />} />
+          </Routes>
+        </IntroPage>
         {/* <Footer /> */}
       </BrowserRouter>
     </div>

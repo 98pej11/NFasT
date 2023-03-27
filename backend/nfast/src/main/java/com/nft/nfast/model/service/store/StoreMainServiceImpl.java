@@ -1,12 +1,18 @@
 package com.nft.nfast.model.service.store;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.nft.nfast.controller.JWTUtil;
 import com.nft.nfast.entity.business.IncomeList;
 import com.nft.nfast.entity.business.Store;
+import com.nft.nfast.entity.user.Token;
+import com.nft.nfast.entity.user.User;
 import com.nft.nfast.model.dto.business.*;
+import com.nft.nfast.model.dto.user.TokenDto;
+import com.nft.nfast.model.dto.user.UserDto;
 import com.nft.nfast.repository.IncomeListRepository;
 import com.nft.nfast.repository.NfastRepository;
 import com.nft.nfast.repository.StoreRepository;
+import com.nft.nfast.repository.TokenRepository;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -38,16 +44,22 @@ public class StoreMainServiceImpl implements StoreMainService {
     @Autowired
     IncomeListRepository incomeListRepository;
 
+    @Autowired
+    TokenRepository tokenRepository;
+
+    @Autowired
+    JWTUtil jwtUtil;
+
     // 발행한 nft 저장
     @Override
     public void saveNfast(NfastMintDto mintDto) {
         // 발행 개수, Store객체, 고유값 리스트 불러오기
         int nFastSupply = mintDto.getNfastSupply();
-        System.out.println("check "+ mintDto);
+        System.out.println("check " + mintDto);
         Store store = storeRepository.findByStoreSequence(mintDto.getStoreSequence());
         List<String> eigenvalueList = mintDto.getNfastEigenvalue();
-        List<String> nfastQrList= mintDto.getNfastQr();
-        List<String> nfastRefundQrList= mintDto.getNfastRefundQr();
+        List<String> nfastQrList = mintDto.getNfastQr();
+        List<String> nfastRefundQrList = mintDto.getNfastRefundQr();
         mintDto.setNfastUseState((byte) 0);
         mintDto.setNfastSaleState((byte) 0);
 
@@ -57,7 +69,7 @@ public class StoreMainServiceImpl implements StoreMainService {
             String eigenvalue = eigenvalueList.get(i);
 
             // QR 리스트
-            String nfastQr=nfastQrList.get(i);
+            String nfastQr = nfastQrList.get(i);
 
             // 환불 QR 리스트
             String nfastRefundQr = nfastRefundQrList.get(i);
@@ -145,7 +157,6 @@ public class StoreMainServiceImpl implements StoreMainService {
 
     }
 
-
     // 가게 등록 - 사업자 등록번호로 사업장명 조회
     public String getStoreName(String storeInfoNumber) {
         String tempUrl = "https://bizno.net/api/fapi?key=YWNkMTAyNkBuYXZlci5jb20g&gb=1&q=" + storeInfoNumber + "&type=json";
@@ -225,19 +236,19 @@ public class StoreMainServiceImpl implements StoreMainService {
                 JSONObject temp;
                 JSONObject jo = (JSONObject) jsonArray.get(0);
                 Object obj2 = parser.parse(jo.get("geometry").toString());
-                temp=(JSONObject) obj2;
+                temp = (JSONObject) obj2;
 
-                JSONObject jo2=(JSONObject)temp.get("location");
+                JSONObject jo2 = (JSONObject) temp.get("location");
                 Object obj3 = parser.parse(jo2.toString());
 
                 JSONObject temp2;
-                temp2=(JSONObject) obj3;
+                temp2 = (JSONObject) obj3;
 
                 lng = String.valueOf(temp2.get("lng"));
                 lat = String.valueOf(temp2.get("lat"));
 
                 ret.put("lat", lat);
-                ret.put("lng",lng);
+                ret.put("lng", lng);
 
             }
         } catch (UnsupportedEncodingException e) {
@@ -267,8 +278,8 @@ public class StoreMainServiceImpl implements StoreMainService {
 
 
         String encode = URLEncoder.encode(storeName);
-        String tempUri="?query="+encode+"&x="+lng+"&y="+lat+"&radius="+100;
-        String rawURI = "https://dapi.kakao.com/v2/local/search/keyword.json"+ tempUri;
+        String tempUri = "?query=" + encode + "&x=" + lng + "&y=" + lat + "&radius=" + 100;
+        String rawURI = "https://dapi.kakao.com/v2/local/search/keyword.json" + tempUri;
         System.out.println(rawURI);
         URI uri = new URI(rawURI);
 
@@ -280,7 +291,7 @@ public class StoreMainServiceImpl implements StoreMainService {
         JSONArray docu = (JSONArray) body.get("documents");
         System.out.println("크기!!!!!!!!!!!" + body.size());
         System.out.println("바디 " + body);
-        Date date=new Date();
+        Date date = new Date();
 
         if (docu.size() != 0) {
             JSONObject addr = (JSONObject) docu.get(0);
@@ -302,4 +313,35 @@ public class StoreMainServiceImpl implements StoreMainService {
         }
         return store;
     }
+
+    //가게 로그인
+    @Override
+    public TokenDto storeLogin(String wallet) {
+        Optional<Store> storeWrapper = storeRepository.findByStoreWallet(wallet);
+        TokenDto tokenDto = null;
+
+        if (storeWrapper.isPresent()) {
+            Store store = storeWrapper.get();
+            String authToken = jwtUtil.createAuthToken(store.getStoreSequence());
+            String refreshToken = jwtUtil.createRefreshToken();
+            tokenDto = TokenDto.builder()
+                    .tokenAccess(authToken)
+                    .tokenRefresh(refreshToken)
+                    .tokenUserSequence(store.getStoreSequence())
+                    .tokenType((byte) 1)
+                    .tokenWallet(wallet)
+                    .build();
+            tokenRepository.save(tokenDto.toEntity());
+        }
+        return tokenDto;
+    }
+
+    @Override
+    public Store getStore(long storeSequence) {
+        Store store = storeRepository.findByStoreSequence(storeSequence);
+        return store;
+    }
+
+    // nft 발행 페이지
+
 }
