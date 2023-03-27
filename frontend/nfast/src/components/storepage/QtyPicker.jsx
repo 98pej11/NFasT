@@ -11,15 +11,15 @@ const Picker = styled.div`
   width: 300px;
   display: flex;
   align-items: center;
-  font-size: 20px;
+  font-size: 15px;
   color: #7b6ffc;
   button {
     width: 40px;
     height: 40px;
     border-radius: 50px;
-    border: solid 3px #bcb6ff;
+    border: solid 1px #bcb6ff;
     background-color: white;
-    font-size: 30px;
+    font-size: 20px;
     color: #bcb6ff;
     margin: 20px;
   }

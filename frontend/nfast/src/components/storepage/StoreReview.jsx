@@ -22,7 +22,7 @@ const AlignChip = styled.div`
 `;
 
 const Wrapper = styled.div`
-  margin: 0px 5px;
+  margin: 0px 3px;
 `;
 
 const StyledChip = styled(Chip)`
