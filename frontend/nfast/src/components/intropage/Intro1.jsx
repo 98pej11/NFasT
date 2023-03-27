@@ -7,34 +7,13 @@ import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrow
 import intro1 from "../../assets/intro1.png";
 // import HighLight from "../commons/HighLight";
 
-export default function Intro1() {
-  return (
-    <ProfilBox>
-      <ContentBox>
-        <Img>
-          <img src={intro1} alt="프로필 이미지" />
-        </Img>
-        <TitleBox>
-          <h3>음식에 대한 값</h3>
-          <h3>제대로 받고 있나요?</h3>
-        </TitleBox>
-        <SubTitleBox>
-          <h4> 줄 서서 먹는 맛집</h4>
-          <h4> 그 기다림의 가치는 과연 얼마일까요?</h4>
-        </SubTitleBox>
-      </ContentBox>
-      <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
-      </MoreContentIconBox>
-    </ProfilBox>
-  );
-}
-
 const ProfilBox = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
+  margin: 10%;
   position: relative; /* contact box 고정시키기위해서 */
 `;
 
@@ -55,43 +34,45 @@ const contentUpAnimation = keyframes`
 `;
 const Img = styled.div`
   img {
-    width: 470px;
-    height: 600px;
+    width: 250px;
+    height: 350px;
     position: absolute;
-    top: 20vw;
-    left: 40vw;
+    top: 10vw;
+    left: 35vw;
     opacity: 80%;
+  }
+  @media screen and (max-width: 200px) {
+    width: 200px;
+    height: 250px;
   }
 `;
 const ContentBox = styled.div`
   width: 100%;
-  height: 100%;
+  height: 65%;
   display: flex;
-  margin-left: 7%;
-  margin-top: 25%;
   flex-direction: column;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
+  @media screen and (max-width: 200px) {
     height: 60%;
   }
 `;
 
 const TitleBox = styled.div`
-  font-size: 2.5rem;
+  font-size: 1.4rem;
   line-height: 1rem;
   position: relative; /* 포지션 설정 */
   z-index: 1;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
-    font-size: 45px;
-    line-height: 45px;
+  @media screen and (max-width: 200px) {
+    font-size: 20px;
+    line-height: 10px;
   }
 `;
 const SubTitleBox = styled.div`
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   line-height: 0.8rem;
   animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
+  @media screen and (max-width: 200px) {
     font-size: 18px;
   }
 `;
@@ -117,3 +98,26 @@ const MoreContentIconBox = styled.div`
   animation-iteration-count: infinite;
   animation-direction: alternate;
 `;
+
+export default function Intro1() {
+  return (
+    <ProfilBox>
+      <ContentBox>
+        <Img>
+          <img src={intro1} alt="" />
+        </Img>
+        <TitleBox>
+          <h3>음식에 대한 값</h3>
+          <h3>제대로 받고 있나요?</h3>
+        </TitleBox>
+        <SubTitleBox>
+          <h4> 줄 서서 먹는 맛집</h4>
+          <h4> 그 기다림의 가치는 과연 얼마일까요?</h4>
+        </SubTitleBox>
+      </ContentBox>
+      <MoreContentIconBox>
+        <KeyboardDoubleArrowDownIcon fontSize="large" />
+      </MoreContentIconBox>
+    </ProfilBox>
+  );
+}
