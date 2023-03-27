@@ -16,6 +16,7 @@ import LoginCustomer from "./pages/customer/LoginPageCustomer";
 import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
 import Header from "./components/commons/Header";
+import CustomerIntroduce from "./pages/customer/CustomerIntroduce";
 // import Footer from "./components/commons/Footer";
 
 const Pages = styled.div`
@@ -37,7 +38,8 @@ function App() {
         <Header />
         <Pages>
           <Routes>
-            <Route path="/" element={<MainPage />} />
+            <Route path="/" element={<CustomerIntroduce />} />
+            <Route path="/mainPage" element={<MainPage />} />
             <Route path="/floating" element={<FloatingBtn />} />
             <Route path="/nFastCard" element={<NFastCard />} />
             <Route path="/review" element={<Review />} />
@@ -46,7 +48,6 @@ function App() {
             <Route path="/mybookmark" element={<MyBookmarkPage />} />
             <Route path="/myinfo" element={<MyInfoPage />} />
             <Route path="/store" element={<StorePage />} />
-
             <Route path="/loginCustomer" element={<LoginCustomer />} />
             <Route path="/loginSeller" element={<LoginSeller />} />
             <Route path="/sellerPage" element={<SellerPage />} />
