@@ -9,6 +9,7 @@ import Container from "@mui/material/Container";
 import LoginBtn from "../loginpage/LoginButton";
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
+import NFastLogo from "../../assets/HeaderLogo.png";
 
 function Header() {
   return (
@@ -41,7 +42,7 @@ function Header() {
           >
             <Box component={Link} to="/">
               {/* 로고이미지가 나와야되는데? */}
-              <img src="logo.png" alt="logo" height="60px" />
+              <img src={NFastLogo} alt="logo" height="20px" />
             </Box>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <SearchBar />
