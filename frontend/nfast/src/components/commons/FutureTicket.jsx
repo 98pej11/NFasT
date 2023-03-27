@@ -1,6 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+// import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,47 +53,60 @@ const Ticket = styled.div`
     left: auto;
   }
   background-color: whitesmoke;
-  width: 270px;
-  height: 120px;
+  width: 380px;
+  height: 140px;
   border-top: groove 20px #bcb6ff;
   display: flex;
+  flex-wrap: wrap;
 `;
 const Info = styled.div`
+  flex: 1;
   width: 150px;
-  height: 120px;
-  h3 {
-    margin-left: 10px;
-  }
-  span {
-    font-size: 12px;
-    margin-left: 10px;
-  }
-  div {
-    display: flex;
-    align-items: center;
+  height: 100px;
+  display: flex;
+  justify-contents: center;
+  flex-direction: column;
+  & > div:not(:last-child) {
+    margin: 6%;
   }
 `;
 const QR = styled.div`
-  width: 120px;
-  height: 120px;
+  flex: 1;
   border-left: dashed 2px #bcb6ff;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+const StyleBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  Button {
+    margin: 2%;
+    width: 80px;
+    height: 30px;
+    background-color: #bcb6ff;
+    color: white;
+    font-size: 12px;
+  }
+`;
 
-function NewTicket({ title, date, time, price, qr }) {
+function FutureTicket({ title, date, time, price, qr }) {
   return (
     <Wrapper>
       <Ticket>
         <Info>
           <div>
-            <h3>{title}</h3>
+            <span>{title}</span>
             <span>{price} ETH</span>
           </div>
           <div>
             <span>{date}</span>
             <span>{time}</span>
+          </div>
+          <div>
+            <StyleBtn>
+              <Button variant="contained">재방문</Button>
+            </StyleBtn>
           </div>
         </Info>
         <QR>{qr}</QR>
@@ -98,18 +114,18 @@ function NewTicket({ title, date, time, price, qr }) {
     </Wrapper>
   );
 }
-NewTicket.defaultProps = {
+FutureTicket.defaultProps = {
   title: "가게이름",
   date: "날짜",
   time: "시간",
   price: 0,
   qr: "qr",
 };
-NewTicket.propTypes = {
+FutureTicket.propTypes = {
   title: PropTypes.string,
   date: PropTypes.string,
   time: PropTypes.number,
   price: PropTypes.number,
   qr: PropTypes.string,
 };
-export default NewTicket;
+export default FutureTicket;
