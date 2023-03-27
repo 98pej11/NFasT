@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "@mui/material/Button";
 import MyField from "./MyField";
 // import SwitchTime from "./SwitchTime";
-import web3 from "../../axios/web3";
+import { web3 } from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
 
 const Publish = styled.div`

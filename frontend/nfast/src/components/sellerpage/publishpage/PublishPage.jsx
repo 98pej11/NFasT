@@ -5,7 +5,13 @@ import Button from "@mui/material/Button";
 import NewTicket from "../../commons/NewTicket";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
-import web3 from "../../axios/web3";
+import {
+  web3,
+  NFasTContract,
+  saleFactory,
+  ssafyTokenContract,
+  createSaleContract,
+} from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
 
 const Publish = styled.div`
@@ -46,7 +52,29 @@ const Price = styled(Count)``;
 const jsonSubmit = async (data) => {
   const accounts = await web3.eth.getAccounts();
   // const ethAddress = await storehash.options.address; CA주소
-  console.log(accounts[0]);
+  console.log(
+    await NFasTContract.methods
+      .create(
+        "0xBae7Be1B10cc17f62eeCeBDC381fCc7e0E6A2249",
+        "test",
+        "0xEABD22D5e36E96203bC7861F4580bB5238a8b0F8",
+        1679902298,
+        true,
+        1679902298,
+        1679902298,
+        10,
+        1
+      )
+      .send({
+        from: "0xBae7Be1B10cc17f62eeCeBDC381fCc7e0E6A2249",
+        value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
+      })
+  );
+  console.log(await saleFactory.methods);
+  console.log(await ssafyTokenContract.methods);
+  console.log(await saleFactory.methods);
+  console.log(await createSaleContract.methods);
+  console.log(await accounts[0]);
   const file = {
     path: "/tmp/myfile.txt",
     content: JSON.stringify(data),
