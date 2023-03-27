@@ -39,21 +39,19 @@ contract Sale is Ownable,IERC721Receiver {
     IERC20 public erc20Contract;
     Nfast public erc721Contract;
 
-    // event 판매 완료시
+    //todo event 판매 완료시
     event Purchase(uint256 indexed _nftId, address _seller, address _buyer);
-    // event 송금시
+    //todo event 송금시
     event Withdraw(address indexed _to, uint256 _price);
-    // event 환불시
+    //todo event 환불시
     event Refund(uint256 indexed _nftId,address _to);
 
 
-    constructor (uint256 _nftId, address _storeAddress, uint256 _price, bool _isStore, uint256 _startDate, uint256 _endDate, address _currencyAddress, address _nftAddress, address _sellerAddress){
-        require(_storeAddress != address(0));
-        require(_price > 0);
-        require(_endDate > block.timestamp);
+    constructor (uint256 _nftId, uint256 _price, bool _isStore, uint256 _startDate, uint256 _endDate, address _currencyAddress, address _nftAddress, address _sellerAddress){
+        require(_price > 0, "price error");
+//        require(_endDate > block.timestamp,"time error");
         nftId = _nftId;
         price = _price;
-        storeAddress = _storeAddress;
         sellerAddress = _sellerAddress;
         startDate = _startDate;
         endDate = _endDate;
@@ -75,6 +73,7 @@ contract Sale is Ownable,IERC721Receiver {
         require(sellerAddress == erc721Contract.ownerOf(nftId), "seller is not owner");
         // 금액이 있는지 확인
         require(price <= erc20Contract.balanceOf(msg.sender), "balance is not enough");
+        //todo approve
         //금액 전송
         erc20Contract.transferFrom(msg.sender, address(this), price);
         //nft 전송
@@ -93,7 +92,7 @@ contract Sale is Ownable,IERC721Receiver {
         require(erc721Contract.getIsUse(nftId) == false, "nfast already used");
         //티켓 소유주인지 확인
         require(buyerAddress == erc721Contract.ownerOf(nftId), "buyer is not owner");
-        // 티켓사용완료 처리
+        // todo 티켓사용완료 처리 백에서 해주세요...
         erc721Contract.setIsUse(nftId);
         // 현재 티켓 소유주에게 첫금액 환불
         erc20Contract.transferFrom(msg.sender, buyerAddress, erc721Contract.getPrice(nftId));
@@ -110,18 +109,19 @@ contract Sale is Ownable,IERC721Receiver {
         uint256 nowPrice = price;
         if (isStore == false) {
             //거래 금액에서 수수료만큼 차감된 금액 구하기
-            nowPrice=nowPrice.mul(erc721Contract.getCharge(nftId)).div(100);
+            uint256 subPrice = nowPrice.mul(erc721Contract.getCharge(nftId)).div(100);
+            nowPrice=price - subPrice;
             //전송
-            erc20Contract.transferFrom(address(this),msg.sender, nowPrice);
+            erc20Contract.transfer(msg.sender, nowPrice);
             //수수료만큼 사장님에게 전송
-            erc20Contract.transferFrom(address(this),storeAddress, price.sub(nowPrice));
+            erc20Contract.transfer(erc721Contract.getStoreAddress(nftId),subPrice);
         }
         else {
             // 사용가능한 날짜가 지났을 시만 가능(환불문제)
             require(block.timestamp > endDate, "sale is not finished");
             //가게일경우 모두 전송
             // payable(msg.sender).transfer(address(this).balance);
-            erc20Contract.transferFrom(address(this),msg.sender, nowPrice);
+            erc20Contract.transfer(msg.sender, nowPrice);
         }
         emit Withdraw(msg.sender,nowPrice);
     }
@@ -130,7 +130,7 @@ contract Sale is Ownable,IERC721Receiver {
     public
     view
     returns (uint256, uint256, uint256, uint256, address, bool, address, address)    {
-        return (startDate, endDate, price, nftId, storeAddress, isEnd, currencyAddress, nftAddress);
+        return (startDate, endDate, price, nftId, erc721Contract.getStoreAddress(nftId), isEnd, currencyAddress, nftAddress);
     }
 
     // function balanceOf() public view returns (uint256) {
@@ -159,11 +159,11 @@ contract Sale is Ownable,IERC721Receiver {
         _;
     }
     modifier onlyEndDate(){
-        require(block.timestamp > endDate, "sale is finished");
+        require(block.timestamp < endDate, "sale is finished");
         _;
     }
     modifier onlyStoreAddress(){
-        require(msg.sender == storeAddress, "only store address");
+        require(msg.sender == erc721Contract.getStoreAddress(nftId), "only store address");
         _;
     }
     modifier onlySellerAddress(){
