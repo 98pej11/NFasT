@@ -5,7 +5,9 @@ import java.util.Date;
 
 public interface NfastPurchase {
     BigDecimal getPrice();
+    BigDecimal getHopePrice();
     Date getNfastDate();
     int getAmount();
     Byte getNfastMealType();
+
 }

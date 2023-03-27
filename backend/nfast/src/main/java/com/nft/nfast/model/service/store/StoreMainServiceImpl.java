@@ -57,16 +57,15 @@ public class StoreMainServiceImpl implements StoreMainService {
         int nFastSupply = mintDto.getNfastSupply();
         System.out.println("check " + mintDto);
         Store store = storeRepository.findByStoreSequence(mintDto.getStoreSequence());
-        List<String> eigenvalueList = mintDto.getNfastEigenvalue();
+        List<String> hashList = mintDto.getNfastHash();
         List<String> nfastQrList = mintDto.getNfastQr();
         List<String> nfastRefundQrList = mintDto.getNfastRefundQr();
         mintDto.setNfastUseState((byte) 0);
         mintDto.setNfastSaleState((byte) 0);
-
         // DB에 저장
         for (int i = 0; i < nFastSupply; i++) {
-            // 고유값 리스트
-            String eigenvalue = eigenvalueList.get(i);
+            // 고유값 리스트 -> for문 밖으로 빼야됨 (한 생성에 한 개 생김)
+            String hash = hashList.get(i);
 
             // QR 리스트
             String nfastQr = nfastQrList.get(i);
@@ -74,7 +73,7 @@ public class StoreMainServiceImpl implements StoreMainService {
             // 환불 QR 리스트
             String nfastRefundQr = nfastRefundQrList.get(i);
 
-            nfastRepository.save(mintDto.toMintEntity(store, eigenvalue, nfastQr, nfastRefundQr));
+            nfastRepository.save(mintDto.toMintEntity(store, hash, nfastQr, nfastRefundQr));
         }
     }
 
@@ -340,6 +339,51 @@ public class StoreMainServiceImpl implements StoreMainService {
     public Store getStore(long storeSequence) {
         Store store = storeRepository.findByStoreSequence(storeSequence);
         return store;
+    }
+
+    // 가게 정보 출력
+    @Override
+    public StoreRegistDto getStoreInfo(long storeSequence) {
+//        Optional<Store> storeWrapper = storeRepository.findById(storeSequence);
+//        Store store = null;
+//        if(storeWrapper.isPresent()){
+//            store=storeWrapper.get();
+////            store = s.toDto();
+//        }
+//        return store;
+        Store store = storeRepository.findByStoreSequence(storeSequence);
+        StoreRegistDto storeRegistDto = StoreRegistDto.builder()
+                .storeName(store.getStoreName())
+                .storeInformation(store.getStoreInformation())
+                .storeWallet(store.getStoreWallet())
+                .storeAddress(store.getStoreAddress())
+                .storePhone(store.getStorePhone())
+                .storeImage(store.getStoreImage())
+                .storeLunchStart(store.getStoreLunchStart())
+                .storeLunchEnd(store.getStoreLunchEnd())
+                .storeDinnerStart(store.getStoreDinnerStart())
+                .storeDinnerEnd(store.getStoreDinnerEnd())
+                .build();
+        return storeRegistDto;
+    }
+
+    // 가게 정보 수정
+    @Override
+    public void userModify(long storeSequence, StoreDto storeDto) {
+        Store store = storeRepository.findByStoreSequence(storeSequence);
+        storeDto.setStoreSequence(storeSequence);
+
+        // 근데너는패치잔아.....................
+        storeDto.setStoreAddress(store.getStoreAddress());
+        storeDto.setStoreCategory(store.getStoreCategory());
+        storeDto.setStoreName(store.getStoreName());
+        storeDto.setStoreCount(store.getStoreCount());
+        storeDto.setStoreDate(store.getStoreDate());
+        storeDto.setStoreLng(store.getStoreLng());
+        storeDto.setStoreLat(store.getStoreLat());
+//        storeDto.set
+
+        storeRepository.save(storeDto.toEntity());
     }
 
     // nft 발행 페이지

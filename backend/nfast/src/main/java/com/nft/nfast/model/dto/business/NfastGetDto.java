@@ -16,6 +16,7 @@ public class NfastGetDto {
     private long nfastSequence;
     private BigDecimal nfastPrice;
     private String nfastEigenvalue;
+    private String nfastHash;
     private Date nfastDate;
     private String nfastQr;
     private String storeName;
