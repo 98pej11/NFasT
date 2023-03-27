@@ -1,10 +1,7 @@
 package com.nft.nfast.controller.business;
 
 import com.nft.nfast.entity.business.Store;
-import com.nft.nfast.model.dto.business.NfastMintDto;
-import com.nft.nfast.model.dto.business.IncomeFindDto;
-import com.nft.nfast.model.dto.business.NfastMintedDto;
-import com.nft.nfast.model.dto.business.StoreRegistDto;
+import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.service.store.StoreMainService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/owner")
 @CrossOrigin(origins = "*")
-public class StoreMainRestController {
+public class OwnerMainRestController {
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
 
@@ -41,10 +38,10 @@ public class StoreMainRestController {
     }
 
     // 전체 수입 내역 출력
-    @GetMapping("{store_sequence}/incomes")
-    public ResponseEntity<Map<String, Object>> incomeList(@PathVariable Long store_sequence){
+    @GetMapping("{storeSequence}/incomes")
+    public ResponseEntity<Map<String, Object>> incomeList(@PathVariable long storeSequence){
         Map<String, Object> resultMap = new HashMap<>();
-        List<IncomeFindDto> incomeGetDtoList=storeMainService.findAllIncomes(store_sequence);
+        List<IncomeFindDto> incomeGetDtoList=storeMainService.findAllIncomes(storeSequence);
 
         resultMap.put("result", SUCCESS);
         resultMap.put("incomes", incomeGetDtoList);
@@ -52,10 +49,10 @@ public class StoreMainRestController {
     }
 
     // 월별 발행 수익 출력
-    @GetMapping("{store_sequence}/monthly-mint-income")
-    public ResponseEntity<Map<String, Object>> mintIncome(@PathVariable Long store_sequence){
+    @GetMapping("{storeSequence}/monthly-mint-income")
+    public ResponseEntity<Map<String, Object>> mintIncome(@PathVariable long storeSequence){
         Map<String, Object> resultMap = new HashMap<>();
-        BigDecimal mintIncome = storeMainService.findMintIncome(store_sequence);
+        BigDecimal mintIncome = storeMainService.findMintIncome(storeSequence);
 
         resultMap.put("result", SUCCESS);
         resultMap.put("monthlyMintIncome", mintIncome);
@@ -63,10 +60,10 @@ public class StoreMainRestController {
     }
 
     // 월별 리셀 수익 출력
-    @GetMapping("{store_sequence}/monthly-resell-income")
-    public ResponseEntity<Map<String, Object>> resellIncome(@PathVariable Long store_sequence){
+    @GetMapping("{storeSequence}/monthly-resell-income")
+    public ResponseEntity<Map<String, Object>> resellIncome(@PathVariable long storeSequence){
         Map<String, Object> resultMap = new HashMap<>();
-        BigDecimal resellIncome = storeMainService.findResellIncome(store_sequence);
+        BigDecimal resellIncome = storeMainService.findResellIncome(storeSequence);
 
         resultMap.put("result", SUCCESS);
         resultMap.put("monthlyResellIncome", resellIncome);
@@ -74,12 +71,12 @@ public class StoreMainRestController {
     }
 
     // 발행한 NFasT 목록
-    @GetMapping("{store_sequence}/nfts")
-    public ResponseEntity<Map<String, Object>> mintedNfast(@PathVariable Long store_sequence){
+    @GetMapping("{storeSequence}/nfts")
+    public ResponseEntity<Map<String, Object>> mintedNfast(@PathVariable Long storeSequence){
         Map<String, Object> resultMap=new HashMap<>();
-        List<NfastMintedDto> mintedNfastList=storeMainService.findMintedNfast(store_sequence);
+        List<NfastMintedDto> mintedNfastList=storeMainService.findMintedNfast(storeSequence);
         resultMap.put("result",SUCCESS);
-        resultMap.put("mintedNfastList", mintedNfastList);
+        resultMap.put("nfasts", mintedNfastList);
 
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
@@ -110,21 +107,42 @@ public class StoreMainRestController {
         }
         else{
             resultMap.put("result", SUCCESS);
-            resultMap.put("jwt-auth-token", tokenDto.getTokenAccess());
-            resultMap.put("jwt-refresh-token", tokenDto.getTokenRefresh());
+            resultMap.put("jwtAuthToken", tokenDto.getTokenAccess());
+            resultMap.put("jwtRefreshToken", tokenDto.getTokenRefresh());
             resultMap.put("wallet", tokenDto.getTokenWallet());
         }
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
     }
 
     // nft 발행 페이지
-    @GetMapping("/{store_sequence}/mint")
-    public ResponseEntity<Map<String, Object>> showMint(@PathVariable long store_sequence ){
-        Store store = storeMainService.getStore(store_sequence);
+    @GetMapping("/{storeSequence}/mint")
+    public ResponseEntity<Map<String, Object>> showMint(@PathVariable long storeSequence ){
+        Store store = storeMainService.getStore(storeSequence);
         String storeName=store.getStoreName();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("result", SUCCESS);
         resultMap.put("storeName",storeName);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
+
+    // 가게 정보 출력
+    @GetMapping("/my-data/{storeSequence}")
+    public ResponseEntity<Map<String, Object>> ownerDetail(@PathVariable long storeSequence){
+        StoreRegistDto storeRegistDto = storeMainService.getStoreInfo(storeSequence);
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result", SUCCESS);
+        resultMap.put("store",storeRegistDto);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+
+    }
+
+    // 가게 정보 수정
+    @PatchMapping("/my-data/{storeSequence}")
+    public ResponseEntity<Map<String, Object>> ownerModify(@PathVariable long storeSequence, @RequestBody StoreDto storeDto){
+        Map<String, Object> resultMap = new HashMap<>();
+        storeMainService.userModify(storeSequence, storeDto);
+        resultMap.put("result", SUCCESS);
+        return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+
     }
 }
