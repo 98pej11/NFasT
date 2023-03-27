@@ -6,7 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 // import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 // import Button from "@mui/material/Button";
-// import LoginBtn from "../loginpage/LoginButton";
+import LoginBtn from "../loginpage/LoginButton";
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
 
@@ -36,7 +36,7 @@ function Header() {
               flexGrow: 1,
               display: "flex",
               alignItems: "center",
-              marginLeft: "10%",
+              // marginLeft: "10%",
             }}
           >
             <Box component={Link} to="/">
@@ -47,8 +47,9 @@ function Header() {
               <SearchBar />
             </Box>
           </Box>
-          <div style={{ marginRight: "14%" }}>
-            {/* <LoginBtn /> */}
+
+          <div style={{ display: "flex" }}>
+            <LoginBtn />
             <SideBar />
           </div>
         </Toolbar>

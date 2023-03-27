@@ -12,7 +12,12 @@ import {
 
 ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale);
 const Wrapper = styled.div`
-  width: 100%;
+  @media only screen and (min-width: 320px) and (max-width: 1000px) {
+    width: 100%;
+  }
+  @media only screen and (min-width: 0px) and (max-width: 320px) {
+    width: 50%;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,6 +63,7 @@ const data = {
 function LineGraph() {
   return (
     <Wrapper>
+      <h4>시세</h4>
       <Line data={data} options={data.options} />
     </Wrapper>
   );

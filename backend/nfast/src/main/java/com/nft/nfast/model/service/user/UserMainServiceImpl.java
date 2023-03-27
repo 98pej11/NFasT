@@ -12,9 +12,11 @@ import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.*;
 import com.nft.nfast.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.xml.stream.Location;
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -186,8 +188,15 @@ public class UserMainServiceImpl implements UserMainService {
             nfast.setNfastTransactionCount(nfast.getNfastTransactionCount() + 1);
             nfast.setNfastPrice(nfast.getNfastHopePrice());
             nfast.setUserSequence(userSequence);
-            System.out.println("checkccccccccccc");
             nfastRepository.save(nfast);
+
+            //가게 거래횟수+1
+            Optional<Store> storeWrapper = storeRepository.findById(storeSequence);
+            if(storeWrapper.isPresent()){
+                Store store = storeWrapper.get();
+                store.setStoreCount(store.getStoreCount()+1);
+                storeRepository.save(store);
+            }
         }
     }
 
@@ -409,17 +418,34 @@ public class UserMainServiceImpl implements UserMainService {
         return nfastUsedDtoList;
     }
 
-//    //거래순 추천 리스트
-//    @Override
-//    public List<StoreDto> findAllTransactionRecommendation() {
-//        List<StoreDto> storeDtoList = new ArrayList<>();
-//        List<Store> storeList = storeRepository.findAllByStoreSequenceOrderByStoreCountDesc();
-//        for(Store store:storeList){
-//            StoreDto storeDto = store.toDto();
-//            storeDtoList.add(storeDto);
-//        }
-//        return storeDtoList;
-//    }
+    //거래순 추천 리스트
+    @Override
+    public List<StoreDto> findAllTransactionRecommendation() {
+        List<StoreDto> storeDtoList = new ArrayList<>();
+        List<Store> storeList = storeRepository.findAll(Sort.by(Sort.Direction.DESC,"storeCount"));
+        for(Store store:storeList){
+            StoreDto storeDto = store.toDto();
+            storeDtoList.add(storeDto);
+        }
+        return storeDtoList;
+    }
+
+    //거리순 추천 리스트
+    @Override
+    public List<StoreDto> findAllDistanceRecommendation(String lat, String lng) {
+        List<StoreDto> storeDtoList = new ArrayList<>();
+        List<Store> storeList = storeRepository.findAll();
+        Map<Double, Store> stores = new TreeMap<>();
+
+        for(Store store: storeList){
+            double distance = getDistance(Double.parseDouble(lat),Double.parseDouble(lng),Double.parseDouble(store.getStoreLat()),Double.parseDouble(store.getStoreLng()));
+            stores.put(distance,store);
+        }
+        for(double key: stores.keySet()){
+            storeDtoList.add(stores.get(key).toDto());
+        }
+        return storeDtoList;
+    }
 
     //로그인
     @Override
@@ -445,6 +471,7 @@ public class UserMainServiceImpl implements UserMainService {
             //회원가입 and 로그인
             UserDto userDto = new UserDto();
             userDto.setUserWallet(wallet);
+            userDto.setUserNickname("unNamed");
             userRepository.save(userDto.toEntity());
             userWrapper = userRepository.findByUserWallet(wallet);
             if(userWrapper.isPresent()) {
@@ -477,14 +504,15 @@ public class UserMainServiceImpl implements UserMainService {
         }
     }
 
+
     @Override
     public NfastGetDto findNowAvailableNfast(long userSequence) {
         Optional<Nfast> nfastWrapper = nfastRepository.findOneByUser(userSequence);
-        NfastGetDto nfastGetDto=null;
-        if (nfastWrapper.isPresent()){
-            Nfast nfast=nfastWrapper.get();
-            Store store=storeRepository.findByStoreSequence(nfast.getStoreSequence().getStoreSequence());
-            String storeName=store.getStoreName();
+        NfastGetDto nfastGetDto = null;
+        if (nfastWrapper.isPresent()) {
+            Nfast nfast = nfastWrapper.get();
+            Store store = storeRepository.findByStoreSequence(nfast.getStoreSequence().getStoreSequence());
+            String storeName = store.getStoreName();
             nfastGetDto = NfastGetDto.builder()
                     .nfastSequence(nfast.getNfastSequence())
                     .nfastDate(nfast.getNfastDate())
@@ -499,5 +527,42 @@ public class UserMainServiceImpl implements UserMainService {
 
         }
         return nfastGetDto;
+    }
+
+    //내 정보 출력
+    @Override
+    public UserDto userDetail(long userSequence) {
+        Optional<User> userWrapper = userRepository.findById(userSequence);
+        UserDto userDto = null;
+        if(userWrapper.isPresent()){
+            User user=userWrapper.get();
+            userDto = user.toDto();
+        }
+        return userDto;
+    }
+
+    @Override
+    public void userModify(UserDto userDto) {
+        userRepository.save(userDto.toEntity());
+    }
+
+    //거리 계산
+    private static double getDistance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515 * 1.609344;   //km 계산
+        return (dist);
+    }
+
+    // decimal degrees to radians 변환 공식
+    private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+    // radians to decimal degrees 변환 공식
+    private static double rad2deg(double rad) {
+        return (rad * 180 / Math.PI);
     }
 }

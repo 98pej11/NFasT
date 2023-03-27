@@ -3,6 +3,7 @@ import styled from "styled-components";
 import StoreImg from "../../assets/StoreImage.png";
 
 const Wrapper = styled.div`
+  margin-top: 20px;
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     height: auto;
   }
@@ -24,6 +25,11 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  span {
+    font-size: 12px;
+    color: #828282;
+  }
 `;
 
 function AboutStore() {
@@ -31,7 +37,7 @@ function AboutStore() {
     <Wrapper>
       <Img src={StoreImg} alt="car!" />
       <Info>
-        <h2>연돈 제주도 본점</h2>
+        <h3>연돈 제주도 본점</h3>
         <span>국내 최초 백종원님 마음속 1등 돈가스 집</span>
         <span>이용시간 12:00~21:00</span>
         <span>전화번호 0501-232</span>
