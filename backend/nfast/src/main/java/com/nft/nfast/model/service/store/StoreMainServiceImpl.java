@@ -1,14 +1,14 @@
 package com.nft.nfast.model.service.store;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.amazonaws.services.kms.model.CustomKeyStoresListEntry;
 import com.nft.nfast.controller.JWTUtil;
 import com.nft.nfast.entity.business.IncomeList;
 import com.nft.nfast.entity.business.Store;
-import com.nft.nfast.entity.user.Token;
-import com.nft.nfast.entity.user.User;
+import com.nft.nfast.exception.Store.NFastNotExistException;
+import com.nft.nfast.exception.Store.StoreNotFoundException;
+import com.nft.nfast.exception.Store.TypeNotAvailabeException;
 import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
-import com.nft.nfast.model.dto.user.UserDto;
 import com.nft.nfast.repository.IncomeListRepository;
 import com.nft.nfast.repository.NfastRepository;
 import com.nft.nfast.repository.StoreRepository;
@@ -29,8 +29,6 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.net.*;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
 
 @Slf4j
@@ -119,9 +117,14 @@ public class StoreMainServiceImpl implements StoreMainService {
     // 발행한 NFT 보기 (날짜별 가격, 판매 현황)
     @Override
     public List<NfastMintedDto> findMintedNfast(Long storeSequence) {
+//        Optional<List<NfastMinted>> mintedNfast = Optional.ofNullable(nfastRepository.findUsedByNfastDate(storeSequence));
         List<NfastMinted> mintedNfast = nfastRepository.findUsedByNfastDate(storeSequence);
+        System.out.println("존재하지 않는 나...................."+mintedNfast);
         List<NfastMintedDto> mintedNfastList = new ArrayList<>();
+        System.out.println("엥.....................................................");
+
         for (NfastMinted m : mintedNfast) {
+            System.out.println("난 존재한다...");
             Date mintedDate = m.getNfastDate();
             BigDecimal defaultPrice = nfastRepository.findDefaultPriceByNfastDate(mintedDate);
             mintedNfastList.add(NfastMintedDto.builder()
@@ -142,17 +145,21 @@ public class StoreMainServiceImpl implements StoreMainService {
         String storeName;
         String storeAddress = storeInfo.getStoreAddress();
 
-        // 사업자 등록번호로 사업장명 조회하기
-        storeName = getStoreName(storeInfoNumber);
-        System.out.println(storeName);
-        // 주소로 위도, 경도 가져오기
-        Map<String, String> address = getLatandLng(storeAddress);
-        String lat = address.get("lat");
-        String lng = address.get("lng");
-        // 이름, 위도, 경도로 가게 정보 불러오기
-        StoreDto store = getStoreInfo(storeName, lat, lng);
-        store.setStoreWallet(storeInfo.getStoreWallet());
-        storeRepository.save(store.toEntity());
+        try{
+            // 사업자 등록번호로 사업장명 조회하기
+            storeName = getStoreName(storeInfoNumber);
+            System.out.println(storeName);
+            // 주소로 위도, 경도 가져오기
+            Map<String, String> address = getLatandLng(storeAddress);
+            String lat = address.get("lat");
+            String lng = address.get("lng");
+            // 이름, 위도, 경도로 가게 정보 불러오기
+            StoreDto store = getStoreInfo(storeName, lat, lng);
+            store.setStoreWallet(storeInfo.getStoreWallet());
+            storeRepository.save(store.toEntity());
+        }catch (Exception e){
+            throw new StoreNotFoundException();
+        }
 
     }
 
@@ -189,7 +196,7 @@ public class StoreMainServiceImpl implements StoreMainService {
             System.out.println("store name is " + storeName);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new StoreNotFoundException();
         }
         return storeName;
     }
@@ -251,13 +258,13 @@ public class StoreMainServiceImpl implements StoreMainService {
 
             }
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            throw new StoreNotFoundException();
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            throw new TypeNotAvailabeException();
         }
         return ret;
     }
@@ -270,46 +277,52 @@ public class StoreMainServiceImpl implements StoreMainService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
+
         StoreDto store = new StoreDto();
         // API 키 설정
         String appKey = "KakaoAK b7e0a5dabf645d026a3345e4f484c4a0";
         headers.set("Authorization", appKey);
 
+        try{
 
-        String encode = URLEncoder.encode(storeName);
-        String tempUri = "?query=" + encode + "&x=" + lng + "&y=" + lat + "&radius=" + 100;
-        String rawURI = "https://dapi.kakao.com/v2/local/search/keyword.json" + tempUri;
-        System.out.println(rawURI);
-        URI uri = new URI(rawURI);
+            String encode = URLEncoder.encode(storeName);
+            String tempUri = "?query=" + encode + "&x=" + lng + "&y=" + lat + "&radius=" + 100;
+            String rawURI = "https://dapi.kakao.com/v2/local/search/keyword.json" + tempUri;
+            System.out.println(rawURI);
+            URI uri = new URI(rawURI);
 
-        RequestEntity<String> rq = new RequestEntity<>(headers, HttpMethod.GET, uri);
-        ResponseEntity<String> re = rest.exchange(rq, String.class);
+            RequestEntity<String> rq = new RequestEntity<>(headers, HttpMethod.GET, uri);
+            ResponseEntity<String> re = rest.exchange(rq, String.class);
 
-        JSONParser jsonParser = new JSONParser();
-        JSONObject body = (JSONObject) jsonParser.parse(re.getBody().toString());
-        JSONArray docu = (JSONArray) body.get("documents");
-        System.out.println("크기!!!!!!!!!!!" + body.size());
-        System.out.println("바디 " + body);
-        Date date = new Date();
+            JSONParser jsonParser = new JSONParser();
+            JSONObject body = (JSONObject) jsonParser.parse(re.getBody().toString());
+            JSONArray docu = (JSONArray) body.get("documents");
+            System.out.println("크기!!!!!!!!!!!" + body.size());
+            System.out.println("바디 " + body);
+            Date date = new Date();
 
-        if (docu.size() != 0) {
-            JSONObject addr = (JSONObject) docu.get(0);
-            System.out.println(addr);
-            String placeName = (String) addr.get("place_name");
-            String storeAddress = (String) addr.get("road_address_name");
-            String storeCategory = (String) addr.get("category_name");
-            String storePhone = (String) addr.get("phone");
-            String storeLng = (String) addr.get("x");
-            String storeLat = (String) addr.get("y");
+            if (docu.size() != 0) {
+                JSONObject addr = (JSONObject) docu.get(0);
+                System.out.println(addr);
+                String placeName = (String) addr.get("place_name");
+                String storeAddress = (String) addr.get("road_address_name");
+                String storeCategory = (String) addr.get("category_name");
+                String storePhone = (String) addr.get("phone");
+                String storeLng = (String) addr.get("x");
+                String storeLat = (String) addr.get("y");
 
-            store.setStoreName(placeName);
-            store.setStoreAddress(storeAddress);
-            store.setStoreCategory(storeCategory);
-            store.setStorePhone(storePhone);
-            store.setStoreLng(storeLng);
-            store.setStoreLat(storeLat);
-            store.setStoreDate(date);
+                store.setStoreName(placeName);
+                store.setStoreAddress(storeAddress);
+                store.setStoreCategory(storeCategory);
+                store.setStorePhone(storePhone);
+                store.setStoreLng(storeLng);
+                store.setStoreLat(storeLat);
+                store.setStoreDate(date);
+            }
+        }catch (Exception e){
+            throw new StoreNotFoundException();
         }
+
         return store;
     }
 
@@ -355,6 +368,7 @@ public class StoreMainServiceImpl implements StoreMainService {
         StoreRegistDto storeRegistDto = StoreRegistDto.builder()
                 .storeName(store.getStoreName())
                 .storeInformation(store.getStoreInformation())
+                .storeDetail(store.getStoreDetail())
                 .storeWallet(store.getStoreWallet())
                 .storeAddress(store.getStoreAddress())
                 .storePhone(store.getStorePhone())
@@ -373,19 +387,12 @@ public class StoreMainServiceImpl implements StoreMainService {
         Store store = storeRepository.findByStoreSequence(storeSequence);
         storeDto.setStoreSequence(storeSequence);
 
-        // 근데너는패치잔아.....................
-        storeDto.setStoreAddress(store.getStoreAddress());
         storeDto.setStoreCategory(store.getStoreCategory());
-        storeDto.setStoreName(store.getStoreName());
         storeDto.setStoreCount(store.getStoreCount());
         storeDto.setStoreDate(store.getStoreDate());
         storeDto.setStoreLng(store.getStoreLng());
         storeDto.setStoreLat(store.getStoreLat());
-//        storeDto.set
-
         storeRepository.save(storeDto.toEntity());
     }
-
-    // nft 발행 페이지
 
 }

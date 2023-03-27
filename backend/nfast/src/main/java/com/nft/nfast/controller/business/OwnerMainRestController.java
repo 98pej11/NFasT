@@ -72,7 +72,7 @@ public class OwnerMainRestController {
 
     // 발행한 NFasT 목록
     @GetMapping("{storeSequence}/nfts")
-    public ResponseEntity<Map<String, Object>> mintedNfast(@PathVariable Long storeSequence){
+    public ResponseEntity<Map<String, Object>> mintedNfast(@PathVariable Long storeSequence) throws Exception{
         Map<String, Object> resultMap=new HashMap<>();
         List<NfastMintedDto> mintedNfastList=storeMainService.findMintedNfast(storeSequence);
         resultMap.put("result",SUCCESS);
@@ -140,6 +140,7 @@ public class OwnerMainRestController {
     @PatchMapping("/my-data/{storeSequence}")
     public ResponseEntity<Map<String, Object>> ownerModify(@PathVariable long storeSequence, @RequestBody StoreDto storeDto){
         Map<String, Object> resultMap = new HashMap<>();
+        System.out.println("THIS IS STOREDTO"+storeDto);
         storeMainService.userModify(storeSequence, storeDto);
         resultMap.put("result", SUCCESS);
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
