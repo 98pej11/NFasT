@@ -27,6 +27,7 @@ public class NfastMintDto {
     private Byte nfastMealType;
     private Byte nfastUseState;
     private Byte nfastSaleState;
+    private String nfastHash;
 
 
     public Nfast toMintEntity(Store store, String eigenvalue, String nfastQr, String nfastRefundQr){
@@ -44,6 +45,7 @@ public class NfastMintDto {
                 .nfastEndTime(nfastEndTime)
                 .nfastUseState(nfastUseState)
                 .nfastSaleState(nfastSaleState)
+                .nfastHash(nfastHash)
                 .build();
         return nfast;
     }
