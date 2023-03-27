@@ -4,7 +4,6 @@ import { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import NewTicket from "../commons/NewTicket";
-import ResellModal from "./ResellModal";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -53,7 +52,6 @@ function MyNft() {
           <Ticket />
         </Tickets>
       )}
-      <ResellModal />
     </Wrapper>
   );
 }
