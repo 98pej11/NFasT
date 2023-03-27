@@ -25,7 +25,7 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
     List<NfastPurchase> findAllByStoreSequenceOrderByNfastDateDesc(long storeSequence);
 
     //구매할 날짜 nft 상세 정보 출력
-    @Query(value="select nfast_date as nfastDate, count(*) as amount, nfast_hope_price as price, nfast_meal_type as nfastMealType from nfast where store_sequence=?1 and nfast_date=?2 and nfast_meal_type=?3 and nfast_sale_state!=1 group by nfast_hope_price order by nfast_hope_price", nativeQuery = true)
+    @Query(value="select nfast_date as nfastDate, count(*) as amount, nfast_hope_price as hopePrice, nfast_meal_type as nfastMealType from nfast where store_sequence=?1 and nfast_date=?2 and nfast_meal_type=?3 and nfast_sale_state!=1 group by nfast_hope_price order by nfast_hope_price", nativeQuery = true)
     List<NfastPurchase> findAllByNfastDate(long storeSequence, String nfastDate, Byte nfastMealType);
 
     // 발행한 NFT 보기 (날짜별 가격, 판매 현황)
@@ -59,5 +59,8 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
 
     @Query(value="select * from nfast where nfast_use_state=0 and nfast_sale_state=1 and user_sequence=:userSequence order by nfast_date LIMIT 1", nativeQuery = true)
     Optional<Nfast> findOneByUser(@Param("userSequence") long userSequence);
+
+    @Query(value = "select * from nfast where nfast_sequence=:nfastSequence", nativeQuery = true)
+    Nfast findAllByNfastSequence(long nfastSequence);
 }
 

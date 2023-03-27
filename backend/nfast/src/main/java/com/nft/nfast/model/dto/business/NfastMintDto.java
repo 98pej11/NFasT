@@ -21,7 +21,8 @@ public class NfastMintDto {
     private String nfastStartTime;
     private String nfastEndTime;
     private int nfastSupply;
-    private List<String> nfastEigenvalue;
+    private String nfastEigenvalue;
+    private List<String> nfastHash;
     private List<String> nfastQr;
     private List<String> nfastRefundQr;
     private Byte nfastMealType;
@@ -29,7 +30,7 @@ public class NfastMintDto {
     private Byte nfastSaleState;
 
 
-    public Nfast toMintEntity(Store store, String eigenvalue, String nfastQr, String nfastRefundQr){
+    public Nfast toMintEntity(Store store,String nfastHash,String nfastQr, String nfastRefundQr){
         Nfast nfast = Nfast.builder()
                 .nfastPrice(nfastDefaultPrice)
                 .nfastDefaultPrice(nfastDefaultPrice)
@@ -37,13 +38,15 @@ public class NfastMintDto {
                 .nfastDate(nfastDate)
                 .nfastQr(nfastQr)
                 .nfastRefundQr(nfastRefundQr)
-                .nfastEigenvalue(eigenvalue)
+                .nfastEigenvalue(nfastEigenvalue)
+                .nfastHash(nfastHash)
                 .storeSequence(store)
                 .nfastMealType(nfastMealType)
                 .nfastStartTime(nfastStartTime)
                 .nfastEndTime(nfastEndTime)
                 .nfastUseState(nfastUseState)
                 .nfastSaleState(nfastSaleState)
+                .nfastHash(nfastHash)
                 .build();
         return nfast;
     }

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Intro1 from "../../components/intropage/Intro1";
+import CustomerIntro1 from "../../components/intropage/Intro1";
 import Intro2 from "../../components/intropage/Intro2";
 import Intro3 from "../../components/intropage/Intro3";
 import Intro4 from "../../components/intropage/Intro4";
@@ -73,7 +73,7 @@ export default function IntroducePage() {
       <GlobalStyles />
       <OuterPageBox ref={OuterPageBoxRef}>
         <ProgressBar OuterPageBoxRef={OuterPageBoxRef} />
-        <Intro1 />
+        <CustomerIntro1 />
         <Intro2 />
         <Intro3 />
         <Intro4 />

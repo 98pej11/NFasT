@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import MetaMask from "../../assets/Metamask.png";
+import { authAction } from "../../redux/actions/authAction";
 
 function Metamask() {
   const [address, setAddress] = useState("");
   const [flag, setFlag] = useState(false);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (flag) {
-      // eslint-disable-next-line
+      dispatch(authAction.walletLogin(address));
       console.log(address);
     }
   }, [address]);

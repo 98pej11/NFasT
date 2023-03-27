@@ -31,6 +31,9 @@ public class Nfast {
     private String nfastEigenvalue;
 
     @Column(nullable = false)
+    private String nfastHash;
+
+    @Column(nullable = false)
     private Date nfastDate;
 
     @Column(nullable = false, length = 20)
@@ -71,11 +74,13 @@ public class Nfast {
     private Store storeSequence;
 
     @Builder
-    public Nfast(long nfastSequence, Byte nfastMealType, BigDecimal nfastPrice, String nfastEigenvalue, Date nfastDate, String nfastStartTime, String nfastEndTime, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, String nfastRefundQr, BigDecimal nfastHopePrice, long userSequence, Store storeSequence) {
+    public Nfast(long nfastSequence, Byte nfastMealType, BigDecimal nfastPrice, String nfastEigenvalue, String nfastHash, Date nfastDate, String nfastStartTime, String nfastEndTime, Byte nfastUseState, Byte nfastSaleState, long nfastTransactionCount, BigDecimal nfastDefaultPrice, String nfastQr, String nfastRefundQr, BigDecimal nfastHopePrice, long userSequence, Store storeSequence) {
+
         this.nfastSequence = nfastSequence;
         this.nfastMealType = nfastMealType;
         this.nfastPrice = nfastPrice;
         this.nfastEigenvalue = nfastEigenvalue;
+        this.nfastHash=nfastHash;
         this.nfastDate = nfastDate;
         this.nfastStartTime = nfastStartTime;
         this.nfastEndTime = nfastEndTime;
@@ -95,6 +100,7 @@ public class Nfast {
                 .nfastSequence(nfastSequence)
                 .nfastPrice(nfastPrice)
                 .nfastEigenvalue(nfastEigenvalue)
+                .nfastHash(nfastHash)
                 .nfastDate(nfastDate)
                 .nfastMealType(nfastMealType)
                 .nfastUseState(nfastUseState)
@@ -117,6 +123,7 @@ public class Nfast {
                 .nfastSequence(nfastSequence)
                 .nfastPrice(nfastPrice)
                 .nfastEigenvalue(nfastEigenvalue)
+                .nfastHash(nfastHash)
                 .nfastDate(nfastDate)
                 .nfastQr(nfastQr)
                 .storeName(storeSequence.getStoreName())

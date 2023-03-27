@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import NewTicket from "../../commons/NewTicket";
+import PastTicket from "../../commons/PastTicket";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
 import {
@@ -88,7 +88,7 @@ const jsonSubmit = async (data) => {
   // });
 };
 
-function SellerPublish() {
+function PublishPage() {
   const handleRegist = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line
@@ -117,7 +117,7 @@ function SellerPublish() {
 
   return (
     <div>
-      <NewTicket />
+      <PastTicket />
       <Publish>
         <Form onSubmit={handleRegist}>
           <Date>
@@ -159,4 +159,4 @@ function SellerPublish() {
     </div>
   );
 }
-export default SellerPublish;
+export default PublishPage;

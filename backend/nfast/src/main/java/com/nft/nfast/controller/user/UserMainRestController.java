@@ -49,43 +49,16 @@ public class UserMainRestController {
     }
 
     //사용 가능 NFasT 리스트
-    @GetMapping("/available-NFasT/{user_sequence}")
-    public ResponseEntity<Map<String, Object>> nftList(@PathVariable long user_sequence){
-        List<NfastGetDto> nfastGetDtoList = userMainService.findAvailableNfast(user_sequence);
+    @GetMapping("/available-NFasT/{userSequence}")
+    public ResponseEntity<Map<String, Object>> nftList(@PathVariable long userSequence){
+        List<NfastGetDto> nfastGetDtoList = userMainService.findAvailableNfast(userSequence);
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
-        resultMap.put("NFasT",nfastGetDtoList);
+        resultMap.put("nfasts",nfastGetDtoList);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
-    //구매 가능한 NFast 리스트 출력
-    @GetMapping("/store/{store_sequence}/purchase")
-    public ResponseEntity<Map<String,Object>> availableNftList(@PathVariable long store_sequence){
-        List<NfastPurchaseDto> nfastPurchaseDtoList = userMainService.findPurchaseNfast(store_sequence);
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result",SUCCESS);
-        resultMap.put("nfasts",nfastPurchaseDtoList);
-        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
-    }
 
-    //구매할 날짜 nft 상세 정보 출력
-    @PostMapping("/store/{storeSequence}/purchase/detail")
-    public ResponseEntity<Map<String,Object>> availableNftDateList(@PathVariable("storeSequence") long storeSequence, @RequestBody NfastDetailDto nfast){
-        List<NfastPurchaseDto> nfastPurchaseDtoList = userMainService.findAllByNfastDate(storeSequence,nfast);
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("result",SUCCESS);
-        resultMap.put("NFasT",nfastPurchaseDtoList);
-        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
-    }
-
-    //구매할 금액 nft 개수 입력 후 구매 확정
-    @PostMapping("/store/{storeSequence}/{userSequence}/purchase/detail/confirm")
-    public ResponseEntity<Map<String,Object>> confirmPurchaseNft(@PathVariable("storeSequence") long storeSequence,@PathVariable("userSequence") long userSequence, @RequestBody NfastPurchaseDto nfast){
-        userMainService.savePurchaseNfast(storeSequence,userSequence,nfast);
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("result",SUCCESS);
-        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
-    }
 
     //거래 내역 리스트
     @GetMapping("/transaction-list/{userSequence}")
@@ -93,46 +66,10 @@ public class UserMainRestController {
         List<TradeFindDto> tradeFindDtoList = userMainService.findAllTrade(userSequence);
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
-        resultMap.put("NFasT",tradeFindDtoList);
+        resultMap.put("nfasts",tradeFindDtoList);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
-    //판매 등록
-    @PostMapping("/store/{storeSequence}/sale")
-    public ResponseEntity<Map<String,Object>> tradeDone(@PathVariable("storeSequence") long storeSequence, @RequestBody NfastTradeDoneDto nfastTradeDoneDto){
-        userMainService.saveTradeNfast(nfastTradeDoneDto);
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("result",SUCCESS);
-        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
-    }
-
-    //북마크 등록
-    @PostMapping("/store/{storeSequence}/bookmark/{userSequence}")
-    public ResponseEntity<Map<String,Object>> bookmarkCheck(@PathVariable("storeSequence") long storeSequence, @PathVariable("userSequence") long userSequence){
-        userMainService.saveBookmark(storeSequence,userSequence);
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("result",SUCCESS);
-        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
-    }
-
-    //북마크 해제
-    @DeleteMapping("/store/{storeSequence}/bookmark/{userSequence}")
-    public ResponseEntity<Map<String,Object>> bookmarkUnCheck(@PathVariable("storeSequence") long storeSequence, @PathVariable("userSequence") long userSequence){
-        userMainService.deleteBookmark(storeSequence,userSequence);
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("result",SUCCESS);
-        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
-    }
-
-    //판매 차익 계산
-    @GetMapping("/store/{nfastSequence}/sale")
-    public ResponseEntity<Map<String,Object>> tradeBenefit(@PathVariable("nfastSequence") long nfastSequence){
-        BigDecimal nfastPrice = userMainService.findNfastPrice(nfastSequence);
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("result",SUCCESS);
-        resultMap.put("nfastPrice",nfastPrice);
-        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
-    }
 
     //리뷰 작성
     @PostMapping("/review-count/{storeSequence}")
@@ -169,7 +106,7 @@ public class UserMainRestController {
         List<NfastUsedDto> nfastUsedDtoList = userMainService.findUnAvailableNfast(userSequence);
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
-        resultMap.put("NFasT",nfastUsedDtoList);
+        resultMap.put("nfasts",nfastUsedDtoList);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
@@ -201,8 +138,8 @@ public class UserMainRestController {
         Map<String, Object> resultMap = new HashMap<>();
         TokenDto tokenDto=userMainService.userLogin(wallet.get("wallet"));
         resultMap.put("result", SUCCESS);
-        resultMap.put("jwt-auth-token", tokenDto.getTokenAccess());
-        resultMap.put("jwt-refresh-token", tokenDto.getTokenRefresh());
+        resultMap.put("jwtAuthToken", tokenDto.getTokenAccess());
+        resultMap.put("jwtRefreshToken", tokenDto.getTokenRefresh());
         resultMap.put("wallet", tokenDto.getTokenWallet());
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
     }
