@@ -25,7 +25,7 @@ public class SwaggerConfig implements WebMvcConfigurer{
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.nft.nfast.controller"))
-                .paths(PathSelectors.ant("/api/v1/**"))
+                .paths(PathSelectors.ant("/api/**"))
                 .build().apiInfo(apiInfo());
     }
 
