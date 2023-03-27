@@ -143,6 +143,5 @@ public class OwnerMainRestController {
         storeMainService.userModify(storeSequence, storeDto);
         resultMap.put("result", SUCCESS);
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
-
     }
 }
