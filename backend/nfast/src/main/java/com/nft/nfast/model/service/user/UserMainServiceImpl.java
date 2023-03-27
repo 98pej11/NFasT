@@ -102,9 +102,11 @@ public class UserMainServiceImpl implements UserMainService {
         List<NfastPurchase> nfasts = nfastRepository.findAllByNfastDate(storeSequence, nfastDate, nfastDto.getNfastMealType());
         List<NfastPurchaseDto> nfastPurchaseDtoList = new ArrayList<>();
         for (NfastPurchase nfast : nfasts) {
+            System.out.println("##########희망가 "+nfast.getHopePrice());
             nfastPurchaseDtoList.add(NfastPurchaseDto.builder()
                     .nfastDate(nfast.getNfastDate().toString())
-                    .nfastPrice(nfast.getPrice())
+//                    .nfastPrice(nfast.getPrice())
+                    .nfastHopePrice(nfast.getHopePrice())
                     .amount(nfast.getAmount())
                     .nfastMealType(nfast.getNfastMealType())
                     .build());
@@ -116,18 +118,22 @@ public class UserMainServiceImpl implements UserMainService {
     @Override
     public void savePurchaseNfast(long storeSequence, long userSequence, NfastPurchaseDto nfastPurchaseDto) {
         String nfastDate = nfastPurchaseDto.getNfastDate().toString();
-        BigDecimal nfastPrice = nfastPurchaseDto.getNfastPrice();
+        BigDecimal nfastHopePrice=nfastPurchaseDto.getNfastHopePrice();
+
         int amount = nfastPurchaseDto.getAmount();
         Byte nfastMealType = nfastPurchaseDto.getNfastMealType();
-        List<Nfast> nfasts = nfastRepository.findTopAmountNfastByParam(storeSequence, nfastDate, nfastPrice, nfastMealType, amount);
+        List<Nfast> nfasts = nfastRepository.findTopAmountNfastByParam(storeSequence, nfastDate, nfastHopePrice, nfastMealType, amount);
         //1. 사장님이 판매하고 있는 nft 판단(nfast_price와 nfast_default_price 비교)
 
         for (Nfast nfast : nfasts) {
+            long nfastSequence=nfast.getNfastSequence();
+            nfast=nfastRepository.findAllByNfastSequence(nfastSequence);
+            BigDecimal nfastPrice = nfast.getNfastPrice();
             if (nfast.getNfastSaleState() == 0) {
                 //2-1. 사장님 -> income_list에 추가
                 incomeListRepository.save(
                         IncomeListDto.builder()
-                                .incomeListPrice(nfastPrice)
+                                .incomeListPrice(nfastHopePrice)
                                 .incomeListDate(new Date())
                                 .incomeListType((byte) 0)   //직접 구매
                                 .storeSequence(storeSequence)
@@ -137,7 +143,7 @@ public class UserMainServiceImpl implements UserMainService {
                 );
                 tradeListRepository.save(
                         TradeListDto.builder()
-                                .tradeListPrice(nfastPrice)
+                                .tradeListPrice(nfastHopePrice)
                                 .tradeListDate(new Date())
                                 .tradeListType((byte) 0)    //구매
                                 .userSequence(userSequence)
@@ -152,38 +158,44 @@ public class UserMainServiceImpl implements UserMainService {
                 System.out.println("inputtttttttt");
                 tradeListRepository.save(
                         TradeListDto.builder()
-                                .tradeListPrice(nfastPrice)
+                                .tradeListPrice(nfastHopePrice)
                                 .tradeListDate(new Date())
                                 .tradeListType((byte) 0)    //구매
                                 .userSequence(userSequence)
-                                .tradeListTransaction("TRANSACTION")
+                                .tradeListTransaction("RESELL_BUY")
                                 .build()
                                 .toEntity()
                 );
+                // 판매자 지갑에 돌아가는것 = (판매희망가 - 구매가)*0.8
+                BigDecimal number1 = new BigDecimal("0.8");
+                BigDecimal sellBenefit=nfastHopePrice.subtract(nfastPrice).multiply(number1);
                 tradeListRepository.save(
                         TradeListDto.builder()
-                                .tradeListPrice(nfastPrice)
+                                .tradeListPrice(sellBenefit)
                                 .tradeListDate(new Date())
                                 .tradeListType((byte) 1)    //판매
                                 .userSequence(nfast.getUserSequence())
-                                .tradeListTransaction("TRANSACTION")
+                                .tradeListTransaction("RESELL_SELL")
                                 .build()
                                 .toEntity()
                 );
+                // 사장님 지갑에 들어가는 것 = (판매가 - 구매가)*0.2
+                BigDecimal number2 = new BigDecimal("0.2");
+                BigDecimal storeBenefit = nfastHopePrice.subtract(nfastPrice).multiply(number2);
                 incomeListRepository.save(
                         IncomeListDto.builder()
-                                .incomeListPrice(nfastPrice)
+                                .incomeListPrice(storeBenefit)
                                 .incomeListDate(new Date())
                                 .incomeListType((byte) 1)   //리셀
                                 .storeSequence(storeSequence)
-                                .incomeListTransaction("TRANSACTION")
+                                .incomeListTransaction("RESELL")
                                 .build()
                                 .toEntity()
                 );
                 //3. price 만큼 지갑에서 차감(metamask)
 
             }
-            //4. nfast의 nfast_sale_state 2로 변경, 거래횟수 +1, 판매희망가->금액
+            //4. nfast의 nfast_sale_state 1로 변경, 거래횟수 +1, 판매희망가->금액
             nfast.setNfastSaleState((byte) 1);
             nfast.setNfastTransactionCount(nfast.getNfastTransactionCount() + 1);
             nfast.setNfastPrice(nfast.getNfastHopePrice());
@@ -292,14 +304,15 @@ public class UserMainServiceImpl implements UserMainService {
         return storeDetailDto;
     }
 
-    //판매 차익 계산
+    //판매 차익 계산 - 구매가만 넘기는 것으로 수정 (230327)
     @Override
     public BigDecimal findNfastPrice(long nfastSequence) {
         Optional<Nfast> nfastWrapper = nfastRepository.findById(nfastSequence);
         BigDecimal nfastPrice = null;
         if (nfastWrapper.isPresent()) {
             Nfast nfast = nfastWrapper.get();
-            nfastPrice = nfast.getNfastHopePrice().subtract(nfast.getNfastPrice());
+            nfastPrice=nfast.getNfastPrice();
+//            nfastPrice = nfast.getNfastHopePrice().subtract(nfast.getNfastPrice());
         }
         return nfastPrice;
     }

@@ -19,4 +19,7 @@ public interface StoreMainService {
     void saveStore(StoreRegistDto storeInfo) throws URISyntaxException, ParseException;
     TokenDto storeLogin(String wallet);
     Store getStore(long storeSequence);
+    StoreRegistDto getStoreInfo(long storeSequence);
+
+    void userModify(long storeSequence, StoreDto storeDto);
 }
