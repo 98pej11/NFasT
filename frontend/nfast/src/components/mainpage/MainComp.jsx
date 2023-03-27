@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import DepartureBoardTwoToneIcon from "@mui/icons-material/DepartureBoardTwoTone";
 import RecordVoiceOverTwoToneIcon from "@mui/icons-material/RecordVoiceOverTwoTone";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import MainCard from "./MainCard";
 // import Trans from "../../assets/trans.png";
 // import Distance from "../../assets/distance.png";
@@ -33,7 +34,18 @@ function MainComp() {
           <DepartureBoardTwoToneIcon />
           <p>거리순</p>
         </Title>
-        <span>가까운 거리의 맛집들을 빠르게 만나보세요.</span>
+        <span
+          style={{
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          가까운 거리의 맛집들을 빠르게 만나보세요.
+        </span>
+        <span style={{ float: "right", display: "flex", alignItems: "center" }}>
+          전체 보기 <KeyboardDoubleArrowRightIcon />
+        </span>
       </Line>
       <Card>
         <MainCard />
@@ -44,7 +56,18 @@ function MainComp() {
           <RecordVoiceOverTwoToneIcon />
           <p>거래순</p>
         </Title>
-        <span>최신 가장 많은 거래가 있는 맛집들을 만나보세요.</span>
+        <span
+          style={{
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          최신 가장 많은 거래가 있는 맛집들을 만나보세요.
+        </span>
+        <span style={{ float: "right", display: "flex", alignItems: "center" }}>
+          전체 보기 <KeyboardDoubleArrowRightIcon />
+        </span>
       </Line>
       <Card>
         <MainCard />
