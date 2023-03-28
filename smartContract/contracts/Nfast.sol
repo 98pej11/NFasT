@@ -2,8 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "./token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-
+import "../node_modules/@openzeppelin/contracts/utils/Counters.sol";
 
 contract Nfast is ERC721 {
     using Counters for Counters.Counter;
