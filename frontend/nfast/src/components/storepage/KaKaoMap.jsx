@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-function KaKaoMap() {
+export default function KaKaoMap() {
   useEffect(() => {
     const mapContainer = document.getElementById("map");
     const mapOption = {
@@ -26,6 +26,11 @@ function KaKaoMap() {
       // 기존에 마커가 있다면 제거
       marker.setMap(null);
       marker.setMap(map);
+
+      return {
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude,
+      };
     }
     function locationLoadError() {
       alert("위치 정보를 가져오는데 실패했습니다.");
@@ -43,4 +48,14 @@ function KaKaoMap() {
   );
 }
 
-export default KaKaoMap;
+// 위치 정보를 가져와서 지도와 마커를 생성하는 함수
+export function locationLoadSuccess(pos) {
+  return {
+    latitude: pos.coords.latitude,
+    longitude: pos.coords.longitude,
+  };
+}
+
+export function locationLoadError() {
+  alert("위치 정보를 가져오는데 실패했습니다.");
+}
