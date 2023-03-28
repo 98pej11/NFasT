@@ -25,7 +25,7 @@ public class User {
     @Column
     private String userImage;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 50)
     @ColumnDefault("unnamed")
     private String userNickname;
 
@@ -46,5 +46,4 @@ public class User {
                 .build();
         return userDto;
     }
-
 }

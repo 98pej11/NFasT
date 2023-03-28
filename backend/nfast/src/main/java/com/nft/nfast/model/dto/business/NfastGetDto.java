@@ -16,7 +16,13 @@ public class NfastGetDto {
     private long nfastSequence;
     private BigDecimal nfastPrice;
     private String nfastEigenvalue;
+    private String nfastHash;
     private Date nfastDate;
     private String nfastQr;
     private String storeName;
+    // 0326 추가
+    private String nfastRefundQr;
+    private String nfastStartTime;
+    private String nfastEndTime;
+    private Byte nfastMealType;
 }

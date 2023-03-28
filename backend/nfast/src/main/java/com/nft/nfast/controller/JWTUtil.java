@@ -19,8 +19,8 @@ public class JWTUtil {
     private Long expireMin;//2시간
 
     //access 토큰 생성
-    public String createAuthToken(int userId) {
-        return create(userId, "authToken",expireMin * 60 * 1000);
+    public String createAuthToken(long userSequence) {
+        return create(userSequence, "authToken",expireMin * 60 * 1000);
     }
 
     //refresh 토큰 생성
@@ -34,12 +34,12 @@ public class JWTUtil {
      * 로그인 성공 시 사용자 정보를 기반으로 JWTToken을 생성해서 반환한다.
      * JWT Token = Header + Payload + Signagure
      *
-     * @param userId
+     * @param userSequence
      * @param subject
      * @param expireMin
      * @return
      */
-    private String create(int userId,String subject,long expireMin) {
+    private String create(long userSequence,String subject,long expireMin) {
         final JwtBuilder builder = Jwts.builder();
         //Header , Payload 설정
         builder.setSubject(subject)
@@ -48,7 +48,7 @@ public class JWTUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * expireMin));
 //                .setExpiration(new Date(System.currentTimeMillis() + expireMin));
         //담고 싶은 정보 설정
-        builder.claim("userId", userId);
+        builder.claim("userSequence", userSequence);
 
         //암호화
         builder.signWith(SignatureAlgorithm.HS256, salt.getBytes());

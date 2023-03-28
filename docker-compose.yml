@@ -5,7 +5,7 @@ services:
     container_name: be
     build: ./backend
     ports:
-      - "8082:8080"
+      - "8084:8080"
     depends_on:
       - db
     restart: on-failure
@@ -21,10 +21,10 @@ services:
     container_name: db
     image: mysql:8.0.30
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
-      - /mysql:/var/lib/mysql
-      - /mysql/config/my.cnf:/etc/mysql/my.cnf
+      - /db:/var/lib/mysql
+      - /db/config/my.cnf:/etc/mysql/my.cnf
     environment:
       MYSQL_DATABASE: nfast
       MYSQL_ROOT_PASSWORD: 1004cjstk

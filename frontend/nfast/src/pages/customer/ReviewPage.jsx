@@ -6,7 +6,7 @@ const Wrapper = styled.div``;
 function ReviewPage() {
   return (
     <Wrapper>
-      <NFastCard>d</NFastCard>
+      <NFastCard> </NFastCard>
     </Wrapper>
   );
 }

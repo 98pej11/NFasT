@@ -5,26 +5,30 @@ import Stack from "@mui/material/Stack";
 import MainCard from "../mainpage/MainCard";
 
 function MyBookmark() {
-  const Styledh2 = styled.div`
+  const Styled = styled.div`
     text-align: center;
-    margin: 10%;
+    h4 {
+      margin-top: 150px;
+      margin-bottom: 70px;
+    }
   `;
   const Pag = styled.div`
-    text-align: center;
     margin: 10%;
+    display: flex; /* 가로 정렬을 위해 flexbox 설정 */
+    justify-content: center; /* 가운데 정렬 */
   `;
   return (
     <div>
-      <Styledh2>
+      <Styled>
         <h4>나의 북마크</h4>
-      </Styledh2>
-      <MainCard />
-      <MainCard />
-      <Pag>
-        <Stack spacing={2}>
-          <Pagination count={10} variant="outlined" color="secondary" />
-        </Stack>
-      </Pag>
+        <MainCard />
+        <MainCard />
+        <Pag>
+          <Stack spacing={2}>
+            <Pagination count={5} variant="outlined" color="secondary" />
+          </Stack>
+        </Pag>
+      </Styled>
     </div>
   );
 }

@@ -1,54 +1,78 @@
 import React from "react";
 import styled from "styled-components";
-import { Box } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import Burger from "../../assets/Burger.png";
+import DepartureBoardTwoToneIcon from "@mui/icons-material/DepartureBoardTwoTone";
+import RecordVoiceOverTwoToneIcon from "@mui/icons-material/RecordVoiceOverTwoTone";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import MainCard from "./MainCard";
-import SearchBar from "../commons/SearchBar";
+// import Trans from "../../assets/trans.png";
+// import Distance from "../../assets/distance.png";
 
 function MainComp() {
-  const Styledh2 = styled.div`
-    display: flex;
-    align-items: center; /* 수직 중앙 정렬 */
-    justify-content: center;
-    text-align: center;
-    margin-top: 10%;
-  `;
   const Line = styled.div`
-    h3 {
-      margin: 5%;
+    margin-left: 3%;
+    margin-right: 3%;
+    text-align: center;
+    p {
+      font-size: 1.1rem;
     }
+    span {
+      font-size: 0.9rem;
+    }
+  `;
+  const Card = styled.div`
+    margin: 3%;
+  `;
+  const Title = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
   `;
   return (
     <div>
-      <div>
-        <Styledh2>
-          <img src={Burger} alt="logo" />
-          <h3>~ 줄서지 말고 먹쟈 ~</h3>
-          <img src={Burger} alt="logo" />
-        </Styledh2>
-        <div
+      <Line>
+        <Title>
+          <DepartureBoardTwoToneIcon />
+          <p>거리순</p>
+        </Title>
+        <span
           style={{
+            textAlign: "center",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
           }}
         >
-          <SearchBar />
-          <Box>
-            <SearchIcon />
-          </Box>
-        </div>
-      </div>
-      <Line>
-        <h3>거리순</h3>
+          가까운 거리의 맛집들을 빠르게 만나보세요.
+        </span>
+        <span style={{ float: "right", display: "flex", alignItems: "center" }}>
+          전체 보기 <KeyboardDoubleArrowRightIcon />
+        </span>
       </Line>
-      <MainCard />
-      <div style={{ marginBottom: 80 }}> </div>
+      <Card>
+        <MainCard />
+      </Card>
+      <div style={{ marginBottom: 100 }}> </div>
       <Line>
-        <h3>거래순</h3>
+        <Title>
+          <RecordVoiceOverTwoToneIcon />
+          <p>거래순</p>
+        </Title>
+        <span
+          style={{
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          최신 가장 많은 거래가 있는 맛집들을 만나보세요.
+        </span>
+        <span style={{ float: "right", display: "flex", alignItems: "center" }}>
+          전체 보기 <KeyboardDoubleArrowRightIcon />
+        </span>
       </Line>
-      <MainCard />
+      <Card>
+        <MainCard />
+      </Card>
+      <div style={{ marginBottom: 100 }}> </div>
     </div>
   );
 }

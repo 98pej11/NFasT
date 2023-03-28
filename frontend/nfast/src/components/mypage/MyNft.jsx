@@ -1,17 +1,47 @@
-import * as React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
-import MyNftCard1 from "./MyNftCard1";
-import MyNftCard2 from "./MyNftCard2";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import PastTicket from "../commons/PastTicket";
+import FutureTicket from "../commons/FutureTicket";
 
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Ticket1 = styled(PastTicket)`
+  flex: 1;
+`;
+
+const Ticket2 = styled(FutureTicket)`
+  flex: 1;
+`;
+
+const TabsContainer = styled.div`
+  flex-shrink: 0;
+`;
+
+const Tickets = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+`;
+const Pag = styled.div`
+  margin: 3%;
+  display: flex; /* 가로 정렬을 위해 flexbox 설정 */
+  justify-content: center; /* 가운데 정렬 */
+`;
 function MyNft() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
   return (
-    <div>
-      <Box sx={{ width: "100%", marginTop: 3 }}>
+    <Wrapper>
+      <TabsContainer>
         <Tabs
           value={selectedTabIndex}
           onChange={(event, newValue) => setSelectedTabIndex(newValue)}
@@ -20,27 +50,33 @@ function MyNft() {
           indicatorColor="secondary"
           aria-label="secondary tabs example"
         >
-          <Tab label="사용 예정 NFT" />
+          <Tab label="미사용 NFT" />
           <Tab label="사용한 NFT" />
         </Tabs>
-        {selectedTabIndex === 0 && (
-          <div>
-            <MyNftCard1 />
-            <MyNftCard1 />
-            <MyNftCard1 />
-            <MyNftCard1 />
-          </div>
-        )}
-        {selectedTabIndex === 1 && (
-          <div>
-            <MyNftCard2 />
-            <MyNftCard2 />
-            <MyNftCard2 />
-            <MyNftCard2 />
-          </div>
-        )}
-      </Box>
-    </div>
+      </TabsContainer>
+      {selectedTabIndex === 0 && (
+        <Tickets>
+          <Ticket1 />
+          <Ticket1 />
+          <Ticket1 />
+          <Ticket1 />
+          {/* <Ticket /> */}
+        </Tickets>
+      )}
+      {selectedTabIndex === 1 && (
+        <Tickets>
+          <Ticket2 />
+          <Ticket2 />
+          <Ticket2 />
+          <Ticket2 />
+        </Tickets>
+      )}
+      <Pag>
+        <Stack spacing={2}>
+          <Pagination count={5} variant="outlined" color="secondary" />
+        </Stack>
+      </Pag>
+    </Wrapper>
   );
 }
 
