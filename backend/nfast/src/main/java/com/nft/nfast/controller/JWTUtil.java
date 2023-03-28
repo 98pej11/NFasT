@@ -67,6 +67,7 @@ public class JWTUtil {
      * @return
      */
     public Map<String, Object> checkAndGetClaims(String jwt) {
+        System.out.println("JWT Util의 jwt 토큰은요..."+jwt);
         try{
             Jws<Claims> claims = Jwts.parser()
                     .setSigningKey(salt.getBytes())
