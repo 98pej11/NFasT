@@ -8,6 +8,7 @@ import com.nft.nfast.entity.user.Bookmark;
 import com.nft.nfast.entity.user.Token;
 import com.nft.nfast.entity.user.TradeList;
 import com.nft.nfast.entity.user.User;
+import com.nft.nfast.exception.Store.NFastNotExistException;
 import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.*;
 import com.nft.nfast.repository.*;
@@ -518,27 +519,30 @@ public class UserMainServiceImpl implements UserMainService {
     }
 
 
+    // 플로팅 지갑
     @Override
     public NfastGetDto findNowAvailableNfast(long userSequence) {
         Optional<Nfast> nfastWrapper = nfastRepository.findOneByUser(userSequence);
         NfastGetDto nfastGetDto = null;
-        if (nfastWrapper.isPresent()) {
-            Nfast nfast = nfastWrapper.get();
-            Store store = storeRepository.findByStoreSequence(nfast.getStoreSequence().getStoreSequence());
-            String storeName = store.getStoreName();
-            nfastGetDto = NfastGetDto.builder()
-                    .nfastSequence(nfast.getNfastSequence())
-                    .nfastDate(nfast.getNfastDate())
-                    .nfastStartTime(nfast.getNfastStartTime())
-                    .nfastEndTime(nfast.getNfastEndTime())
-                    .nfastMealType(nfast.getNfastMealType())
-                    .nfastPrice(nfast.getNfastPrice())
-                    .nfastQr(nfast.getNfastQr())
-                    .nfastRefundQr(nfast.getNfastRefundQr())
-                    .storeName(storeName)
-                    .build();
-
+        if (!nfastWrapper.isPresent()){
+            throw new NFastNotExistException();
         }
+
+        Nfast nfast = nfastWrapper.get();
+        Store store = storeRepository.findByStoreSequence(nfast.getStoreSequence().getStoreSequence());
+        String storeName = store.getStoreName();
+        nfastGetDto = NfastGetDto.builder()
+                .nfastSequence(nfast.getNfastSequence())
+                .nfastDate(nfast.getNfastDate())
+                .nfastStartTime(nfast.getNfastStartTime())
+                .nfastEndTime(nfast.getNfastEndTime())
+                .nfastMealType(nfast.getNfastMealType())
+                .nfastPrice(nfast.getNfastPrice())
+                .nfastQr(nfast.getNfastQr())
+                .nfastRefundQr(nfast.getNfastRefundQr())
+                .storeName(storeName)
+                .build();
+
         return nfastGetDto;
     }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import MetaMask from "../../assets/Metamask.png";
 import { authAction } from "../../redux/actions/authAction";
@@ -9,11 +10,16 @@ function Metamask() {
   const [flag, setFlag] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (flag) {
-      dispatch(authAction.walletLogin(address));
       console.log(address);
+      dispatch(authAction.userConfirm(address));
+
+      // dispatch(authAction.walletLogin(address));
+      // console.log(address);
+      navigate("/");
     }
   }, [address]);
 
