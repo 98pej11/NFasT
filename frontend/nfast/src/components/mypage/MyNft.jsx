@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Stack from "@mui/material/Stack";
 import styled from "styled-components";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+import { getSequence } from "../../storage/Cookie";
+import { mypageAction } from "../../redux/actions/mypageAction";
 import PastTicket from "../commons/PastTicket";
 import FutureTicket from "../commons/FutureTicket";
 
@@ -38,7 +41,17 @@ const Pag = styled.div`
 `;
 function MyNft() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
-
+  const dispatch = useDispatch();
+  const sequence = getSequence();
+  useEffect(() => {
+    dispatch(mypageAction.getAvailableNfasts(sequence));
+  }, []);
+  const availableNfasts = useSelector(
+    (state) => state.mypageReducer.availableNfasts
+  );
+  const unavailableNfasts = useSelector(
+    (state) => state.mypageReducer.unavailableNfasts
+  );
   return (
     <Wrapper>
       <TabsContainer>
@@ -54,23 +67,44 @@ function MyNft() {
           <Tab label="사용한 NFT" />
         </Tabs>
       </TabsContainer>
-      {selectedTabIndex === 0 && (
-        <Tickets>
-          <Ticket1 />
-          <Ticket1 />
-          <Ticket1 />
-          <Ticket1 />
-          {/* <Ticket /> */}
-        </Tickets>
-      )}
-      {selectedTabIndex === 1 && (
-        <Tickets>
-          <Ticket2 />
-          <Ticket2 />
-          <Ticket2 />
-          <Ticket2 />
-        </Tickets>
-      )}
+      {selectedTabIndex === 0 &&
+        (availableNfasts.length !== 0 ? (
+          availableNfasts.map((nfast) => {
+            return (
+              <Tickets>
+                <Ticket1
+                  storeName={nfast.storeName}
+                  nfastDate={nfast.nfastDate}
+                  nfastStartTime={nfast.nfastStartTime}
+                  nfastEndTime={nfast.nfastEndTime}
+                  nfastPrice={nfast.nfastPrice}
+                  nfastQr={nfast.nfastQr}
+                />
+              </Tickets>
+            );
+          })
+        ) : (
+          <div>사용 가능한 NFasT가 없습니다ㅠㅠ</div>
+        ))}
+      {selectedTabIndex === 1 &&
+        (unavailableNfasts.length !== 0 ? (
+          unavailableNfasts.map((nfast) => {
+            return (
+              <Tickets>
+                <Ticket2
+                  storeName={nfast.storeName}
+                  nfastDate={nfast.nfastDate}
+                  nfastStartTime={nfast.nfastStartTime}
+                  nfastEndTime={nfast.nfastEndTime}
+                  nfastPrice={nfast.nfastPrice}
+                  nfastQr={nfast.nfastQr}
+                />
+              </Tickets>
+            );
+          })
+        ) : (
+          <div>사용한 NFasT가 없습니다!</div>
+        ))}
       <Pag>
         <Stack spacing={2}>
           <Pagination count={5} variant="outlined" color="secondary" />

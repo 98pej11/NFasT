@@ -111,7 +111,7 @@ public class UserMainRestController {
     }
 
     //거래순 추천 리스트
-    @GetMapping("/main/transacftion-recommendation-list")
+    @GetMapping("/main/transaction-recommendation-list")
     public ResponseEntity<Map<String, Object>> transactionRecommendationList(){
         List<StoreDto> storeDtoList = userMainService.findAllTransactionRecommendation();
         Map<String, Object> resultMap = new HashMap<>();
@@ -141,6 +141,7 @@ public class UserMainRestController {
         resultMap.put("jwtAuthToken", tokenDto.getTokenAccess());
         resultMap.put("jwtRefreshToken", tokenDto.getTokenRefresh());
         resultMap.put("wallet", tokenDto.getTokenWallet());
+        resultMap.put("sequence", tokenDto.getTokenUserSequence());
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
     }
 

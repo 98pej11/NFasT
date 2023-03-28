@@ -65,9 +65,9 @@ const Ticket = styled.div`
 const Info = styled.div`
   flex: 1;
   width: 150px;
-  height: 100px;
+  height: 140px;
   display: flex;
-  justify-contents: center;
+  justify-content: center;
   flex-direction: column;
   & > div:not(:last-child) {
     margin: 6%;
@@ -136,7 +136,15 @@ const CheckText = styled.div`
 `;
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function PastTicket({ title, date, time, price, qr }) {
+function PastTicket(props) {
+  const {
+    storeName,
+    nfastDate,
+    nfastStartTime,
+    nfastEndTime,
+    nfastPrice,
+    nfastQr,
+  } = props;
   const [drawer1Open, setDrawer1Open] = useState(false);
   const [drawer2Open, setDrawer2Open] = useState(false);
 
@@ -152,12 +160,19 @@ function PastTicket({ title, date, time, price, qr }) {
       <Ticket>
         <Info>
           <div>
-            <span>{title}</span>
-            <span>{price} ETH</span>
+            <span>{storeName}</span>
+            <span>{nfastPrice} ETH</span>
           </div>
           <div>
-            <span>{date}</span>
-            <span>{time}</span>
+            <span>
+              {`${new Date(nfastDate).getFullYear()}.
+                ${new Date(nfastDate).getMonth()}.
+                ${new Date(nfastDate).getDay()}`}
+            </span>
+            <div>
+              <span>{nfastStartTime}</span>
+              <span>{nfastEndTime}</span>
+            </div>
           </div>
           <div>
             <StyleBtn>
@@ -244,23 +259,25 @@ function PastTicket({ title, date, time, price, qr }) {
             {/* <StyleBtn></StyleBtn> */}
           </div>
         </Info>
-        <QR>{qr}</QR>
+        <QR>{nfastQr}</QR>
       </Ticket>
     </Wrapper>
   );
 }
 PastTicket.defaultProps = {
-  title: "가게이름",
-  date: "날짜",
-  time: "시간",
-  price: 0,
-  qr: "qr",
+  storeName: "가게이름",
+  nfastDate: "날짜",
+  nfastStartTime: "시작시간",
+  nfastEndTime: "종료시간",
+  nfastPrice: 0,
+  nfastQr: "qr",
 };
 PastTicket.propTypes = {
-  title: PropTypes.string,
-  date: PropTypes.string,
-  time: PropTypes.number,
-  price: PropTypes.number,
-  qr: PropTypes.string,
+  storeName: PropTypes.string,
+  nfastDate: PropTypes.string,
+  nfastStartTime: PropTypes.number,
+  nfastEndTime: PropTypes.number,
+  nfastPrice: PropTypes.number,
+  nfastQr: PropTypes.string,
 };
 export default PastTicket;
