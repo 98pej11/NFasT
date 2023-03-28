@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import PastTicket from "../../commons/PastTicket";
+import PublishCard from "./PublishCard";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
 import {
@@ -16,6 +16,7 @@ import {
 import ipfs from "../../axios/ipfs";
 import { publishAction } from "../../../redux/actions/publishAction";
 
+// styled-components 시작
 const Publish = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,7 +51,9 @@ const Count = styled(Date)`
 `;
 
 const Price = styled(Count)``;
+// styled-components 끝
 
+// jsonSubmit 함수
 const jsonSubmit = async (data) => {
   const accounts = await web3.eth.getAccounts();
   // const ethAddress = await storehash.options.address; CA주소
@@ -91,6 +94,8 @@ const jsonSubmit = async (data) => {
   //   image: accounts[0],
   // });
 };
+// jsonSubmit 함수 끝
+
 function PublishPage() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -124,7 +129,7 @@ function PublishPage() {
 
   return (
     <div>
-      <PastTicket />
+      <PublishCard />
       <Publish>
         <Form onSubmit={handleRegist}>
           <Date>

@@ -136,7 +136,7 @@ const CheckText = styled.div`
 `;
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function PastTicket({ title, date, time, price, qr }) {
+function FastTicket({ title, date, time, price, qr }) {
   const [drawer1Open, setDrawer1Open] = useState(false);
   const [drawer2Open, setDrawer2Open] = useState(false);
 
@@ -249,18 +249,18 @@ function PastTicket({ title, date, time, price, qr }) {
     </Wrapper>
   );
 }
-PastTicket.defaultProps = {
+FastTicket.defaultProps = {
   title: "가게이름",
   date: "날짜",
   time: "시간",
   price: 0,
   qr: "qr",
 };
-PastTicket.propTypes = {
+FastTicket.propTypes = {
   title: PropTypes.string,
   date: PropTypes.string,
-  time: PropTypes.number,
+  time: PropTypes.string,
   price: PropTypes.number,
   qr: PropTypes.string,
 };
-export default PastTicket;
+export default FastTicket;

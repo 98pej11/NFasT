@@ -1,82 +1,112 @@
-import React, { useEffect } from "react";
+/* eslint-disable react/jsx-props-no-spreading */
+import React from "react";
 import styled from "styled-components";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Box from "@mui/material/Box";
-// import { useTheme } from "@mui/material/styles";
-import Chip from "@mui/material/Chip";
-// import DoneIcon from "@mui/icons-material/Done";
-import PaidIcon from "@mui/icons-material/Paid";
+import PropTypes from "prop-types";
 
-const NFT1 = styled.div`
-  width: 100%;
+const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  align-items: center;
 `;
-const StyledChip = styled(Chip)`
-  margin: 30px;
-  padding: 10px;
-  width: 100px;
+const Ticket = styled.div`
+  position: relative;
+  //   종이같은 그림자
+  &:before {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    top: 80%;
+    max-width: 300px;
+    background: #777;
+    -webkit-box-shadow: 0 15px 10px #777;
+    -moz-box-shadow: 0 15px 10px #777;
+    box-shadow: 0 15px 10px #777;
+    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+    -o-transform: rotate(-3deg);
+    -ms-transform: rotate(-3deg);
+    transform: rotate(-3deg);
+  }
+  &:after {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    width: 50%;
+    top: 80%;
+    max-width: 300px;
+    background: #777;
+    -webkit-box-shadow: 0 15px 10px #777;
+    -moz-box-shadow: 0 15px 10px #777;
+    box-shadow: 0 15px 10px #777;
+    -webkit-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+    -o-transform: rotate(3deg);
+    -ms-transform: rotate(3deg);
+    transform: rotate(3deg);
+    right: 10px;
+    left: auto;
+  }
+  background-color: whitesmoke;
+  width: 380px;
+  height: 140px;
+  border-top: groove 20px #bcb6ff;
+  display: flex;
+  flex-wrap: wrap;
 `;
-useEffect(() => {
-  console.log("h");
-}, []);
-function PublishCard() {
-  const handleClick = () => {
-    // eslint-disable-next-line no-console
-    console.log("You clicked the Chip.");
-  };
+const Info = styled.div`
+  flex: 1;
+  width: 150px;
+  height: 100px;
+  display: flex;
+  justify-contents: center;
+  flex-direction: column;
+  & > div:not(:last-child) {
+    margin: 6%;
+  }
+`;
+const QR = styled.div`
+  flex: 1;
+  border-left: dashed 2px #bcb6ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
+function FutureTicket({ title, date, time, price, qr }) {
   return (
-    <div>
-      <NFT1>
-        <Card
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "70%",
-            borderRadius: 7,
-            border: "solid 3px #ABA1A1",
-            backgroundColor: "#FFDB7E",
-          }}
-        >
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <CardContent sx={{ flex: "1 0 auto" }}>
-              <Typography
-                variant="subtitle1"
-                color="text.secondary"
-                component="div"
-              >
-                2023.03.13
-              </Typography>
-              <Typography component="div" variant="h5">
-                가게이름
-              </Typography>
-            </CardContent>
-            <Box sx={{ display: "flex", pl: 1, pb: 1 }}>
-              <StyledChip
-                style={{ backgroundColor: "white" }}
-                icon={<PaidIcon />}
-                label="판매하기"
-                onClick={handleClick}
-                //   deleteIcon={<DoneIcon />}
-                variant="outlined"
-              />
-              <Typography
-                variant="overline"
-                display="block"
-                gutterBottom
-                style={{ paddingLeft: 8 }}
-              >
-                30.143 Eth
-              </Typography>
-            </Box>
-          </Box>
-        </Card>
-      </NFT1>
-    </div>
+    <Wrapper>
+      <Ticket>
+        <Info>
+          <div>
+            <span>{title}</span>
+            <span>{price} ETH</span>
+          </div>
+          <div>
+            <span>{date}</span>
+            <span>{time}</span>
+          </div>
+        </Info>
+        <QR>{qr}</QR>
+      </Ticket>
+    </Wrapper>
   );
 }
-export default PublishCard;
+FutureTicket.defaultProps = {
+  title: "가게이름",
+  date: "날짜",
+  time: "시간",
+  price: 0,
+  qr: "qr",
+};
+FutureTicket.propTypes = {
+  title: PropTypes.string,
+  date: PropTypes.string,
+  time: PropTypes.number,
+  price: PropTypes.number,
+  qr: PropTypes.string,
+};
+export default FutureTicket;

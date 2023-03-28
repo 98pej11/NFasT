@@ -1,73 +1,112 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
-import CardImg from "../../assets/NFast_Card.png";
+import PropTypes from "prop-types";
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-const Cards = styled.div`
+const Ticket = styled.div`
   position: relative;
-  width: 100%;
-  height: 100vh;
+  //   종이같은 그림자
+  &:before {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    top: 80%;
+    max-width: 300px;
+    background: #777;
+    -webkit-box-shadow: 0 15px 10px #777;
+    -moz-box-shadow: 0 15px 10px #777;
+    box-shadow: 0 15px 10px #777;
+    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+    -o-transform: rotate(-3deg);
+    -ms-transform: rotate(-3deg);
+    transform: rotate(-3deg);
+  }
+  &:after {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    width: 50%;
+    top: 80%;
+    max-width: 300px;
+    background: #777;
+    -webkit-box-shadow: 0 15px 10px #777;
+    -moz-box-shadow: 0 15px 10px #777;
+    box-shadow: 0 15px 10px #777;
+    -webkit-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+    -o-transform: rotate(3deg);
+    -ms-transform: rotate(3deg);
+    transform: rotate(3deg);
+    right: 10px;
+    left: auto;
+  }
+  background-color: whitesmoke;
+  width: 380px;
+  height: 140px;
+  border-top: groove 20px #bcb6ff;
+  display: flex;
+  flex-wrap: wrap;
+`;
+const Info = styled.div`
+  flex: 1;
+  width: 150px;
+  height: 100px;
+  display: flex;
+  justify-contents: center;
+  flex-direction: column;
+  & > div:not(:last-child) {
+    margin: 6%;
+  }
+`;
+const QR = styled.div`
+  flex: 1;
+  border-left: dashed 2px #bcb6ff;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const Img = styled.img`
-  position: absolute;
-`;
-const TopText = styled.div`
-  position: relative;
-  color: lightCyan;
-  top: -90px;
-  left: 10px;
-`;
-const Qr = styled.div`
-  position: relative;
-  top: 0
-  left: 10px;
-  width: 100px;
-  height: 100px;
-  background-color: blue;
-`;
-const BottomText = styled.div`
-  position: relative;
-  bottom: -85px;
-  left: -50px;
-  color: lightCyan;
-`;
-function NFastCard({ name, date, price }) {
+function FutureTicket({ title, date, time, price, qr }) {
   return (
     <Wrapper>
-      <Cards>
-        <Img src={CardImg} alt="car!" />
-        <TopText>
-          <h2>{date}</h2>
-          <h3>{name}</h3>
-        </TopText>
-        <Qr>큐알</Qr>
-        <BottomText>
-          <button type="button">확인</button>
-          <div>{price} Eth</div>
-        </BottomText>
-      </Cards>
+      <Ticket>
+        <Info>
+          <div>
+            <span>{title}</span>
+            <span>{price} ETH</span>
+          </div>
+          <div>
+            <span>{date}</span>
+            <span>{time}</span>
+          </div>
+        </Info>
+        <QR>{qr}</QR>
+      </Ticket>
     </Wrapper>
   );
 }
-NFastCard.defaultProps = {
-  name: "가게이름",
+FutureTicket.defaultProps = {
+  title: "가게이름",
   date: "날짜",
+  time: "시간",
   price: 0,
+  qr: "qr",
 };
-NFastCard.propTypes = {
-  name: PropTypes.string,
+FutureTicket.propTypes = {
+  title: PropTypes.string,
   date: PropTypes.string,
+  time: PropTypes.number,
   price: PropTypes.number,
+  qr: PropTypes.string,
 };
-export default NFastCard;
+export default FutureTicket;
