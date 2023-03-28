@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import MainCard from "../mainpage/MainCard";
+import TransCard from "../mainpage/TransCard";
 
 function MyBookmark() {
   const Styled = styled.div`
@@ -21,8 +21,8 @@ function MyBookmark() {
     <div>
       <Styled>
         <h4>나의 북마크</h4>
-        <MainCard />
-        <MainCard />
+        <TransCard />
+        <TransCard />
         <Pag>
           <Stack spacing={2}>
             <Pagination count={5} variant="outlined" color="secondary" />
