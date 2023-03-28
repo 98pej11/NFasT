@@ -26,19 +26,19 @@ public class MVCConfig implements WebMvcConfigurer {
     }
 
     // JWT 인터셉터
-    @Override
-    public void addInterceptors(InterceptorRegistry registry){
-        List<String> excludePatterns = new ArrayList<String>();
-        excludePatterns.add("/api/main/search-list/{storeName}");
-        excludePatterns.add("/api/login");
-        excludePatterns.add("/api/main/distance-recommendation-list");
-        excludePatterns.add("/api/main/transaction-recommendation-list");
-        excludePatterns.add("/api/main/search-list/store/{storeSequence}");
-        excludePatterns.add("/api/store/{storeSequence}/purchase/detail");
-        excludePatterns.add("/api/owner/introduction-store/application");
-        excludePatterns.add("/api/owner/login");
-        JWTInterceptor jwtInterceptor = new JWTInterceptor(jwtUtil);
-        registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/api/**").excludePathPatterns(excludePatterns);
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry){
+//        List<String> excludePatterns = new ArrayList<String>();
+//        excludePatterns.add("/api/main/search-list/{storeName}");
+//        excludePatterns.add("/api/login");
+//        excludePatterns.add("/api/main/distance-recommendation-list");
+//        excludePatterns.add("/api/main/transaction-recommendation-list");
+//        excludePatterns.add("/api/main/search-list/store/{storeSequence}");
+//        excludePatterns.add("/api/store/{storeSequence}/purchase/detail");
+//        excludePatterns.add("/api/owner/introduction-store/application");
+//        excludePatterns.add("/api/owner/login");
+//        JWTInterceptor jwtInterceptor = new JWTInterceptor(jwtUtil);
+//        registry.addInterceptor(jwtInterceptor)
+//                .addPathPatterns("/api/**").excludePathPatterns(excludePatterns);
+//    }
 }
