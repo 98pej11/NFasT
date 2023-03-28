@@ -32,7 +32,6 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
     @Query(value=
             "select nfast_date as nfastDate, count(case when nfast_sale_state!=0 then 1 end) as nfastSaleCount, count(*) as nfastTotalCount from nfast where store_sequence=:store group by nfast_date ", nativeQuery = true)
     List<NfastMinted> findUsedByNfastDate(@Param("store") Long store);
-//    count(case when nfast_sale_state=0 then 1 end) as nfastSaleCount, count(*) as nfastTotalCount
 
     //구매할 금액 nft 개수 입력 후 구매 확정
     @Query(value="select * from nfast where store_sequence=?1 and nfast_date=?2 and nfast_hope_price=?3 and nfast_meal_type=?4 and nfast_sale_state!=1 limit ?5", nativeQuery = true)
