@@ -28,20 +28,21 @@ public class StoreRegistDto {
     private String storePhone;
     private String storeInformation;
     private String storeImage;
+    private String storeDetail;
 
-    public StoreRegistDto toEntity(){
-        StoreRegistDto storeRegistDto = StoreRegistDto.builder()
-                .storeName(this.getStoreName())
-                .storeInformation(this.getStoreInformation())
-                .storeWallet(this.getStoreWallet())
-                .storeAddress(this.getStoreAddress())
-                .storePhone(this.getStorePhone())
-                .storeImage(this.getStoreImage())
-                .storeLunchStart(this.getStoreLunchStart())
-                .storeLunchEnd(this.getStoreLunchEnd())
-                .storeDinnerStart(this.getStoreDinnerStart())
-                .storeDinnerEnd(this.getStoreDinnerEnd())
-                .build();
-        return storeRegistDto;
-    }
+//    public StoreRegistDto toEntity(){
+//        StoreRegistDto storeRegistDto = StoreRegistDto.builder()
+//                .storeName(this.getStoreName())
+//                .storeInformation(this.getStoreInformation())
+//                .storeWallet(this.getStoreWallet())
+//                .storeAddress(this.getStoreAddress())
+//                .storePhone(this.getStorePhone())
+//                .storeImage(this.getStoreImage())
+//                .storeLunchStart(this.getStoreLunchStart())
+//                .storeLunchEnd(this.getStoreLunchEnd())
+//                .storeDinnerStart(this.getStoreDinnerStart())
+//                .storeDinnerEnd(this.getStoreDinnerEnd())
+//                .build();
+//        return storeRegistDto;
+//    }
 }
