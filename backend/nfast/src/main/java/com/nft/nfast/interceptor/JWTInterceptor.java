@@ -27,8 +27,8 @@ public class JWTInterceptor implements HandlerInterceptor {
 
 
         // request의 헤더에서 jwt-auth-token으로 넘어온 녀석을 찾아본다.
-        String authToken = request.getHeader("jwt-auth-token");
-        String refreshToken = request.getHeader("jwt-refresh-token");
+        String authToken = request.getHeader("jwtAuthToken");
+        String refreshToken = request.getHeader("jwtRefreshToken");
         System.out.println("AUTHTOKEN "+authToken);
         System.out.println("REFRESHTOKEN "+refreshToken);
         log.debug("경로: {}, 토큰: {}", request.getServletPath(), authToken);

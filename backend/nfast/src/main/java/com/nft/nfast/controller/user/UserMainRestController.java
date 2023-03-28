@@ -141,6 +141,7 @@ public class UserMainRestController {
         resultMap.put("jwtAuthToken", tokenDto.getTokenAccess());
         resultMap.put("jwtRefreshToken", tokenDto.getTokenRefresh());
         resultMap.put("wallet", tokenDto.getTokenWallet());
+        resultMap.put("sequence", tokenDto.getTokenUserSequence());
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
     }
 
