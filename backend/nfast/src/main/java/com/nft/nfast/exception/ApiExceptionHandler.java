@@ -17,6 +17,7 @@ import java.time.ZonedDateTime;
 public class ApiExceptionHandler {
     // 어떤 컨트롤러에서든 NFastNotExistException이 발생하면
     // 이 @ControllerAdvice 어노테이션이 선언된 클래스로 와서 맞는 익셉션 핸들러를 찾고 그에 대한 처리를 함
+    // NFasT 조회 에러
     @ExceptionHandler(value={NFastNotExistException.class})
     public ResponseEntity<Object> handlerNFastNotExistException(NFastNotExistException e){
         HttpStatus httpStatus=HttpStatus.BAD_REQUEST;
@@ -29,6 +30,7 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(apiException, httpStatus);
     }
 
+    // 가게 등록 에러
     @ExceptionHandler(value={StoreNotFoundException.class})
     public ResponseEntity<Object> handlerStoreNotFoundException(StoreNotFoundException e){
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
