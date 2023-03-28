@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -20,6 +20,9 @@ const StyledChip = styled(Chip)`
   padding: 10px;
   width: 100px;
 `;
+useEffect(() => {
+  console.log("h");
+}, []);
 function PublishCard() {
   const handleClick = () => {
     // eslint-disable-next-line no-console

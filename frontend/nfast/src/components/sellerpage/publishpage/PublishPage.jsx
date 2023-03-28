@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import PastTicket from "../../commons/PastTicket";
@@ -13,6 +14,7 @@ import {
   createSaleContract,
 } from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
+import { publishAction } from "../../../redux/actions/publishAction";
 
 const Publish = styled.div`
   display: flex;
@@ -75,10 +77,12 @@ const jsonSubmit = async (data) => {
   console.log(await saleFactory.methods);
   console.log(await createSaleContract.methods);
   console.log(await accounts[0]);
+
   const file = {
     path: "/tmp/myfile.txt",
     content: JSON.stringify(data),
   };
+
   const testc = await ipfs.add(file);
   console.log(testc.cid.string);
   return { cid: testc.cid.string, walletAddress: accounts[0] };
@@ -87,8 +91,11 @@ const jsonSubmit = async (data) => {
   //   image: accounts[0],
   // });
 };
-
 function PublishPage() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(publishAction.storeTitle(1));
+  }, []);
   const handleRegist = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line
