@@ -90,18 +90,32 @@ const StyleBtn = styled.div`
   }
 `;
 
-function FutureTicket({ title, date, time, price, qr }) {
+function FutureTicket({
+  storeName,
+  nfastDate,
+  nfastStartTime,
+  nfastEndTime,
+  nfastPrice,
+  nfastQr,
+}) {
   return (
     <Wrapper>
       <Ticket>
         <Info>
           <div>
-            <span>{title}</span>
-            <span>{price} ETH</span>
+            <span>{storeName}</span>
+            <span>{nfastPrice} ETH</span>
           </div>
           <div>
-            <span>{date}</span>
-            <span>{time}</span>
+            <span>
+              {`${new Date(nfastDate).getFullYear()}.
+                ${new Date(nfastDate).getMonth()}.
+                ${new Date(nfastDate).getDay()}`}
+            </span>
+            <div>
+              <span>{nfastStartTime}</span>
+              <span>{nfastEndTime}</span>
+            </div>
           </div>
           <div>
             <StyleBtn>
@@ -109,23 +123,25 @@ function FutureTicket({ title, date, time, price, qr }) {
             </StyleBtn>
           </div>
         </Info>
-        <QR>{qr}</QR>
+        <QR>{nfastQr}</QR>
       </Ticket>
     </Wrapper>
   );
 }
 FutureTicket.defaultProps = {
-  title: "가게이름",
-  date: "날짜",
-  time: "시간",
-  price: 0,
-  qr: "qr",
+  storeName: "가게이름",
+  nfastDate: "날짜",
+  nfastStartTime: "시작시간",
+  nfastEndTime: "종료시간",
+  nfastPrice: 0,
+  nfastQr: "qr",
 };
 FutureTicket.propTypes = {
-  title: PropTypes.string,
-  date: PropTypes.string,
-  time: PropTypes.number,
-  price: PropTypes.number,
-  qr: PropTypes.string,
+  storeName: PropTypes.string,
+  nfastDate: PropTypes.string,
+  nfastStartTime: PropTypes.number,
+  nfastEndTime: PropTypes.number,
+  nfastPrice: PropTypes.number,
+  nfastQr: PropTypes.string,
 };
 export default FutureTicket;

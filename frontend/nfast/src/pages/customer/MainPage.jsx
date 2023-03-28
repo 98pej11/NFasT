@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 // import Container from "@mui/material/Container";
 // import Grid from "@mui/material/Grid";
 // import Typography from "@mui/material/Typography";
 import MainComp from "../../components/mainpage/MainComp";
+import { getAccessToken } from "../../storage/Cookie";
+
+export class Token {
+  #accessToken = "";
+
+  getAccessToken() {
+    return this.#accessToken;
+  }
+
+  setAccessToken(token) {
+    this.#accessToken = token;
+  }
+}
 
 function MainPage() {
+  useEffect(() => {
+    console.log(getAccessToken());
+  }, [getAccessToken]);
+
   return (
     <div>
       <Box

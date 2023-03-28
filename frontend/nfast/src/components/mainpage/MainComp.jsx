@@ -1,11 +1,15 @@
 import React from "react";
+
 import styled from "styled-components";
 import DepartureBoardTwoToneIcon from "@mui/icons-material/DepartureBoardTwoTone";
 import RecordVoiceOverTwoToneIcon from "@mui/icons-material/RecordVoiceOverTwoTone";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import MainCard from "./MainCard";
+import MainCard from "./TransCard";
+import FloatingBtn from "../commons/FloatingBtn";
+
 // import Trans from "../../assets/trans.png";
 // import Distance from "../../assets/distance.png";
+// import FloatingBtn from "./../commons/FloatingBtn";
 
 function MainComp() {
   const Line = styled.div`
@@ -72,6 +76,7 @@ function MainComp() {
       <Card>
         <MainCard />
       </Card>
+      <FloatingBtn>Floating</FloatingBtn>
       <div style={{ marginBottom: 100 }}> </div>
     </div>
   );
