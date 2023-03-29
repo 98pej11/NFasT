@@ -493,6 +493,7 @@ public class UserMainServiceImpl implements UserMainService {
         else{
             //회원가입 and 로그인
             UserDto userDto = new UserDto();
+
             userDto.setUserWallet(wallet);
             userDto.setUserNickname("unNamed");
             userRepository.save(userDto.toEntity());

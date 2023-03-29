@@ -6,6 +6,7 @@ import com.nft.nfast.model.dto.business.NfastMinted;
 import com.nft.nfast.model.dto.business.NfastMintedDto;
 import com.nft.nfast.model.dto.business.NfastPurchase;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -65,5 +66,9 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
 
     @Query(value = "select * from nfast where nfast_sequence=:nfastSequence", nativeQuery = true)
     Nfast findAllByNfastSequence(long nfastSequence);
+
+    @Modifying
+    @Query(value = "update nfast set nfast_use_state=?1 where nfast_sequence=?2", nativeQuery = true)
+    void changeUseState(int i, long nfastSequence);
 }
 
