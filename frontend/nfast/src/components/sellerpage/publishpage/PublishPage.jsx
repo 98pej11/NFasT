@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { QrReader } from "react-qr-reader";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import PublishTicket from "./PublishTicket";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
+
 import {
   web3,
   NFasTContract,
@@ -168,9 +170,34 @@ const jsonSubmit = async (data) => {
 
 function PublishPage() {
   const dispatch = useDispatch();
+  const [selected, setSelected] = useState("environment");
+  const [startScan, setStartScan] = useState(false);
+  const [loadingScan, setLoadingScan] = useState(false);
+  const [data, setData] = useState("");
+  // const storeSequence;
+  const handleScan = async (scanData) => {
+    setLoadingScan(true);
+    console.log(`loaded data data`, scanData);
+    if (scanData && scanData !== "") {
+      console.log(`loaded >>>`, scanData);
+
+      // storeSequence=scanData
+      setData(scanData.text);
+      dispatch(publishAction.checkQR(scanData.text));
+      setStartScan(false);
+      setLoadingScan(false);
+      // setPrecScan(scanData);
+    }
+  };
+  const handleError = (err) => {
+    console.error(err);
+  };
+
   useEffect(() => {
     dispatch(publishAction.storeTitle(1));
+    // dispatch(publishAction.checkQR(data));
   }, []);
+
   const handleRegist = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line
@@ -196,6 +223,9 @@ function PublishPage() {
     data.walletAddress = tempData.walletAddress;
     // eslint-disable-next-line no-console
     console.log(data);
+    useEffect(() => {
+      dispatch(publishAction.storeTitle(1));
+    }, []);
   };
 
   return (
@@ -243,6 +273,37 @@ function PublishPage() {
           </div>
         </Form>
       </Publish>
+      <div>
+        <div>
+          <h1>QR코두 스캔해보쟈~</h1>
+
+          <button
+            onClick={() => {
+              setStartScan(!startScan);
+            }}
+          >
+            {startScan ? "Stop Scan" : "Start Scan"}
+          </button>
+          {startScan && (
+            <>
+              <select onChange={(e) => setSelected(e.target.value)}>
+                <option value="environment">Back Camera</option>
+                <option value="user">Front Camera</option>
+              </select>
+              <QrReader
+                facingMode={selected}
+                delay={1000}
+                onError={handleError}
+                onResult={handleScan}
+                // chooseDeviceId={()=>selected}
+                style={{ width: "300px" }}
+              />
+            </>
+          )}
+          {loadingScan && <p>Loading</p>}
+          {data !== "" && <p>{data}</p>}
+        </div>
+      </div>
     </Wrapper>
   );
 }

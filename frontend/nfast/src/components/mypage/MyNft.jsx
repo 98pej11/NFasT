@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import QRCode from "react-qr-code";
-// import QrReader from 'react-qr-scanner';
-import { QrReader } from "react-qr-reader";
 import Stack from "@mui/material/Stack";
 import styled from "styled-components";
 import Tabs from "@mui/material/Tabs";
@@ -48,25 +46,6 @@ function MyNft() {
   const dispatch = useDispatch();
   const sequence = getSequence();
 
-  const [selected, setSelected] = useState("environment");
-  const [startScan, setStartScan] = useState(false);
-  const [loadingScan, setLoadingScan] = useState(false);
-  const [data, setData] = useState("");
-  const handleScan = async (scanData) => {
-    setLoadingScan(true);
-    console.log(`loaded data data`, scanData);
-    if (scanData && scanData !== "") {
-      console.log(`loaded >>>`, scanData);
-      setData(scanData.text);
-      setStartScan(false);
-      setLoadingScan(false);
-      // setPrecScan(scanData);
-    }
-  };
-  const handleError = (err) => {
-    console.error(err);
-  };
-
   useEffect(() => {
     dispatch(mypageAction.getAvailableNfasts(sequence));
   }, []);
@@ -111,42 +90,9 @@ function MyNft() {
         ) : (
           <div>
             <div>사용 가능한 NFasT가 없습니다ㅠㅠ</div>
-            <QRCode value="33" size="100" />
+            <QRCode value="56" size="100" />
             <div>이것은 환불큐알 코드이다</div>
-            <QRCode
-              value="https://j8a307.p.ssafy.io/api/owner/qr/refund/34"
-              size="100"
-            />
-
-            <div>
-              <h1>QR코두 스캔해보쟈~</h1>
-
-              <button
-                onClick={() => {
-                  setStartScan(!startScan);
-                }}
-              >
-                {startScan ? "Stop Scan" : "Start Scan"}
-              </button>
-              {startScan && (
-                <>
-                  <select onChange={(e) => setSelected(e.target.value)}>
-                    <option value="environment">Back Camera</option>
-                    <option value="user">Front Camera</option>
-                  </select>
-                  <QrReader
-                    facingMode={selected}
-                    delay={1000}
-                    onError={handleError}
-                    onResult={handleScan}
-                    // chooseDeviceId={()=>selected}
-                    style={{ width: "300px" }}
-                  />
-                </>
-              )}
-              {loadingScan && <p>Loading</p>}
-              {data !== "" && <p>{data}</p>}
-            </div>
+            <QRCode value="57" size="100" />
           </div>
         ))}
       {selectedTabIndex === 1 &&
