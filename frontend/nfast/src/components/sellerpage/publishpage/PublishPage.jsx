@@ -52,25 +52,36 @@ const Price = styled(Count)``;
 const jsonSubmit = async (data) => {
   const accounts = await web3.eth.getAccounts();
   // const ethAddress = await storehash.options.address; CA주소
-  console.log(
-    await NFasTContract.methods
-      .create(
-        "0xBae7Be1B10cc17f62eeCeBDC381fCc7e0E6A2249",
-        "test",
-        "0xEABD22D5e36E96203bC7861F4580bB5238a8b0F8",
-        1679902298,
-        true,
-        1679902298,
-        1679902298,
-        10,
-        1
-      )
-      .send({
-        from: "0xBae7Be1B10cc17f62eeCeBDC381fCc7e0E6A2249",
-        value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
-      })
+  await NFasTContract.methods
+    .createAll(
+      5,
+      "0x9fE44aE14da38bbc20cD416A63543262077Cc1A2",
+      "test",
+      "0x9fE44aE14da38bbc20cD416A63543262077Cc1A2",
+      1679902298,
+      true,
+      1679902298,
+      1679902298,
+      10,
+      1
+    )
+    .send({
+      from: "0x9fE44aE14da38bbc20cD416A63543262077Cc1A2",
+      value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
+    });
+
+  NFasTContract.events.CreateAll(
+    {
+      // eslint-disable-next-line no-loss-of-precision
+      filter: { _store: 0x9fe44ae14da38bbc20cd416a63543262077cc1a3 }, // Using an array means OR: e.g. 20 or 23
+    },
+    // eslint-disable-next-line func-names
+    function (error, event) {
+      console.log(event);
+    }
   );
-  console.log(await saleFactory.methods);
+
+  console.log(await NFasTContract.methods.current().call());
   console.log(await ssafyTokenContract.methods);
   console.log(await saleFactory.methods);
   console.log(await createSaleContract.methods);

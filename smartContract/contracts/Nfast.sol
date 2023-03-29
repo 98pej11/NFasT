@@ -28,6 +28,8 @@ contract Nfast is ERC721 {
     //수수료
     mapping(uint256 => uint) charge;
 
+    event CreateAll(address indexed _store, uint256[] tokenIds);
+
     constructor(string memory name_, string memory symbol_)
     ERC721(name_, symbol_)
     {
@@ -36,7 +38,6 @@ contract Nfast is ERC721 {
     function current() public view returns (uint256) {
         return tokenIds.current();
     }
-
 
     function create(address _to, string memory _tokenURI, address _storeAddress, uint256 _date, bool _mealType, uint256 _startTime, uint256 _endTime, uint256 _price, uint _charge)
     public
@@ -61,6 +62,33 @@ contract Nfast is ERC721 {
         //가게에게 판매 허용
         //        approve(_to, newTokenId);
         return newTokenId;
+    }
+
+    function createAll(uint256 _numTokens, address  _to, string  calldata _tokenURI, address  _storeAddress, uint256  _date, bool  _mealType, uint256  _startTime, uint256  _endTime, uint256  _price, uint256  _charge
+    )
+    public
+    payable
+    returns (uint256[] memory) {
+        require(_numTokens > 0, "Number of tokens must be greater than zero");
+
+        uint256[] memory tokenIds = new uint256[](_numTokens);
+
+        for (uint256 i = 0; i < _numTokens; i++) {
+            tokenIds[i] = create(
+                _to,
+                _tokenURI,
+                _storeAddress,
+                _date,
+                _mealType,
+                _startTime,
+                _endTime,
+                _price,
+                _charge
+            );
+        }
+
+        emit CreateAll(_storeAddress,tokenIds);
+        return tokenIds;
     }
 
     function _burn(uint256 _tokenId)
