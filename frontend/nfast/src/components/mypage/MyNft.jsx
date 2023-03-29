@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import QRCode from "react-qr-code";
+// import QrReader from 'react-qr-scanner';
+import QrReader from "react-qr-reader";
 import Stack from "@mui/material/Stack";
 import styled from "styled-components";
 import Tabs from "@mui/material/Tabs";
@@ -7,7 +10,7 @@ import Tab from "@mui/material/Tab";
 import Pagination from "@mui/material/Pagination";
 import { getSequence } from "../../storage/Cookie";
 import { mypageAction } from "../../redux/actions/mypageAction";
-import FastTicket from "../commons/FastTicket";
+import PastTicket from "../commons/FastTicket";
 import FutureTicket from "../commons/FutureTicket";
 
 const Wrapper = styled.div`
@@ -16,7 +19,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Ticket1 = styled(FastTicket)`
+const Ticket1 = styled(PastTicket)`
   flex: 1;
 `;
 
@@ -39,10 +42,31 @@ const Pag = styled.div`
   display: flex; /* 가로 정렬을 위해 flexbox 설정 */
   justify-content: center; /* 가운데 정렬 */
 `;
+
 function MyNft() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const dispatch = useDispatch();
   const sequence = getSequence();
+
+  const [selected, setSelected] = useState("environment");
+  const [startScan, setStartScan] = useState(false);
+  const [loadingScan, setLoadingScan] = useState(false);
+  const [data, setData] = useState("");
+  const handleScan = async (scanData) => {
+    setLoadingScan(true);
+    console.log(`loaded data data`, scanData);
+    if (scanData && scanData !== "") {
+      console.log(`loaded >>>`, scanData);
+      setData(scanData);
+      setStartScan(false);
+      setLoadingScan(false);
+      // setPrecScan(scanData);
+    }
+  };
+  const handleError = (err) => {
+    console.error(err);
+  };
+
   useEffect(() => {
     dispatch(mypageAction.getAvailableNfasts(sequence));
   }, []);
@@ -52,6 +76,7 @@ function MyNft() {
   const unavailableNfasts = useSelector(
     (state) => state.mypageReducer.unavailableNfasts
   );
+
   return (
     <Wrapper>
       <TabsContainer>
@@ -84,7 +109,55 @@ function MyNft() {
             );
           })
         ) : (
-          <div>사용 가능한 NFasT가 없습니다ㅠㅠ</div>
+          <div>
+            <div>사용 가능한 NFasT가 없습니다ㅠㅠ</div>
+            <QRCode value="33" size="100" />
+            <div>이것은 환불큐알 코드이다</div>
+            <QRCode
+              value="https://j8a307.p.ssafy.io/api/owner/qr/refund/34"
+              size="100"
+            />
+
+            <div className="App">
+              <h1>QR코두 스캔해보쟈~</h1>
+
+              <button
+                onClick={() => {
+                  setStartScan(!startScan);
+                }}
+              >
+                {startScan ? "Stop Scan" : "Start Scan"}
+              </button>
+              {startScan && (
+                <>
+                  <select onChange={(e) => setSelected(e.target.value)}>
+                    <option value={"environment"}>Back Camera</option>
+                    <option value={"user"}>Front Camera</option>
+                  </select>
+                  <QrReader
+                    facingMode={selected}
+                    delay={1000}
+                    onError={handleError}
+                    onScan={handleScan}
+                    // chooseDeviceId={()=>selected}
+                    style={{ width: "300px" }}
+                  />
+                </>
+              )}
+              {loadingScan && <p>Loading</p>}
+              {data !== "" && <p>{data}</p>}
+            </div>
+
+            {/* <div>
+              <QrReader
+                delay={this.state.delay}
+                style={previewStyle}
+                onError={this.handleError}
+                onScan={this.handleScan}
+                />
+              <p>{this.state.result}</p>
+            </div> */}
+          </div>
         ))}
       {selectedTabIndex === 1 &&
         (unavailableNfasts.length !== 0 ? (
