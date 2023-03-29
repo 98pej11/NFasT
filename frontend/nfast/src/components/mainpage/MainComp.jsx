@@ -4,7 +4,8 @@ import styled from "styled-components";
 import DepartureBoardTwoToneIcon from "@mui/icons-material/DepartureBoardTwoTone";
 import RecordVoiceOverTwoToneIcon from "@mui/icons-material/RecordVoiceOverTwoTone";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import MainCard from "./TransCard";
+import DistanceCard from "./DistanceCard";
+import TransCard from "./TransCard";
 import FloatingBtn from "../commons/FloatingBtn";
 
 // import Trans from "../../assets/trans.png";
@@ -52,7 +53,7 @@ function MainComp() {
         </span>
       </Line>
       <Card>
-        <MainCard />
+        <DistanceCard />
       </Card>
       <div style={{ marginBottom: 100 }}> </div>
       <Line>
@@ -74,7 +75,7 @@ function MainComp() {
         </span>
       </Line>
       <Card>
-        <MainCard />
+        <TransCard />
       </Card>
       <FloatingBtn>Floating</FloatingBtn>
       <div style={{ marginBottom: 100 }}> </div>

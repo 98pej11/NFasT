@@ -28,9 +28,9 @@ export default function DistanceCard() {
         {distanceList.map((card) => (
           <Grid
             item
-            xs={12}
-            sm={4}
-            md={4}
+            xs={6}
+            sm={3} // change to 6 for Galaxy S20 Ultra
+            md={3} // change to 6 for Galaxy S20 Ultra
             display="flex"
             justifyContent="center"
             alignItems="center"
