@@ -14,6 +14,7 @@ import NFastLogo from "../../assets/HeaderLogo.png";
 function Header() {
   return (
     <AppBar
+      elevation={0}
       position="absolute"
       variant="outlined"
       style={{

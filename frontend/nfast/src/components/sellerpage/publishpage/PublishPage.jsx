@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import PastTicket from "../../commons/PastTicket";
+import PublishTicket from "./PublishTicket";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
 import {
@@ -13,42 +14,65 @@ import {
   createSaleContract,
 } from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
+import { publishAction } from "../../../redux/actions/publishAction";
 
+// styled-components 시작
+
+const Wrapper = styled.div`
+  height: 70vh;
+  margin-top: 20px;
+`;
+
+const Ticket = styled(PublishTicket)`
+  margin-bottom: 20px;
+`;
 const Publish = styled.div`
+  height: 70%;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+  h4 {
+    width: 40%;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+  }
 `;
 const Form = styled.form`
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: flex-start;
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const Date = styled.div`
   display: flex;
-  align-items: center;
-  h3 {
-    width: 20%;
-    // margin-right: 20px;
-  }
 `;
 
 const Time = styled(Date)`
-  h3 {
-    width: 20%;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `;
 
-const Count = styled(Date)`
-  h3 {
-    width: 20%;
-    // margin-right: 50px;
-  }
+const Count = styled(Date)``;
+
+const Price = styled(Count)`
+  margin-bottom: 20px;
 `;
+// styled-components 끝
 
-const Price = styled(Count)``;
-
+// jsonSubmit 함수
 const jsonSubmit = async (data) => {
   const accounts = await web3.eth.getAccounts();
   // const ethAddress = await storehash.options.address; CA주소
@@ -111,10 +135,12 @@ const jsonSubmit = async (data) => {
   console.log(await saleFactory.methods);
   console.log(await createSaleContract.methods);
   console.log(await accounts[0]);
+
   const file = {
     path: "/tmp/myfile.txt",
     content: JSON.stringify(data),
   };
+
   const testc = await ipfs.add(file);
   console.log(testc.cid.string);
   return { cid: testc.cid.string, walletAddress: accounts[0] };
@@ -123,8 +149,13 @@ const jsonSubmit = async (data) => {
   //   image: accounts[0],
   // });
 };
+// jsonSubmit 함수 끝
 
 function PublishPage() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(publishAction.storeTitle(1));
+  }, []);
   const handleRegist = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line
@@ -152,47 +183,51 @@ function PublishPage() {
   };
 
   return (
-    <div>
-      <PastTicket />
+    <Wrapper>
+      <Ticket />
       <Publish>
         <Form onSubmit={handleRegist}>
           <Date>
-            <h3>날짜</h3>
+            <h4>날짜</h4>
             <PublishField content="date" variant="outlined" />
           </Date>
           <Time>
-            <h3>시간</h3>
+            <h4>시간</h4>
             <SwitchTime />
-            <PublishField
-              sx={{ marginLeft: "20px" }}
-              content="time"
-              variant="outlined"
-            />
-            <PublishField
-              sx={{ marginLeft: "20px" }}
-              content="time"
-              variant="outlined"
-            />
+            <div>
+              <PublishField
+                sx={{ marginLeft: "20px" }}
+                content="time"
+                variant="outlined"
+              />
+              <PublishField
+                sx={{ marginLeft: "20px" }}
+                content="time"
+                variant="outlined"
+              />
+            </div>
           </Time>
           <Count>
-            <h3>수량</h3>
+            <h4>수량</h4>
             <PublishField content="count" variant="outlined" />
           </Count>
           <Price>
-            <h3>가격</h3>
+            <h4>가격</h4>
             <PublishField content="price" variant="outlined" />
           </Price>
-          <Button
-            sx={{ backgroundColor: "#BCB6FF" }}
-            type="submit"
-            variant="contained"
-            disableElevation
-          >
-            발행하기
-          </Button>
+          <div>
+            <Button
+              sx={{ backgroundColor: "#BCB6FF" }}
+              type="submit"
+              variant="contained"
+              disableElevation
+            >
+              발행하기
+            </Button>
+          </div>
         </Form>
       </Publish>
-    </div>
+    </Wrapper>
   );
 }
 export default PublishPage;
