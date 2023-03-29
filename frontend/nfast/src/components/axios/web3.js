@@ -1627,13 +1627,13 @@ const ssafyTokenAbi = [
   },
 ];
 
-const NFasTCA = "0x65931CBd7Da0cacA254E1477279ca8381f472427";
+const NFasTCA = "0xe4aF4bAbdD7382E5190e4393dfBBccB21A164163";
 
 // const saleCA = ""
 
-const saleFactoryCA = "0xE7B42Cf0674E45b814328022172FEd76322eFdB5";
+const saleFactoryCA = "0xa2DE7727EAe6Af509E553B7ed667bE40b8De405e";
 
-const ssafyTokenCA = "0x46a1b0FDc89d7f5Bbbcb5F1bc065e33dEBE44D63";
+const ssafyTokenCA = "0x08B794e4Cabd52df6697476f70BBcD050BBEb47e";
 
 // let web3;
 
