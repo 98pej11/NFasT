@@ -12,11 +12,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0;
-  height :auto;
+  height: auto;
 
   h4 {
     width: 100%;
-    border-top : solid 1px black"
+    border-top: solid 1px black;
   }
 `;
 const Divider = styled.div`

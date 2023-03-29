@@ -7,6 +7,7 @@ import com.nft.nfast.entity.business.Store;
 import com.nft.nfast.exception.Store.NFastNotExistException;
 import com.nft.nfast.exception.Store.StoreNotFoundException;
 import com.nft.nfast.exception.Store.TypeNotAvailabeException;
+import com.nft.nfast.exception.User.UserNotExistException;
 import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.repository.IncomeListRepository;
@@ -331,20 +332,22 @@ public class StoreMainServiceImpl implements StoreMainService {
     public TokenDto storeLogin(String wallet) {
         Optional<Store> storeWrapper = storeRepository.findByStoreWallet(wallet);
         TokenDto tokenDto = null;
-
-        if (storeWrapper.isPresent()) {
-            Store store = storeWrapper.get();
-            String authToken = jwtUtil.createAuthToken(store.getStoreSequence());
-            String refreshToken = jwtUtil.createRefreshToken();
-            tokenDto = TokenDto.builder()
-                    .tokenAccess(authToken)
-                    .tokenRefresh(refreshToken)
-                    .tokenUserSequence(store.getStoreSequence())
-                    .tokenType((byte) 1)
-                    .tokenWallet(wallet)
-                    .build();
-            tokenRepository.save(tokenDto.toEntity());
+        if (!storeWrapper.isPresent()){
+            throw new UserNotExistException();
         }
+//        else (storeWrapper.isPresent()) {
+        Store store = storeWrapper.get();
+        String authToken = jwtUtil.createAuthToken(store.getStoreSequence());
+        String refreshToken = jwtUtil.createRefreshToken();
+        tokenDto = TokenDto.builder()
+                .tokenAccess(authToken)
+                .tokenRefresh(refreshToken)
+                .tokenUserSequence(store.getStoreSequence())
+                .tokenType((byte) 1)
+                .tokenWallet(wallet)
+                .build();
+        tokenRepository.save(tokenDto.toEntity());
+//        }
         return tokenDto;
     }
 

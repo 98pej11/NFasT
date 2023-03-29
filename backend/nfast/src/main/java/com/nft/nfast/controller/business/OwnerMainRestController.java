@@ -4,6 +4,7 @@ import com.nft.nfast.entity.business.Store;
 import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.service.store.StoreMainService;
+import com.nft.nfast.repository.StoreRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,17 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/owner")
 @CrossOrigin(origins = "*")
 public class OwnerMainRestController {
+    @Autowired
+    private StoreRepository storeRepository;
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
-
 
     @Autowired
     StoreMainService storeMainService;
@@ -85,8 +89,12 @@ public class OwnerMainRestController {
     @PostMapping("/introduction-store/application")
     public ResponseEntity<Map<String,Object>> applyStore(@RequestBody StoreRegistDto store) throws URISyntaxException, ParseException {
         Map<String, Object> resultMap=new HashMap<>();
-        storeMainService.saveStore(store);
-        System.out.println("wALLET "+store.getStoreWallet());
+        String wallet = store.getStoreWallet();
+        Optional<Store> storedWallet = storeRepository.findByStoreWallet(wallet);
+        // DB에 가게가 존재하지 않으면 저장해준다
+        if (!storedWallet.isPresent()){
+            storeMainService.saveStore(store);
+        }
         TokenDto tokenDto=storeMainService.storeLogin(store.getStoreWallet());
         System.out.println("TOKENDTO "+tokenDto);
         resultMap.put("result", SUCCESS);
