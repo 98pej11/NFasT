@@ -13,11 +13,25 @@ function PublishField({
   variant,
   ...otherProps
 }) {
+  const activeBorderColor = "#BCB6FF";
+  const activeLabelColor = "#BCB6FF";
   switch (content) {
     case "date":
       return (
         <TextField
-          sx={sx}
+          sx={{
+            ...sx,
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "20px",
+            },
+            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+              {
+                borderColor: activeBorderColor,
+              },
+            "& .MuiInputLabel-outlined.Mui-focused": {
+              color: activeLabelColor,
+            },
+          }}
           required
           variant={variant}
           type="date"
@@ -32,7 +46,19 @@ function PublishField({
     case "time":
       return (
         <TextField
-          sx={sx}
+          sx={{
+            ...sx,
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "20px",
+            },
+            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+              {
+                borderColor: activeBorderColor,
+              },
+            "& .MuiInputLabel-outlined.Mui-focused": {
+              color: activeLabelColor,
+            },
+          }}
           required
           variant={variant}
           type="time"
@@ -47,7 +73,19 @@ function PublishField({
     case "count":
       return (
         <TextField
-          sx={sx}
+          sx={{
+            ...sx,
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "20px",
+            },
+            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+              {
+                borderColor: activeBorderColor,
+              },
+            "& .MuiInputLabel-outlined.Mui-focused": {
+              color: activeLabelColor,
+            },
+          }}
           required
           variant={variant}
           label="숫자만 입력"
@@ -63,7 +101,19 @@ function PublishField({
     case "price":
       return (
         <TextField
-          sx={sx}
+          sx={{
+            ...sx,
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "20px",
+            },
+            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+              {
+                borderColor: activeBorderColor,
+              },
+            "& .MuiInputLabel-outlined.Mui-focused": {
+              color: activeLabelColor,
+            },
+          }}
           required
           label="숫자만 입력"
           type="text"

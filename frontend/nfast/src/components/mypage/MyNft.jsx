@@ -7,7 +7,7 @@ import Tab from "@mui/material/Tab";
 import Pagination from "@mui/material/Pagination";
 import { getSequence } from "../../storage/Cookie";
 import { mypageAction } from "../../redux/actions/mypageAction";
-import PastTicket from "../commons/PastTicket";
+import FastTicket from "../commons/FastTicket";
 import FutureTicket from "../commons/FutureTicket";
 
 const Wrapper = styled.div`
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Ticket1 = styled(PastTicket)`
+const Ticket1 = styled(FastTicket)`
   flex: 1;
 `;
 
