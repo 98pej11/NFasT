@@ -22,12 +22,12 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       },
       "& + .MuiSwitch-track": {
         opacity: 1,
-        backgroundColor: theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
+        backgroundColor: "#BCB6FF",
       },
     },
   },
   "& .MuiSwitch-thumb": {
-    backgroundColor: theme.palette.mode === "dark" ? "#003892" : "#001e3c",
+    backgroundColor: theme.palette.mode === "dark" ? "#7E7AAB" : "#7E7AAB",
     width: 32,
     height: 32,
     "&:before": {
@@ -46,13 +46,14 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
   "& .MuiSwitch-track": {
     opacity: 1,
-    backgroundColor: theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
+    backgroundColor: "#BCB6FF",
     borderRadius: 20 / 2,
   },
 }));
 
 const Label = styled(FormControlLabel)`
   width: 110px;
+  color: #7e7aab;
 `;
 export default function CustomizedSwitches() {
   const [time, setTime] = useState("디너");

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import PublishCard from "./PublishCard";
+import PublishTicket from "./PublishTicket";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
 import {
@@ -17,40 +17,59 @@ import ipfs from "../../axios/ipfs";
 import { publishAction } from "../../../redux/actions/publishAction";
 
 // styled-components 시작
+
+const Wrapper = styled.div`
+  height: 70vh;
+  margin-top: 20px;
+`;
+
+const Ticket = styled(PublishTicket)`
+  margin-bottom: 20px;
+`;
 const Publish = styled.div`
+  height: 70%;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+  h4 {
+    width: 40%;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+  }
 `;
 const Form = styled.form`
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: flex-start;
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const Date = styled.div`
   display: flex;
-  align-items: center;
-  h3 {
-    width: 20%;
-    // margin-right: 20px;
-  }
 `;
 
 const Time = styled(Date)`
-  h3 {
-    width: 20%;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `;
 
-const Count = styled(Date)`
-  h3 {
-    width: 20%;
-    // margin-right: 50px;
-  }
-`;
+const Count = styled(Date)``;
 
-const Price = styled(Count)``;
+const Price = styled(Count)`
+  margin-bottom: 20px;
+`;
 // styled-components 끝
 
 // jsonSubmit 함수
@@ -128,47 +147,51 @@ function PublishPage() {
   };
 
   return (
-    <div>
-      <PublishCard />
+    <Wrapper>
+      <Ticket />
       <Publish>
         <Form onSubmit={handleRegist}>
           <Date>
-            <h3>날짜</h3>
+            <h4>날짜</h4>
             <PublishField content="date" variant="outlined" />
           </Date>
           <Time>
-            <h3>시간</h3>
+            <h4>시간</h4>
             <SwitchTime />
-            <PublishField
-              sx={{ marginLeft: "20px" }}
-              content="time"
-              variant="outlined"
-            />
-            <PublishField
-              sx={{ marginLeft: "20px" }}
-              content="time"
-              variant="outlined"
-            />
+            <div>
+              <PublishField
+                sx={{ marginLeft: "20px" }}
+                content="time"
+                variant="outlined"
+              />
+              <PublishField
+                sx={{ marginLeft: "20px" }}
+                content="time"
+                variant="outlined"
+              />
+            </div>
           </Time>
           <Count>
-            <h3>수량</h3>
+            <h4>수량</h4>
             <PublishField content="count" variant="outlined" />
           </Count>
           <Price>
-            <h3>가격</h3>
+            <h4>가격</h4>
             <PublishField content="price" variant="outlined" />
           </Price>
-          <Button
-            sx={{ backgroundColor: "#BCB6FF" }}
-            type="submit"
-            variant="contained"
-            disableElevation
-          >
-            발행하기
-          </Button>
+          <div>
+            <Button
+              sx={{ backgroundColor: "#BCB6FF" }}
+              type="submit"
+              variant="contained"
+              disableElevation
+            >
+              발행하기
+            </Button>
+          </div>
         </Form>
       </Publish>
-    </div>
+    </Wrapper>
   );
 }
 export default PublishPage;

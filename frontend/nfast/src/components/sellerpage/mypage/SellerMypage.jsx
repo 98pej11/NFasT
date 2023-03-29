@@ -1,45 +1,75 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-console */
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import MyField from "./MyField";
 // import SwitchTime from "./SwitchTime";
 import { web3 } from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
 
 const Publish = styled.div`
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
-const Form = styled.form`
-  flex-direction: column;
-  align-items: center;
+const UploadPhoto = styled.div`
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border: solid 1px #bcb6ff;
+  border-radius: 20px;
+  display: flex;
   justify-content: center;
+  align-items: center;
+
+  span {
+    color: #5b5299;
+  }
+`;
+const Form = styled.form`
+  height: 60%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+
+  h4 {
+    width: 40%;
+    margin-right: 20px;
+  }
+`;
+const FileBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+const FileInput = styled.input`
+  &::file-selector-button {
+    display: none;
+  }
+`;
+const ButtonBox = styled.div`
+   {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const Date = styled.div`
   display: flex;
   align-items: center;
-
-  h5 {
-    width: 30%;
-    margin-right: 20px;
-  }
 `;
 
 const Time = styled(Date)`
-  h5 {
-    width: 30%;
-  }
+  width: 100%;
 `;
 
-const Count = styled(Date)`
-  h5 {
-    margin-right: 20px;
-  }
-`;
+const Count = styled(Date)``;
 
 const Price = styled(Count)``;
 
@@ -60,7 +90,15 @@ const jsonSubmit = async (data) => {
   // });
 };
 
-function SellerPublish() {
+export default function SellerPublish() {
+  const [picture, setPicture] = useState(null); // state for storing selected picture
+
+  const handlePictureChange = (e) => {
+    // handler for updating state when picture is selected
+    const file = e.target.files[0];
+    setPicture(file);
+  };
+
   const handleRegist = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line
@@ -90,41 +128,68 @@ function SellerPublish() {
   return (
     <div>
       <Publish>
+        <UploadPhoto>
+          {!picture && <span>사진 등록하기</span>}
+          {picture && ( // display picture if it is selected
+            <img
+              src={URL.createObjectURL(picture)}
+              alt="Selected"
+              style={{ width: "100%", objectFit: "cover", marginBottom: 10 }}
+            />
+          )}
+        </UploadPhoto>
         <Form onSubmit={handleRegist}>
+          <FileBox>
+            <FileInput // file input field for selecting picture
+              type="file"
+              accept="image/*"
+              id="photo"
+              onChange={handlePictureChange}
+              style={{ marginBottom: 10, display: "none" }}
+            />
+            <label htmlFor="photo">
+              <AddCircleIcon sx={{ fontSize: "60px", color: "#BCB6FF" }} />
+            </label>
+          </FileBox>
           <Date>
-            <h5>지갑 주소</h5>
+            <h4>지갑 주소</h4>
             <MyField content="count" variant="outlined" />
           </Date>
           <Count>
-            <h5>가게 이름</h5>
+            <h4>가게 이름</h4>
             <MyField content="count" variant="outlined" />
           </Count>
           <Time>
-            <h5>런치</h5>
-            <MyField sx={{}} content="time" variant="outlined" />
+            <h4>런치</h4>
+            <MyField content="time" variant="outlined" />
             <div style={{ marginLeft: 30 }} />
-            <h5>디너</h5>
-            <MyField sx={{}} content="time" variant="outlined" />
+            <h4>디너</h4>
+            <MyField content="time" variant="outlined" />
           </Time>
           <Count>
-            <h5>전화 번호</h5>
+            <h4>전화 번호</h4>
             <MyField content="count" variant="outlined" />
           </Count>
           <Price>
-            <h5>가게 소개</h5>
+            <h4>가게 소개</h4>
             <MyField content="price" variant="outlined" />
           </Price>
-          <Button
-            sx={{ backgroundColor: "#BCB6FF" }}
-            type="submit"
-            variant="contained"
-            disableElevation
-          >
-            수정하기
-          </Button>
+          <Price>
+            <h4>이용 방법</h4>
+            <MyField content="price" variant="outlined" />
+          </Price>
+          <ButtonBox>
+            <Button
+              sx={{ backgroundColor: "#BCB6FF" }}
+              type="submit"
+              variant="contained"
+              disableElevation
+            >
+              수정하기
+            </Button>
+          </ButtonBox>
         </Form>
       </Publish>
     </div>
   );
 }
-export default SellerPublish;
