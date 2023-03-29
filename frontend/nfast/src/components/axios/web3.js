@@ -1061,7 +1061,18 @@ const saleAbi = [
 
 const saleFactoryAbi = [
   {
-    inputs: [],
+    inputs: [
+      {
+        internalType: "address",
+        name: "_nftAddress",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_tokenAddress",
+        type: "address",
+      },
+    ],
     stateMutability: "nonpayable",
     type: "constructor",
   },
@@ -1121,68 +1132,7 @@ const saleFactoryAbi = [
     ],
     stateMutability: "view",
     type: "function",
-  },
-  {
-    inputs: [],
-    name: "allSales",
-    outputs: [
-      {
-        internalType: "address[]",
-        name: "",
-        type: "address[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_nftId",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "_storeAddress",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_price",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_startTime",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_endTime",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "_currencyAddress",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_nftAddress",
-        type: "address",
-      },
-    ],
-    name: "createSale",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
+    constant: true,
   },
   {
     inputs: [],
@@ -1196,6 +1146,7 @@ const saleFactoryAbi = [
     ],
     stateMutability: "view",
     type: "function",
+    constant: true,
   },
   {
     inputs: [],
@@ -1222,6 +1173,7 @@ const saleFactoryAbi = [
     ],
     stateMutability: "view",
     type: "function",
+    constant: true,
   },
   {
     inputs: [
@@ -1236,8 +1188,56 @@ const saleFactoryAbi = [
     stateMutability: "nonpayable",
     type: "function",
   },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_nftId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_price",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_startTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_endTime",
+        type: "uint256",
+      },
+    ],
+    name: "createSale",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+    payable: true,
+  },
+  {
+    inputs: [],
+    name: "allSales",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
 ];
-
 const ssafyTokenAbi = [
   {
     inputs: [

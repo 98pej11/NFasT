@@ -9,7 +9,7 @@ import SwitchTime from "./SwitchTime";
 import {
   web3,
   NFasTContract,
-  // saleFactory,
+  saleFactory,
   // ssafyTokenContract,
   // createSaleContract,
 } from "../../axios/web3";
@@ -72,9 +72,7 @@ const Price = styled(Count)`
 `;
 // styled-components 끝
 
-// jsonSubmit 함수
-
-// string을 시간객체로 변경
+// string을 시간객체로 변경 형식 - 2023-02-31
 function stringToDate(str) {
   const y = str.substr(0, 4);
   const m = str.substr(5, 2);
@@ -87,15 +85,150 @@ function dateToUint(date) {
   return Math.floor(stringToDate(date).getTime() / 1000);
 }
 
-// 시간을 uint로 변경
+// 시간을 uint로 변경 형식 - 12:12
 function timeToUint(time) {
   const m = time.substr(0, 2);
   const s = time.substr(3, 2);
   return m * 60 * 60 + s * 60;
 }
 
+// jsonSubmit 함수
+
+// 구매
+// 거래 객체 받아야함
+// async function purchase(sale, data) {
+//   console.log("purchase sale");
+//   const tx = await sale.methods.purchase().send({
+//     from: data.walletAddress,
+//     value: web3.utils.toWei("0.1", "ether"),
+//   });
+
+//   await sale.getPastEvents(
+//     "Purchase",
+//     {
+//       fromBlock: tx.blockNumber,
+//       toBlock: "latest",
+//     },
+//     (event) => {
+//       console.log(event);
+//       // db에 저장
+//       // 구매완료
+//       // 입금로직 여기서 처리
+//       // 사장일 경우 모아서 처리해야되나나난나나난
+//     }
+//   );
+// }
+
+// 환불
+// 사장만 가능 qr 형태로로로로로로로롤?
+// 거래 객체가 필요한데 어캐 넘겨주냐
+// async function refund(sale, data) {
+//   console.log("refund sale");
+//   const tx = await sale.methods.refund().send({
+//     from: data.walletAddress,
+//     value: web3.utils.toWei("0.1", "ether"),
+//   });
+
+//   await sale.getPastEvents(
+//     "Refund",
+//     {
+//       fromBlock: tx.blockNumber,
+//       toBlock: "latest",
+//     },
+//     (event) => {
+//       console.log(event);
+//       // db에 저장
+//     }
+//   );
+// }
+
+// 입금
+// async function withdraw(sale, data) {
+//   console.log("widthdraw sale");
+//   const tx = await sale.methods.withdraw().send({
+//     from: data.walletAddress,
+//     value: web3.utils.toWei("0.1", "ether"),
+//   });
+
+//   await sale.getPastEvents(
+//     "Withdraw",
+//     {
+//       fromBlock: tx.blockNumber,
+//       toBlock: "latest",
+//     },
+//     (event) => {
+//       console.log(event);
+//       // db에 저장
+//     }
+//   );
+// }
+
+// 거래 생성
+// async function createSale(data, nfastId) {
+//   console.log("start sale");
+//   // nfast id, 가격, 시작시간, 종료시간
+//   const startDate = dateToUint(data.date) - 60 * 60 * 24 * 7;
+//   const tx = await saleFactory.methods
+//     .createSale(
+//       nfastId,
+//       data.price,
+//       startDate,
+//       dateToUint(data.date) + timeToUint(data.end)
+//     )
+//     .send({
+//       from: data.walletAddress,
+//       value: web3.utils.toWei("0.1", "ether"),
+//     });
+
+//   await saleFactory.getPastEvents(
+//     "CreateSale",
+//     {
+//       fromBlock: tx.blockNumber,
+//       toBlock: "latest",
+//     },
+//     (event) => {
+//       console.log(event);
+//       // db에 저장
+//     }
+//   );
+// }
+
+// 사장님 생성 후 거래 생성
+async function createAllSale(data, nfastIds) {
+  console.log("start sale");
+  // nfast id, 가격, 시작시간, 종료시간
+  const startDate = dateToUint(data.date) - 60 * 60 * 24 * 7;
+  const tx = await saleFactory.methods
+    .createAllSale(
+      nfastIds,
+      data.price,
+      startDate,
+      dateToUint(data.date) + timeToUint(data.end)
+    )
+    .send({
+      from: data.walletAddress,
+      value: web3.utils.toWei("0.1", "ether"),
+    });
+  // await nfastIds.forEach(async (nfastId) => {
+  //   // 판매일로부터 일주일전
+  //   console.log(saleFactory.methods);
+
+  // });
+  console.log(tx);
+  await saleFactory.getPastEvents(
+    "allEvents",
+    {
+      toBlock: nfastIds.length,
+    },
+    (event) => {
+      console.log(event);
+      // db에 저장
+    }
+  );
+}
+
+// nft 발행
 async function createNfast(data, cid) {
-  // nft 발행
   // 발행할 개수, admin 주소, tokenurl, 가게주소, 날짜, 점심저녁구분, 시작시간, 종료시간, 가격, 수수료
   const tx = await NFasTContract.methods
     .createAll(
@@ -132,15 +265,16 @@ async function createNfast(data, cid) {
   //   .on("error", (error, receipt) => {
   //     console.log(receipt);
   //   });
-
   NFasTContract.getPastEvents(
     "CreateAll",
     {
       fromBlock: tx.blockNumber,
       toBlock: "latest",
     },
-    function (error, events) {
+    async (error, events) => {
       console.log(events[0].returnValues[1]);
+      await createAllSale(data, events[0].returnValues[1]);
+      // db에 저장
     }
   );
 }
@@ -160,7 +294,7 @@ const jsonSubmit = async (data) => {
   console.log(testc.cid.string);
   console.log(ipfsFile.walletAddress);
 
-  createNfast(data, testc.cid.string);
+  await createNfast(data, testc.cid.string);
 
   return { cid: testc.cid.string, walletAddress: accounts[0] };
 };
@@ -186,6 +320,7 @@ function PublishPage() {
       walletAddress: "",
       storeName: "",
     };
+
     // rest api
     // data.storeName = 가게이름
     // console.log(e.target[2]);

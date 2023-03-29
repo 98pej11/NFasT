@@ -23,10 +23,24 @@ contract SaleFactory is Ownable {
         tokenAddress = _tokenAddress;
     }
 
+    function createAllSale(uint256[] _nftIds, uint256 _price, uint256 _startTime, uint256 _endTime)
+    public
+    payable
+    returns (bool)
+    {
+        address[]  memory newSales = new address[](_nftIds.length);
+        for (uint256 i = 0; i < _nftIds.length; i++) {
+            createSale(_nftIds[i],_price,_startTime,_endTime);
+        }
+
+        return true;
+    }
+
     function createSale(uint256 _nftId, uint256 _price, uint256 _startTime, uint256 _endTime)
     public
     payable
     returns (address) {
+        require(Nfast(nftAddress).getOwner(_nftId) == msg.sender, "소유한 코인만 판매 가능합니다.");
         // 사장인지 거래인지 구분
         bool isStore = false;
         if (Nfast(nftAddress).getStoreAddress(_nftId) == msg.sender) isStore = true;
