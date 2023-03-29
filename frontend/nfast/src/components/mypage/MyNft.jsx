@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import QRCode from "react-qr-code";
 // import QrReader from 'react-qr-scanner';
-import QrReader from "react-qr-reader";
+import { QrReader } from "react-qr-reader";
 import Stack from "@mui/material/Stack";
 import styled from "styled-components";
 import Tabs from "@mui/material/Tabs";
@@ -57,7 +57,7 @@ function MyNft() {
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "") {
       console.log(`loaded >>>`, scanData);
-      setData(scanData);
+      setData(scanData.text);
       setStartScan(false);
       setLoadingScan(false);
       // setPrecScan(scanData);
@@ -118,7 +118,7 @@ function MyNft() {
               size="100"
             />
 
-            <div className="App">
+            <div>
               <h1>QR코두 스캔해보쟈~</h1>
 
               <button
@@ -131,14 +131,14 @@ function MyNft() {
               {startScan && (
                 <>
                   <select onChange={(e) => setSelected(e.target.value)}>
-                    <option value={"environment"}>Back Camera</option>
-                    <option value={"user"}>Front Camera</option>
+                    <option value="environment">Back Camera</option>
+                    <option value="user">Front Camera</option>
                   </select>
                   <QrReader
                     facingMode={selected}
                     delay={1000}
                     onError={handleError}
-                    onScan={handleScan}
+                    onResult={handleScan}
                     // chooseDeviceId={()=>selected}
                     style={{ width: "300px" }}
                   />
@@ -147,16 +147,6 @@ function MyNft() {
               {loadingScan && <p>Loading</p>}
               {data !== "" && <p>{data}</p>}
             </div>
-
-            {/* <div>
-              <QrReader
-                delay={this.state.delay}
-                style={previewStyle}
-                onError={this.handleError}
-                onScan={this.handleScan}
-                />
-              <p>{this.state.result}</p>
-            </div> */}
           </div>
         ))}
       {selectedTabIndex === 1 &&
