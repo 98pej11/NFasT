@@ -1,6 +1,7 @@
 package com.nft.nfast.exception;
 
 import com.nft.nfast.config.constant.ExceptionMessage;
+import com.nft.nfast.exception.Store.NFastAlreadyUsed;
 import com.nft.nfast.exception.Store.NFastNotExistException;
 import com.nft.nfast.exception.Store.StoreNotFoundException;
 import com.nft.nfast.exception.Store.TypeNotAvailabeException;
@@ -67,6 +68,12 @@ public class ApiExceptionHandler {
         );
         return new ResponseEntity<>(apiException, httpStatus);
     }
+
+    // 이미 사용된 NFast 사용이나 환불하려 할 때 에러
+//    @ExceptionHandler(value = {NFastAlreadyUsed.class})
+//    public ResponseEntity<Object> handlerNFastAlreadyUsedException(NFastAlreadyUsed e){
+//        HttpStatus httpStatus=HttpStatus.IM_USED;
+//    }
 
     // json 타입 에런데.. 적용 안됨 ㄱ- 프론트에서 검사하고 넘겨줘잉
     @ExceptionHandler(value={TypeNotAvailabeException.class})
