@@ -66,15 +66,24 @@ public class UserMainServiceImpl implements UserMainService {
         return storeDtoList;
     }
 
+    // 이용 가능한 nfast(미사용)
     @Override
     public List<NfastGetDto> findAvailableNfast(long userSequence) {
-        List<Nfast> nfasts = nfastRepository.findAllByUserSequence(userSequence);
+        List<Nfast> nfasts=nfastRepository.findUnUsedByUserSequence(userSequence);
+//        List<Nfast> nfasts = nfastRepository.findAllByUserSequence(userSequence);
         List<NfastGetDto> nfastGetDtoList = new ArrayList<>();
-
-        for (Nfast nfast : nfasts) {
-            NfastGetDto dto = nfast.toGetDto();
-            nfastGetDtoList.add(dto);
+        if (nfasts==null || nfasts.isEmpty()){
+            System.out.println("비었어요웅");
         }
+        else{
+            for (Nfast nfast : nfasts) {
+                NfastGetDto dto = nfast.toGetDto();
+                nfastGetDtoList.add(dto);
+            }
+        }
+
+
+
         return nfastGetDtoList;
     }
 

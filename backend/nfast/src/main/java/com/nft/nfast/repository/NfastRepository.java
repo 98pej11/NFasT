@@ -20,6 +20,10 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
     //거래 내역 리스트
     List<Nfast> findAllByUserSequence(long userSequence);
 
+    //미사용 NFasT 리스트
+    @Query(value="select * from nfast where user_sequence=?1 and nfast_use_state=0", nativeQuery = true)
+    List<Nfast> findUnUsedByUserSequence(long userSequence);
+
     //구매 가능한 NFast 리스트 출력
     @Query(value="select nfast_date as nfastDate,count(*) as amount, min(nfast_hope_price) as price, nfast_meal_type as nfastMealType from nfast where store_sequence=?1 and nfast_sale_state!=1 group by nfast_date, nfast_meal_type order by nfast_date",nativeQuery = true)
     List<NfastPurchase> findAllByStoreSequenceOrderByNfastDateDesc(long storeSequence);
