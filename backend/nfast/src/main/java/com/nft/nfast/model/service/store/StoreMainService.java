@@ -22,4 +22,6 @@ public interface StoreMainService {
     StoreRegistDto getStoreInfo(long storeSequence);
 
     void userModify(long storeSequence, StoreDto storeDto);
+
+    boolean updateNfast(Byte status, long nfastSequence);
 }

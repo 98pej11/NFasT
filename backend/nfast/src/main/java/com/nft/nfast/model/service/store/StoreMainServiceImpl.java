@@ -3,6 +3,7 @@ package com.nft.nfast.model.service.store;
 import com.amazonaws.services.kms.model.CustomKeyStoresListEntry;
 import com.nft.nfast.controller.JWTUtil;
 import com.nft.nfast.entity.business.IncomeList;
+import com.nft.nfast.entity.business.Nfast;
 import com.nft.nfast.entity.business.Store;
 import com.nft.nfast.exception.Store.NFastNotExistException;
 import com.nft.nfast.exception.Store.StoreNotFoundException;
@@ -21,6 +22,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,8 @@ import java.math.BigDecimal;
 import java.net.*;
 
 import java.util.*;
+
+
 
 @Slf4j
 @Service
@@ -120,7 +124,7 @@ public class StoreMainServiceImpl implements StoreMainService {
     public List<NfastMintedDto> findMintedNfast(Long storeSequence) {
 //        Optional<List<NfastMinted>> mintedNfast = Optional.ofNullable(nfastRepository.findUsedByNfastDate(storeSequence));
         List<NfastMinted> mintedNfast = nfastRepository.findUsedByNfastDate(storeSequence);
-        System.out.println("존재하지 않는 나...................."+mintedNfast);
+        System.out.println("존재하지 않는 나...................." + mintedNfast);
         List<NfastMintedDto> mintedNfastList = new ArrayList<>();
         System.out.println("엥.....................................................");
 
@@ -146,7 +150,7 @@ public class StoreMainServiceImpl implements StoreMainService {
         String storeName;
         String storeAddress = storeInfo.getStoreAddress();
 
-        try{
+        try {
             // 사업자 등록번호로 사업장명 조회하기
             storeName = getStoreName(storeInfoNumber);
             System.out.println(storeName);
@@ -158,7 +162,7 @@ public class StoreMainServiceImpl implements StoreMainService {
             StoreDto store = getStoreInfo(storeName, lat, lng);
             store.setStoreWallet(storeInfo.getStoreWallet());
             storeRepository.save(store.toEntity());
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new StoreNotFoundException();
         }
 
@@ -284,7 +288,7 @@ public class StoreMainServiceImpl implements StoreMainService {
         String appKey = "KakaoAK b7e0a5dabf645d026a3345e4f484c4a0";
         headers.set("Authorization", appKey);
 
-        try{
+        try {
 
             String encode = URLEncoder.encode(storeName);
             String tempUri = "?query=" + encode + "&x=" + lng + "&y=" + lat + "&radius=" + 100;
@@ -320,7 +324,7 @@ public class StoreMainServiceImpl implements StoreMainService {
                 store.setStoreLat(storeLat);
                 store.setStoreDate(date);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new StoreNotFoundException();
         }
 
@@ -332,7 +336,7 @@ public class StoreMainServiceImpl implements StoreMainService {
     public TokenDto storeLogin(String wallet) {
         Optional<Store> storeWrapper = storeRepository.findByStoreWallet(wallet);
         TokenDto tokenDto = null;
-        if (!storeWrapper.isPresent()){
+        if (!storeWrapper.isPresent()) {
             throw new UserNotExistException();
         }
 //        else (storeWrapper.isPresent()) {
@@ -360,13 +364,6 @@ public class StoreMainServiceImpl implements StoreMainService {
     // 가게 정보 출력
     @Override
     public StoreRegistDto getStoreInfo(long storeSequence) {
-//        Optional<Store> storeWrapper = storeRepository.findById(storeSequence);
-//        Store store = null;
-//        if(storeWrapper.isPresent()){
-//            store=storeWrapper.get();
-////            store = s.toDto();
-//        }
-//        return store;
         Store store = storeRepository.findByStoreSequence(storeSequence);
         StoreRegistDto storeRegistDto = StoreRegistDto.builder()
                 .storeName(store.getStoreName())
@@ -398,4 +395,18 @@ public class StoreMainServiceImpl implements StoreMainService {
         storeRepository.save(storeDto.toEntity());
     }
 
+    // NFasT use_state 변경 (QR 사용, 환불)
+    @Override
+    public boolean updateNfast(Byte status, long nfastSequence) {
+        Nfast nfast = nfastRepository.findAllByNfastSequence(nfastSequence);
+        Byte useState = nfast.getNfastUseState();
+
+        // 미사용 nfast인게 맞으면 nfastUseState를 1로 변경하여 사용 처리
+        if (useState == 0) {
+            nfast.setNfastUseState(status);
+            nfastRepository.save(nfast);
+            return true;
+        }
+        return false;
+    }
 }
