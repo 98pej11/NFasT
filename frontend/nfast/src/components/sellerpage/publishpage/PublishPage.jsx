@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import PublishTicket from "./PublishTicket";
@@ -8,9 +9,9 @@ import SwitchTime from "./SwitchTime";
 import {
   web3,
   NFasTContract,
-  saleFactory,
-  ssafyTokenContract,
-  createSaleContract,
+  // saleFactory,
+  // ssafyTokenContract,
+  // createSaleContract,
 } from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
 import { publishAction } from "../../../redux/actions/publishAction";
@@ -114,26 +115,34 @@ async function createNfast(data, cid) {
       value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
     });
 
-  NFasTContract.events
-    .CreateAll({ fromBlock: tx.blockNumber }, function (error, event) {
-      console.log(event);
-    })
-    .on("connected", function (subscriptionId) {
-      console.log(subscriptionId);
-    })
-    .on("data", function (event) {
-      console.log(event.returnValues[1]);
-    })
-    .on("changed", function (event) {
-      console.log(event.returnValues);
-    })
-    .on("error", function (error, receipt) {
-      console.log(receipt);
-    });
+  console.log(tx);
+  // NFasTContract.events
+  //   .CreateAll({ fromBlock: tx.blockNumber }, (error, event) => {
+  //     console.log(event);
+  //   })
+  //   .on("connected", (subscriptionId) => {
+  //     console.log(subscriptionId);
+  //   })
+  //   .on("data", (event) => {
+  //     console.log(event.returnValues[1]);
+  //   })
+  //   .on("changed", (event) => {
+  //     console.log(event.returnValues);
+  //   })
+  //   .on("error", (error, receipt) => {
+  //     console.log(receipt);
+  //   });
 
-  //   NFasTContract.getPastEvents('allEvents', {
-  //     toBlock: 'latest'
-  // }, function(error, events){ console.log(events); });
+  NFasTContract.getPastEvents(
+    "CreateAll",
+    {
+      fromBlock: tx.blockNumber,
+      toBlock: "latest",
+    },
+    function (error, events) {
+      console.log(events[0].returnValues[1]);
+    }
+  );
 }
 
 const jsonSubmit = async (data) => {
