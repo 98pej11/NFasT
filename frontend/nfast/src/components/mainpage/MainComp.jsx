@@ -8,10 +8,6 @@ import DistanceCard from "./DistanceCard";
 import TransCard from "./TransCard";
 import FloatingBtn from "../commons/FloatingBtn";
 
-// import Trans from "../../assets/trans.png";
-// import Distance from "../../assets/distance.png";
-// import FloatingBtn from "./../commons/FloatingBtn";
-
 function MainComp() {
   const Line = styled.div`
     margin-left: 3%;

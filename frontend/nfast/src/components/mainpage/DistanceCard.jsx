@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
+// import Button from "@mui/material/Button";
 // import StorefrontIcon from "@mui/icons-material/Storefront";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Typography from "@mui/material/Typography";
@@ -20,10 +21,13 @@ export default function DistanceCard() {
   }, []);
 
   const distanceList = useSelector((state) => state.mainReducer.stores);
-  // eslint-disable-next-line no-console
-  console.log(distanceList);
+
   return (
     <div style={{ marginTop: 30 }}>
+      {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button onClick={handlePrev}>{"<"}</Button>
+        <Button onClick={handleNext}>{">"}</Button>
+      </div> */}
       <Grid container spacing={3}>
         {distanceList.map((card) => (
           <Grid
