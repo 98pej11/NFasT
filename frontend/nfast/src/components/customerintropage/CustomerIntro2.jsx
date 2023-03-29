@@ -26,23 +26,28 @@ const contentUpAnimation = keyframes`
 const Text = styled.div`
   display: flex;
   flex-direction: column;
+  h4 {
+    font-size: 20px;
+    width: 150px;
+  }
+  span {
+    font-size: 16px;
+    width: 200px;
+    margin-bottom: 10px;
+  }
 `;
 const ContentBox = styled.div`
   width: 100%;
-  height: 65%;
+  height: 100%;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
-    height: 60%;
-  }
 `;
 const Img = styled.div`
   img {
-    width: 150px;
-    height: 150px;
-
-    opacity: 80%;
+    width: 80px;
+    height: 140px;
   }
   @media screen and (max-width: 200px) {
     width: 200px;
@@ -57,7 +62,6 @@ const ProfilBox = styled.div`
   margin: 10%;
 `;
 const TitleBox = styled.div`
-  font-size: 1.4rem;
   line-height: 1rem;
   z-index: 1;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
@@ -67,7 +71,8 @@ const TitleBox = styled.div`
   }
 `;
 const SubTitleBox = styled.div`
-  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
   line-height: 0.8rem;
   animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
   @media screen and (max-width: 200px) {
@@ -107,8 +112,8 @@ export default function Intro2() {
             <h4>가능하다!</h4>
           </TitleBox>
           <SubTitleBox>
-            <h4>줄이 너무 길어서 못가던 맛집</h4>
-            <h4>바로 들어갈 수 있어요!</h4>
+            <span>줄이 너무 길어서 못가던 맛집</span>
+            <span>바로 들어갈 수 있어요!</span>
           </SubTitleBox>
         </Text>
         <Img>
