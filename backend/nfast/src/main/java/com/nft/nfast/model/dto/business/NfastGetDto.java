@@ -25,4 +25,5 @@ public class NfastGetDto {
     private String nfastStartTime;
     private String nfastEndTime;
     private Byte nfastMealType;
+    private Byte nfastSaleState;
 }

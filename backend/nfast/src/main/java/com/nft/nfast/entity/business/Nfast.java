@@ -131,6 +131,7 @@ public class Nfast {
                 .nfastStartTime(nfastStartTime)
                 .nfastRefundQr(nfastRefundQr)
                 .nfastMealType(nfastMealType)
+                .nfastSaleState(nfastSaleState)
                 .build();
         return nfastGetDto;
     }
