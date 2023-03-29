@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();

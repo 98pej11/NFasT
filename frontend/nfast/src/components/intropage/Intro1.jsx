@@ -8,7 +8,6 @@ import intro1 from "../../assets/intro1.png";
 // import HighLight from "../commons/HighLight";
 
 const ProfilBox = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -32,14 +31,21 @@ const contentUpAnimation = keyframes`
             transform-origin: 50% 50%;
   }
 `;
+const Text = styled.div`
+  h4 {
+    font-size: 20px;
+    width: 180px;
+  }
+  span {
+    font-size: 15px;
+    width: 150px;
+    margin-bottom: 3px;
+  }
+`;
 const Img = styled.div`
   img {
-    width: 250px;
-    height: 350px;
-    position: absolute;
-    top: 10vw;
-    left: 35vw;
-    opacity: 80%;
+    width: 150px;
+    height: 170px;
   }
   @media screen and (max-width: 200px) {
     width: 200px;
@@ -48,9 +54,8 @@ const Img = styled.div`
 `;
 const ContentBox = styled.div`
   width: 100%;
-  height: 65%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
   @media screen and (max-width: 200px) {
     height: 60%;
@@ -58,8 +63,6 @@ const ContentBox = styled.div`
 `;
 
 const TitleBox = styled.div`
-  font-size: 1.4rem;
-  line-height: 1rem;
   position: relative; /* 포지션 설정 */
   z-index: 1;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
@@ -69,8 +72,8 @@ const TitleBox = styled.div`
   }
 `;
 const SubTitleBox = styled.div`
-  font-size: 0.9rem;
-  line-height: 0.8rem;
+  display: flex;
+  flex-direction: column;
   animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
   @media screen and (max-width: 200px) {
     font-size: 18px;
@@ -103,17 +106,20 @@ export default function Intro1() {
   return (
     <ProfilBox>
       <ContentBox>
+        <Text>
+          <TitleBox>
+            <h4>음식에 대한 값</h4>
+            <h4>제대로 받고 있나요?</h4>
+          </TitleBox>
+          <SubTitleBox>
+            <span>줄 서서 먹는 맛집</span>
+            <span>그 기다림의 가치는</span>
+            <span> 과연 얼마일까요?</span>
+          </SubTitleBox>
+        </Text>
         <Img>
           <img src={intro1} alt="" />
         </Img>
-        <TitleBox>
-          <h3>음식에 대한 값</h3>
-          <h3>제대로 받고 있나요?</h3>
-        </TitleBox>
-        <SubTitleBox>
-          <h4> 줄 서서 먹는 맛집</h4>
-          <h4> 그 기다림의 가치는 과연 얼마일까요?</h4>
-        </SubTitleBox>
       </ContentBox>
       <MoreContentIconBox>
         <KeyboardDoubleArrowDownIcon fontSize="large" />

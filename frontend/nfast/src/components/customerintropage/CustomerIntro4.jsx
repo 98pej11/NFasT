@@ -33,12 +33,12 @@ export default function Intro5() {
   return (
     <ProfilBox>
       <PageLink to="/mainpage">
-        <Box elevation={3}>
+        <Box elevation={3} sx={{ borderRadius: "70px" }}>
           <h3>손님으로 이용하기</h3>
         </Box>
       </PageLink>
-      <PageLink to="/loginSeller">
-        <Box elevation={3}>
+      <PageLink to="/introduce">
+        <Box elevation={3} sx={{ borderRadius: "70px" }}>
           <h3>사장님으로 이용하기</h3>
         </Box>
       </PageLink>
