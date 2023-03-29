@@ -1,9 +1,11 @@
 package com.nft.nfast.controller.business;
 
+import com.nft.nfast.entity.business.Nfast;
 import com.nft.nfast.entity.business.Store;
 import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.service.store.StoreMainService;
+import com.nft.nfast.repository.NfastRepository;
 import com.nft.nfast.repository.StoreRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
@@ -24,6 +26,8 @@ import java.util.Optional;
 @RequestMapping("/api/owner")
 @CrossOrigin(origins = "*")
 public class OwnerMainRestController {
+    @Autowired
+    private NfastRepository nfastRepository;
     @Autowired
     private StoreRepository storeRepository;
     private static final String SUCCESS = "success";
@@ -152,5 +156,35 @@ public class OwnerMainRestController {
         storeMainService.userModify(storeSequence, storeDto);
         resultMap.put("result", SUCCESS);
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+    }
+
+    // QR 사용
+    @PatchMapping("/qr/{nfastSequence}")
+    public ResponseEntity<Map<String, Object>> useQr(@PathVariable long nfastSequence){
+        Map<String, Object> resultMap=new HashMap<>();
+        boolean updateRes = storeMainService.updateNfast((byte) 1, nfastSequence);
+        if (updateRes){
+            resultMap.put("result", SUCCESS);
+        }
+        else{
+            resultMap.put("result", "이미 사용된 NFasT입니다.");
+        }
+
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
+
+    // 환불 QR 사용
+    @PatchMapping("/qr/refund/{nfastSequence}")
+    public ResponseEntity<Map<String, Object>> refundQr(@PathVariable long nfastSequence){
+        Map<String, Object> resultMap=new HashMap<>();
+        boolean updateRes = storeMainService.updateNfast((byte) 2, nfastSequence);
+        if (updateRes){
+            resultMap.put("result", SUCCESS);
+        }
+        else{
+            resultMap.put("result", "환불이 불가능한 NFasT입니다.");
+        }
+
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 }
