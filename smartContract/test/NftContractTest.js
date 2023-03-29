@@ -23,19 +23,17 @@ contract("NftCreator", (accounts) => {
 
     console.log("--------------------");
     console.log(
-      await ssafyNFT
-        .create(
-          sender,
-          tokenURI,
-          storeAddress,
-          dateInSecs,
-          false,
-          dateInSecs,
-          dateInSecs,
-          20,
-          10
-        )
-        .call()
+      await ssafyNFT.create(
+        sender,
+        tokenURI,
+        storeAddress,
+        dateInSecs,
+        false,
+        dateInSecs,
+        dateInSecs,
+        20,
+        10
+      )
     );
     console.log("--------------------");
 

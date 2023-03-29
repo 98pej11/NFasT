@@ -24,6 +24,8 @@ const ipfsClient = require("ipfs-http-client");
 // });
 const INFURA_ID = process.env.REACT_APP_INFURA_ID;
 const INFURA_SECRET_KEY = process.env.REACT_APP_INFURA_SECRET_KEY;
+// const INFURA_ID = "2NdihV0LDPPtVRkbHiUjAgQUQZN";
+// const INFURA_SECRET_KEY = "cd8eb31a7e3f8ca8e38bac8e48b359d4";
 
 const auth = `Basic ${Buffer.from(`${INFURA_ID}:${INFURA_SECRET_KEY}`).toString(
   "base64"

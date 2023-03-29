@@ -76,12 +76,15 @@ const Price = styled(Count)`
 const jsonSubmit = async (data) => {
   const accounts = await web3.eth.getAccounts();
   // const ethAddress = await storehash.options.address; CA주소
+  console.log(accounts[0]);
+  console.log("가장 최근 eigen", await NFasTContract.methods.current().call());
+  console.log("=*******=");
   console.log(
     await NFasTContract.methods
       .create(
-        "0xBae7Be1B10cc17f62eeCeBDC381fCc7e0E6A2249",
+        accounts[0],
         "test",
-        "0xEABD22D5e36E96203bC7861F4580bB5238a8b0F8",
+        accounts[0],
         1679902298,
         true,
         1679902298,
@@ -89,11 +92,44 @@ const jsonSubmit = async (data) => {
         10,
         1
       )
-      .send({
-        from: "0xBae7Be1B10cc17f62eeCeBDC381fCc7e0E6A2249",
-        value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
-      })
+      .send(
+        {
+          from: "0x90DA9C2D5F2d1FA57C65ec89195638d90ff89C92",
+          value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
+        },
+        (err, result) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("이게진짜");
+            console.log(result);
+            console.log("returns말고 return newTokenId???");
+          }
+        }
+      )
   );
+  console.log("==========");
+  const newTokenId = await NFasTContract.methods.current().call();
+  console.log(await NFasTContract.methods.getIsUse(newTokenId).call());
+  console.log(
+    await NFasTContract.methods.setIsUse(newTokenId).send(
+      {
+        from: "0x90DA9C2D5F2d1FA57C65ec89195638d90ff89C92",
+        // value: web3.utils.toWei("1.0", "ether"), // Optional: set the amount of ether to send with the transaction
+      }
+      // (err, result) => {
+      //   if (err) {
+      //     console.log(err);
+      //   } else {
+      //     console.log("사용여부 수정");
+      //     console.log(result);
+      //     console.log("return 없을 수도 ");
+      //   }
+      // }
+    )
+  );
+  console.log(await NFasTContract.methods.getIsUse(newTokenId).call());
+  console.log("==========");
   console.log(await saleFactory.methods);
   console.log(await ssafyTokenContract.methods);
   console.log(await saleFactory.methods);

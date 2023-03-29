@@ -1543,13 +1543,13 @@ const ssafyTokenAbi = [
   },
 ];
 
-const NFasTCA = "0xcd511b5E0416fcF35b2a4c6E4F9593D536d2dcCA";
+const NFasTCA = "0x888A32CC75304a8De22020135048f6C6Be05B11a";
 
 // const saleCA = ""
 
-const saleFactoryCA = "0xd2e2c6Cbf15DF8F7c6516ECa892390Ba2BD2dB3E";
+const saleFactoryCA = "";
 
-const ssafyTokenCA = "0xFFA5A1Ee9985Ddc27546c205CD4ac6ca7f2F4779";
+const ssafyTokenCA = "";
 
 // let web3;
 
