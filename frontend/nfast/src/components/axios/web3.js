@@ -100,6 +100,25 @@ const nfastAbi = [
       {
         indexed: true,
         internalType: "address",
+        name: "_store",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256[]",
+        name: "tokenIds",
+        type: "uint256[]",
+      },
+    ],
+    name: "CreateAll",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
         name: "from",
         type: "address",
       },
@@ -450,6 +469,71 @@ const nfastAbi = [
         internalType: "uint256",
         name: "",
         type: "uint256",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+    payable: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_numTokens",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_to",
+        type: "address",
+      },
+      {
+        internalType: "string",
+        name: "_tokenURI",
+        type: "string",
+      },
+      {
+        internalType: "address",
+        name: "_storeAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_date",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_mealType",
+        type: "bool",
+      },
+      {
+        internalType: "uint256",
+        name: "_startTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_endTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_price",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_charge",
+        type: "uint256",
+      },
+    ],
+    name: "createAll",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
       },
     ],
     stateMutability: "payable",
@@ -1543,13 +1627,13 @@ const ssafyTokenAbi = [
   },
 ];
 
-const NFasTCA = "0x888A32CC75304a8De22020135048f6C6Be05B11a";
+const NFasTCA = "0xe4aF4bAbdD7382E5190e4393dfBBccB21A164163";
 
 // const saleCA = ""
 
-const saleFactoryCA = "";
+const saleFactoryCA = "0xa2DE7727EAe6Af509E553B7ed667bE40b8De405e";
 
-const ssafyTokenCA = "";
+const ssafyTokenCA = "0x08B794e4Cabd52df6697476f70BBcD050BBEb47e";
 
 // let web3;
 
