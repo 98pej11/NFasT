@@ -8,7 +8,7 @@ import Tab from "@mui/material/Tab";
 import Pagination from "@mui/material/Pagination";
 import { getSequence } from "../../storage/Cookie";
 import { mypageAction } from "../../redux/actions/mypageAction";
-import FastTicket from "../commons/PastTicket";
+// import FastTicket from "../commons/PastTicket";
 import FutureTicket from "../commons/FutureTicket";
 
 const Wrapper = styled.div`
