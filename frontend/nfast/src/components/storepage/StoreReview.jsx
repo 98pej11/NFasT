@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import styled from "styled-components";
 import Chip from "@mui/material/Chip";
 import DoneIcon from "@mui/icons-material/Done";
-// import reviewTime from "../../assets/Review_time.png";
+import reviewTimer from "../../assets/Review_timer.png";
 import reviewParking from "../../assets/Review_parking.png";
 import reviewKind from "../../assets/Review_kind.png";
 import reviewVeiw from "../../assets/Review_view.png";
@@ -25,15 +26,15 @@ function StoreReview(props) {
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label={{ reviewTime } + { cntTime }}
+            label={`${reviewTime} ${cntTime}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
-            avatar={<img src={reviewTime} alt="d" />}
+            avatar={<img src={reviewTimer} alt="d" />}
           />
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label={{ reviewConvenience } + { cntConvenience }}
+            label={`${reviewConvenience} ${cntConvenience}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewParking} alt="d" />}
@@ -43,10 +44,7 @@ function StoreReview(props) {
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label={
-              storedetail.review.reviewService[0] +
-              storedetail.review.reviewService[1]
-            }
+            label={`${reviewService} ${cntService}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewKind} alt="d" />}
@@ -54,10 +52,7 @@ function StoreReview(props) {
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label={
-              storedetail.review.reviewMood[0] +
-              storedetail.review.reviewMood[1]
-            }
+            label={`${reviewMood} ${cntMood}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewVeiw} alt="d" />}
@@ -73,14 +68,13 @@ const Chips = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 const AlignChip = styled.div`
-  width: 100%;
-  margin: 10px;
+  width: 95%;
+  margin: 5px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 const Wrapper = styled.div`
@@ -88,8 +82,7 @@ const Wrapper = styled.div`
 `;
 
 const StyledChip = styled(Chip)`
-  padding: 10px;
-  width: 150px;
+  width: 180px;
   .MuiChip-label {
     font-size: 11px;
   }

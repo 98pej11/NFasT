@@ -23,49 +23,60 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const data = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "My First dataset",
-      data: [80, 90, 80, 90, 80, 90, 80],
-      borderColor: "tomato",
-      backgroundColor: "rgba(255, 99, 132, 0.2)",
-    },
-    {
-      label: "My Second dataset",
-      data: [10, 20, 10, 20, 10, 20, 10],
-      borderColor: "darkblue",
-      backgroundColor: "rgba(54, 162, 235, 0.2)",
-    },
-  ],
-  options: {
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: "Month",
-        },
-      },
-      y: {
-        title: {
-          display: true,
-          text: "Value",
-        },
-        type: "linear",
-        min: 0,
-        max: 100,
-      },
-    },
-  },
-};
+function StoreChart(props) {
+  // eslint-disable-next-line react/prop-types
+  const { PriceMax, PriceMin } = props;
 
-function LineGraph() {
+  const data = {
+    labels: [
+      "월요일",
+      "화요일",
+      "수요일",
+      "목요일",
+      "금요일",
+      "토요일",
+      "일요일",
+    ],
+    datasets: [
+      {
+        label: "최고가",
+        data: PriceMax,
+        borderColor: "tomato",
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+      },
+      {
+        label: "최저가",
+        data: PriceMin,
+        borderColor: "darkblue",
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+      },
+    ],
+    options: {
+      scales: {
+        x: {
+          title: {
+            display: false,
+            text: "요일",
+          },
+        },
+        y: {
+          title: {
+            display: false,
+            text: "값(Eth)",
+          },
+          // type: "linear",
+          min: 0,
+          max: 2,
+        },
+      },
+    },
+  };
+
   return (
     <Wrapper>
-      <h4>시세</h4>
+      <h4>지난주 시세</h4>
       <Line data={data} options={data.options} />
     </Wrapper>
   );
 }
-export default LineGraph;
+export default StoreChart;

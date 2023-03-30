@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import StoreInfo from "../../components/storepage/StoreInfo";
 import StoreReview from "../../components/storepage/StoreReview";
-// import StoreChart from "../../components/storepage/StoreChart";
-// import KakaoMap from "../../components/storepage/KakaoMap";
-// import KaKaoMap from "../../components/strepage/KaKaoMap";
-// import StoreNav from "../../components/storepage/StoreNav";
+import StoreChart from "../../components/storepage/StoreChart";
+import KaKaoMap from "../../components/storepage/KaKaoMap";
+import StoreNav from "../../components/storepage/StoreNav";
 import { storeAction } from "../../redux/actions/storeAction";
 
 export default function StorePage() {
@@ -30,6 +29,7 @@ export default function StorePage() {
           <StoreInfo
             storeImage={storedetail.store.storeImage}
             storeName={storedetail.store.storeName}
+            storeCategory={storedetail.store.storeCategory}
             storeDetail={storedetail.store.storeDetail}
             storeLunchStart={storedetail.store.storeLunchStart}
             storeLunchEnd={storedetail.store.storeLunchEnd}
@@ -49,37 +49,32 @@ export default function StorePage() {
             reviewMood={storedetail.review.reviewMood[0]}
             cntMood={storedetail.review.reviewMood[1]}
           />
+          <Divider />
+          <Graph>
+            <Chart
+              PriceMax={storedetail.storeNfastPriceMax}
+              PriceMin={storedetail.storeNfastPriceMin}
+            />
+          </Graph>
+          <Divider />
+          <h4>지도</h4>
+          <MapWrapper>
+            <Map>
+              <KaKaoMap
+                storeLat={storedetail.store.storeLat}
+                storeLng={storedetail.store.storeLng}
+              />
+            </Map>
+          </MapWrapper>
+          <Divider />
+          <Footer>
+            <StoreNav />
+          </Footer>
         </Wrapper>
       </div>
     )
   );
 }
-//   return (
-//     <div>
-//       <Wrapper>
-//         <StoreInfo storeSequence={storeSequence} />
-//         <Divider />
-//         <Review />
-//         <Divider />
-//         <Graph>
-//           <Chart />
-//         </Graph>
-//         <Divider />
-//         <h4>지도</h4>
-//         <MapWrapper>
-//           <Map>
-//             <KaKaoMap />
-//           </Map>
-//         </MapWrapper>
-//         <Footer>
-//           <StoreNav />
-//         </Footer>
-//       </Wrapper>
-//     </div>
-//   );
-// }
-
-// export default StorePage;
 
 const Wrapper = styled.div`
   display: flex;
@@ -90,7 +85,6 @@ const Wrapper = styled.div`
 
   h4 {
     width: 100%;
-    border-top: solid 1px black;
   }
 `;
 const Divider = styled.div`
@@ -102,35 +96,35 @@ const Divider = styled.div`
 const Review = styled(StoreReview)`
   width: 100%;
 `;
-// const Graph = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   justify-content: center;
-// `;
+const Graph = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`;
 
-// const Chart = styled(StoreChart)`
-//   width: 100%;
-//   height: 100%;
-// `;
+const Chart = styled(StoreChart)`
+  width: 100%;
+  height: 100%;
+`;
 
-// const MapWrapper = styled.div`
-//   width: 300px;
-//   height: 300px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   margin-bottom: 100px;
-// `;
+const MapWrapper = styled.div`
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+`;
 
-// const Map = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   z-index: 0; /* Set z-index to 0 */
-// `;
-// const Footer = styled.div`
-//   position: fixed;
-//   bottom: 0;
-//   width: 100%;
-//   z-index: 1; /* Set z-index to 1 */
-// `;
+const Map = styled.div`
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Set z-index to 0 */
+`;
+const Footer = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1; /* Set z-index to 1 */
+`;
