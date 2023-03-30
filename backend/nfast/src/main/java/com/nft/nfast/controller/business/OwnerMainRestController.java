@@ -105,6 +105,7 @@ public class OwnerMainRestController {
         resultMap.put("jwt-auth-token", tokenDto.getTokenAccess());
         resultMap.put("jwt-refresh-token", tokenDto.getTokenRefresh());
         resultMap.put("wallet", tokenDto.getTokenWallet());
+        resultMap.put("sequence", tokenDto.getTokenUserSequence());
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
@@ -160,10 +161,10 @@ public class OwnerMainRestController {
     }
 
     // QR 사용
-    @PatchMapping("/qr/{nfastSequence}")
-    public ResponseEntity<Map<String, Object>> useQr(@PathVariable long nfastSequence){
+    @PatchMapping("/qr/{type}/{nfastSequence}")
+    public ResponseEntity<Map<String, Object>> useQr(@PathVariable byte type, @PathVariable long nfastSequence){
         Map<String, Object> resultMap=new HashMap<>();
-        boolean updateRes = storeMainService.updateNfast((byte) 1, nfastSequence);
+        boolean updateRes = storeMainService.updateNfast(type, nfastSequence);
         if (updateRes){
             resultMap.put("result", SUCCESS);
         }
@@ -174,18 +175,18 @@ public class OwnerMainRestController {
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
-    // 환불 QR 사용
-    @PatchMapping("/qr/refund/{nfastSequence}")
-    public ResponseEntity<Map<String, Object>> refundQr(@PathVariable long nfastSequence){
-        Map<String, Object> resultMap=new HashMap<>();
-        boolean updateRes = storeMainService.updateNfast((byte) 2, nfastSequence);
-        if (updateRes){
-            resultMap.put("result", SUCCESS);
-        }
-        else{
-            resultMap.put("result", "환불이 불가능한 NFasT입니다.");
-        }
-
-        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
-    }
+//    // 환불 QR 사용
+//    @PatchMapping("/qr/refund/{nfastSequence}")
+//    public ResponseEntity<Map<String, Object>> refundQr(@PathVariable long nfastSequence){
+//        Map<String, Object> resultMap=new HashMap<>();
+//        boolean updateRes = storeMainService.updateNfast((byte) 2, nfastSequence);
+//        if (updateRes){
+//            resultMap.put("result", SUCCESS);
+//        }
+//        else{
+//            resultMap.put("result", "환불이 불가능한 NFasT입니다.");
+//        }
+//
+//        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+//    }
 }
