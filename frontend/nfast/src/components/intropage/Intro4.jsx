@@ -5,7 +5,7 @@ import styled, { keyframes } from "styled-components";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import intro5 from "../../assets/intro5.png";
+import intro4 from "../../assets/intro4.png";
 // import HighLight from "../commons/HighLight";
 
 export default function Intro4() {
@@ -13,7 +13,7 @@ export default function Intro4() {
     <ProfilBox>
       <ContentBox>
         <Img>
-          <img src={intro5} alt="프로필 이미지" />
+          <img src={intro4} alt="프로필 이미지" />
         </Img>
         <Text>
           <TitleBox>
