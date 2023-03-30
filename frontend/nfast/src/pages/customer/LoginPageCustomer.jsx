@@ -45,7 +45,11 @@ export default function LoginPage() {
               justifyContent: "center",
             }}
           >
-            <Metamask onClick={handleMetamaskClick} disabled={open} />
+            <Metamask
+              onClick={handleMetamaskClick}
+              disabled={open}
+              isSeller={0}
+            />
             {open &&
               (<Alert severity="success">로그인에 성공했단다.</Alert>)(
                 // eslint-disable-next-line no-console

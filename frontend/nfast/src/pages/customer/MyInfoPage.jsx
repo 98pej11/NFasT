@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import MyInfo from "../../components/mypage/MyInfo";
+import { getSequence } from "../../storage/Cookie";
+import { mypageAction } from "../../redux/actions/mypageAction";
 
 function MyInfoPage() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(mypageAction.getUserInfo(getSequence()));
+  }, []);
+  const userInfo = useSelector((state) => state.mypageReducer.userInfo);
   return (
     <div>
-      <MyInfo />
+      <MyInfo
+        userWallet={userInfo.userWallet}
+        userNickname={userInfo.userNickname}
+        userSequence={userInfo.userSequence}
+        userImage={userInfo.userImage}
+      />
     </div>
   );
 }

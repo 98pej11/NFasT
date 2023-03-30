@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./token/ERC721/ERC721.sol";
-import "../node_modules/@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+//import "./token/ERC721/ERC721.sol";
+//import "../node_modules/@openzeppelin/contracts/utils/Counters.sol";
 
 contract Nfast is ERC721 {
     using Counters for Counters.Counter;
@@ -71,10 +73,10 @@ contract Nfast is ERC721 {
     returns (uint256[] memory) {
         require(_numTokens > 0, "Number of tokens must be greater than zero");
 
-        uint256[] memory tokenIds = new uint256[](_numTokens);
+        uint256[] memory returnTokenIds = new uint256[](_numTokens);
 
         for (uint256 i = 0; i < _numTokens; i++) {
-            tokenIds[i] = create(
+            returnTokenIds[i] = create(
                 _to,
                 _tokenURI,
                 _storeAddress,
@@ -87,8 +89,8 @@ contract Nfast is ERC721 {
             );
         }
 
-        emit CreateAll(_storeAddress,tokenIds);
-        return tokenIds;
+        emit CreateAll(_storeAddress,returnTokenIds);
+        return returnTokenIds;
     }
 
     function _burn(uint256 _tokenId)

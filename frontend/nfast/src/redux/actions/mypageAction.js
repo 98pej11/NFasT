@@ -57,8 +57,91 @@ function getBookMarkList(userSequence) {
   };
 }
 
+function getUserInfo(userSequence) {
+  return async (dispatch) => {
+    const url = `${baseUrl}/my-data/${userSequence}`;
+    await axios
+      .get(url)
+      .then((response) => {
+        const { data } = response;
+        dispatch({ type: "GET_USERINFO_SUCCESS", payload: { data } });
+      })
+      .catch((error) => {
+        console.log("GETPOINT ERROR", error);
+      });
+  };
+}
+
+function modifyUserInfo(userSequence, user) {
+  console.log(user);
+  return async (dispatch) => {
+    const url = `${baseUrl}/my-data/${userSequence}`;
+    await axios
+      .patch(url, user, {
+        headers: {},
+      })
+      .then((response) => {
+        const { data } = response;
+        dispatch({ type: "PATCH_USERINFO_SUCCESS", payload: { data } });
+      })
+      .catch((error) => {
+        console.log("MODIFYUSER", error);
+      });
+  };
+}
+
+function getStoreInfo(storeSequence) {
+  return async (dispatch) => {
+    const url = `${baseUrl}/owner/my-data/${storeSequence}`;
+    await axios
+      .get(url)
+      .then((response) => {
+        const { data } = response;
+        dispatch({ type: "GET_STOREINFO_SUCCESS", payload: { data } });
+      })
+      .catch((error) => {
+        console.log("GET STORE ERROR", error);
+      });
+  };
+}
+
+function getMintIncome(storeSequence) {
+  return async (dispatch) => {
+    const url = `${baseUrl}/owner/${storeSequence}/monthly-mint-income`;
+    await axios
+      .get(url)
+      .then((response) => {
+        const { data } = response;
+        dispatch({ type: "GET_MINTINCOME_SUCCESS", payload: { data } });
+      })
+      .catch((error) => {
+        console.log("GET STORE ERROR", error);
+      });
+  };
+}
+
+function getResellIncome(storeSequence) {
+  return async (dispatch) => {
+    const url = `${baseUrl}/owner/${storeSequence}/monthly-resell-income`;
+    await axios
+      .get(url)
+      .then((response) => {
+        const { data } = response;
+        dispatch({ type: "GET_RESELLINCOME_SUCCESS", payload: { data } });
+      })
+      .catch((error) => {
+        console.log("GET STORE ERROR", error);
+      });
+  };
+}
+
 export const mypageAction = {
   getAvailableNfasts,
   getUnAvailableNfasts,
   getBookMarkList,
+  getUserInfo,
+  modifyUserInfo,
+  getStoreInfo,
+  getMintIncome,
+  getResellIncome,
 };

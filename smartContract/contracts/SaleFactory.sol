@@ -1,9 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./access/Ownable.sol";
-import "./token/ERC20/ERC20.sol";
-import "./token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
+//import "./access/Ownable.sol";
+//import "./token/ERC20/ERC20.sol";
+//import "./token/ERC721/ERC721.sol";
 import "./Nfast.sol";
 import "./Sale.sol";
 
@@ -23,16 +27,14 @@ contract SaleFactory is Ownable {
         tokenAddress = _tokenAddress;
     }
 
-    function createAllSale(uint256[] _nftIds, uint256 _price, uint256 _startTime, uint256 _endTime)
+    function createAllSale(uint256[] calldata _nftIds, uint256 _price, uint256 _startTime, uint256 _endTime)
     public
     payable
     returns (bool)
     {
-        address[]  memory newSales = new address[](_nftIds.length);
         for (uint256 i = 0; i < _nftIds.length; i++) {
             createSale(_nftIds[i],_price,_startTime,_endTime);
         }
-
         return true;
     }
 
@@ -40,7 +42,7 @@ contract SaleFactory is Ownable {
     public
     payable
     returns (address) {
-        require(Nfast(nftAddress).getOwner(_nftId) == msg.sender, "소유한 코인만 판매 가능합니다.");
+        require(Nfast(nftAddress).ownerOf(_nftId) == msg.sender,"only owner can create sale.");
         // 사장인지 거래인지 구분
         bool isStore = false;
         if (Nfast(nftAddress).getStoreAddress(_nftId) == msg.sender) isStore = true;
@@ -55,7 +57,21 @@ contract SaleFactory is Ownable {
         return address(newSale);
     }
 
+    function getNftAddress()
+    public
+    view
+    returns (address)
+    {
+        return nftAddress;
+    }
 
+    function getTokenAddress()
+    public
+    view
+    returns (address)
+    {
+        return tokenAddress;
+    }
     function allSales()
     public
     view

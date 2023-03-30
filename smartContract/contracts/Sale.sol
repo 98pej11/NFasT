@@ -1,9 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./access/Ownable.sol";
-import "./token/ERC20/ERC20.sol";
-import "./token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
+//import "./access/Ownable.sol";
+//import "./token/ERC20/ERC20.sol";
+//import "./token/ERC721/ERC721.sol";
 import "./Nfast.sol";
 import "./SaleFactory.sol";
 import "./utils/math/SafeMath.sol";
@@ -49,7 +53,7 @@ contract Sale is Ownable,IERC721Receiver {
 
     constructor (uint256 _nftId, uint256 _price, bool _isStore, uint256 _startDate, uint256 _endDate, address _currencyAddress, address _nftAddress, address _sellerAddress){
         require(_price > 0, "price error");
-//        require(_endDate > block.timestamp,"time error");
+        require(_endDate > block.timestamp,"time error");
         nftId = _nftId;
         price = _price;
         sellerAddress = _sellerAddress;

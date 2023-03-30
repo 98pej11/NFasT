@@ -70,6 +70,33 @@ contract("Sale Contract Testing", (accounts) => {
     //        console.log(await factory.allSales())
     assert.equal(salesContract, (await factory.allSales())[0], "create sale");
   });
+//  it("1.5_create All sale", async () => {
+//    await nfast.create(
+//      seller,
+//      uri,
+//      seller,
+//      getTime(),
+//      false,
+//      getTime(),
+//      getTime(),
+//      20,
+//      10
+//    );
+//    assert.equal(seller, await getNftOwner(nfast), "create nft");
+//
+//    await token.mint(3000);
+//    await token.transfer(seller, 1000);
+//    await token.transfer(buyer, 1000);
+//    await token.transfer(buyer2, 1000);
+//    assert.equal(1000, await token.balanceOf(buyer), "token transfer");
+//
+//    salesContract = (
+//      await factory.createAllSale([,],1, price, getTime(), getTime() + 1000000)
+//    ).logs[0].address;
+//    //        console.log(salesContract)
+//    //        console.log(await factory.allSales())
+//    assert.equal(salesContract, (await factory.allSales())[0], "create sale");
+//  });
 
   it("2_Purchase", async () => {
     await token.approve(salesContract, price, { from: buyer });
