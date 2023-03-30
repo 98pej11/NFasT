@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import FloatingIcon from "../../assets/FloatingIcon.png";
 import FloatingCards from "./FloatingCards";
+import { mainAction } from "../../redux/actions/mainAction";
+import { getSequence } from "../../storage/Cookie";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -41,12 +44,14 @@ const Btn = styled.button`
     height: 80px;
   }
 `;
-
 function FloatingBtn() {
   const [floating, setFloating] = useState("none");
 
+  const dispatch = useDispatch();
+
   const handleClick = () => {
     if (floating === "none") {
+      dispatch(mainAction.getFloatingNfast(getSequence()));
       setFloating("auto");
     } else {
       setFloating("none");

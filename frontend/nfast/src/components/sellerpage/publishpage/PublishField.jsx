@@ -12,6 +12,7 @@ function PublishField({
 }) {
   const activeBorderColor = "#BCB6FF";
   const activeLabelColor = "#BCB6FF";
+
   switch (content) {
     case "date":
       return (

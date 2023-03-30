@@ -48,7 +48,7 @@ export default function LoginPage() {
               justifyContent: "center",
             }}
           >
-            <Metamask />
+            <Metamask isSeller={1} />
           </div>
           <Button
             variant="contained"

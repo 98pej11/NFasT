@@ -570,6 +570,7 @@ public class UserMainServiceImpl implements UserMainService {
 
     @Override
     public void userModify(UserDto userDto) {
+        System.out.println("USERDTO "+ userDto);
         userRepository.save(userDto.toEntity());
     }
 
