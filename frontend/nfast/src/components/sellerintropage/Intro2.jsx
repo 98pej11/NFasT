@@ -1,11 +1,38 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import intro3 from "../../assets/intro3.png";
+import intro2 from "../../assets/intro2.png";
 // import HighLight from "../commons/HighLight";
+
+export default function Intro2() {
+  return (
+    <ProfilBox>
+      <ContentBox>
+        <Img>
+          <img src={intro2} alt="프로필 이미지" />
+        </Img>
+        <TitleBox>
+          <h3>NFasT로</h3>
+          <h3>입장은 빠르게</h3>
+          <h3>만족은 높게</h3>
+        </TitleBox>
+        <SubTitleBox>
+          <h4>기다림에 지친 손님에게</h4>
+          <h4>더욱 가치있는 서비스를 제공해요!</h4>
+        </SubTitleBox>
+      </ContentBox>
+      <MoreContentIconBox>
+        <Link to="/intro3">
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </Link>
+      </MoreContentIconBox>
+    </ProfilBox>
+  );
+}
 
 const contentUpAnimation = keyframes`
   0% {
@@ -28,17 +55,7 @@ const ContentBox = styled.div`
   align-items: center;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
 `;
-const Text = styled.div`
-  h4 {
-    font-size: 20px;
-    width: 130px;
-  }
-  span {
-    font-size: 15px;
-    width: 220px;
-    margin-bottom: 3px;
-  }
-`;
+
 const Img = styled.div`
   img {
     width: 200px;
@@ -94,32 +111,3 @@ const MoreContentIconBox = styled.div`
   animation-iteration-count: infinite;
   animation-direction: alternate;
 `;
-
-export default function Intro2() {
-  return (
-    <ProfilBox>
-      <ContentBox>
-        <Text>
-          <TitleBox>
-            <Img>
-              <img src={intro3} alt="프로필 이미지" />
-            </Img>
-            <div>
-              <h4>NFasT로</h4>
-              <h4>입장은 빠르게 </h4>
-              <h4>만족은 높게</h4>
-            </div>
-          </TitleBox>
-
-          <SubTitleBox>
-            <span>기다림에 지친 손님에게</span>
-            <span>더욱 가치있는 서비스를 제공해요!</span>
-          </SubTitleBox>
-        </Text>
-      </ContentBox>
-      <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
-      </MoreContentIconBox>
-    </ProfilBox>
-  );
-}

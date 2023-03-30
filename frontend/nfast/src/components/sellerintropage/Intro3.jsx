@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import intro2 from "../../assets/intro2.png";
+import intro3 from "../../assets/intro3.png";
 // import HighLight from "../commons/HighLight";
 
 export default function Intro3() {
@@ -25,11 +26,13 @@ export default function Intro3() {
           </SubTitleBox>
         </Text>
         <Img>
-          <img src={intro2} alt="" />
+          <img src={intro3} alt="" />
         </Img>
       </ContentBox>
       <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
+        <Link to="/intro4">
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </Link>
       </MoreContentIconBox>
     </ProfilBox>
   );
