@@ -337,7 +337,7 @@ public class StoreMainServiceImpl implements StoreMainService {
         Optional<Store> storeWrapper = storeRepository.findByStoreWallet(wallet);
         TokenDto tokenDto = null;
         if (!storeWrapper.isPresent()) {
-            throw new UserNotExistException();
+            return null;
         }
 //        else (storeWrapper.isPresent()) {
         Store store = storeWrapper.get();

@@ -105,6 +105,7 @@ public class OwnerMainRestController {
         resultMap.put("jwt-auth-token", tokenDto.getTokenAccess());
         resultMap.put("jwt-refresh-token", tokenDto.getTokenRefresh());
         resultMap.put("wallet", tokenDto.getTokenWallet());
+        resultMap.put("sequence", tokenDto.getTokenUserSequence());
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
