@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 // import Container from "@mui/material/Container";
 // import Grid from "@mui/material/Grid";
 // import Typography from "@mui/material/Typography";
 import MainComp from "../../components/mainpage/MainComp";
-import { getAccessToken } from "../../storage/Cookie";
+import { getSequence } from "../../storage/Cookie";
+import { mypageAction } from "../../redux/actions/mypageAction";
 
 // export class Token {
 //   #accessToken = "";
@@ -19,10 +21,10 @@ import { getAccessToken } from "../../storage/Cookie";
 // }
 
 function MainPage() {
+  const dispatch = useDispatch();
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(getAccessToken());
-  }, [getAccessToken]);
+    dispatch(mypageAction.getUserInfo(getSequence()));
+  }, []);
 
   return (
     <div>

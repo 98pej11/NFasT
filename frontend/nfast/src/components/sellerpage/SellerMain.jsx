@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import * as React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
@@ -9,6 +10,8 @@ import PublishPage from "./publishpage/PublishPage";
 import SellerIncome from "./incomepage/SellerIncome";
 import SellerMaked from "./makedpage/SellerMaked";
 import SellerMypage from "./mypage/SellerMypage";
+import { mypageAction } from "../../redux/actions/mypageAction";
+import { getSequence } from "../../storage/Cookie";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,15 +65,27 @@ const HeaderTab = styled(Tab)`
 `;
 
 export default function SellerMain() {
+  const dispatch = useDispatch();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    dispatch(mypageAction.getStoreInfo(getSequence()));
+    dispatch(mypageAction.getMintIncome(getSequence()));
+    dispatch(mypageAction.getResellIncome(getSequence()));
+  }, []);
+
+  const mintIncome = useSelector((state) => state.mypageReducer.mintIncome);
+  const resellIncome = useSelector((state) => state.mypageReducer.resellIncome);
+
   return (
     <Header>
-      <Profit>이번달 수익 :</Profit>
+      <Profit>
+        월 발행 수익 : {mintIncome}eth | 월 리셀 수익 : {resellIncome}eth
+      </Profit>
       <Box>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
