@@ -4,8 +4,8 @@ import styled, { keyframes } from "styled-components";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import intro2 from "../../assets/intro4.png";
-import intro21 from "../../assets/intro4_1.png";
+import introOne from "../../assets/Intro_Reseller1.png";
+import introTwo from "../../assets/Intro_Reseller2.png";
 // import HighLight from "../commons/HighLight";
 
 const contentUpAnimation = keyframes`
@@ -48,8 +48,8 @@ const ContentBox = styled.div`
 `;
 const Img = styled.div`
   img {
-    width: 80px;
-    height: 140px;
+    width: 60px;
+    height: 120px;
   }
 `;
 const ProfilBox = styled.div`
@@ -97,7 +97,7 @@ const MoreContentIconBox = styled.div`
   animation-direction: alternate;
 `;
 
-export default function Intro2() {
+export default function CustomerIntro3() {
   return (
     <ProfilBox>
       <ContentBox>
@@ -112,10 +112,10 @@ export default function Intro2() {
           </SubTitleBox>
         </Text>
         <Img>
-          <img src={intro21} alt="프로필 이미지" />
+          <img src={introOne} alt="프로필 이미지" />
         </Img>
         <Img>
-          <img src={intro2} alt="프로필 이미지" />
+          <img src={introTwo} alt="프로필 이미지" />
         </Img>
       </ContentBox>
       <MoreContentIconBox>

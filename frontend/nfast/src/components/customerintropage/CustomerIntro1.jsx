@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import IntroImg from "../../assets/IntroImg.png";
+import Intro1 from "../../assets/Intro1_Customer.png";
 
 const ProfilBox = styled.div`
   display: flex;
@@ -48,7 +48,7 @@ export default function CustomerIntro1() {
   return (
     <ProfilBox>
       <ContentBox>
-        <img src={IntroImg} alt="" />
+        <img src={Intro1} alt="" />
       </ContentBox>
       <MoreContentIconBox>
         <KeyboardDoubleArrowDownIcon fontSize="large" />
