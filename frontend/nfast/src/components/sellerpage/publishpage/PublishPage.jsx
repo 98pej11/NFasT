@@ -17,6 +17,7 @@ import {
 } from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
 import { publishAction } from "../../../redux/actions/publishAction";
+import { getSequence } from "../../../storage/Cookie";
 // import { getSequence } from "../../../storage/Cookie";
 
 // styled-components 시작
@@ -77,107 +78,116 @@ const Price = styled(Count)`
 
 // jsonSubmit 함수
 
-// string을 시간객체로 변경
-function stringToDate(str) {
-  const y = str.substr(0, 4);
-  const m = str.substr(5, 2);
-  const d = str.substr(8, 2);
-  return new Date(y, m - 1, d);
-}
-
-// date 값을 uint으로 변경
-function dateToUint(date) {
-  return Math.floor(stringToDate(date).getTime() / 1000);
-}
-
-// 시간을 uint로 변경
-function timeToUint(time) {
-  const m = time.substr(0, 2);
-  const s = time.substr(3, 2);
-  return m * 60 * 60 + s * 60;
-}
-
-async function createNfast(data, cid) {
-  // nft 발행
-  // 발행할 개수, admin 주소, tokenurl, 가게주소, 날짜, 점심저녁구분, 시작시간, 종료시간, 가격, 수수료
-  const tx = await NFasTContract.methods
-    .createAll(
-      data.count,
-      data.walletAddress,
-      cid,
-      data.walletAddress,
-      dateToUint(data.date),
-      data.time,
-      dateToUint(data.date) + timeToUint(data.start),
-      dateToUint(data.date) + timeToUint(data.end),
-      data.price,
-      5
-    )
-    .send({
-      from: data.walletAddress,
-      value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
-    });
-  console.log("여기값");
-  console.log(tx);
-  NFasTContract.events
-    .CreateAll({ fromBlock: tx.blockNumber }, (error, event) => {
-      console.log(event);
-    })
-    .on("connected", (subscriptionId) => {
-      console.log(subscriptionId);
-    })
-    .on("data", (event) => {
-      console.log(event.returnValues[1]);
-    })
-    .on("changed", (event) => {
-      console.log(event.returnValues);
-    })
-    .on("error", (error, receipt) => {
-      console.log(receipt);
-    });
-
-  // NFasTContract.getPastEvents(
-  //   "CreateAll",
-  //   {
-  //     fromBlock: tx.blockNumber,
-  //     toBlock: "latest",
-  //   },
-  //   function (error, events) {
-  //     console.log(events[0].returnValues[1]);
-  //   }
-  // );
-}
-
-const jsonSubmit = async (data) => {
-  const accounts = await web3.eth.getAccounts();
-  // const ethAddress = await storehash.options.address; CA주소
-  console.log(accounts[0]);
-  const ipfsFile = data;
-  console.log(ipfsFile);
-  ipfsFile.walletAddress = await accounts[0];
-  // console.log(await accounts[0]);
-  const file = {
-    path: "/tmp/myfile.txt",
-    content: JSON.stringify(ipfsFile),
-  };
-
-  const testc = await ipfs.add(file);
-  console.log(testc.cid.string);
-  console.log(ipfsFile.walletAddress);
-
-  createNfast(data, testc.cid.string);
-
-  return { cid: testc.cid.string, walletAddress: accounts[0] };
-};
 // jsonSubmit 함수 끝
 
 function PublishPage() {
   const dispatch = useDispatch();
+  const ticket = useSelector((state) => state.mypageReducer.storeInfo);
+  const sequence = useSelector((state) => state.authReducer.sequence);
 
   useEffect(() => {
-    dispatch(publishAction.storeTitle(1));
+    dispatch(publishAction.storeTitle(sequence));
   }, []);
-  const ticket = useSelector((state) => state.mypageReducer.storeInfo);
+
+  // string을 시간객체로 변경
+  function stringToDate(str) {
+    const y = str.substr(0, 4);
+    const m = str.substr(5, 2);
+    const d = str.substr(8, 2);
+    return new Date(y, m - 1, d);
+  }
+
+  // date 값을 uint으로 변경
+  function dateToUint(date) {
+    return Math.floor(stringToDate(date).getTime() / 1000);
+  }
+
+  // 시간을 uint로 변경
+  function timeToUint(time) {
+    const m = time.substr(0, 2);
+    const s = time.substr(3, 2);
+    return m * 60 * 60 + s * 60;
+  }
+
+  async function createNfast(data, cid) {
+    // nft 발행
+    // 발행할 개수, admin 주소, tokenurl, 가게주소, 날짜, 점심저녁구분, 시작시간, 종료시간, 가격, 수수료
+    const tx = await NFasTContract.methods
+      .createAll(
+        data.count,
+        data.walletAddress,
+        cid,
+        data.walletAddress,
+        dateToUint(data.date),
+        data.time,
+        dateToUint(data.date) + timeToUint(data.start),
+        dateToUint(data.date) + timeToUint(data.end),
+        data.price,
+        5
+      )
+      .send({
+        from: data.walletAddress,
+        value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
+      });
+    console.log("여기값");
+    console.log(tx);
+    // NFasTContract.events
+    //   .CreateAll({ fromBlock: tx.blockNumber }, (error, event) => {
+    //     console.log(event);
+    //   })
+    //   .on("connected", (subscriptionId) => {
+    //     console.log(subscriptionId);
+    //   })
+    //   .on("data", (event) => {
+    //     console.log(event.returnValues[1]);
+    //   })
+    //   .on("changed", (event) => {
+    //     console.log(event.returnValues);
+    //   })
+    //   .on("error", (error, receipt) => {
+    //     console.log(receipt);
+    //   });
+
+    NFasTContract.getPastEvents(
+      "CreateAll",
+      {
+        fromBlock: tx.blockNumber,
+        toBlock: "latest",
+      },
+      async (error, events) => {
+        console.log(events[0].returnValues[1]);
+        // await createAllSale(data, events[0].returnValues[1]);
+        // db에 저장
+        data.nfastHash.push(events[0].returnValues[1]);
+        console.log("DATAAAA", data);
+        dispatch(publishAction.publishNfast(getSequence(), data));
+      }
+    );
+  }
+
+  const jsonSubmit = async (data) => {
+    const accounts = await web3.eth.getAccounts();
+    // const ethAddress = await storehash.options.address; CA주소
+    console.log(accounts[0]);
+    const ipfsFile = data;
+    console.log(ipfsFile);
+    ipfsFile.walletAddress = await accounts[0];
+    console.log(await accounts[0]);
+    const file = {
+      path: "/tmp/myfile.txt",
+      content: JSON.stringify(ipfsFile),
+    };
+
+    const testc = await ipfs.add(file);
+    console.log(testc.cid.string);
+    console.log(ipfsFile.walletAddress);
+
+    // createNfast(data, "testc.cid.string");
+    createNfast(data, testc.cid.string);
+
+    // return;
+    return { cid: testc.cid.string, walletAddress: accounts[0] };
+  };
 
   console.log("TICKET", ticket);
   const handleRegist = async (e) => {
@@ -194,6 +204,8 @@ function PublishPage() {
       cid: "",
       walletAddress: "",
       storeName: ticket.storeName,
+      nfastHash: [],
+      sequence,
     };
     // rest api
     // data.storeName = 가게이름
@@ -204,10 +216,7 @@ function PublishPage() {
     data.cid = tempData.cid;
     data.walletAddress = tempData.walletAddress;
     // eslint-disable-next-line no-console
-    console.log(data);
-    useEffect(() => {
-      dispatch(publishAction.storeTitle(1));
-    }, []);
+    console.log("DATAAAAAAA", data);
   };
 
   return (
