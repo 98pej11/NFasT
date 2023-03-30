@@ -31,7 +31,12 @@ export default function LoginPage() {
           }}
         >
           <img src={logo} alt="" />
-          <Typography variant="h6">줄서지말고 먹자!</Typography>
+          <Typography
+            variant="h6"
+            sx={{ color: "#5B5299", marginBottom: "50px" }}
+          >
+            줄서지말고 먹자!
+          </Typography>
 
           <div
             style={{

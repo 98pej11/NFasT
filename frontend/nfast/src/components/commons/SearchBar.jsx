@@ -30,8 +30,9 @@ export default function SearchBar() {
           </InputAdornment>
         ),
         sx: {
+          height: "35px",
           borderRadius: 9999,
-          marginLeft: 3,
+          margin: "0px 5px",
           disableUnderline: "true",
           bgcolor: IsClicked ? "white" : "#E9E7FF",
           bordercolor: IsClicked ? "white" : "#E9E7FF",
