@@ -1,4 +1,7 @@
+/* eslint-disable react/jsx-filename-extension */
 import axios from "axios";
+import Alert from "@mui/material/Alert";
+
 import {
   setAccessToken,
   setRefreshToken,
@@ -146,14 +149,16 @@ function userConfirm(wallet) {
           setRefreshToken(jwtRefreshToken);
           setSequence(sequence);
         } else {
-          alert("아이디와 비밀번호를 확인하세요.");
+          // eslint-disable-next-line react/react-in-jsx-scope
+          <Alert severity="success">아이디와 비밀번호를 확인하세요.</Alert>;
           dispatch({ type: "SET_IS_LOGIN", payload: false });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: false });
           dispatch({ type: "SET_IS_LOGIN_ERROR", payload: true });
         }
       })
       .catch((error) => {
-        alert("아이디와 비밀번호를 확인하세요.");
+        // eslint-disable-next-line react/react-in-jsx-scope
+        <Alert severity="success">아이디와 비밀번호를 확인하세요.</Alert>;
         console.log("userConfirm Error", error);
       });
   };

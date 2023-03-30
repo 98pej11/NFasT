@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { mainAction } from "../../redux/actions/mainAction";
 
-export default function MainCard() {
+export default function TransCard() {
   const dispatch = useDispatch();
   const getTrans = () => {
     dispatch(mainAction.getTrans());
@@ -28,9 +28,9 @@ export default function MainCard() {
         {transList.map((card) => (
           <Grid
             item
-            xs={12}
-            sm={4}
-            md={4}
+            xs={6}
+            sm={3} // change to 6 for Galaxy S20 Ultra
+            md={3} // change to 6 for Galaxy S20 Ultra
             display="flex"
             justifyContent="center"
             alignItems="center"

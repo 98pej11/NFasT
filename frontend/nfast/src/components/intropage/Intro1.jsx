@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -18,8 +19,8 @@ const ProfilBox = styled.div`
 
 const contentUpAnimation = keyframes`
   0% {
-    -webkit-transform: translateY(50px);
-            transform: translateY(50px);
+    -webkit-transform: translateY(25px);
+            transform: translateY(25px);
     -webkit-transform-origin: 50% 50%;
             transform-origin: 50% 50%;
     text-shadow: none;
@@ -88,8 +89,8 @@ const downIconAnimation = keyframes`
       text-shadow: none;
     }
     100% {
-      -webkit-transform: translateY(50px);
-              transform: translateY(50px);
+      -webkit-transform: translateY(25px);
+              transform: translateY(25px);
       -webkit-transform-origin: 50% 50%;
               transform-origin: 50% 50%;
     }
@@ -122,7 +123,9 @@ export default function Intro1() {
         </Img>
       </ContentBox>
       <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
+        <Link to="/intro2">
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </Link>
       </MoreContentIconBox>
     </ProfilBox>
   );

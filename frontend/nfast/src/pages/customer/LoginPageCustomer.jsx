@@ -1,23 +1,24 @@
 import React from "react";
-// import styled from "styled-components";
-// import Avatar from "@mui/material/Avatar";
-// import CssBaseline from "@mui/material/CssBaseline";
-// import TextField from "@mui/material/TextField";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import Checkbox from "@mui/material/Checkbox";
+// import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+// import Collapse from "@mui/material/Collapse";
 import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import logo from "../../assets/NFast_Logo.png";
 import moneylogin from "../../assets/moneylogin.png";
 import Metamask from "../../components/loginpage/Metamask";
 
-const theme = createTheme();
-
 export default function LoginPage() {
+  const theme = createTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleMetamaskClick = () => {
+    setOpen(true);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs" m={30}>
@@ -39,8 +40,13 @@ export default function LoginPage() {
               justifyContent: "center",
             }}
           >
-            <Metamask />
+            <Metamask onClick={handleMetamaskClick} disabled={open} />
+            {open &&
+              (<Alert severity="success">로그인에 성공했단다.</Alert>)(
+                console.log("나 여기")
+              )}
           </div>
+
           <Button
             variant="contained"
             href="/loginSeller"
