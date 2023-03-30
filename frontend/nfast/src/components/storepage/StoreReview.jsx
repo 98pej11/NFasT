@@ -1,35 +1,31 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import styled from "styled-components";
 import Chip from "@mui/material/Chip";
 import DoneIcon from "@mui/icons-material/Done";
-import reviewTime from "../../assets/Review_time.png";
+// import reviewTime from "../../assets/Review_time.png";
 import reviewParking from "../../assets/Review_parking.png";
 import reviewKind from "../../assets/Review_kind.png";
 import reviewVeiw from "../../assets/Review_view.png";
-import { storeAction } from "../../redux/actions/storeAction";
 
-function StoreReview() {
-  const dispatch = useDispatch();
-  const getStoreDetail = () => {
-    dispatch(storeAction.getStoreDetail());
-  };
-  useEffect(() => {
-    getStoreDetail();
-  }, []);
-  const storedetail = useSelector(
-    (state) => state.storepageReducer.storedetail
-  );
+function StoreReview(props) {
+  // eslint-disable-next-line react/prop-types
+  const {
+    reviewTime,
+    cntTime,
+    reviewConvenience,
+    cntConvenience,
+    reviewService,
+    cntService,
+    reviewMood,
+    cntMood,
+  } = props;
   return (
     <Chips>
       <h4>리뷰</h4>
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label={
-              storedetail.review.reviewTime[0] +
-              storedetail.review.reviewTime[1]
-            }
+            label={{ reviewTime } + { cntTime }}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewTime} alt="d" />}
@@ -37,10 +33,7 @@ function StoreReview() {
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label={
-              storedetail.review.reviewConvenience[0] +
-              storedetail.review.reviewConvenience[1]
-            }
+            label={{ reviewConvenience } + { cntConvenience }}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewParking} alt="d" />}
