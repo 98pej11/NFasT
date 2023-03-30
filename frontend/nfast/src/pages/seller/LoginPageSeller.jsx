@@ -52,7 +52,7 @@ export default function LoginPage() {
           </div>
           <Button
             variant="contained"
-            href="/introduce"
+            href="/introSeller1"
             sx={{
               backgroundColor: "#BCB6FF",
               color: "white",

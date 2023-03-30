@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import intro2 from "../../assets/intro2.png";
+import intro2 from "../../assets/Intro2_Customer.png";
 // import HighLight from "../commons/HighLight";
 
 const contentUpAnimation = keyframes`
@@ -28,11 +28,11 @@ const Text = styled.div`
   flex-direction: column;
   h4 {
     font-size: 20px;
-    width: 200px;
+    width: 150px;
   }
   span {
     font-size: 16px;
-    width: 250px;
+    width: 200px;
     margin-bottom: 10px;
   }
 `;
@@ -47,12 +47,8 @@ const ContentBox = styled.div`
 `;
 const Img = styled.div`
   img {
-    width: 80px;
-    height: 140px;
-  }
-  @media screen and (max-width: 200px) {
-    width: 200px;
-    height: 250px;
+    width: 170px;
+    height: 80px;
   }
 `;
 const ProfilBox = styled.div`
@@ -65,13 +61,8 @@ const ProfilBox = styled.div`
   margin-bottom: 120px;
 `;
 const TitleBox = styled.div`
-  line-height: 1rem;
-  z-index: 1;
+  display: flex;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 20px;
-    line-height: 10px;
-  }
 `;
 const SubTitleBox = styled.div`
   display: flex;
@@ -105,23 +96,25 @@ const MoreContentIconBox = styled.div`
   animation-direction: alternate;
 `;
 
-export default function Intro2() {
+export default function CustomerIntro2() {
   return (
     <ProfilBox>
       <ContentBox>
         <Text>
           <TitleBox>
-            <h4>NFasT에서는</h4>
-            <h4>가능하다!</h4>
+            <div>
+              <h4>NFasT에서는</h4>
+              <h4>가능하다!</h4>
+            </div>
+            <Img>
+              <img src={intro2} alt="프로필 이미지" />
+            </Img>
           </TitleBox>
           <SubTitleBox>
             <span>줄이 너무 길어서 못가던 맛집</span>
             <span>바로 들어갈 수 있어요!</span>
           </SubTitleBox>
         </Text>
-        <Img>
-          <img src={intro2} alt="프로필 이미지" />
-        </Img>
       </ContentBox>
       <MoreContentIconBox>
         <KeyboardDoubleArrowDownIcon fontSize="large" />
