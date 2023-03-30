@@ -6,20 +6,21 @@ import Box from "@mui/material/Box";
 import MainComp from "../../components/mainpage/MainComp";
 import { getAccessToken } from "../../storage/Cookie";
 
-export class Token {
-  #accessToken = "";
+// export class Token {
+//   #accessToken = "";
 
-  getAccessToken() {
-    return this.#accessToken;
-  }
+//   getAccessToken() {
+//     return this.#accessToken;
+//   }
 
-  setAccessToken(token) {
-    this.#accessToken = token;
-  }
-}
+//   setAccessToken(token) {
+//     this.#accessToken = token;
+//   }
+// }
 
 function MainPage() {
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log(getAccessToken());
   }, [getAccessToken]);
 

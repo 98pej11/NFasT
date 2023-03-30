@@ -18,6 +18,7 @@ const ContentBox = styled.div`
   h1 {
     font-size: 30px;
   }
+  margin-bottom: 20px;
 `;
 
 const downIconAnimation = keyframes`
