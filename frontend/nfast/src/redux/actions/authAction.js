@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import axios from "axios";
 import Alert from "@mui/material/Alert";
-
 import {
   setAccessToken,
   setRefreshToken,
@@ -13,7 +12,6 @@ import {
 // import jwtDecode from "jwt-decode";
 
 // import { apiInstance } from "../../api/index";
-
 // const baseUrl = `http://localhost:8080/api`;
 const baseUrl = `https://j8a307.p.ssafy.io/api`;
 
@@ -136,6 +134,91 @@ function userConfirm(wallet) {
   };
 }
 
+function storeConfirm(wallet) {
+  const inputs = {
+    wallet,
+  };
+  return async (dispatch) => {
+    const url = `${baseUrl}/owner/login`;
+    // let url = `http://i8a508.p.ssafy.io:8080/api/v1/login`;
+    await axios
+      .post(url, JSON.stringify(inputs), {
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+      })
+      .then((response) => {
+        const { data } = response;
+        if (data.result === "success") {
+          const { jwtAuthToken, jwtRefreshToken, sequence } = data;
+          dispatch({ type: "SET_IS_LOGIN", payload: true });
+          dispatch({ type: "SET_IS_VALID_TOKEN", payload: true });
+          dispatch({ type: "SET_IS_LOGIN_ERROR", payload: false });
+
+          setAccessToken(jwtAuthToken);
+          setRefreshToken(jwtRefreshToken);
+          setSequence(sequence);
+          console.log("SUCCESS");
+        } else {
+          // eslint-disable-next-line react/react-in-jsx-scope
+          <Alert severity="success">아이디와 비밀번호를 확인하세요.</Alert>;
+          dispatch({ type: "SET_IS_LOGIN", payload: false });
+          dispatch({ type: "SET_IS_VALID_TOKEN", payload: false });
+          dispatch({ type: "SET_IS_LOGIN_ERROR", payload: true });
+          console.log("가게 로그인 FAIL, 가게 등록하러 가기");
+        }
+      })
+      .catch((error) => {
+        // eslint-disable-next-line react/react-in-jsx-scope
+        <Alert severity="success">아이디와 비밀번호를 확인하세요.</Alert>;
+        console.log("userConfirm Error", error);
+      });
+  };
+}
+
+function storeRegister(storeWallet, store) {
+  const inputs = {
+    storeWallet,
+    storeAddress: store.storeAddress,
+    storeInfoNumber: store.storeInfoNumber,
+  };
+  console.log(inputs);
+  return async (dispatch) => {
+    const url = `${baseUrl}/owner/introduction-store/application`;
+    await axios
+      .post(url, JSON.stringify(inputs), {
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+      })
+      .then((response) => {
+        const { data } = response;
+        if (data.result === "success") {
+          const { jwtAuthToken, jwtRefreshToken, sequence } = data;
+          dispatch({ type: "SET_IS_LOGIN", payload: true });
+          dispatch({ type: "SET_IS_VALID_TOKEN", payload: true });
+          dispatch({ type: "SET_IS_LOGIN_ERROR", payload: false });
+
+          setAccessToken(jwtAuthToken);
+          setRefreshToken(jwtRefreshToken);
+          setSequence(sequence);
+          console.log("SUCCESS");
+        } else {
+          // eslint-disable-next-line react/react-in-jsx-scope
+          <Alert severity="success">아이디와 비밀번호를 확인하세요.</Alert>;
+          dispatch({ type: "SET_IS_LOGIN", payload: false });
+          dispatch({ type: "SET_IS_VALID_TOKEN", payload: false });
+          dispatch({ type: "SET_IS_LOGIN_ERROR", payload: true });
+        }
+      })
+      .catch((error) => {
+        // eslint-disable-next-line react/react-in-jsx-scope
+        <Alert severity="success">아이디와 비밀번호를 확인하세요.</Alert>;
+        console.log("userConfirm Error", error);
+      });
+  };
+}
+
 // function getUserInfo(token) {
 //   console.log("OOOO", token);
 //   let decodeToken = jwtDecode(token);
@@ -186,4 +269,6 @@ export const authAction = {
   onLogout,
   walletLogin,
   userConfirm,
+  storeConfirm,
+  storeRegister,
 };
