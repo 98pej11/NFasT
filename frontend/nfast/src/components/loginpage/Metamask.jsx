@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
+
+// import Alert from "@mui/material/Alert";
 import MetaMask from "../../assets/Metamask.png";
 import { authAction } from "../../redux/actions/authAction";
 
@@ -14,14 +16,16 @@ function Metamask() {
 
   useEffect(() => {
     if (flag) {
+      // eslint-disable-next-line no-console
       console.log(address);
       dispatch(authAction.userConfirm(address));
-
-      // dispatch(authAction.walletLogin(address));
-      // console.log(address);
+      // eslint-disable-next-line no-alert
+      // <Alert severity="success">성공적으로 처리되었습니다!</Alert>;
+      alert("로그인ㅋㅋ");
+      console.log("나 여기 들어오긴했단다");
       navigate("/");
     }
-  }, [address]);
+  }, [address, dispatch, navigate]);
 
   const handleConnectMetamask = async () => {
     if (window.ethereum) {

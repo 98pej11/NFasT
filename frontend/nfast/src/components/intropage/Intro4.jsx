@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -14,37 +15,32 @@ export default function Intro4() {
         <Img>
           <img src={intro4} alt="프로필 이미지" />
         </Img>
-        <TitleBox>
-          <h3>고객들간의 거래로</h3>
-          <h3>가게에 수입이 들어와요!</h3>
-        </TitleBox>
-        <SubTitleBox>
-          <h4>한정된 수량의 NFT만 발급해도 </h4>
-          <h4>계속되는 수입을 볼 수 있어요.</h4>
-        </SubTitleBox>
+        <Text>
+          <TitleBox>
+            <h4>고객들간의 거래로</h4>
+            <h4>가게에 수입이 들어와요!</h4>
+          </TitleBox>
+          <SubTitleBox>
+            <span>한정된 수량의 NFT만 발급해도 </span>
+            <span>계속되는 수입을 볼 수 있어요.</span>
+          </SubTitleBox>
+        </Text>
       </ContentBox>
       <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
+        <Link to="/intro5">
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </Link>
       </MoreContentIconBox>
     </ProfilBox>
   );
 }
 const Img = styled.div`
   img {
-    width: 300px;
-    height: 330px;
-    position: absolute;
-    top: 10vw;
-    left: 30vw;
-    opacity: 80%;
-  }
-  @media screen and (max-width: 200px) {
-    width: 200px;
-    height: 250px;
+    width: 150px;
+    height: 100px;
   }
 `;
 const ProfilBox = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -73,35 +69,37 @@ const ContentBox = styled.div`
   width: 100%;
   height: 65%;
   display: flex;
-
-  // margin-left: 7%;
-  // margin-top: 25%;
-  flex-direction: column;
-
+  align-items: center;
+  justify-content: space-evenly;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
-    height: 60%;
+`;
+
+const Text = styled.div`
+  h4 {
+    font-size: 20px;
+    width: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
+  span {
+    font-size: 15px;
+    width: 210px;
+    margin-bottom: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  margin-left: 10px;
 `;
 
 const TitleBox = styled.div`
-  font-size: 1.4rem;
-  line-height: 1rem;
-  position: relative; /* 포지션 설정 */
-  z-index: 1;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 20px;
-    line-height: 10px;
-  }
 `;
 const SubTitleBox = styled.div`
-  font-size: 0.9rem;
-  line-height: 0.8rem;
+  display: flex;
+  flex-direction: column;
   animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 18px;
-  }
 `;
 const downIconAnimation = keyframes`
     0% {

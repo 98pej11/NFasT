@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -25,7 +26,9 @@ export default function Intro2() {
         </SubTitleBox>
       </ContentBox>
       <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
+        <Link to="/intro3">
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </Link>
       </MoreContentIconBox>
     </ProfilBox>
   );
@@ -46,57 +49,45 @@ const contentUpAnimation = keyframes`
             transform-origin: 50% 50%;
   }
 `;
-const Img = styled.div`
-  img {
-    width: 350px;
-    height: 400px;
-    position: absolute;
-    top: 10vw;
-    left: 30vw;
-    opacity: 80%;
-  }
-  @media screen and (max-width: 200px) {
-    width: 200px;
-    height: 250px;
-  }
-`;
 const ContentBox = styled.div`
   width: 100%;
-  height: 65%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
-    height: 60%;
+`;
+
+const Img = styled.div`
+  img {
+    width: 200px;
+    height: 130px;
   }
 `;
+
 const ProfilBox = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
   margin: 10%;
-  position: relative; /* contact box 고정시키기위해서 */
 `;
 const TitleBox = styled.div`
-  font-size: 1.4rem;
-  line-height: 1rem;
-  position: relative; /* 포지션 설정 */
-  z-index: 1;
+  display: flex;
+  align-items: center;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 20px;
-    line-height: 10px;
+  h4 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 `;
 const SubTitleBox = styled.div`
-  font-size: 0.9rem;
-  line-height: 0.8rem;
-  animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  span {
+    width: 100%;
+    text-align: end;
   }
+  animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
 `;
 const downIconAnimation = keyframes`
     0% {

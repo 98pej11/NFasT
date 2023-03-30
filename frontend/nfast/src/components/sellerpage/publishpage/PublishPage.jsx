@@ -141,6 +141,7 @@ async function createNfast(data, cid) {
       fromBlock: tx.blockNumber,
       toBlock: "latest",
     },
+    // eslint-disable-next-line
     function (error, events) {
       console.log(events[0].returnValues[1]);
     }

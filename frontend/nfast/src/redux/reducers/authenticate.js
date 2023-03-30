@@ -17,9 +17,11 @@ function authReducer(state = initialState, action = {}) {
         userId: payload.data.userId,
       };
     case "DELETE_TOKEN_SUCCESS":
+      // eslint-disable-next-line
       console.log("로그아웃 토큰제거까지 옴");
       return { ...state, isLogin: false, accessToken: null };
     case "POST_RESETTOEKN_SUCCESS":
+      // eslint-disable-next-line
       console.log("토큰 재발급 요청");
       return {
         ...state,
@@ -34,6 +36,7 @@ function authReducer(state = initialState, action = {}) {
     case "SET_IS_LOGIN_ERROR":
       return { ...state, isLoginError: payload };
     case "SET_AUTH_TOKEN":
+      // eslint-disable-next-line
       console.log("SET_AUTH_TOKEN", payload);
       return { ...state, accessToken: payload };
     case "GET_USER_INFO_SUCCESS":
