@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// import { QrReader } from "react-qr-reader";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import PublishTicket from "./PublishTicket";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
+
 import {
   web3,
   NFasTContract,
@@ -15,7 +17,7 @@ import {
 } from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
 import { publishAction } from "../../../redux/actions/publishAction";
-import { getSequence } from "../../../storage/Cookie";
+// import { getSequence } from "../../../storage/Cookie";
 
 // styled-components 시작
 
@@ -171,8 +173,9 @@ const jsonSubmit = async (data) => {
 
 function PublishPage() {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(publishAction.storeTitle(getSequence()));
+    dispatch(publishAction.storeTitle(1));
   }, []);
   const ticket = useSelector((state) => state.mypageReducer.storeInfo);
 
@@ -202,6 +205,9 @@ function PublishPage() {
     data.walletAddress = tempData.walletAddress;
     // eslint-disable-next-line no-console
     console.log(data);
+    useEffect(() => {
+      dispatch(publishAction.storeTitle(1));
+    }, []);
   };
 
   return (
