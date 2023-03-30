@@ -44,6 +44,7 @@ const ContentBox = styled.div`
   justify-content: space-evenly;
   align-items: center;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
+  margin-bottom: 20px;
 `;
 const Img = styled.div`
   img {
@@ -57,6 +58,7 @@ const ProfilBox = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 10%;
+  margin-top: 50px;
 `;
 const TitleBox = styled.div`
   font-size: 1.4rem;
@@ -87,6 +89,7 @@ const downIconAnimation = keyframes`
     }
 `;
 const MoreContentIconBox = styled.div`
+  margin-bottom: 20px;
   animation-duration: 2s;
   animation-delay: 3s;
   animation-name: ${downIconAnimation};
