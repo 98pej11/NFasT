@@ -107,6 +107,7 @@ FutureTicket.propTypes = {
   date: PropTypes.string,
   time: PropTypes.number,
   price: PropTypes.number,
-  qr: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  qr: PropTypes.object,
 };
 export default FutureTicket;
