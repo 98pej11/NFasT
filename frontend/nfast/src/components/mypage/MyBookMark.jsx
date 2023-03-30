@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+// import Pagination from "@mui/material/Pagination";
+// import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -23,37 +23,33 @@ export default function MyBookMark() {
       margin-bottom: 70px;
     }
   `;
-  const Pag = styled.div`
-    margin: 10%;
-    display: flex; /* 가로 정렬을 위해 flexbox 설정 */
-    justify-content: center; /* 가운데 정렬 */
-  `;
+  // const Pag = styled.div`
+  //   margin: 10%;
+  //   display: flex; /* 가로 정렬을 위해 flexbox 설정 */
+  //   justify-content: center; /* 가운데 정렬 */
+  // `;
 
   const dispatch = useDispatch();
   const sequence = getSequence();
-  const getBookMarkList = () => {
-    dispatch(mypageAction.getBookMarkList(sequence));
-  };
-  const bookmarkList = useSelector((state) => state.mypageReducer.stores);
+
+  const bookmarkList = useSelector((state) => state.mypageReducer.bookmarkList);
   // eslint-disable-next-line no-console
-  console.log(bookmarkList);
+  console.log(`${bookmarkList}없는데?`);
   useEffect(() => {
-    if (!bookmarkList || bookmarkList.length === 0) {
-      getBookMarkList();
-    }
-  }, [bookmarkList.length, getBookMarkList]);
+    dispatch(mypageAction.getBookMarkList(sequence));
+  }, []);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  // const handlePageChange = (event, page) => {
-  //   setCurrentPage(page);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // // const handlePageChange = (event, page) => {
+  // //   setCurrentPage(page);
+  // // };
+  // const cardsPerPage = 4;
+  // const getCardList = () => {
+  //   const startIndex = (currentPage - 1) * cardsPerPage;
+  //   const endIndex = startIndex + cardsPerPage;
+
+  //   return bookmarkList.slice(startIndex, endIndex);
   // };
-  const cardsPerPage = 4;
-  const getCardList = () => {
-    const startIndex = (currentPage - 1) * cardsPerPage;
-    const endIndex = startIndex + cardsPerPage;
-
-    return bookmarkList.slice(startIndex, endIndex);
-  };
 
   return (
     <div>
@@ -62,7 +58,7 @@ export default function MyBookMark() {
 
         <div style={{ marginTop: 30 }}>
           <Grid container spacing={3}>
-            {getCardList().map((card) => (
+            {bookmarkList.map((card) => (
               <Grid
                 item
                 xs={6}
@@ -116,7 +112,7 @@ export default function MyBookMark() {
             ))}
           </Grid>
         </div>
-        <Pag>
+        {/* <Pag>
           <Stack spacing={2}>
             <Pagination
               count={Math.ceil(bookmarkList.length / cardsPerPage)}
@@ -126,7 +122,7 @@ export default function MyBookMark() {
               onChange={(event, page) => setCurrentPage(page)}
             />
           </Stack>
-        </Pag>
+        </Pag> */}
       </Styled>
     </div>
   );
