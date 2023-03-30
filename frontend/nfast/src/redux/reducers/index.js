@@ -5,6 +5,7 @@ import authReducer from "./authenticate";
 import mypageReducer from "./mypage";
 import mainReducer from "./mainpage";
 import publishReducer from "./publish";
+import searchReducer from "./search";
 
 // const persistConfig = {
 //   key: "root",
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   mainReducer,
   mypageReducer,
   publishReducer,
+  searchReducer,
 });
 
 export default rootReducer;
