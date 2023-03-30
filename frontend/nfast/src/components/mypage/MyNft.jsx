@@ -8,7 +8,7 @@ import Tab from "@mui/material/Tab";
 import Pagination from "@mui/material/Pagination";
 import { getSequence } from "../../storage/Cookie";
 import { mypageAction } from "../../redux/actions/mypageAction";
-import PastTicket from "../commons/FastTicket";
+// import PastTicket from "../commons/FastTicket";
 import FutureTicket from "../commons/FutureTicket";
 
 const Wrapper = styled.div`
@@ -17,9 +17,9 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Ticket1 = styled(PastTicket)`
-  flex: 1;
-`;
+// const Ticket1 = styled(PastTicket)`
+//   flex: 1;
+// `;
 
 const Ticket2 = styled(FutureTicket)`
   flex: 1;
@@ -70,19 +70,37 @@ function MyNft() {
           <Tab label="미사용 NFT" />
           <Tab label="사용한 NFT" />
         </Tabs>
+        {/* <Ticket2
+          nfastQr={
+            <QRCode
+              value={JSON.stringify({ nfastSequence: 27, type: 2 })}
+              size="100"
+              style={{ fgColor: "#000123" }}
+            />
+          }
+        /> */}
       </TabsContainer>
       {selectedTabIndex === 0 &&
         (availableNfasts.length !== 0 ? (
           availableNfasts.map((nfast) => {
             return (
               <Tickets>
-                <Ticket1
+                <Ticket2
                   storeName={nfast.storeName}
                   nfastDate={nfast.nfastDate}
                   nfastStartTime={nfast.nfastStartTime}
                   nfastEndTime={nfast.nfastEndTime}
                   nfastPrice={nfast.nfastPrice}
-                  nfastQr={nfast.nfastQr}
+                  nfastQr={
+                    <QRCode
+                      value={JSON.stringify({
+                        nfastSequence: nfast.nfastSequence,
+                        type: 1,
+                      })}
+                      size="100"
+                      style={{ fgColor: "#000123" }}
+                    />
+                  }
                 />
               </Tickets>
             );
@@ -90,9 +108,18 @@ function MyNft() {
         ) : (
           <div>
             <div>사용 가능한 NFasT가 없습니다ㅠㅠ</div>
-            <QRCode value="56" size="100" />
+            {/* <div>이것은 그냥큐알 코드이다</div>
+            <QRCode
+              value={JSON.stringify({ nfastSequence: 26, type: 1 })}
+              size="100"
+              style={{ fgColor: "#000123" }}
+            />
             <div>이것은 환불큐알 코드이다</div>
-            <QRCode value="57" size="100" />
+            <QRCode
+              value={JSON.stringify({ nfastSequence: 27, type: 2 })}
+              size="100"
+              style={{ fgColor: "#000123" }}
+            /> */}
           </div>
         ))}
       {selectedTabIndex === 1 &&

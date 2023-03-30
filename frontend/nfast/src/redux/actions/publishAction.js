@@ -19,12 +19,15 @@ function storeTitle(storeSequence) {
   };
 }
 
-function checkQR(nfastSequence) {
-  console.log("nfastSequence ", nfastSequence);
+function checkQR(nfastInfo) {
+  const { nfastSequence, type } = JSON.parse(nfastInfo);
+  // const nfastSequence = info.nfastSequence;
+  // const type = info.type;
+  console.log("nfastSequence ", nfastSequence, type);
   return async () => {
     // const url = `http://localhost:8080/api/owner`;
     await axios
-      .patch(`http://localhost:8080/api/owner/qr/${nfastSequence}`)
+      .patch(`http://localhost:8080/api/owner/qr/${type}/${nfastSequence}`)
       .then((response) => {
         const { data } = response;
         // dispatch({type: "GET_CHECKQR_SUCCESS", payload: {data}});
