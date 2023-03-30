@@ -161,10 +161,10 @@ public class OwnerMainRestController {
     }
 
     // QR 사용
-    @PatchMapping("/qr/{type}/{nfastSequence}")
-    public ResponseEntity<Map<String, Object>> useQr(@PathVariable byte type, @PathVariable long nfastSequence){
+    @PatchMapping("/qr/{storeSequence}/{type}/{nfastSequence}")
+    public ResponseEntity<Map<String, Object>> useQr(@PathVariable long storeSequence, @PathVariable byte type, @PathVariable long nfastSequence){
         Map<String, Object> resultMap=new HashMap<>();
-        boolean updateRes = storeMainService.updateNfast(type, nfastSequence);
+        boolean updateRes = storeMainService.updateNfast(type, nfastSequence, storeSequence);
         if (updateRes){
             resultMap.put("result", SUCCESS);
         }

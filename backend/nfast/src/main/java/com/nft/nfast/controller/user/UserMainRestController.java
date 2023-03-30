@@ -34,9 +34,9 @@ public class UserMainRestController {
     private S3FileUploadService s3FileUploadService;
 
     //검색 시 가게 리스트 출력
-    @GetMapping("/main/search-list/{store_name}")
-    public ResponseEntity<Map<String, Object>> storeList(@PathVariable String store_name){
-        List<StoreFindDto> storeDtoList = userMainService.findAllStore(store_name);
+    @GetMapping("/main/search-list/")
+    public ResponseEntity<Map<String, Object>> storeList(){
+        List<StoreFindDto> storeDtoList = userMainService.findAllStore();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
         resultMap.put("stores",storeDtoList);
