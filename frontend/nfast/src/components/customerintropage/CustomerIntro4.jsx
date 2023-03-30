@@ -30,7 +30,7 @@ const Box = styled(Paper)`
   justify-content: center;
 `;
 
-export default function Intro5() {
+export default function CustomerIntro5() {
   return (
     <ProfilBox>
       <PageLink to="/mainpage">
@@ -38,7 +38,7 @@ export default function Intro5() {
           <h3> 손님으로 이용하기 </h3>
         </Box>
       </PageLink>
-      <PageLink to="/introduce">
+      <PageLink to="/introSeller1">
         <Box elevation={3} sx={{ borderRadius: "50px" }}>
           <h3>사장님으로 이용하기</h3>
         </Box>
