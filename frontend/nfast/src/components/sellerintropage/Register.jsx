@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Box from "@mui/material/Box";
@@ -19,7 +19,63 @@ const StyleBtn = styled.div`
     font-size: 13px;
   }
 `;
+
 export default function Register() {
+  const [inputs, setInputs] = useState({
+    storeInfoNumber: null,
+    storeAddress: "",
+  });
+  const onChangeHandler = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    const nextInputs = { ...inputs, [name]: value };
+    setInputs(nextInputs);
+    console.log(nextInputs);
+  };
+
+  const getPostcode = () => {
+    new window.daum.Postcode({
+      oncomplete(data) {
+        let addr = ""; // 주소 변수
+        let extraAddr = ""; // 참고항목 변수
+
+        if (data.userSelectedType === "R") {
+          addr = data.roadAddress;
+        } else {
+          addr = data.jibunAddress;
+        }
+
+        if (data.userSelectedType === "R") {
+          if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+            extraAddr += data.bname;
+          }
+          if (data.buildingName !== "" && data.apartment === "Y") {
+            extraAddr +=
+              extraAddr !== "" ? `,  ${data.buildingName}` : data.buildingName;
+          }
+          if (extraAddr !== "") {
+            extraAddr = ` (  ${extraAddr}  )`;
+          }
+          document.getElementById("address").value = extraAddr;
+        } else {
+          document.getElementById("address").value = "";
+        }
+
+        document.getElementById("zonecode").value = data.zonecode;
+        document.getElementById("address").value = addr;
+        const nextInput = {
+          ...inputs,
+          storeAddress: addr,
+        };
+        setInputs(nextInput);
+      },
+    }).open();
+  };
+
+  // useEffect(()=>{
+  //   console.log("어쩌구");
+  //   // 입력된 주소 storeAddress에 저장
+  // }, storeAddress)
   return (
     <ProfilBox>
       <ContentBox>
@@ -41,11 +97,11 @@ export default function Register() {
           </Typography>
           <TextField
             id="filled-read-only-input"
+            name="storeInfoNumber"
             placeholder="사업자 등록 번호를 입력하세요."
             fullWidth
-            InputProps={{
-              readOnly: true,
-            }}
+            onChange={onChangeHandler}
+            value={inputs.storeInfoNumber}
           />
           <Typography
             sx={{ display: "flex", justifyContent: "flex-start", marginTop: 3 }}
@@ -62,26 +118,32 @@ export default function Register() {
             }}
           >
             <TextField
-              id="outlined-basic"
+              id="zonecode"
               placeholder="ex) 강서로 348"
               variant="outlined"
             />
             <StyleBtn>
-              <Button variant="contained">주소 검색</Button>
+              <Button variant="contained" onClick={getPostcode}>
+                주소 검색
+              </Button>
             </StyleBtn>
           </div>
           <TextField
-            id="outlined-basic"
+            id="address"
+            name="storeAddress"
             placeholder="상세 주소를 입력하세요."
             variant="outlined"
+            onChange={onChangeHandler}
+            value={inputs.storeAddress}
           />
           <div style={{ marginTop: 20 }}> </div>
-          <Metamask />
+          <Metamask isSeller={2} store={inputs} />
         </Box>
       </ContentBox>
     </ProfilBox>
   );
 }
+
 const ProfilBox = styled.div`
   height: 100vh;
   display: flex;
