@@ -62,7 +62,7 @@ const Info = styled.div`
   width: 150px;
   height: 100px;
   display: flex;
-  justify-contents: center;
+  justify-content: center;
   flex-direction: column;
   & > div:not(:last-child) {
     margin: 6%;
@@ -76,18 +76,17 @@ const QR = styled.div`
   align-items: center;
 `;
 
-function FutureTicket({ title, date, time, price, qr }) {
+function PublishTicket({ title, date, time, price, qr }) {
   return (
     <Wrapper>
       <Ticket>
         <Info>
           <div>
-            <span>{title}</span>
-            <span>{price} ETH</span>
-          </div>
-          <div>
-            <span>{date}</span>
-            <span>{time}</span>
+            <div>{date}</div>
+            <div>
+              {title} <span>{time}</span>
+            </div>
+            <div>{price}eth</div>
           </div>
         </Info>
         <QR>{qr}</QR>
@@ -95,18 +94,18 @@ function FutureTicket({ title, date, time, price, qr }) {
     </Wrapper>
   );
 }
-FutureTicket.defaultProps = {
+PublishTicket.defaultProps = {
   title: "가게이름",
   date: "날짜",
   time: "시간",
   price: 0,
   qr: "qr",
 };
-FutureTicket.propTypes = {
+PublishTicket.propTypes = {
   title: PropTypes.string,
   date: PropTypes.string,
   time: PropTypes.number,
   price: PropTypes.number,
   qr: PropTypes.string,
 };
-export default FutureTicket;
+export default PublishTicket;

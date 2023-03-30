@@ -5,12 +5,15 @@ import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.dto.user.TradeFindDto;
 import com.nft.nfast.model.dto.user.UserDto;
+import com.nft.nfast.model.service.S3FileUploadService;
 import com.nft.nfast.model.service.user.UserMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -26,6 +29,9 @@ public class UserMainRestController {
 
     @Autowired
     UserMainService userMainService;
+
+    @Autowired
+    private S3FileUploadService s3FileUploadService;
 
     //검색 시 가게 리스트 출력
     @GetMapping("/main/search-list/{store_name}")
@@ -137,6 +143,7 @@ public class UserMainRestController {
     public ResponseEntity<Map<String, Object>> userLogin(@RequestBody Map<String,String> wallet) {
         Map<String, Object> resultMap = new HashMap<>();
         TokenDto tokenDto=userMainService.userLogin(wallet.get("wallet"));
+        System.out.println("TOKEN TYTTTTTT "+tokenDto.getTokenType());
         resultMap.put("result", SUCCESS);
         resultMap.put("jwtAuthToken", tokenDto.getTokenAccess());
         resultMap.put("jwtRefreshToken", tokenDto.getTokenRefresh());
@@ -164,11 +171,22 @@ public class UserMainRestController {
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
     }
 
+//    //내 정보 수정
+//    @PatchMapping("/my-data/{userSequence}")
+//    public ResponseEntity<Map<String, Object>> userModify(@PathVariable("userSequence") long userSequence, @RequestBody UserDto user) {
+//        Map<String, Object> resultMap = new HashMap<>();
+//        System.out.println("USER "+ user);
+//        userMainService.userModify(user);
+//        resultMap.put("result", SUCCESS);
+//        return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+//    }
     //내 정보 수정
     @PatchMapping("/my-data/{userSequence}")
-    public ResponseEntity<Map<String, Object>> userModify(@PathVariable("userSequence") long userSequence, @RequestBody UserDto user) {
+    public ResponseEntity<Map<String, Object>> userModify(@RequestPart(value="user") UserDto user, @RequestPart(value = "userImage",required = false) MultipartFile multipartFile) throws IOException {
         Map<String, Object> resultMap = new HashMap<>();
-        System.out.println("USER "+ user);
+        if(multipartFile != null){
+            user.setUserImage(s3FileUploadService.upload(multipartFile));
+        }
         userMainService.userModify(user);
         resultMap.put("result", SUCCESS);
         return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);

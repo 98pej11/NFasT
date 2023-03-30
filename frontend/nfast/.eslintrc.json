@@ -6,6 +6,12 @@
   "rules": {
     "no-shadow": "off",
     "import/prefer-default-export": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelAttributes": ["htmlFor"]
+      }
+    ],
     "prettier/prettier": [
       "error",
       {
@@ -15,8 +21,7 @@
     "react/function-component-definition": [
       2,
       { "namedcomponents": "arrow-function" }
-    ],
-    "react/button-has-type": "off"
+    ]
   },
   "settings": {
     "import/resolver": {

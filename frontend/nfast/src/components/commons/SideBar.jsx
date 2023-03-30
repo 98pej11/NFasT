@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -15,16 +17,25 @@ import Drawer from "@mui/material/Drawer";
 import Tooltip from "@mui/material/Tooltip";
 
 import cat from "../../assets/cat.png";
+import { authAction } from "../../redux/actions/authAction";
 
 export default function Example() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpenDrawer(true);
   };
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = (type) => {
     setOpenDrawer(false);
+    navigate(type);
+  };
+
+  const logout = () => {
+    dispatch(authAction.onLogout());
+    handleDrawerClose("/loginCustomer");
   };
 
   return (
@@ -87,15 +98,23 @@ export default function Example() {
                   <ListItemText>나의 북마크</ListItemText>
                 </ListItemButton>
               </ListItem>
-              <ListItem disablePadding sx={{ height: "50px" }}>
-                <ListItemButton href="/myinfo">
+              <ListItem
+                disablePadding
+                sx={{ height: "50px" }}
+                onClick={() => handleDrawerClose("/myinfo")}
+              >
+                <ListItemButton>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText>나의 정보수정</ListItemText>
                 </ListItemButton>
               </ListItem>
-              <ListItem disablePadding sx={{ height: "50px" }}>
+              <ListItem
+                disablePadding
+                sx={{ height: "50px" }}
+                onClick={() => logout()}
+              >
                 <ListItemButton>
                   <ListItemIcon>
                     <InboxIcon />

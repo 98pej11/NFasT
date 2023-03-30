@@ -45,12 +45,20 @@ function Header() {
               {/* 로고이미지가 나와야되는데? */}
               <img src={NFastLogo} alt="logo" height="20px" />
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                // marginLeft: "10%",
+              }}
+            >
               <SearchBar />
             </Box>
           </Box>
 
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <LoginBtn />
             <SideBar />
           </div>

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { QrReader } from "react-qr-reader";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { QrReader } from "react-qr-reader";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import PublishTicket from "./PublishTicket";
@@ -17,6 +17,7 @@ import {
 } from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
 import { publishAction } from "../../../redux/actions/publishAction";
+// import { getSequence } from "../../../storage/Cookie";
 
 // styled-components 시작
 
@@ -116,42 +117,43 @@ async function createNfast(data, cid) {
       from: data.walletAddress,
       value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
     });
-
+  console.log("여기값");
   console.log(tx);
-  // NFasTContract.events
-  //   .CreateAll({ fromBlock: tx.blockNumber }, (error, event) => {
-  //     console.log(event);
-  //   })
-  //   .on("connected", (subscriptionId) => {
-  //     console.log(subscriptionId);
-  //   })
-  //   .on("data", (event) => {
-  //     console.log(event.returnValues[1]);
-  //   })
-  //   .on("changed", (event) => {
-  //     console.log(event.returnValues);
-  //   })
-  //   .on("error", (error, receipt) => {
-  //     console.log(receipt);
-  //   });
+  NFasTContract.events
+    .CreateAll({ fromBlock: tx.blockNumber }, (error, event) => {
+      console.log(event);
+    })
+    .on("connected", (subscriptionId) => {
+      console.log(subscriptionId);
+    })
+    .on("data", (event) => {
+      console.log(event.returnValues[1]);
+    })
+    .on("changed", (event) => {
+      console.log(event.returnValues);
+    })
+    .on("error", (error, receipt) => {
+      console.log(receipt);
+    });
 
-  NFasTContract.getPastEvents(
-    "CreateAll",
-    {
-      fromBlock: tx.blockNumber,
-      toBlock: "latest",
-    },
-    // eslint-disable-next-line
-    function (error, events) {
-      console.log(events[0].returnValues[1]);
-    }
-  );
+  // NFasTContract.getPastEvents(
+  //   "CreateAll",
+  //   {
+  //     fromBlock: tx.blockNumber,
+  //     toBlock: "latest",
+  //   },
+  //   function (error, events) {
+  //     console.log(events[0].returnValues[1]);
+  //   }
+  // );
 }
 
 const jsonSubmit = async (data) => {
   const accounts = await web3.eth.getAccounts();
   // const ethAddress = await storehash.options.address; CA주소
+  console.log(accounts[0]);
   const ipfsFile = data;
+  console.log(ipfsFile);
   ipfsFile.walletAddress = await accounts[0];
   // console.log(await accounts[0]);
   const file = {
@@ -171,34 +173,13 @@ const jsonSubmit = async (data) => {
 
 function PublishPage() {
   const dispatch = useDispatch();
-  const [selected, setSelected] = useState("environment");
-  const [startScan, setStartScan] = useState(false);
-  const [loadingScan, setLoadingScan] = useState(false);
-  const [data, setData] = useState("");
-  // const storeSequence;
-  const handleScan = async (scanData) => {
-    setLoadingScan(true);
-    console.log(`loaded data data`, scanData);
-    if (scanData && scanData !== "") {
-      console.log(`loaded >>>`, scanData);
-
-      // storeSequence=scanData
-      setData(scanData.text);
-      dispatch(publishAction.checkQR(scanData.text));
-      setStartScan(false);
-      setLoadingScan(false);
-      // setPrecScan(scanData);
-    }
-  };
-  const handleError = (err) => {
-    console.error(err);
-  };
 
   useEffect(() => {
     dispatch(publishAction.storeTitle(1));
-    // dispatch(publishAction.checkQR(data));
   }, []);
+  const ticket = useSelector((state) => state.mypageReducer.storeInfo);
 
+  console.log("TICKET", ticket);
   const handleRegist = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line
@@ -212,7 +193,7 @@ function PublishPage() {
       price: e.target[9].value,
       cid: "",
       walletAddress: "",
-      storeName: "",
+      storeName: ticket.storeName,
     };
     // rest api
     // data.storeName = 가게이름
@@ -231,7 +212,7 @@ function PublishPage() {
 
   return (
     <Wrapper>
-      <Ticket />
+      <Ticket title={ticket.storeName} />
       <Publish>
         <Form onSubmit={handleRegist}>
           <DateTime>
@@ -274,37 +255,6 @@ function PublishPage() {
           </div>
         </Form>
       </Publish>
-      <div>
-        <div>
-          <h1>QR코두 스캔해보쟈~</h1>
-
-          <button
-            onClick={() => {
-              setStartScan(!startScan);
-            }}
-          >
-            {startScan ? "Stop Scan" : "Start Scan"}
-          </button>
-          {startScan && (
-            <>
-              <select onChange={(e) => setSelected(e.target.value)}>
-                <option value="environment">Back Camera</option>
-                <option value="user">Front Camera</option>
-              </select>
-              <QrReader
-                facingMode={selected}
-                delay={1000}
-                onError={handleError}
-                onResult={handleScan}
-                // chooseDeviceId={()=>selected}
-                style={{ width: "300px" }}
-              />
-            </>
-          )}
-          {loadingScan && <p>Loading</p>}
-          {data !== "" && <p>{data}</p>}
-        </div>
-      </div>
     </Wrapper>
   );
 }

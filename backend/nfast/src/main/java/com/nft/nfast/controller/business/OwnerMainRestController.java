@@ -116,14 +116,15 @@ public class OwnerMainRestController {
         TokenDto tokenDto=storeMainService.storeLogin(wallet.get("wallet"));
         if(tokenDto==null){
             resultMap.put("result",FAIL);
+            return new ResponseEntity<>(resultMap,HttpStatus.NO_CONTENT);
         }
         else{
             resultMap.put("result", SUCCESS);
             resultMap.put("jwtAuthToken", tokenDto.getTokenAccess());
             resultMap.put("jwtRefreshToken", tokenDto.getTokenRefresh());
             resultMap.put("wallet", tokenDto.getTokenWallet());
+            return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
     }
 
     // nft 발행 페이지

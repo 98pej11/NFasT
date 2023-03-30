@@ -28,11 +28,11 @@ const Text = styled.div`
   flex-direction: column;
   h4 {
     font-size: 20px;
-    width: 150px;
+    width: 200px;
   }
   span {
     font-size: 16px;
-    width: 200px;
+    width: 250px;
     margin-bottom: 10px;
   }
 `;
@@ -43,6 +43,7 @@ const ContentBox = styled.div`
   justify-content: space-evenly;
   align-items: center;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
+  margin-bottom: 20px;
 `;
 const Img = styled.div`
   img {
@@ -60,6 +61,8 @@ const ProfilBox = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 10%;
+  margin-top: 100px;
+  margin-bottom: 120px;
 `;
 const TitleBox = styled.div`
   line-height: 1rem;

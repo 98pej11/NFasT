@@ -42,34 +42,6 @@ function walletLogin(wallet) {
   };
 }
 
-// function onLogin(id, password) {
-//   let data = {
-//     identity: id,
-//     password: password,
-//   };
-//   console.log("로그인요청은 옴", data);
-//   return async (dispatch, getState) => {
-//     let url = `${baseUrl}/login`;
-//     // let url = `http://i8a508.p.ssafy.io:8080/api/v1/login`;
-//     let response = await axios
-//       .post(url, JSON.stringify(data), {
-//         headers: {
-//           "Content-Type": "application/json;charset=utf-8",
-//         },
-//       })
-//       .then((response) => {
-//         let data = response.data;
-//         let refreshtoken = data["jwt-refresh-token"];
-//         let userid = data["userId"];
-//         getRefreshToken(refreshtoken);
-//         setUserId(userid);
-//         dispatch({ type: "POST_AUTH_SUCCESS", payload: { data } });
-//       })
-//       .catch((error) => {
-//         console.log("인증에러", error);
-//       });
-//   };
-// }
 function onLogout(wallet) {
   console.log("로그아웃요청", wallet);
   const data = {

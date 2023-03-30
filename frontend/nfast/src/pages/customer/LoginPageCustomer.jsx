@@ -32,7 +32,12 @@ export default function LoginPage() {
           }}
         >
           <img src={logo} alt="" />
-          <Typography variant="h6">줄서지말고 먹자!</Typography>
+          <Typography
+            variant="h6"
+            sx={{ color: "#5B5299", marginBottom: "50px" }}
+          >
+            줄서지말고 먹자!
+          </Typography>
 
           <div
             style={{
@@ -40,9 +45,14 @@ export default function LoginPage() {
               justifyContent: "center",
             }}
           >
-            <Metamask onClick={handleMetamaskClick} disabled={open} />
+            <Metamask
+              onClick={handleMetamaskClick}
+              disabled={open}
+              isSeller={0}
+            />
             {open &&
               (<Alert severity="success">로그인에 성공했단다.</Alert>)(
+                // eslint-disable-next-line no-console
                 console.log("나 여기")
               )}
           </div>
