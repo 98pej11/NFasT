@@ -23,6 +23,7 @@ function Metamask(props) {
         dispatch(authAction.userConfirm(address));
         navigate("/mainpage");
       } else if (isSeller === 1) {
+        console.log(address);
         dispatch(authAction.storeConfirm(address));
         navigate("/sellerPage");
       } else if (isSeller === 2) {

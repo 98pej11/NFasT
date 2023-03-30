@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import SellerMain from "../../components/sellerpage/SellerMain";
 
@@ -8,10 +9,13 @@ const PublishNft = styled.div`
   background-color: white;
 `;
 function SellerPage() {
+  const sequence = useSelector((state) => state.authReducer.sequence);
   return (
-    <PublishNft>
-      <SellerMain />
-    </PublishNft>
+    sequence && (
+      <PublishNft>
+        <SellerMain sequence={sequence} />
+      </PublishNft>
+    )
   );
 }
 
