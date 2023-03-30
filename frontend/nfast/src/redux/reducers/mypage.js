@@ -11,7 +11,7 @@ function mypage(state = initialState, action = {}) {
     case "GET_UNAVAILABLE_NFASTS_SUCCESS":
       return { ...state, unavailableNfasts: payload.data.nfasts };
     case "GET_BOOKMARKLIST_SUCCESS":
-      return { ...state, bookmarkList: payload.data.owner };
+      return { ...state, bookmarkList: payload.data.stores };
     default:
       return { ...state };
   }

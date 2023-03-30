@@ -47,7 +47,7 @@ function getBookMarkList(userSequence) {
       .then((response) => {
         const { data } = response;
         // eslint-disable-next-line
-        console.log(data);
+        console.log(data.stores + "데이터 들어오세요");
         dispatch({ type: "GET_BOOKMARKLIST_SUCCESS", payload: { data } });
       })
       .catch((error) => {
