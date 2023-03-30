@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface UserMainService {
-    List<StoreFindDto> findAllStore(String storeName);
+    List<StoreFindDto> findAllStore();
     List<NfastGetDto> findAvailableNfast(long userSequence);
     List<NfastPurchaseDto> findPurchaseNfast(long storeSequence);
     List<NfastPurchaseDto> findAllByNfastDate(long storeSequence, NfastDetailDto nfastDto);
