@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import SellerIncome from "../../assets/SellerIncome.png";
@@ -23,7 +24,9 @@ export default function Intro5() {
         </Img>
       </ContentBox>
       <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
+        <Link to="/intro6">
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </Link>
       </MoreContentIconBox>
     </ProfilBox>
   );

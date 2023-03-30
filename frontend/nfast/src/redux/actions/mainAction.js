@@ -9,6 +9,7 @@ const baseUrl = `https://j8a307.p.ssafy.io/api`;
 
 navigator.geolocation.getCurrentPosition((pos) => {
   const { lat, lng } = locationLoadSuccess(pos);
+  // eslint-disable-next-line
   console.log("위도와 경도를 받아올까용?", lat, lng);
 }, locationLoadError);
 
@@ -27,6 +28,7 @@ function getDistance(lat, lng) {
         dispatch({ type: "GET_DISTANCE_LIST_SUCCESS", payload: { data } });
       })
       .catch((error) => {
+        // eslint-disable-next-line
         console.log(error);
       });
   };
@@ -42,6 +44,7 @@ function getTrans() {
         dispatch({ type: "GET_TRANS_LIST_SUCCESS", payload: { data } });
       })
       .catch((error) => {
+        // eslint-disable-next-line
         console.log(error);
       });
   };
@@ -54,10 +57,12 @@ function getFloatingNfast(userSequence) {
       .get(url)
       .then((response) => {
         const { data } = response;
+        // eslint-disable-next-line
         console.log(data);
         dispatch({ type: "GET_FLOATING_NFAST", payload: { data } });
       })
       .catch((error) => {
+        // eslint-disable-next-line
         console.log("FLOATING ERROR", error);
       });
   };

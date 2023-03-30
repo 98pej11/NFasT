@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -6,6 +7,32 @@ import styled, { keyframes } from "styled-components";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import intro3 from "../../assets/intro3.png";
 // import HighLight from "../commons/HighLight";
+
+export default function Intro2() {
+  return (
+    <ProfilBox>
+      <ContentBox>
+        <Img>
+          <img src={intro2} alt="프로필 이미지" />
+        </Img>
+        <TitleBox>
+          <h3>NFasT로</h3>
+          <h3>입장은 빠르게</h3>
+          <h3>만족은 높게</h3>
+        </TitleBox>
+        <SubTitleBox>
+          <h4>기다림에 지친 손님에게</h4>
+          <h4>더욱 가치있는 서비스를 제공해요!</h4>
+        </SubTitleBox>
+      </ContentBox>
+      <MoreContentIconBox>
+        <Link to="/intro3">
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </Link>
+      </MoreContentIconBox>
+    </ProfilBox>
+  );
+}
 
 const contentUpAnimation = keyframes`
   0% {

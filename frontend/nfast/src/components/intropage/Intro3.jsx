@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -29,7 +30,9 @@ export default function Intro3() {
         </Img>
       </ContentBox>
       <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
+        <Link to="/intro4">
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </Link>
       </MoreContentIconBox>
     </ProfilBox>
   );
