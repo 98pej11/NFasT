@@ -397,12 +397,13 @@ public class StoreMainServiceImpl implements StoreMainService {
 
     // NFasT use_state 변경 (QR 사용, 환불)
     @Override
-    public boolean updateNfast(Byte status, long nfastSequence) {
+    public boolean updateNfast(Byte status, long nfastSequence, long storeSequence) {
         Nfast nfast = nfastRepository.findAllByNfastSequence(nfastSequence);
         Byte useState = nfast.getNfastUseState();
-
+        Store store = nfast.getStoreSequence();
+        long sq=store.getStoreSequence();
         // 미사용 nfast인게 맞으면 nfastUseState를 1로 변경하여 사용 처리
-        if (useState == 0) {
+        if (useState == 0 && sq==storeSequence) {
             nfast.setNfastUseState(status);
             nfastRepository.save(nfast);
             return true;
