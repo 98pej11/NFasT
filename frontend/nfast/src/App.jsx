@@ -54,7 +54,7 @@ function App() {
             <Route path="/mytrans" element={<MyTransPage />} />
             <Route path="/mybookmark" element={<MyBookmarkPage />} />
             <Route path="/myinfo" element={<MyInfoPage />} />
-            <Route path="/store" element={<StorePage />} />
+            <Route path="/store/:storeSequence" element={<StorePage />} />
             <Route path="/loginCustomer" element={<LoginCustomer />} />
             <Route path="/loginSeller" element={<LoginSeller />} />
             <Route path="/sellerPage" element={<SellerPage />} />

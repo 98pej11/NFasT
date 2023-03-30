@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import StoreInfo from "../../components/storepage/StoreInfo";
 import StoreReview from "../../components/storepage/StoreReview";
@@ -6,6 +7,38 @@ import StoreChart from "../../components/storepage/StoreChart";
 // import KakaoMap from "../../components/storepage/KakaoMap";
 import KaKaoMap from "../../components/storepage/KaKaoMap";
 import StoreNav from "../../components/storepage/StoreNav";
+
+function StorePage() {
+  // eslint-disable-next-line react/destructuring-assignment, react/prop-types
+  const { storeSequence } = useParams();
+  console.log(`${storeSequence}이 드러와따`);
+
+  return (
+    <div>
+      <Wrapper>
+        <StoreInfo storeSequence={storeSequence} />
+        <Divider />
+        <Review />
+        <Divider />
+        <Graph>
+          <Chart />
+        </Graph>
+        <Divider />
+        <h4>지도</h4>
+        <MapWrapper>
+          <Map>
+            <KaKaoMap />
+          </Map>
+        </MapWrapper>
+        <Footer>
+          <StoreNav />
+        </Footer>
+      </Wrapper>
+    </div>
+  );
+}
+
+export default StorePage;
 
 const Wrapper = styled.div`
   display: flex;
@@ -60,31 +93,3 @@ const Footer = styled.div`
   width: 100%;
   z-index: 1; /* Set z-index to 1 */
 `;
-
-function StorePage() {
-  return (
-    <div>
-      <Wrapper>
-        <StoreInfo />
-        <Divider />
-        <Review />
-        <Divider />
-        <Graph>
-          <Chart />
-        </Graph>
-        <Divider />
-        <h4>지도</h4>
-        <MapWrapper>
-          <Map>
-            <KaKaoMap />
-          </Map>
-        </MapWrapper>
-        <Footer>
-          <StoreNav />
-        </Footer>
-      </Wrapper>
-    </div>
-  );
-}
-
-export default StorePage;
