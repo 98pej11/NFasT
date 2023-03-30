@@ -114,6 +114,7 @@ function userConfirm(wallet) {
           dispatch({ type: "SET_IS_LOGIN", payload: true });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: true });
           dispatch({ type: "SET_IS_LOGIN_ERROR", payload: false });
+          dispatch({ type: "GET_USER_INFO_SUCCESS", payload: sequence });
 
           setAccessToken(jwtAuthToken);
           setRefreshToken(jwtRefreshToken);
@@ -154,6 +155,8 @@ function storeConfirm(wallet) {
           dispatch({ type: "SET_IS_LOGIN", payload: true });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: true });
           dispatch({ type: "SET_IS_LOGIN_ERROR", payload: false });
+          console.log(data);
+          dispatch({ type: "GET_USER_INFO_SUCCESS", payload: sequence });
 
           setAccessToken(jwtAuthToken);
           setRefreshToken(jwtRefreshToken);
@@ -198,6 +201,8 @@ function storeRegister(storeWallet, store) {
           dispatch({ type: "SET_IS_LOGIN", payload: true });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: true });
           dispatch({ type: "SET_IS_LOGIN_ERROR", payload: false });
+
+          dispatch({ type: "GET_USER_INFO_SUCCESS", payload: sequence });
 
           setAccessToken(jwtAuthToken);
           setRefreshToken(jwtRefreshToken);
