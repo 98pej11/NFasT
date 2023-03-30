@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import QRCode from "react-qr-code";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
@@ -145,7 +146,7 @@ function NFastCard() {
     nfastStartTime,
     nfastEndTime,
     nfastPrice,
-    nfastQr,
+    // nfastQr,
   } = floatingNfast;
   const [drawer1Open, setDrawer1Open] = useState(false);
   const [drawer2Open, setDrawer2Open] = useState(false);
@@ -260,7 +261,16 @@ function NFastCard() {
             </MyDrawer>
           </div>
         </Info>
-        <QR>{nfastQr}</QR>
+        <QR>
+          <QRCode
+            value={JSON.stringify({
+              nfastSequence: 56,
+              type: 1,
+            })}
+            size="100"
+            style={{ fgColor: "#000123" }}
+          />
+        </QR>
       </Ticket>
     </Wrapper>
   );

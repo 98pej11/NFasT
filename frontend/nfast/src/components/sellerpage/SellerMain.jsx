@@ -12,6 +12,7 @@ import SellerMaked from "./makedpage/SellerMaked";
 import SellerMypage from "./mypage/SellerMypage";
 import { mypageAction } from "../../redux/actions/mypageAction";
 import { getSequence } from "../../storage/Cookie";
+import FloatingBtnSeller from "../commons/FloatingBtnSeller";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -112,6 +113,9 @@ export default function SellerMain() {
           <SellerMypage />
         </TabPanel>
       </Box>
+      <div>
+        <FloatingBtnSeller>floating</FloatingBtnSeller>
+      </div>
     </Header>
   );
 }

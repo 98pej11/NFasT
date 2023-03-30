@@ -131,17 +131,18 @@ function FutureTicket({
 FutureTicket.defaultProps = {
   storeName: "가게이름",
   nfastDate: "날짜",
-  nfastStartTime: "시작시간",
-  nfastEndTime: "종료시간",
+  nfastStartTime: "0",
+  nfastEndTime: "0",
   nfastPrice: 0,
   nfastQr: "qr",
 };
 FutureTicket.propTypes = {
   storeName: PropTypes.string,
   nfastDate: PropTypes.string,
-  nfastStartTime: PropTypes.number,
-  nfastEndTime: PropTypes.number,
+  nfastStartTime: PropTypes.string,
+  nfastEndTime: PropTypes.string,
   nfastPrice: PropTypes.number,
-  nfastQr: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  nfastQr: PropTypes.object,
 };
 export default FutureTicket;
