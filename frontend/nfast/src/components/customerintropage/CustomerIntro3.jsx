@@ -5,6 +5,7 @@ import styled, { keyframes } from "styled-components";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import intro2 from "../../assets/intro4.png";
+import intro21 from "../../assets/intro4_1.png";
 // import HighLight from "../commons/HighLight";
 
 const contentUpAnimation = keyframes`
@@ -26,27 +27,28 @@ const contentUpAnimation = keyframes`
 const Text = styled.div`
   display: flex;
   flex-direction: column;
+  h4 {
+    font-size: 20px;
+    width: 170px;
+  }
+  span {
+    font-size: 16px;
+    width: 200px;
+    margin-bottom: 10px;
+  }
 `;
 const ContentBox = styled.div`
   width: 100%;
   height: 65%;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
-    height: 60%;
-  }
 `;
 const Img = styled.div`
   img {
-    width: 150px;
-    height: 150px;
-
-    opacity: 80%;
-  }
-  @media screen and (max-width: 200px) {
-    width: 200px;
-    height: 250px;
+    width: 80px;
+    height: 140px;
   }
 `;
 const ProfilBox = styled.div`
@@ -61,18 +63,13 @@ const TitleBox = styled.div`
   line-height: 1rem;
   z-index: 1;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 20px;
-    line-height: 10px;
-  }
 `;
 const SubTitleBox = styled.div`
+  display: flex;
+  flex-direction: column;
   font-size: 0.9rem;
   line-height: 0.8rem;
   animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 18px;
-  }
 `;
 const downIconAnimation = keyframes`
     0% {
@@ -107,10 +104,13 @@ export default function Intro2() {
             <h4>사고 팔면 되니까~</h4>
           </TitleBox>
           <SubTitleBox>
-            <h4>구매한 NFasT는</h4>
-            <h4>개인간의 거래가 가능해요!</h4>
+            <span>구매한 NFasT는</span>
+            <span>개인간의 거래가 가능해요!</span>
           </SubTitleBox>
         </Text>
+        <Img>
+          <img src={intro21} alt="프로필 이미지" />
+        </Img>
         <Img>
           <img src={intro2} alt="프로필 이미지" />
         </Img>

@@ -5,7 +5,7 @@ import styled, { keyframes } from "styled-components";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import intro2 from "../../assets/intro2.png";
+import intro3 from "../../assets/intro3.png";
 // import HighLight from "../commons/HighLight";
 
 export default function Intro2() {
@@ -49,57 +49,55 @@ const contentUpAnimation = keyframes`
             transform-origin: 50% 50%;
   }
 `;
-const Img = styled.div`
-  img {
-    width: 350px;
-    height: 400px;
-    position: absolute;
-    top: 10vw;
-    left: 30vw;
-    opacity: 80%;
-  }
-  @media screen and (max-width: 200px) {
-    width: 200px;
-    height: 250px;
-  }
-`;
 const ContentBox = styled.div`
   width: 100%;
-  height: 65%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
-    height: 60%;
+`;
+const Text = styled.div`
+  h4 {
+    font-size: 20px;
+    width: 130px;
+  }
+  span {
+    font-size: 15px;
+    width: 220px;
+    margin-bottom: 3px;
   }
 `;
+const Img = styled.div`
+  img {
+    width: 200px;
+    height: 130px;
+  }
+`;
+
 const ProfilBox = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
   margin: 10%;
-  position: relative; /* contact box 고정시키기위해서 */
 `;
 const TitleBox = styled.div`
-  font-size: 1.4rem;
-  line-height: 1rem;
-  position: relative; /* 포지션 설정 */
-  z-index: 1;
+  display: flex;
+  align-items: center;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 20px;
-    line-height: 10px;
+  h4 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 `;
 const SubTitleBox = styled.div`
-  font-size: 0.9rem;
-  line-height: 0.8rem;
-  animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  span {
+    width: 100%;
+    text-align: end;
   }
+  animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
 `;
 const downIconAnimation = keyframes`
     0% {
@@ -123,3 +121,32 @@ const MoreContentIconBox = styled.div`
   animation-iteration-count: infinite;
   animation-direction: alternate;
 `;
+
+export default function Intro2() {
+  return (
+    <ProfilBox>
+      <ContentBox>
+        <Text>
+          <TitleBox>
+            <Img>
+              <img src={intro3} alt="프로필 이미지" />
+            </Img>
+            <div>
+              <h4>NFasT로</h4>
+              <h4>입장은 빠르게 </h4>
+              <h4>만족은 높게</h4>
+            </div>
+          </TitleBox>
+
+          <SubTitleBox>
+            <span>기다림에 지친 손님에게</span>
+            <span>더욱 가치있는 서비스를 제공해요!</span>
+          </SubTitleBox>
+        </Text>
+      </ContentBox>
+      <MoreContentIconBox>
+        <KeyboardDoubleArrowDownIcon fontSize="large" />
+      </MoreContentIconBox>
+    </ProfilBox>
+  );
+}

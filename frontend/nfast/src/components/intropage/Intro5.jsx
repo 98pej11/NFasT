@@ -1,29 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faGithub } from "@fortawesome/free-brands-svg-icons";
-// import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import intro5 from "../../assets/intro5.png";
-// import HighLight from "../commons/HighLight";
+import SellerIncome from "../../assets/SellerIncome.png";
 
 export default function Intro5() {
   return (
     <ProfilBox>
       <ContentBox>
+        <Text>
+          <TitleBox>
+            <h4>NFasT를 이용하는</h4>
+            <h4>사장님들의</h4>
+            <h4>평균 수입이에요!</h4>
+          </TitleBox>
+          <SubTitleBox>
+            <span>하루 평균</span>
+            <span>= 2825.15 Eth 수익이 발생해요 </span>
+          </SubTitleBox>
+        </Text>
         <Img>
-          <img src={intro5} alt="프로필 이미지" />
+          <img src={SellerIncome} alt="프로필 이미지" />
         </Img>
-        <TitleBox>
-          <h3>NFasT를 이용하는</h3>
-          <h3>사장님들의</h3>
-          <h3>평균 수입이에요!</h3>
-        </TitleBox>
-        <SubTitleBox>
-          <h4>하루 평균</h4>
-          <h4>000원의 수익이 발생해요 </h4>
-        </SubTitleBox>
       </ContentBox>
       <MoreContentIconBox>
         <Link to="/intro6">
@@ -35,20 +33,12 @@ export default function Intro5() {
 }
 const Img = styled.div`
   img {
-    width: 350px;
-    height: 400px;
-    position: absolute;
-    top: 10vw;
-    left: 35vw;
+    width: 120px;
+    height: 70px;
     opacity: 80%;
-  }
-  @media screen and (max-width: 200px) {
-    width: 200px;
-    height: 250px;
   }
 `;
 const ProfilBox = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -75,37 +65,33 @@ const contentUpAnimation = keyframes`
 
 const ContentBox = styled.div`
   width: 100%;
-  height: 65%;
+  height: 100%;
   display: flex;
-
-  // margin-left: 7%;
-  // margin-top: 25%;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
-    height: 60%;
+`;
+
+const Text = styled.div`
+  h4 {
+    font-size: 20px;
+    width: 170px;
+  }
+  span {
+    font-size: 15px;
+    width: 220px;
+    margin-bottom: 3px;
   }
 `;
 
 const TitleBox = styled.div`
-  font-size: 1.4rem;
-  line-height: 1rem;
-  position: relative; /* 포지션 설정 */
-  z-index: 1;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 20px;
-    line-height: 10px;
-  }
 `;
 const SubTitleBox = styled.div`
-  font-size: 0.9rem;
-  line-height: 0.8rem;
+  display: flex;
+  flex-direction: column;
   animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 18px;
-  }
 `;
 const downIconAnimation = keyframes`
     0% {

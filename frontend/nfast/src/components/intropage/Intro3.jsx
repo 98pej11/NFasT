@@ -5,27 +5,29 @@ import styled, { keyframes } from "styled-components";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import intro3 from "../../assets/intro3.png";
+import intro2 from "../../assets/intro2.png";
 // import HighLight from "../commons/HighLight";
 
 export default function Intro3() {
   return (
     <ProfilBox>
       <ContentBox>
+        <Text>
+          <TitleBox>
+            <h4>우선권을 구매한</h4>
+            <h4>특별한 손님만이 </h4>
+            <h4> 이용할 수 있어요</h4>
+          </TitleBox>
+          <SubTitleBox>
+            <span>NFasT 서비스의 품질을 위해</span>
+            <span>발행 수의 제한이 있어요</span>
+            <span>이쯤에서, </span>
+            <span>수익에 대한 의문이 드시나요?</span>
+          </SubTitleBox>
+        </Text>
         <Img>
-          <img src={intro3} alt="" />
+          <img src={intro2} alt="" />
         </Img>
-        <TitleBox>
-          <h3>우선권을 구매한</h3>
-          <h3>특별한 손님만이 </h3>
-          <h3> 이용할 수 있어요</h3>
-        </TitleBox>
-        <SubTitleBox>
-          <h4>NFasT 서비스의 품질을 위해</h4>
-          <h4>발행 수의 제한이 있어요</h4>
-          <h4>이쯤에서, </h4>
-          <h4>수익에 대한 의문이 드시나요?</h4>
-        </SubTitleBox>
       </ContentBox>
       <MoreContentIconBox>
         <Link to="/intro4">
@@ -37,26 +39,16 @@ export default function Intro3() {
 }
 const Img = styled.div`
   img {
-    width: 280px;
-    height: 300px;
-    position: absolute;
-    top: 20vw;
-    left: 35vw;
-    opacity: 80%;
-  }
-  @media screen and (max-width: 200px) {
-    width: 200px;
-    height: 250px;
+    width: 120px;
+    height: 140px;
   }
 `;
 const ProfilBox = styled.div`
-  height: 100vh;
+  width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  margin: 10%;
   justify-content: center;
-  position: relative; /* contact box 고정시키기위해서 */
+  align-items: center;
 `;
 
 const contentUpAnimation = keyframes`
@@ -77,24 +69,24 @@ const contentUpAnimation = keyframes`
 
 const ContentBox = styled.div`
   width: 100%;
-  height: 65%;
   display: flex;
-
-  // margin-left: 7%;
-  // margin-top: 25%;
-  flex-direction: column;
-
+  align-items: center;
+  justify-content: center;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
-  @media screen and (max-width: 682px) {
-    height: 60%;
+`;
+const Text = styled.div`
+  h4 {
+    font-size: 20px;
+    width: 145px;
+  }
+  span {
+    font-size: 15px;
+    width: 200px;
+    margin-bottom: 3px;
   }
 `;
 
 const TitleBox = styled.div`
-  font-size: 1.4rem;
-  line-height: 1rem;
-  position: relative; /* 포지션 설정 */
-  z-index: 1;
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
   @media screen and (max-width: 200px) {
     font-size: 20px;
@@ -102,12 +94,10 @@ const TitleBox = styled.div`
   }
 `;
 const SubTitleBox = styled.div`
-  font-size: 0.9rem;
-  line-height: 0.8rem;
+  display: flex;
+  flex-direction: center;
+  flex-direction: column;
   animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
-  @media screen and (max-width: 200px) {
-    font-size: 18px;
-  }
 `;
 const downIconAnimation = keyframes`
     0% {
