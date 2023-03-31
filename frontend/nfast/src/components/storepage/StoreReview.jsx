@@ -10,23 +10,16 @@ import reviewVeiw from "../../assets/Review_view.png";
 
 function StoreReview(props) {
   // eslint-disable-next-line react/prop-types
-  const {
-    reviewTime,
-    cntTime,
-    reviewConvenience,
-    cntConvenience,
-    reviewService,
-    cntService,
-    reviewMood,
-    cntMood,
-  } = props;
+  const { review } = props;
+  // eslint-disable-next-line
+  console.log("내가리뷰야", review);
   return (
     <Chips>
       <h4>리뷰</h4>
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label={`${reviewTime} ${cntTime}`}
+            label={`${review.reviewTime[0]} ${review.reviewTime[1]}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewTimer} alt="d" />}
@@ -34,7 +27,7 @@ function StoreReview(props) {
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label={`${reviewConvenience} ${cntConvenience}`}
+            label={`${review.reviewConvenience[0]} ${review.reviewConvenience[1]}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewParking} alt="d" />}
@@ -44,7 +37,7 @@ function StoreReview(props) {
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label={`${reviewService} ${cntService}`}
+            label={`${review.reviewService[0]} ${review.reviewService[1]}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewKind} alt="d" />}
@@ -52,7 +45,7 @@ function StoreReview(props) {
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label={`${reviewMood} ${cntMood}`}
+            label={`${review.reviewMood[0]} ${review.reviewMood[1]}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewVeiw} alt="d" />}
