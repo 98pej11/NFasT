@@ -182,7 +182,6 @@ function NFastCard() {
               <Button variant="contained" onClick={toggleDrawer1}>
                 판매하기
               </Button>
-
               <Button variant="contained" onClick={toggleDrawer2}>
                 환불하기
               </Button>

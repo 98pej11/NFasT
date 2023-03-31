@@ -40,14 +40,14 @@ export default function StorePage() {
           />
           <Divider />
           <Review
-            reviewTime={storedetail.review.reviewTime[0]}
-            cntTime={storedetail.review.reviewTime[1]}
-            reviewConvenience={storedetail.review.reviewConvenience[0]}
-            cntConvenience={storedetail.review.reviewConvenience[1]}
-            reviewService={storedetail.review.reviewService[0]}
-            cntService={storedetail.review.reviewService[1]}
-            reviewMood={storedetail.review.reviewMood[0]}
-            cntMood={storedetail.review.reviewMood[1]}
+            reviewTime={storedetail.review.reviewTime}
+            cntTime={storedetail.review.reviewTime}
+            reviewConvenience={storedetail.review.reviewConvenience}
+            cntConvenience={storedetail.review.reviewConvenience}
+            reviewService={storedetail.review.reviewService}
+            cntService={storedetail.review.reviewService}
+            reviewMood={storedetail.review.reviewMood}
+            cntMood={storedetail.review.reviewMood}
           />
           <Divider />
           <Graph>
