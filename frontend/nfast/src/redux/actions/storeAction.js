@@ -19,13 +19,19 @@ function getStoreDetail(storeSequence) {
   };
 }
 
-function writeReview(storeSequence, reviewData) {
-  console.log(storeSequence);
-  console.log(reviewData);
+function writeReview(storesequence, userSequence, reviews) {
+  console.log(storesequence);
+  console.log(reviews);
+  const data = {
+    storeSequence: storesequence,
+    userSequence,
+    reviews,
+  };
+  console.log(data);
   return async () => {
-    const url = `${baseUrl}/review-count/${storeSequence}`;
+    const url = `${baseUrl}/review-count/${storesequence}`;
     await axios
-      .post(url, JSON.stringify(reviewData), {
+      .post(url, JSON.stringify(data), {
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
