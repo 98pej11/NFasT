@@ -1,61 +1,40 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import styled from "styled-components";
 import Chip from "@mui/material/Chip";
 import DoneIcon from "@mui/icons-material/Done";
-import reviewTime from "../../assets/Review_time.png";
+import reviewTimer from "../../assets/Review_timer.png";
 import reviewParking from "../../assets/Review_parking.png";
 import reviewKind from "../../assets/Review_kind.png";
 import reviewVeiw from "../../assets/Review_view.png";
 
-const Chips = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const AlignChip = styled.div`
-  width: 100%;
-  margin: 10px;
-  display: flex;
-  justify-content: center;
-`;
-
-const Wrapper = styled.div`
-  margin: 0px 3px;
-`;
-
-const StyledChip = styled(Chip)`
-  padding: 10px;
-  width: 150px;
-  .MuiChip-label {
-    font-size: 11px;
-  }
-`;
-
-function ReviewButton() {
-  const handleClick = () => {
-    // eslint-disable-next-line no-console
-    console.log("You clicked the Chip.");
-  };
-
+function StoreReview(props) {
+  // eslint-disable-next-line react/prop-types
+  const {
+    reviewTime,
+    cntTime,
+    reviewConvenience,
+    cntConvenience,
+    reviewService,
+    cntService,
+    reviewMood,
+    cntMood,
+  } = props;
   return (
     <Chips>
       <h4>리뷰</h4>
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label="바로 들어갔어요 14"
-            onClick={handleClick}
+            label={`${reviewTime} ${cntTime}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
-            avatar={<img src={reviewTime} alt="d" />}
+            avatar={<img src={reviewTimer} alt="d" />}
           />
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label="주차하기 편해요 22"
-            onClick={handleClick}
+            label={`${reviewConvenience} ${cntConvenience}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewParking} alt="d" />}
@@ -65,8 +44,7 @@ function ReviewButton() {
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label="친절해요 15"
-            onClick={handleClick}
+            label={`${reviewService} ${cntService}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewKind} alt="d" />}
@@ -74,8 +52,7 @@ function ReviewButton() {
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label="뷰가 좋아요 23"
-            onClick={handleClick}
+            label={`${reviewMood} ${cntMood}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewVeiw} alt="d" />}
@@ -86,4 +63,27 @@ function ReviewButton() {
   );
 }
 
-export default ReviewButton;
+export default StoreReview;
+const Chips = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const AlignChip = styled.div`
+  width: 95%;
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Wrapper = styled.div`
+  margin: 0px 3px;
+`;
+
+const StyledChip = styled(Chip)`
+  width: 180px;
+  .MuiChip-label {
+    font-size: 11px;
+  }
+`;
