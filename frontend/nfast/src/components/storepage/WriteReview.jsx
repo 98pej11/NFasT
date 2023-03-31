@@ -47,9 +47,9 @@ const StyleBtn = styled.div`
 `;
 export default function WriteReview() {
   const dispatch = useDispatch();
-  const { storesequence } = useParams();
+  const { storeSequence } = useParams();
   const [inputs, setInputs] = useState({
-    storeSequence: storesequence,
+    storeSequence,
     userSequence: getSequence(),
     reviews: {
       reviewTime: [],
@@ -59,8 +59,20 @@ export default function WriteReview() {
     },
   });
   const handleSubmit = () => {
-    console.log(inputs);
-    dispatch(storeAction.writeReview(inputs));
+    if (
+      inputs.reviews.reviewTime === null ||
+      inputs.reviews.reviewConvenience === null ||
+      inputs.reviews.reviewService === null ||
+      inputs.reviews.reviewMood === null
+    ) {
+      // eslint-disable-next-line no-alert
+      alert("리뷰 작성을 완료해주세요");
+    } else {
+      console.log(storeSequence);
+      dispatch(
+        storeAction.writeReview(storeSequence, getSequence(), inputs.reviews)
+      );
+    }
   };
   const handleTime = (event) => {
     const selectedValue = event.target.value;
@@ -206,7 +218,7 @@ export default function WriteReview() {
               <img src={reviewKind} alt="d" />
               서비스
             </FormLabel>
-            <RadioGroup defaultValue="0" onChange={handleService}>
+            <RadioGroup onChange={handleService}>
               <FormControlLabel
                 value="0"
                 control={<Radio />}
