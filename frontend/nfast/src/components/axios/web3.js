@@ -1651,7 +1651,7 @@ const ssafyTokenCA = "0x08B794e4Cabd52df6697476f70BBcD050BBEb47e";
 // }
 
 // overrides metamask v0.2 for our v 1.0
-export const web3 = new Web3(window.web3.currentProvider);
+export const web3 = new Web3(window.ethereum);
 
 // export default web3;
 
