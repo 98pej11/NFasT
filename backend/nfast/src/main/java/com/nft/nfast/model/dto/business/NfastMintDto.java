@@ -23,6 +23,7 @@ public class NfastMintDto {
     private int nfastSupply;
     private String nfastEigenvalue;
     private List<String> nfastHash;
+//    private List<String> nfastTokenId;
     private List<String> nfastQr;
     private List<String> nfastRefundQr;
     private Byte nfastMealType;

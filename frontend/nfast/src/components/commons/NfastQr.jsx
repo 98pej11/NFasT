@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { QrReader } from "react-qr-reader";
 import styled from "styled-components";
+// import { mypageAction } from "../../redux/actions/mypageAction";
+import { getSequence } from "../../storage/Cookie";
 import { publishAction } from "../../redux/actions/publishAction";
 // import NFastCard from "./NFastCard";
 
@@ -12,10 +14,11 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Cards = styled.div`
+const QR = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
+  aling-items: center;
   top: 0;
 `;
 
@@ -25,16 +28,18 @@ function NfastQr() {
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [data, setData] = useState("");
+
   // const storeSequence;
   const handleScan = async (scanData) => {
     setLoadingScan(true);
     console.log(`loaded data data`, scanData);
+    const sq = getSequence();
     if (scanData && scanData !== "") {
       console.log(`loaded >>>`, scanData);
-
+      console.log(sq);
       // storeSequence=scanData
       setData(scanData.text);
-      dispatch(publishAction.checkQR(scanData.text));
+      dispatch(publishAction.checkQR(scanData.text, sq));
       setStartScan(false);
       setLoadingScan(false);
       // setPrecScan(scanData);
@@ -45,7 +50,7 @@ function NfastQr() {
   };
   return (
     <Wrapper>
-      <Cards>
+      <QR>
         <div>
           <h1>QR코두 스캔해보쟈~</h1>
           <button
@@ -75,7 +80,7 @@ function NfastQr() {
           {loadingScan && <p>Loading</p>}
           {data !== "" && <p>{data}</p>}
         </div>
-      </Cards>
+      </QR>
     </Wrapper>
   );
 }

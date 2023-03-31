@@ -49,7 +49,7 @@ function getIncomeList(storeSequence) {
   };
 }
 
-function checkQR(nfastInfo) {
+function checkQR(nfastInfo, storeSequence) {
   const { nfastSequence, type } = JSON.parse(nfastInfo);
   // const nfastSequence = info.nfastSequence;
   // const type = info.type;
@@ -57,7 +57,9 @@ function checkQR(nfastInfo) {
   return async () => {
     // const url = `http://localhost:8080/api/owner`;
     await axios
-      .patch(`http://localhost:8080/api/owner/qr/${type}/${nfastSequence}`)
+      .patch(
+        `http://localhost:8080/api/owner/qr/${storeSequence}/${type}/${nfastSequence}`
+      )
       .then((response) => {
         const { data } = response;
         // dispatch({type: "GET_CHECKQR_SUCCESS", payload: {data}});

@@ -21,6 +21,7 @@ public interface UserMainService {
     void saveTradeNfast(NfastTradeDoneDto nfastTradeDoneDto);
     void saveBookmark(long storeSeqeuence, long useSequence);
     void deleteBookmark(long storeSeqeuence, long useSequence);
+    Byte isMyBookmark(long storeSequence, long userSequence);
     StoreDetailDto findStoreDetail(long storeSequence);
     BigDecimal findNfastPrice(long nfastSequence);
     void saveReview(ReviewGetDto reviewGetDto);
@@ -31,9 +32,7 @@ public interface UserMainService {
     List<StoreDto> findAllDistanceRecommendation(String lat, String lng);
     TokenDto userLogin(String wallet);
     void logout(String wallet);
-
     NfastGetDto findNowAvailableNfast(long userSequence);
-
     UserDto userDetail(long userSequence);
     void userModify(UserDto user);
 
