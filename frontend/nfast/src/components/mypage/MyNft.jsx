@@ -94,7 +94,7 @@ function MyNft() {
                   nfastQr={
                     <QRCode
                       value={JSON.stringify({
-                        nfastSequence: nfast.nfastSequence,
+                        nfastSequence: 1,
                         type: 1,
                       })}
                       size="100"
