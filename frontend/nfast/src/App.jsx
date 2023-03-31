@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { useMediaQuery } from "@mui/material";
 import NFastCard from "./components/commons/NFastCard";
 import FloatingBtn from "./components/commons/FloatingBtn";
 import IntroSeller1 from "./pages/seller/IntroSeller1";
@@ -34,15 +35,15 @@ const Pages = styled.div`
   // margin-right: 10%;
   position: relative;
 `;
-// const IntroPage = styled.div`
-//   // margin-top: 80px;
-//   // margin-left: 10%;
-//   // margin-right: 10%;
-//   position: relative;
-// `;
+const Wrapper = styled.div`
+  @media (max-width: 412px) {
+    width: 100%;
+    max-width: 412px;
+  }
+`;
 function App() {
   return (
-    <div>
+    <Wrapper>
       <BrowserRouter>
         <Header />
         <Pages>
@@ -74,7 +75,7 @@ function App() {
         </Pages>
         {/* <Footer /> */}
       </BrowserRouter>
-    </div>
+    </Wrapper>
   );
 }
 export default App;
