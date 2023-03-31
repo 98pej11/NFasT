@@ -19,9 +19,18 @@ export default function SearchBar() {
   }, []);
 
   const [inputValue, setInputValue] = useState("");
+  const [clickedName, setClickedName] = useState("");
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [dropDownList, setDropDownList] = useState(wholeTextArray);
   const [dropDownItemIndex, setDropDownItemIndex] = useState(-1);
+
+  let StoreSequence = 0;
+  const getStoreSequence = () => {
+    const store = searchList.find((store) => store.storeName === clickedName);
+    if (store) {
+      StoreSequence = store.storeSequence;
+    }
+  };
 
   const showDropDownList = () => {
     if (inputValue === "") {
@@ -42,6 +51,9 @@ export default function SearchBar() {
 
   const clickDropDownItem = (clickedItem) => {
     setInputValue(clickedItem);
+    setClickedName(inputValue);
+    getStoreSequence();
+    console.log(`${StoreSequence}`);
     setIsHaveInputValue(false);
   };
 
@@ -171,8 +183,8 @@ const DropDownBox = styled.ul`
 `;
 
 const DropDownItem = styled.li`
-  font-size: 12px;
-  padding: 0 16px;
+  font-size: 15px;
+  padding: 12px 7px;
 
   &.selected {
     background-color: lightgray;
