@@ -78,13 +78,13 @@ export default function SearchBar() {
 
   return (
     <WholeBox>
-      <div>제목</div>
       <InputBox isHaveInputValue={isHaveInputValue}>
         <Input
           type="text"
           value={inputValue}
           onChange={changeInputValue}
           onKeyUp={handleDropDownKey}
+          placeholder="맛집을 검색하세요"
         />
         <DeleteButton onClick={() => setInputValue("")}>&times;</DeleteButton>
       </InputBox>
@@ -117,14 +117,15 @@ const activeBorderRadius = "16px 16px 0 0";
 const inactiveBorderRadius = "16px 16px 16px 16px";
 
 const WholeBox = styled.div`
-  padding: 10px;
+  width: 180px;
+  padding: 5px;
 `;
 
 const InputBox = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border: 1px solid #bcb6ff;
   border-radius: ${(props) =>
     props.isHaveInputValue ? activeBorderRadius : inactiveBorderRadius};
   z-index: 3;
@@ -135,6 +136,7 @@ const InputBox = styled.div`
 `;
 
 const Input = styled.input`
+  width: 100%;
   flex: 1 0 0;
   margin: 0;
   padding: 0;
@@ -142,16 +144,17 @@ const Input = styled.input`
   color: black;
   border: none;
   outline: none;
-  font-size: 16px;
+  color: #6c509f;
+  font-size: 14px;
 `;
 
 const DeleteButton = styled.div`
-  color: black;
+  color: #bcb6ff;
   cursor: pointer;
 `;
 
 const DropDownBox = styled.ul`
-  color: black;
+  color: #6c509f;
   display: block;
   margin: 0 auto;
   padding: 8px 0;
@@ -163,11 +166,12 @@ const DropDownBox = styled.ul`
   list-style-type: none;
   z-index: 3;
   position: absolute; /* set a fixed position */
-  top: 75px; /* adjust the top position as needed */
-  width: 258px;
+  top: 60px; /* adjust the top position as needed */
+  width: 178px;
 `;
 
 const DropDownItem = styled.li`
+  font-size: 12px;
   padding: 0 16px;
 
   &.selected {
