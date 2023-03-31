@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from "axios";
 
 const baseUrl = `https://j8a307.p.ssafy.io/api`;
@@ -18,21 +19,22 @@ function getSearchList() {
   };
 }
 
-// function getStoreDetail(storeSequence) {
-//   return async((dispatch) => {
-//     const url = `${baseUrl}/main/search-list/store/${storeSequence}`;
-//     await axios
-//     .get(url)
-//     .then((response)=>{
-//       const {data} = response;
-//       dispatch({type:"GET_STORE_DETAIL",payload:{data}});
-//     }).catch((error)=> {
-//       console.log("GETSTORE ERROR",error)
-//     })
-//   });
-// }
+function getSearchLink(storeSequence) {
+  return async (dispatch) => {
+    const url = `${baseUrl}/main/search-list/store/${storeSequence}`;
+    await axios
+      .get(url)
+      .then((response) => {
+        const { data } = response;
+        dispatch({ type: "GET_SEARCH_LINK", payload: { data } });
+      })
+      .catch((error) => {
+        console.log("GETSEARCHLIST ERROR", error);
+      });
+  };
+}
 
 export const searchAction = {
   getSearchList,
-  // git
+  getSearchLink,
 };

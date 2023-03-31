@@ -1,5 +1,6 @@
 const initialState = {
   searchList: [],
+  searchLinkStore: "",
 };
 
 function searchReducer(state = initialState, action = {}) {
@@ -11,5 +12,14 @@ function searchReducer(state = initialState, action = {}) {
       return { ...state };
   }
 }
+
+// fuction searchStoreReducer(state = initialState , action={}) {
+// const {type , payload} = action;
+// switch (type){
+//   case "GET_STORE_DETAIL":
+//     return {...state,searchLinkStore:payload.data.s}
+// }
+
+// }
 
 export default searchReducer;
