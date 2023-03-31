@@ -18,6 +18,21 @@ function getSearchList() {
   };
 }
 
+// function getStoreDetail(storeSequence) {
+//   return async((dispatch) => {
+//     const url = `${baseUrl}/main/search-list/store/${storeSequence}`;
+//     await axios
+//     .get(url)
+//     .then((response)=>{
+//       const {data} = response;
+//       dispatch({type:"GET_STORE_DETAIL",payload:{data}});
+//     }).catch((error)=> {
+//       console.log("GETSTORE ERROR",error)
+//     })
+//   });
+// }
+
 export const searchAction = {
   getSearchList,
+  // git
 };
