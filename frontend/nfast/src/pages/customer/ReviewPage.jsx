@@ -1,11 +1,11 @@
 import React from "react";
 // import styled from "styled-components";
-import MyReview from "../../components/mypage/MyReview";
+import WriteReview from "../../components/storepage/WriteReview";
 
 export default function ReviewPage() {
   return (
     <div>
-      <MyReview />
+      <WriteReview />
     </div>
   );
 }

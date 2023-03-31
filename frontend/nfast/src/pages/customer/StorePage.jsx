@@ -15,7 +15,7 @@ export default function StorePage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(storeAction.getStoreDetail(storeSequence));
+    dispatch(storeAction.writeReview(storeSequence));
   }, []);
 
   const storedetail = useSelector(
