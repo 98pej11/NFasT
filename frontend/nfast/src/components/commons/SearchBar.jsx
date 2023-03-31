@@ -52,9 +52,9 @@ export default function SearchBar() {
   const clickDropDownItem = (clickedItem) => {
     setInputValue(clickedItem);
     setClickedName(inputValue);
-    setIsHaveInputValue(false);
     getStoreSequence();
-    console.log(StoreSequence);
+    console.log(`${StoreSequence}`);
+    setIsHaveInputValue(false);
   };
 
   const handleDropDownKey = (event) => {

@@ -9,6 +9,7 @@ import Pagination from "@mui/material/Pagination";
 import { getSequence } from "../../storage/Cookie";
 import { mypageAction } from "../../redux/actions/mypageAction";
 // import FastTicket from "../commons/PastTicket";
+import PastTicket from "../commons/PastTicket";
 import FutureTicket from "../commons/FutureTicket";
 
 const Wrapper = styled.div`
@@ -20,6 +21,10 @@ const Wrapper = styled.div`
 // const Ticket1 = styled(PastTicket)`
 //   flex: 1;
 // `;
+
+const Ticket1 = styled(PastTicket)`
+  flex: 1;
+`;
 
 const Ticket2 = styled(FutureTicket)`
   flex: 1;
@@ -127,7 +132,7 @@ function MyNft() {
           unavailableNfasts.map((nfast) => {
             return (
               <Tickets>
-                <Ticket2
+                <Ticket1
                   storeName={nfast.storeName}
                   nfastDate={nfast.nfastDate}
                   nfastStartTime={nfast.nfastStartTime}
