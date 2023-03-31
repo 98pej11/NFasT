@@ -1627,7 +1627,7 @@ const ssafyTokenAbi = [
   },
 ];
 
-const NFasTCA = "0xe4aF4bAbdD7382E5190e4393dfBBccB21A164163";
+const NFasTCA = "0x28C74322c84c4A09ADEAEeA40bAF6c11cce796d0";
 
 // const saleCA = ""
 

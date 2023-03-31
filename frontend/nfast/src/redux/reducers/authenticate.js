@@ -1,7 +1,7 @@
 const initialState = {
   authenticated: false,
   accessToken: null,
-  userId: "",
+  sequence: "",
   isLogin: false,
   isValidToken: false,
   isLoginError: false,
@@ -40,7 +40,8 @@ function authReducer(state = initialState, action = {}) {
       console.log("SET_AUTH_TOKEN", payload);
       return { ...state, accessToken: payload };
     case "GET_USER_INFO_SUCCESS":
-      return { ...state, userId: payload.data };
+      console.log("SEQUENCEEEEEEEEE", payload);
+      return { ...state, sequence: payload };
     default:
       return { ...state };
   }

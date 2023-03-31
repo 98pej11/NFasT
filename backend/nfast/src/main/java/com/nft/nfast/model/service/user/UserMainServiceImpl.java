@@ -55,8 +55,8 @@ public class UserMainServiceImpl implements UserMainService {
     JWTUtil jwtUtil;
 
     @Override
-    public List<StoreFindDto> findAllStore(String storeName) {
-        List<Store> stores = storeRepository.findAllByStoreNameContaining(storeName);
+    public List<StoreFindDto> findAllStore() {
+        List<Store> stores = storeRepository.findAllStore();
         List<StoreFindDto> storeDtoList = new ArrayList<>();
 
         for (Store store : stores) {
@@ -570,6 +570,7 @@ public class UserMainServiceImpl implements UserMainService {
 
     @Override
     public void userModify(UserDto userDto) {
+        System.out.println("USERDTO "+ userDto);
         userRepository.save(userDto.toEntity());
     }
 

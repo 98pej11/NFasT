@@ -88,12 +88,21 @@ function Header() {
         boxShadow: "none",
         marginTop: 15,
         marginBottom: 10,
+        display: "flex",
+        alignItems: "center",
       }}
     >
-      <Container maxWidth="xl">
+      <Container
+        style={{
+          display: "flex",
+          alignItems: "center",
+          height: "100%",
+        }}
+        maxWidth="xl"
+      >
         <Toolbar
           disableGutters
-          sx={{ height: "80px", display: "flex", alignItems: "center" }}
+          sx={{ height: "100%", display: "flex", alignItems: "center" }}
         >
           {/* 로고 */}
           <Box

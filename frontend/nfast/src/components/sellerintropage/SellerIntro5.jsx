@@ -1,10 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import SellerIncome from "../../assets/SellerIncome.png";
+import Intro5 from "../../assets/Intro5_Seller.png";
 
-export default function Intro5() {
+export default function SellerIntro5() {
   return (
     <ProfilBox>
       <ContentBox>
@@ -20,21 +18,20 @@ export default function Intro5() {
           </SubTitleBox>
         </Text>
         <Img>
-          <img src={SellerIncome} alt="프로필 이미지" />
+          <img src={Intro5} alt="프로필 이미지" />
         </Img>
       </ContentBox>
-      <MoreContentIconBox>
-        <Link to="/intro6">
-          <KeyboardDoubleArrowDownIcon fontSize="large" />
-        </Link>
-      </MoreContentIconBox>
     </ProfilBox>
   );
 }
 const Img = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0px;
   img {
-    width: 120px;
-    height: 70px;
+    width: 200px;
+    height: 100px;
     opacity: 80%;
   }
 `;
@@ -67,6 +64,7 @@ const ContentBox = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -74,9 +72,15 @@ const ContentBox = styled.div`
 `;
 
 const Text = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 40px 0px;
   h4 {
     font-size: 20px;
     width: 170px;
+    margin: 10px 0px;
   }
   span {
     font-size: 15px;
@@ -92,26 +96,4 @@ const SubTitleBox = styled.div`
   display: flex;
   flex-direction: column;
   animation: ${contentUpAnimation} 0.8s 1 ease-in normal;
-`;
-const downIconAnimation = keyframes`
-    0% {
-      -webkit-transform: translateY(0);
-              transform: translateY(0);
-      -webkit-transform-origin: 50% 50%;
-              transform-origin: 50% 50%;
-      text-shadow: none;
-    }
-    100% {
-      -webkit-transform: translateY(50px);
-              transform: translateY(50px);
-      -webkit-transform-origin: 50% 50%;
-              transform-origin: 50% 50%;
-    }
-`;
-const MoreContentIconBox = styled.div`
-  animation-duration: 2s;
-  animation-delay: 3s;
-  animation-name: ${downIconAnimation};
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 `;

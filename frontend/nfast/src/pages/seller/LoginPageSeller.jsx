@@ -30,8 +30,17 @@ export default function LoginPage() {
             alignItems: "center",
           }}
         >
-          <img src={business} alt="" style={{ width: 200, height: 200 }} />
-          <Typography variant="h6">쉽고 빠른 수익을 만나보세요!</Typography>
+          <img
+            src={business}
+            alt=""
+            style={{ width: 300, height: 300, marginTop: "50px" }}
+          />
+          <Typography
+            variant="h6"
+            sx={{ color: "#5B5299", marginBottom: "50px" }}
+          >
+            쉽고 빠른 수익을 만나보세요!
+          </Typography>
 
           <div
             style={{
@@ -39,11 +48,11 @@ export default function LoginPage() {
               justifyContent: "center",
             }}
           >
-            <Metamask />
+            <Metamask isSeller={1} />
           </div>
           <Button
             variant="contained"
-            href="/introduce"
+            href="/introSeller1"
             sx={{
               backgroundColor: "#BCB6FF",
               color: "white",
