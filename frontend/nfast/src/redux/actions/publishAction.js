@@ -57,9 +57,7 @@ function checkQR(nfastInfo, storeSequence) {
   return async () => {
     // const url = `http://localhost:8080/api/owner`;
     await axios
-      .patch(
-        `http://localhost:8080/api/owner/qr/${storeSequence}/${type}/${nfastSequence}`
-      )
+      .patch(`${baseUrl}/qr/${storeSequence}/${type}/${nfastSequence}`)
       .then((response) => {
         const { data } = response;
         // dispatch({type: "GET_CHECKQR_SUCCESS", payload: {data}});

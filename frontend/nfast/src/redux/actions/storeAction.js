@@ -19,6 +19,24 @@ function getStoreDetail(storeSequence) {
   };
 }
 
+function getNfastUseState(userSequence, nfastSequence) {
+  return async (dispatch) => {
+    await axios
+      .get(
+        `${url}/floating-button/confirmation/${userSequence}/${nfastSequence}`
+      )
+      .then((response) => {
+        const { data } = response;
+        dispatch({ type: "GET_NFASTUSESTATE_SUCCESS", payload: { data } });
+        console.log("RESPONSE DATA ", data);
+      })
+      .catch((error) => {
+        console.log("ERROR", error);
+      });
+  };
+}
+
 export const storeAction = {
   getStoreDetail,
+  getNfastUseState,
 };

@@ -30,11 +30,13 @@ function getUnAvailableNfasts(userSequence) {
       .then((response) => {
         const { data } = response;
         // eslint-disable-next-line
+        console.log("******사용한 NFT 결과값이다앙*****", data);
         console.log(data);
         dispatch({ type: "GET_UNAVAILABLE_NFASTS_SUCCESS", payload: { data } });
       })
       .catch((error) => {
         // eslint-disable-next-line
+        console.log("너머냐");
         console.log("GETPOINT ERROR", error);
       });
   };

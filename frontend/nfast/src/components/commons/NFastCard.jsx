@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import QRCode from "react-qr-code";
 import styled from "styled-components";
-import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
+// import PropTypes from "prop-types";
+// import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Drawer from "@mui/material/Drawer";
-import Checkbox from "@mui/material/Checkbox";
-import { TextField } from "@mui/material";
+// import Drawer from "@mui/material/Drawer";
+// import Checkbox from "@mui/material/Checkbox";
+// import { TextField } from "@mui/material";
+import { QrCode } from "@mui/icons-material";
+import { storeAction } from "../../redux/actions/storeAction";
+import { getSequence } from "../../storage/Cookie";
 
 const Wrapper = styled.div`
   display: flex;
@@ -94,49 +97,49 @@ const StyleBtn = styled.div`
     font-size: 12px;
   }
 `;
-const ConfirmBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  Button {
-    margin: 2%;
-    width: 120px;
-    height: 50px;
-    background-color: #bcb6ff;
-    color: white;
-    font-size: 18px;
-  }
-`;
-const MyDrawer = styled(Drawer)`
-  text-align: center;
-  & .MuiDrawer-paper {
-    width: 100%;
-    height: 40%;
-    overflow-y: auto;
-    border-radius: 50px 50px 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-const Input = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  p {
-    margin-right: 5%;
-    font-size: 20px;
-  }
-`;
-const CheckText = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  p {
-    margin-left: 5%;
-    font-size: 20px;
-  }
-`;
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+// const ConfirmBtn = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   Button {
+//     margin: 2%;
+//     width: 120px;
+//     height: 50px;
+//     background-color: #bcb6ff;
+//     color: white;
+//     font-size: 18px;
+//   }
+// `;
+// const MyDrawer = styled(Drawer)`
+//   text-align: center;
+//   & .MuiDrawer-paper {
+//     width: 100%;
+//     height: 40%;
+//     overflow-y: auto;
+//     border-radius: 50px 50px 0 0;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//   }
+// `;
+// const Input = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   p {
+//     margin-right: 5%;
+//     font-size: 20px;
+//   }
+// `;
+// const CheckText = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   p {
+//     margin-left: 5%;
+//     font-size: 20px;
+//   }
+// `;
+// const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function NFastCard() {
   const floatingNfast = useSelector((state) => state.mainReducer.nfast);
@@ -146,17 +149,26 @@ function NFastCard() {
     nfastStartTime,
     nfastEndTime,
     nfastPrice,
-    // nfastQr,
+    nfastSequence,
   } = floatingNfast;
-  const [drawer1Open, setDrawer1Open] = useState(false);
-  const [drawer2Open, setDrawer2Open] = useState(false);
+  // const [drawer1Open, setDrawer1Open] = useState(false);
+  // const [drawer2Open, setDrawer2Open] = useState(false);
+  const [qrStatus, setQrStatus] = useState(false);
+  const userSequence = getSequence();
+  // const useQr = () => {
+  //   getNfastUseState();
+  // };
 
-  const toggleDrawer1 = () => {
-    setDrawer1Open(!drawer1Open);
+  const useStateRoute = () => {
+    if (storeAction.getNfastUseState(nfastSequence, userSequence) == 1) {
+      //네비ㄱ이터 해서 이동
+    } else {
+      //alret 에러
+    }
   };
-
   const toggleDrawer2 = () => {
-    setDrawer2Open(!drawer2Open);
+    // setDrawer2Open(!drawer2Open);
+    setQrStatus(true);
   };
   return (
     <Wrapper>
@@ -179,8 +191,8 @@ function NFastCard() {
           </div>
           <div>
             <StyleBtn>
-              <Button variant="contained" onClick={toggleDrawer1}>
-                판매하기
+              <Button variant="contained" onClick={useStateRoute}>
+                사용 확인
               </Button>
 
               <Button variant="contained" onClick={toggleDrawer2}>
@@ -189,7 +201,7 @@ function NFastCard() {
             </StyleBtn>
 
             {/* 첫 번째 Drawer 내용 */}
-            <MyDrawer
+            {/* <MyDrawer
               anchor="bottom"
               open={drawer1Open}
               onClose={toggleDrawer1}
@@ -218,15 +230,15 @@ function NFastCard() {
                   <TextField sx={{ width: "70%" }} />
                 </Input>
                 <ConfirmBtn>
-                  <Button variant="contained" onClick={toggleDrawer1}>
-                    판매하기
+                  <Button variant="contained" onClick={useQr}>
+                    사용 확인
                   </Button>
                 </ConfirmBtn>
               </Box>
-            </MyDrawer>
+            </MyDrawer> */}
 
             {/* 두 번째 Drawer 내용 */}
-            <MyDrawer
+            {/* <MyDrawer
               anchor="bottom"
               open={drawer2Open}
               onClose={toggleDrawer2}
@@ -258,18 +270,29 @@ function NFastCard() {
                   </Button>
                 </ConfirmBtn>
               </Box>
-            </MyDrawer>
+            </MyDrawer> */}
           </div>
         </Info>
         <QR>
-          <QRCode
-            value={JSON.stringify({
-              nfastSequence: 56,
-              type: 1,
-            })}
-            size="100"
-            style={{ fgColor: "#000123" }}
-          />
+          {!qrStatus ? (
+            <QRCode
+              value={JSON.stringify({
+                nfastSequence,
+                type: 1,
+              })}
+              size="100"
+              fgColor="#000123"
+            />
+          ) : (
+            <QrCode
+              value={JSON.stringify({
+                nfastSequence,
+                type: 2,
+              })}
+              size="100"
+              fgColor="#rgba(255, 55, 55, 1)"
+            />
+          )}
         </QR>
       </Ticket>
     </Wrapper>
@@ -283,12 +306,14 @@ NFastCard.defaultProps = {
   nfastPrice: 0,
   nfastQr: "qr",
 };
-NFastCard.propTypes = {
-  storeName: PropTypes.string,
-  nfastDate: PropTypes.string,
-  nfastStartTime: PropTypes.number,
-  nfastEndTime: PropTypes.number,
-  nfastPrice: PropTypes.number,
-  nfastQr: PropTypes.string,
-};
+
+// NFastCard.propTypes = {
+//   storeName: PropTypes.string,
+//   nfastDate: PropTypes.string,
+//   nfastStartTime: PropTypes.number,
+//   nfastEndTime: PropTypes.number,
+//   nfastPrice: PropTypes.number,
+//   nfastQr: PropTypes.string,
+// };
+
 export default NFastCard;
