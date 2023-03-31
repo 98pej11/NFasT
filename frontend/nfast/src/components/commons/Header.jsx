@@ -41,7 +41,7 @@ function Header() {
               // marginLeft: "10%",
             }}
           >
-            <Box component={Link} to="/">
+            <Box component={Link} to="/mainPage">
               {/* 로고이미지가 나와야되는데? */}
               <img src={NFastLogo} alt="logo" height="20px" />
             </Box>
