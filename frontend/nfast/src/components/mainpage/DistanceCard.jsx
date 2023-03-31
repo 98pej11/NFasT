@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,7 +9,6 @@ import Grid from "@mui/material/Grid";
 // import StorefrontIcon from "@mui/icons-material/Storefront";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
 import { mainAction } from "../../redux/actions/mainAction";
 
 export default function DistanceCard() {
@@ -16,6 +16,7 @@ export default function DistanceCard() {
   const getDistance = () => {
     dispatch(mainAction.getDistance());
   };
+
   useEffect(() => {
     getDistance();
   }, []);
@@ -45,7 +46,7 @@ export default function DistanceCard() {
                 height: "250px",
               }}
             >
-              <Link to="/store">
+              <Link to={`/store/${card.storeSequence}`}>
                 <CardMedia
                   component="img"
                   height="140"
@@ -57,7 +58,7 @@ export default function DistanceCard() {
                   }}
                 />
               </Link>
-              <CardContent style={{}}>
+              <CardContent>
                 <Typography
                   gutterBottom
                   component="div"

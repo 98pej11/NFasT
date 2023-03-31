@@ -1,11 +1,80 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import StoreInfo from "../../components/storepage/StoreInfo";
 import StoreReview from "../../components/storepage/StoreReview";
 import StoreChart from "../../components/storepage/StoreChart";
-// import KakaoMap from "../../components/storepage/KakaoMap";
 import KaKaoMap from "../../components/storepage/KaKaoMap";
 import StoreNav from "../../components/storepage/StoreNav";
+import { storeAction } from "../../redux/actions/storeAction";
+
+export default function StorePage() {
+  // eslint-disable-next-line react/destructuring-assignment, react/prop-types
+  const { storeSequence } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(storeAction.getStoreDetail(storeSequence));
+  }, []);
+
+  const storedetail = useSelector(
+    (state) => state.storepageReducer.storedetail
+  );
+
+  return (
+    storedetail && (
+      <div>
+        <Wrapper>
+          <StoreInfo
+            storeImage={storedetail.store.storeImage}
+            storeName={storedetail.store.storeName}
+            storeCategory={storedetail.store.storeCategory}
+            storeDetail={storedetail.store.storeDetail}
+            storeLunchStart={storedetail.store.storeLunchStart}
+            storeLunchEnd={storedetail.store.storeLunchEnd}
+            storeDinnerStart={storedetail.store.storeDinnerStart}
+            storeDinnerEnd={storedetail.store.storeDinnerEnd}
+            storePhone={storedetail.store.storePhone}
+            storeInformation={storedetail.store.storeInformation}
+          />
+          <Divider />
+          <Review
+            reviewTime={storedetail.review.reviewTime[0]}
+            cntTime={storedetail.review.reviewTime[1]}
+            reviewConvenience={storedetail.review.reviewConvenience[0]}
+            cntConvenience={storedetail.review.reviewConvenience[1]}
+            reviewService={storedetail.review.reviewService[0]}
+            cntService={storedetail.review.reviewService[1]}
+            reviewMood={storedetail.review.reviewMood[0]}
+            cntMood={storedetail.review.reviewMood[1]}
+          />
+          <Divider />
+          <Graph>
+            <Chart
+              PriceMax={storedetail.storeNfastPriceMax}
+              PriceMin={storedetail.storeNfastPriceMin}
+            />
+          </Graph>
+          <Divider />
+          <h4>지도</h4>
+          <MapWrapper>
+            <Map>
+              <KaKaoMap
+                storeLat={storedetail.store.storeLat}
+                storeLng={storedetail.store.storeLng}
+              />
+            </Map>
+          </MapWrapper>
+          <Divider />
+          <Footer>
+            <StoreNav />
+          </Footer>
+        </Wrapper>
+      </div>
+    )
+  );
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,7 +85,6 @@ const Wrapper = styled.div`
 
   h4 {
     width: 100%;
-    border-top: solid 1px black;
   }
 `;
 const Divider = styled.div`
@@ -60,31 +128,3 @@ const Footer = styled.div`
   width: 100%;
   z-index: 1; /* Set z-index to 1 */
 `;
-
-function StorePage() {
-  return (
-    <div>
-      <Wrapper>
-        <StoreInfo />
-        <Divider />
-        <Review />
-        <Divider />
-        <Graph>
-          <Chart />
-        </Graph>
-        <Divider />
-        <h4>지도</h4>
-        <MapWrapper>
-          <Map>
-            <KaKaoMap />
-          </Map>
-        </MapWrapper>
-        <Footer>
-          <StoreNav />
-        </Footer>
-      </Wrapper>
-    </div>
-  );
-}
-
-export default StorePage;

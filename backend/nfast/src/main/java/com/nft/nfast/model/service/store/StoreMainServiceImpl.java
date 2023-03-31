@@ -71,10 +71,10 @@ public class StoreMainServiceImpl implements StoreMainService {
             String hash = hashList.get(i);
 
             // QR 리스트
-            String nfastQr = nfastQrList.get(i);
+            String nfastQr = "";
 
             // 환불 QR 리스트
-            String nfastRefundQr = nfastRefundQrList.get(i);
+            String nfastRefundQr = "";
 
             nfastRepository.save(mintDto.toMintEntity(store, hash, nfastQr, nfastRefundQr));
         }

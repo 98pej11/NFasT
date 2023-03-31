@@ -12,6 +12,7 @@ function mainpage(state = initialState, action = {}) {
       //   console.log(payload);
       return { ...state, stores: payload.data };
     case "GET_FLOATING_NFAST":
+      // eslint-disable-next-line no-console
       console.log(payload.data.nfast);
       return { ...state, nfast: payload.data.nfast };
     default:

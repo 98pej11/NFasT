@@ -76,9 +76,46 @@ function checkQR(nfastInfo, storeSequence) {
   };
 }
 
+function publishNfast(sequence, store) {
+  const data = {
+    storeSequence: sequence,
+    nfastDate: store.date,
+    nfastDefaultPrice: store.price,
+    nfastStartTime: store.start,
+    nfastEndTime: store.end,
+    nfastSupply: store.count,
+    nfastEigenvalue: store.cid,
+    nfastHash: store.nfastHash[0],
+    nfastQr: [],
+    nfastRefundQr: [],
+    nfastMealType: store.time,
+    nfastUseState: 0,
+    nfastSaleState: 0,
+  };
+  return async (dispatch) => {
+    const url = `${baseUrl}/${sequence}/mint`;
+    // const url = `http://localhost:8080/api/owner/${sequence}/mint`;
+    await axios
+      .post(url, JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        dispatch({ type: "POST_PUBLISHNFAST_SUCCESS" });
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.log(error);
+      });
+  };
+}
+
 export const publishAction = {
   storeTitle,
   getPublishNfastList,
   getIncomeList,
   checkQR,
+  publishNfast,
 };

@@ -11,7 +11,6 @@ import SellerIncome from "./incomepage/SellerIncome";
 import SellerMaked from "./makedpage/SellerMaked";
 import SellerMypage from "./mypage/SellerMypage";
 import { mypageAction } from "../../redux/actions/mypageAction";
-import { getSequence } from "../../storage/Cookie";
 import FloatingBtnSeller from "../commons/FloatingBtnSeller";
 
 function TabPanel(props) {
@@ -65,18 +64,19 @@ const HeaderTab = styled(Tab)`
   width: 25%;
 `;
 
-export default function SellerMain() {
+export default function SellerMain(props) {
+  const { sequence } = props;
   const dispatch = useDispatch();
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    dispatch(mypageAction.getStoreInfo(getSequence()));
-    dispatch(mypageAction.getMintIncome(getSequence()));
-    dispatch(mypageAction.getResellIncome(getSequence()));
+    console.log("SEQUENCE", sequence);
+    dispatch(mypageAction.getStoreInfo(sequence));
+    dispatch(mypageAction.getMintIncome(sequence));
+    dispatch(mypageAction.getResellIncome(sequence));
   }, []);
 
   const mintIncome = useSelector((state) => state.mypageReducer.mintIncome);
@@ -119,3 +119,10 @@ export default function SellerMain() {
     </Header>
   );
 }
+
+SellerMain.defaultProps = {
+  sequence: "",
+};
+SellerMain.propTypes = {
+  sequence: PropTypes.string,
+};
