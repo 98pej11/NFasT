@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import axios from "axios";
 import Alert from "@mui/material/Alert";
+import { baseUrl } from "./url";
 import {
   setAccessToken,
   setRefreshToken,
@@ -13,7 +14,7 @@ import {
 
 // import { apiInstance } from "../../api/index";
 // const baseUrl = `http://localhost:8080/api`;
-const baseUrl = `https://j8a307.p.ssafy.io/api`;
+// const baseUrl = `https://j8a307.p.ssafy.io/api`;
 
 // const api = apiInstance();
 

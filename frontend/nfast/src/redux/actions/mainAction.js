@@ -3,9 +3,10 @@ import axios from "axios";
 //   locationLoadSuccess,
 //   locationLoadError,
 // } from "../../components/storepage/KaKaoMap";
+import { baseUrl } from "./url";
 
 // const baseUrl = `http://localhost:8080/api`;
-const baseUrl = `https://j8a307.p.ssafy.io/api`;
+// const baseUrl = `https://j8a307.p.ssafy.io/api`;
 
 // navigator.geolocation.getCurrentPosition((pos) => {
 //   const { lat, lng } = locationLoadSuccess(pos);

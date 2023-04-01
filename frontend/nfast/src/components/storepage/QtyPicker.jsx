@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { storeAction } from "../../redux/actions/storeAction";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -29,15 +31,45 @@ const Price = styled.h3`
 `;
 
 function QtyPicker() {
-  const [count, setCount] = useState(1);
+  const dispatch = useDispatch();
+  const [count, setCount] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [list, setList] = useState([]);
+  const totalCnt = useSelector((state) => state.storepageReducer.totalCnt);
+  const purchaseList = useSelector(
+    (state) => state.storepageReducer.purchaseList
+  );
+  console.log(purchaseList);
+  useEffect(() => {
+    const temp = [];
+    let cnt = 0;
+    purchaseList.map((item) => {
+      for (let i = 0; i < item.amount; i += 1) {
+        temp[cnt] = item.nfastHopePrice;
+        cnt += 1;
+      }
+      return temp;
+    });
+    setList(temp);
+  }, [purchaseList]);
+
+  useEffect(() => {
+    dispatch(storeAction.saveAmount(count));
+  }, [count]);
 
   const handleIncrement = () => {
-    setCount(count + 1);
+    if (count >= totalCnt) {
+      alert("구매 가능 개수를 초과하셨습니다.");
+    } else {
+      setPrice(price + list[count]);
+      setCount(count + 1);
+    }
   };
 
   const handleDecrement = () => {
-    if (count > 1) {
+    if (count > 0) {
       setCount(count - 1);
+      setPrice(price - list[count - 1]);
     }
   };
 
@@ -52,7 +84,7 @@ function QtyPicker() {
           +
         </button>
       </Picker>
-      <Price>원</Price>
+      <Price>{price}원</Price>
     </Wrapper>
   );
 }

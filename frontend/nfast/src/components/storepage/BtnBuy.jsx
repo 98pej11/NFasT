@@ -1,6 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
+import { storeAction } from "../../redux/actions/storeAction";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -21,9 +23,16 @@ const StyleBtn = styled(Button)`
   font-size: 20px;
 `;
 function BtnBye() {
+  const dispatch = useDispatch();
+  const onClickHandler = () => {
+    dispatch(storeAction.saveHandler(1));
+  };
+
   return (
     <Wrapper>
-      <StyleBtn variant="contained">구매</StyleBtn>
+      <StyleBtn variant="contained" onClick={onClickHandler}>
+        구매
+      </StyleBtn>
     </Wrapper>
   );
 }

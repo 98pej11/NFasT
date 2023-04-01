@@ -22,6 +22,7 @@ export default function StorePage() {
     (state) => state.storepageReducer.storedetail
   );
 
+  console.log("STORE DETAIL", storedetail);
   return (
     storedetail && (
       <div>
