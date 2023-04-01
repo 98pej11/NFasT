@@ -8,7 +8,6 @@ import Tab from "@mui/material/Tab";
 import Pagination from "@mui/material/Pagination";
 import { getSequence } from "../../storage/Cookie";
 import { mypageAction } from "../../redux/actions/mypageAction";
-// import FastTicket from "../commons/PastTicket";
 import PastTicket from "../commons/PastTicket";
 import FutureTicket from "../commons/FutureTicket";
 
@@ -18,15 +17,11 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-// const Ticket1 = styled(PastTicket)`
-//   flex: 1;
-// `;
-
-const Ticket1 = styled(PastTicket)`
+const Ticket1 = styled(FutureTicket)`
   flex: 1;
 `;
 
-const Ticket2 = styled(FutureTicket)`
+const Ticket2 = styled(PastTicket)`
   flex: 1;
 `;
 
@@ -49,6 +44,7 @@ const Pag = styled.div`
 function MyNft() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const dispatch = useDispatch();
+  // 유저 시퀀스잔아
   const sequence = getSequence();
 
   useEffect(() => {
@@ -57,10 +53,15 @@ function MyNft() {
   const availableNfasts = useSelector(
     (state) => state.mypageReducer.availableNfasts
   );
+
+  useEffect(() => {
+    dispatch(mypageAction.getUnAvailableNfasts(sequence));
+  }, []);
+
   const unavailableNfasts = useSelector(
     (state) => state.mypageReducer.unavailableNfasts
   );
-
+  console.log("사용한 NFT를 보여주마", unavailableNfasts);
   return (
     <Wrapper>
       <TabsContainer>
@@ -90,7 +91,7 @@ function MyNft() {
           availableNfasts.map((nfast) => {
             return (
               <Tickets>
-                <Ticket2
+                <Ticket1
                   storeName={nfast.storeName}
                   nfastDate={nfast.nfastDate}
                   nfastStartTime={nfast.nfastStartTime}
@@ -99,7 +100,7 @@ function MyNft() {
                   nfastQr={
                     <QRCode
                       value={JSON.stringify({
-                        nfastSequence: 1,
+                        nfastSequence: nfast.nfastSequence,
                         type: 1,
                       })}
                       size="100"
@@ -132,13 +133,14 @@ function MyNft() {
           unavailableNfasts.map((nfast) => {
             return (
               <Tickets>
-                <Ticket1
-                  storeName={nfast.storeName}
-                  nfastDate={nfast.nfastDate}
-                  nfastStartTime={nfast.nfastStartTime}
-                  nfastEndTime={nfast.nfastEndTime}
-                  nfastPrice={nfast.nfastPrice}
-                  nfastQr={nfast.nfastQr}
+                <Ticket2
+                  storeName={nfast.nfast.storeName}
+                  nfastDate={nfast.nfast.nfastDate}
+                  nfastStartTime={nfast.nfast.nfastStartTime}
+                  nfastEndTime={nfast.nfast.nfastEndTime}
+                  nfastPrice={nfast.nfast.nfastPrice}
+                  // 리뷰 만드러야됨.
+                  nfastQr={nfast.review.reviewTime}
                 />
               </Tickets>
             );
