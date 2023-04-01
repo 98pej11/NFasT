@@ -25,8 +25,10 @@ export default function TransCard() {
   return (
     <div style={{ marginTop: 30 }}>
       <Grid container spacing={3}>
-        {transList.map((card) => (
+        {transList.map((card, index) => (
           <Grid
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
             item
             xs={6}
             sm={3} // change to 6 for Galaxy S20 Ultra
