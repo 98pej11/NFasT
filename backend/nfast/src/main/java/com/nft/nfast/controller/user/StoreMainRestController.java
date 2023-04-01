@@ -1,6 +1,7 @@
 package com.nft.nfast.controller.user;
 
 import com.nft.nfast.model.dto.business.NfastDetailDto;
+import com.nft.nfast.model.dto.business.NfastDto;
 import com.nft.nfast.model.dto.business.NfastPurchaseDto;
 import com.nft.nfast.model.dto.business.NfastTradeDoneDto;
 import com.nft.nfast.model.service.user.UserMainService;
@@ -47,9 +48,10 @@ public class StoreMainRestController {
     //구매할 금액 nft 개수 입력 후 구매 확정
     @PostMapping("/{storeSequence}/{userSequence}/purchase/detail/confirm")
     public ResponseEntity<Map<String,Object>> confirmPurchaseNft(@PathVariable("storeSequence") long storeSequence,@PathVariable("userSequence") long userSequence, @RequestBody NfastPurchaseDto nfast){
-        userMainService.savePurchaseNfast(storeSequence,userSequence,nfast);
+        List<NfastDto> nfastDtoList = userMainService.savePurchaseNfast(storeSequence,userSequence,nfast);
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
+        resultMap.put("nfasts", nfastDtoList);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 

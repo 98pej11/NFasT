@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
 import styled, { keyframes } from "styled-components";
 import StoreSwitch from "./StoreSwitch";
+import { storeAction } from "../../redux/actions/storeAction";
+import { toStringByFormatting } from "../../api/transDate";
+import { getSequence } from "../../storage/Cookie";
 
 const slideUpAnimation = keyframes`
   from {
@@ -41,14 +46,50 @@ const Wrapper = styled.div`
 `;
 
 function CalendarList() {
+  const { storeSequence } = useParams();
+  const dispatch = useDispatch();
+  const [inputs, setInputs] = useState({
+    storeSequence,
+    nfastMealType: 0,
+    nfastDate: toStringByFormatting(new Date()),
+  });
   const [value, setValue] = useState(new Date());
   const [showButtons, setShowButtons] = useState(false);
-  // const [mealData, setMealData] = useState(null);
+  const [mealType, setMealType] = useState(0);
+  const amount = useSelector((state) => state.storepageReducer.amount);
+  const flag = useSelector((state) => state.storepageReducer.flag);
 
   const handleDayClick = (date) => {
+    console.log(inputs);
+    console.log("day check", date.getFullYear());
+    const dateForm = toStringByFormatting(date);
+    console.log("date", dateForm);
+    dispatch(storeAction.saveHandler(0));
+    setInputs({ ...inputs, nfastDate: dateForm });
     setValue(date);
     setShowButtons(true); // 한 번만 눌러서 버튼이 나오도록 수정
   };
+  useEffect(() => {
+    console.log("checkINININ");
+    console.log(toStringByFormatting(new Date()));
+    dispatch(storeAction.getPurchaseList(inputs));
+  }, []);
+
+  useEffect(() => {
+    console.log("check");
+    dispatch(storeAction.getPurchaseList(inputs));
+  }, [inputs]);
+
+  useEffect(() => {
+    console.log("check");
+    setInputs({ ...inputs, nfastMealType: mealType });
+  }, [mealType]);
+
+  useEffect(() => {
+    if (flag === 1) {
+      dispatch(storeAction.postPurchase(inputs, amount, getSequence()));
+    }
+  }, [flag]);
 
   // const handleMealChoice = (meal) => {
   //   setShowButtons(false);
@@ -65,7 +106,7 @@ function CalendarList() {
     <Wrapper>
       <h2>구매하기</h2>
       <Calendar onClickDay={handleDayClick} value={value} />
-      {showButtons && <StoreSwitch />}
+      {showButtons && <StoreSwitch setMealType={setMealType} />}
       {/* {mealData && <p>선택한 식사: {mealData}</p>} */}
     </Wrapper>
   );
