@@ -20,6 +20,7 @@ function storepage(state = initialState, action = {}) {
     case "SAVE_HANDLER":
       return { ...state, flag: payload.data };
     case "GET_PURCHASE_INFO":
+      console.log("PLAYOD", payload);
       return { ...state, purchaseInfo: payload.data.nfasts };
     default:
       return { ...state };
