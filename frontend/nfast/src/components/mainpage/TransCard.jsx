@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -8,20 +8,16 @@ import Grid from "@mui/material/Grid";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import { mainAction } from "../../redux/actions/mainAction";
+// import { mainAction } from "../../redux/actions/mainAction";
 
-export default function TransCard() {
-  const dispatch = useDispatch();
-  const getTrans = () => {
-    dispatch(mainAction.getTrans());
+export default function TransCard(props) {
+  // eslint-disable-next-line react/prop-types
+  const { transList } = props;
+  TransCard.propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types, no-undef
+    transList: PropTypes.array.isRequired,
   };
-  useEffect(() => {
-    getTrans();
-  }, []);
 
-  const transList = useSelector((state) => state.mainReducer.stores);
-  // eslint-disable-next-line no-console
-  console.log(transList);
   return (
     <div style={{ marginTop: 30 }}>
       <Grid container spacing={3}>

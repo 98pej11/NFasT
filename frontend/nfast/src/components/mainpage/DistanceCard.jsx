@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+// import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -9,34 +10,16 @@ import Grid from "@mui/material/Grid";
 // import StorefrontIcon from "@mui/icons-material/Storefront";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Typography from "@mui/material/Typography";
-import { mainAction } from "../../redux/actions/mainAction";
+// import { mainAction } from "../../redux/actions/mainAction";
 
-export default function DistanceCard() {
-  const dispatch = useDispatch();
+export default function DistanceCard(props) {
+  // eslint-disable-next-line react/prop-types
+  const { distanceList } = props;
 
-  const getDistance = ({ latitude, longitude }) => {
-    dispatch(mainAction.getDistance(latitude, longitude));
+  DistanceCard.propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types, no-undef
+    distanceList: PropTypes.array.isRequired,
   };
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        // eslint-disable-next-line
-        console.log("Latitude:", position.coords.latitude);
-        // eslint-disable-next-line
-        console.log("Longitude:", position.coords.longitude);
-        const { latitude, longitude } = position.coords;
-        getDistance({ latitude, longitude });
-      },
-      (error) => {
-        // eslint-disable-next-line
-        console.log(error);
-      }
-    );
-  }, []);
-  const distanceList = useSelector((state) => state.mainReducer.stores);
-  // eslint-disable-next-line
-  console.log(distanceList);
   return (
     distanceList && (
       <div style={{ marginTop: 30 }}>
