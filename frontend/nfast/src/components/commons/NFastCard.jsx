@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
 import styled from "styled-components";
 // import PropTypes from "prop-types";
@@ -9,7 +11,7 @@ import Button from "@mui/material/Button";
 // import Drawer from "@mui/material/Drawer";
 // import Checkbox from "@mui/material/Checkbox";
 // import { TextField } from "@mui/material";
-import { QrCode } from "@mui/icons-material";
+// import { QrCode } from "@mui/icons-material";
 import { storeAction } from "../../redux/actions/storeAction";
 import { getSequence } from "../../storage/Cookie";
 
@@ -155,20 +157,26 @@ function NFastCard() {
   // const [drawer2Open, setDrawer2Open] = useState(false);
   const [qrStatus, setQrStatus] = useState(false);
   const userSequence = getSequence();
+  const navigate = useNavigate();
   // const useQr = () => {
   //   getNfastUseState();
   // };
 
   const useStateRoute = () => {
-    if (storeAction.getNfastUseState(nfastSequence, userSequence) == 1) {
-      //네비ㄱ이터 해서 이동
+    if (storeAction.getNfastUseState(nfastSequence, userSequence) === 1) {
+      // 네비ㄱ이터 해서 이동
+      console.log("======리뷰쓸거아ㅑ아아======", nfastSequence);
+      navigate(`/review/${nfastSequence}`);
     } else {
-      //alret 에러
+      // alret 에러
+      // alert("에러");
+      console.log("======리뷰쓸거아ㅑ아아======", nfastSequence);
+      navigate(`/review/${nfastSequence}`);
     }
   };
   const toggleDrawer2 = () => {
     // setDrawer2Open(!drawer2Open);
-    setQrStatus(true);
+    setQrStatus(!qrStatus);
   };
   return (
     <Wrapper>
@@ -194,10 +202,15 @@ function NFastCard() {
               <Button variant="contained" onClick={useStateRoute}>
                 사용 확인
               </Button>
-
-              <Button variant="contained" onClick={toggleDrawer2}>
-                환불하기
-              </Button>
+              {!qrStatus ? (
+                <Button variant="contained" onClick={toggleDrawer2}>
+                  환불하기
+                </Button>
+              ) : (
+                <Button variant="contained" onClick={toggleDrawer2}>
+                  사용하기
+                </Button>
+              )}
             </StyleBtn>
 
             {/* 첫 번째 Drawer 내용 */}
@@ -281,16 +294,16 @@ function NFastCard() {
                 type: 1,
               })}
               size="100"
-              fgColor="#000123"
+              fgColor="rgba(37, 74, 205, 1)"
             />
           ) : (
-            <QrCode
+            <QRCode
               value={JSON.stringify({
                 nfastSequence,
                 type: 2,
               })}
               size="100"
-              fgColor="#rgba(255, 55, 55, 1)"
+              fgColor="rgba(255, 55, 55, 1)"
             />
           )}
         </QR>

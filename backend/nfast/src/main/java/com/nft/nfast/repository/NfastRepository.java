@@ -39,8 +39,8 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
     List<NfastMinted> findUsedByNfastDate(@Param("store") Long store);
 
     //구매할 금액 nft 개수 입력 후 구매 확정
-    @Query(value="select * from nfast where store_sequence=?1 and nfast_date=?2 and nfast_hope_price=?3 and nfast_meal_type=?4 and nfast_sale_state!=1 limit ?5", nativeQuery = true)
-    List<Nfast> findTopAmountNfastByParam(long storeSequence, String nfastDate, BigDecimal nfastPrice, Byte nfastMealType, int amount);
+    @Query(value="select * from nfast where store_sequence=?1 and nfast_date=?2 and nfast_meal_type=?3 and nfast_sale_state!=1 limit ?4", nativeQuery = true)
+    List<Nfast> findTopAmountNfastByParam(long storeSequence, String nfastDate, Byte nfastMealType, int amount);
 
     // 발행한 NFT 보기 (해당 날짜에 발행된 초기 비용)
     @Query(value = "select max(nfast_default_price) as nfastDefaultPrice from nfast where nfast_date=:mintedDate", nativeQuery = true)

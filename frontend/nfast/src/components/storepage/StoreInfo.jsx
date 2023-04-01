@@ -2,13 +2,13 @@
 import React from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import StoreImg from "../../assets/StoreImage.png";
+// import StoreImg from "../../assets/StoreImage.png";
 // import { storeAction } from "../../redux/actions/storeAction";
 
 function StoreInfo(props) {
   // eslint-disable-next-line react/prop-types
   const {
-    // storeImage,
+    storeImage,
     storeName,
     storeCategory,
     storeDetail,
@@ -23,8 +23,8 @@ function StoreInfo(props) {
 
   return (
     <Wrapper>
-      {/* <Img src={storeImage} alt="car!" /> */}
-      <Img src={StoreImg} alt="car!" />
+      <Img src={storeImage} alt="car!" />
+      {/* <Img src={StoreImg} alt="car!" /> */}
 
       <Info>
         <h3>{storeName}</h3>

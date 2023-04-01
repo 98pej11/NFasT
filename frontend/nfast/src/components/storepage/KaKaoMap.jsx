@@ -3,49 +3,46 @@ import React, { useEffect } from "react";
 export default function KaKaoMap(props) {
   // eslint-disable-next-line react/prop-types
   const { storeLat, storeLng } = props;
+  console.log(storeLat, storeLng);
   useEffect(() => {
-    const mapContainer = document.getElementById("map");
-    const mapOption = {
-      center: new window.kakao.maps.LatLng(storeLat, storeLng),
-      level: 3,
-    };
-    const map = new window.kakao.maps.Map(mapContainer, mapOption);
+    const script = document.createElement("script");
+    script.src =
+      "https://dapi.kakao.com/v2/maps/sdk.js?appkey=46501186d9798d27a6d3a0e837f996a6&libraries=services&autoload=false";
+    document.head.appendChild(script);
 
-    function locationLoadSuccess(pos) {
-      const currentPos = new window.kakao.maps.LatLng(storeLat, storeLng);
+    const waitForKakaoMaps = new Promise((resolve) => {
+      script.onload = () => {
+        resolve(window.kakao.maps);
+      };
+    });
 
-      // 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
+    waitForKakaoMaps.then((kakaoMaps) => {
+      const mapContainer = document.getElementById("map");
+      const mapOption = {
+        center: new kakaoMaps.LatLng(storeLat, storeLng),
+        level: 3,
+      };
+      const map = new kakaoMaps.Map(mapContainer, mapOption);
+
+      const currentPos = new kakaoMaps.LatLng(storeLat, storeLng);
+
       map.panTo(currentPos);
 
-      // 마커 생성
-      const marker = new window.kakao.maps.Marker({
+      const marker = new kakaoMaps.Marker({
         position: currentPos,
       });
 
-      // 기존에 마커가 있다면 제거
       marker.setMap(null);
       marker.setMap(map);
 
       return {
-        latitude: pos.coords.latitude,
-        longitude: pos.coords.longitude,
+        latitude: storeLat,
+        longitude: storeLng,
       };
-    }
-    function locationLoadError() {
-      // eslint-disable-next-line
-      alert("위치 정보를 가져오는데 실패했습니다.");
-    }
-    navigator.geolocation.getCurrentPosition(
-      locationLoadSuccess,
-      locationLoadError
-    );
+    });
   }, [storeLat, storeLng]);
 
-  return (
-    <div id="map" style={{ width: "100%", height: "350px" }}>
-      {" "}
-    </div>
-  );
+  return <div id="map" style={{ width: "100%", height: "350px" }} />;
 }
 
 // 위치 정보를 가져와서 지도와 마커를 생성하는 함수
