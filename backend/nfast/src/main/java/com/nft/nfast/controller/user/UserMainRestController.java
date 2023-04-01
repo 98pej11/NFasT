@@ -78,8 +78,8 @@ public class UserMainRestController {
 
 
     //리뷰 작성
-    @PostMapping("/review-count/{storeSequence}")
-    public ResponseEntity<Map<String,Object>> reviewList(@PathVariable("storeSequence") long storeSequence, @RequestBody ReviewGetDto reviewGetDto){
+    @PostMapping("/review-count/{nfastSequence}")
+    public ResponseEntity<Map<String,Object>> reviewList(@PathVariable("nfastSequence") long nfastSequence, @RequestBody ReviewGetDto reviewGetDto){
         userMainService.saveReview(reviewGetDto);
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);

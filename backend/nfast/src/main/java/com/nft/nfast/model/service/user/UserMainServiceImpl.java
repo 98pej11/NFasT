@@ -350,10 +350,11 @@ public class UserMainServiceImpl implements UserMainService {
     @Override
     public void saveReview(ReviewGetDto reviewGetDto) {
         ReviewFindDto reviewFindDto = reviewGetDto.getReviews();
+        Nfast nfast=nfastRepository.findAllByNfastSequence(reviewGetDto.getNfastSequence());
         reviewRepository.save(ReviewDto.builder()
                 .reviewTopic(0)
                 .reviewSubTopic(Integer.parseInt(reviewFindDto.getReviewTime()[0]))
-                .storeSequence(reviewGetDto.getStoreSequence())
+                .storeSequence(nfast.getStoreSequence().getStoreSequence())
                 .userSequence(reviewGetDto.getUserSequence())
                 .build()
                 .toEntity()
@@ -361,7 +362,7 @@ public class UserMainServiceImpl implements UserMainService {
         reviewRepository.save(ReviewDto.builder()
                 .reviewTopic(1)
                 .reviewSubTopic(Integer.parseInt(reviewFindDto.getReviewConvenience()[0]))
-                .storeSequence(reviewGetDto.getStoreSequence())
+                .storeSequence(nfast.getStoreSequence().getStoreSequence())
                 .userSequence(reviewGetDto.getUserSequence())
                 .build()
                 .toEntity()
@@ -369,7 +370,7 @@ public class UserMainServiceImpl implements UserMainService {
         reviewRepository.save(ReviewDto.builder()
                 .reviewTopic(2)
                 .reviewSubTopic(Integer.parseInt(reviewFindDto.getReviewService()[0]))
-                .storeSequence(reviewGetDto.getStoreSequence())
+                .storeSequence(nfast.getStoreSequence().getStoreSequence())
                 .userSequence(reviewGetDto.getUserSequence())
                 .build()
                 .toEntity()
@@ -377,7 +378,7 @@ public class UserMainServiceImpl implements UserMainService {
         reviewRepository.save(ReviewDto.builder()
                 .reviewTopic(3)
                 .reviewSubTopic(Integer.parseInt(reviewFindDto.getReviewMood()[0]))
-                .storeSequence(reviewGetDto.getStoreSequence())
+                .storeSequence(nfast.getStoreSequence().getStoreSequence())
                 .userSequence(reviewGetDto.getUserSequence())
                 .build()
                 .toEntity()

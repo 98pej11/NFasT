@@ -179,10 +179,6 @@ function PastTicket(props) {
               <Button variant="contained" onClick={toggleDrawer1}>
                 판매하기
               </Button>
-
-              <Button variant="contained" onClick={toggleDrawer2}>
-                환불하기
-              </Button>
             </StyleBtn>
 
             {/* 첫 번째 Drawer 내용 */}

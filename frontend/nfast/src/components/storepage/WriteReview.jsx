@@ -47,9 +47,9 @@ const StyleBtn = styled.div`
 `;
 export default function WriteReview() {
   const dispatch = useDispatch();
-  const { storeSequence } = useParams();
+  const { nfastSequence } = useParams();
   const [inputs, setInputs] = useState({
-    storeSequence,
+    nfastSequence,
     userSequence: getSequence(),
     reviews: {
       reviewTime: [],
@@ -68,9 +68,9 @@ export default function WriteReview() {
       // eslint-disable-next-line no-alert
       alert("리뷰 작성을 완료해주세요");
     } else {
-      console.log(storeSequence);
+      console.log(nfastSequence);
       dispatch(
-        storeAction.writeReview(storeSequence, getSequence(), inputs.reviews)
+        storeAction.writeReview(nfastSequence, getSequence(), inputs.reviews)
       );
     }
   };

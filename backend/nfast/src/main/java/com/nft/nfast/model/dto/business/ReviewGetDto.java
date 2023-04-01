@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class ReviewGetDto {
-    private long storeSequence;
+    private long nfastSequence;
     private long userSequence;
     private ReviewFindDto reviews;
 }
