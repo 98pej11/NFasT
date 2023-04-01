@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
@@ -11,7 +11,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import TextField from "@mui/material/TextField";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   arrowIcon: {
@@ -30,22 +30,8 @@ function ArrowIcon({ direction }) {
   );
 }
 
-export default function IncomeTable() {
-  const [data] = useState([
-    { id: 1, name: "Apple", updown: "", price: 1.99, date: "2023.03.12" },
-    { id: 2, name: "Banana", updown: "", price: 0.99, date: "2023.03.12" },
-    { id: 3, name: "Orange", updown: "", price: 1.49, date: "2023.03.12" },
-    { id: 4, name: "Grapes", updown: "", price: 2.99, date: "2023.03.12" },
-  ]);
-  const [filter, setFilter] = useState("");
-
-  const handleFilterChange = (event) => {
-    setFilter(event.target.value);
-  };
-
-  const filteredData = data.filter((item) =>
-    item.name.toLowerCase().includes(filter.toLowerCase())
-  );
+export default function IncomeTable(props) {
+  const { incomeList } = props;
   const Pag = styled.div`
     margin: 10%;
     display: flex; /* 가로 정렬을 위해 flexbox 설정 */
@@ -56,29 +42,24 @@ export default function IncomeTable() {
       <Table sx={{ textAlign: "center" }}>
         <TableHead align="center">
           <TableRow>
-            <TableCell sx={{ width: "20%" }}>
-              <TextField
-                label="가게 이름"
-                value={filter}
-                onChange={handleFilterChange}
-              />
-            </TableCell>
-
             <TableCell sx={{ width: "5%" }}>
               <ArrowIcon direction="up" />
               <ArrowIcon direction="down" />
             </TableCell>
-            <TableCell sx={{ width: "20%" }}>가격</TableCell>
+            <TableCell sx={{ width: "20%" }}>수수료 수익</TableCell>
             <TableCell sx={{ width: "20%" }}>유효 날짜</TableCell>
           </TableRow>
         </TableHead>
         <TableBody align="center">
-          {filteredData.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.name}</TableCell>
+          {incomeList.map((item) => (
+            <TableRow>
               <TableCell>{item.updown}</TableCell>
-              <TableCell>{item.price}Eth</TableCell>
-              <TableCell>{item.date}</TableCell>
+              <TableCell>{item.incomeListPrice}Eth</TableCell>
+              <TableCell>
+                {`${new Date(item.incomeListDate).getFullYear()}.
+                ${new Date(item.incomeListDate).getMonth()}.
+                ${new Date(item.incomeListDate).getDay()}`}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -91,3 +72,14 @@ export default function IncomeTable() {
     </div>
   );
 }
+
+IncomeTable.propTypes = {
+  incomeList: PropTypes.arrayOf(
+    PropTypes.shape({
+      incomeListDate: PropTypes.string,
+      incomeListPrice: PropTypes.number,
+      incomeListTransaction: PropTypes.string,
+      incomeListType: PropTypes.number,
+    })
+  ).isRequired,
+};

@@ -2,6 +2,11 @@ import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 
+const Wrapper = styled.div`
+  display: flex;
+  height: 100%;
+  alignitems: center;
+`;
 const LoginBtn = styled(Button)`
   margin-right: 20px;
   background-color: #ff9e45;
@@ -11,16 +16,22 @@ const LoginBtn = styled(Button)`
 `;
 function LoginButton() {
   return (
-    <div>
+    <Wrapper>
       <LoginBtn
         variant="contained"
-        sx={{ backgroundColor: "#BCB6FF" }}
+        sx={{
+          backgroundColor: "#BCB6FF",
+          width: "40px",
+          height: "30px",
+          fontSize: "10px",
+          margin: "0px 5px",
+        }}
         href="/loginCustomer"
         disableElevation
       >
         로그인
       </LoginBtn>
-    </div>
+    </Wrapper>
   );
 }
 

@@ -1,29 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { PropTypes } from "prop-types";
 import Button from "@mui/material/Button";
 
 // import Alert from "@mui/material/Alert";
 import MetaMask from "../../assets/Metamask.png";
 import { authAction } from "../../redux/actions/authAction";
 
-function Metamask() {
+function Metamask(props) {
+  const { isSeller, store } = props;
   const [address, setAddress] = useState("");
   const [flag, setFlag] = useState(false);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (flag) {
-      // eslint-disable-next-line no-console
-      console.log(address);
-      dispatch(authAction.userConfirm(address));
-      // eslint-disable-next-line no-alert
-      // <Alert severity="success">성공적으로 처리되었습니다!</Alert>;
-      alert("로그인ㅋㅋ");
-      console.log("나 여기 들어오긴했단다");
-      navigate("/");
+      if (isSeller === 0) {
+        // dispatch(authAction.walletLogin(address));
+        // console.log(address);
+        dispatch(authAction.userConfirm(address));
+        navigate("/mainpage");
+      } else if (isSeller === 1) {
+        console.log(address);
+        dispatch(authAction.storeConfirm(address));
+        navigate("/sellerPage");
+      } else if (isSeller === 2) {
+        dispatch(authAction.storeRegister(address, store));
+        navigate("/sellerPage");
+      }
     }
   }, [address, dispatch, navigate]);
 
@@ -76,4 +82,14 @@ function Metamask() {
   );
 }
 
+Metamask.defaultProps = {
+  isSeller: 0,
+};
+Metamask.propTypes = {
+  isSeller: PropTypes.number,
+  store: PropTypes.shape({
+    storeInfoNumber: PropTypes.number,
+    storeAddress: PropTypes.string,
+  }).isRequired,
+};
 export default Metamask;

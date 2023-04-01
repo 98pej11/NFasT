@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import javax.xml.stream.Location;
+import java.awt.print.Book;
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -55,8 +56,8 @@ public class UserMainServiceImpl implements UserMainService {
     JWTUtil jwtUtil;
 
     @Override
-    public List<StoreFindDto> findAllStore(String storeName) {
-        List<Store> stores = storeRepository.findAllByStoreNameContaining(storeName);
+    public List<StoreFindDto> findAllStore() {
+        List<Store> stores = storeRepository.findAllStore();
         List<StoreFindDto> storeDtoList = new ArrayList<>();
 
         for (Store store : stores) {
@@ -276,6 +277,16 @@ public class UserMainServiceImpl implements UserMainService {
             BookmarkDto dto = bookmark.toDto();
             bookmarkRepository.deleteById(dto.getBookmarkSequence());
         }
+    }
+
+    // 북마크 조회
+    @Override
+    public Byte isMyBookmark(long storeSequence, long userSequence) {
+        Optional<Bookmark> bookmarkWrapper=bookmarkRepository.findByStoreSequenceAndUserSequence(storeSequence, userSequence);
+        if (bookmarkWrapper.isPresent()){
+            return 0;
+        }
+        return 1;
     }
 
     //가게명 검색(상세 정보 출력)
@@ -570,6 +581,7 @@ public class UserMainServiceImpl implements UserMainService {
 
     @Override
     public void userModify(UserDto userDto) {
+        System.out.println("USERDTO "+ userDto);
         userRepository.save(userDto.toEntity());
     }
 

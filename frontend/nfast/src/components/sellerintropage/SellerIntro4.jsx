@@ -5,16 +5,14 @@ import styled, { keyframes } from "styled-components";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import intro4 from "../../assets/intro4.png";
+import intro41 from "../../assets/Intro_Reseller1.png";
+import intro42 from "../../assets/Intro_Reseller2.png";
 // import HighLight from "../commons/HighLight";
 
-export default function Intro4() {
+export default function SellerIntro4() {
   return (
     <ProfilBox>
       <ContentBox>
-        <Img>
-          <img src={intro4} alt="프로필 이미지" />
-        </Img>
         <Text>
           <TitleBox>
             <h4>고객들간의 거래로</h4>
@@ -25,9 +23,13 @@ export default function Intro4() {
             <span>계속되는 수입을 볼 수 있어요.</span>
           </SubTitleBox>
         </Text>
+        <Img>
+          <img src={intro41} alt="프로필 이미지" />
+          <img src={intro42} alt="프로필 이미지" />
+        </Img>
       </ContentBox>
       <MoreContentIconBox>
-        <Link to="/intro5">
+        <Link to="/introSeller3">
           <KeyboardDoubleArrowDownIcon fontSize="large" />
         </Link>
       </MoreContentIconBox>
@@ -35,10 +37,14 @@ export default function Intro4() {
   );
 }
 const Img = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
   img {
-    width: 150px;
-    height: 100px;
+    width: 100px;
+    height: 160px;
   }
+  margin-top: 30px;
 `;
 const ProfilBox = styled.div`
   display: flex;
@@ -69,32 +75,33 @@ const ContentBox = styled.div`
   width: 100%;
   height: 65%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
 `;
 
 const Text = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 30px;
   h4 {
     font-size: 20px;
     width: 210px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    margin: 10px 0px;
   }
   span {
     font-size: 15px;
     width: 210px;
     margin-bottom: 3px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
   }
-  margin-left: 10px;
 `;
 
 const TitleBox = styled.div`
   animation: ${contentUpAnimation} 0.5s 1 ease-in normal;
+  margin-bottom: 10px;
 `;
 const SubTitleBox = styled.div`
   display: flex;

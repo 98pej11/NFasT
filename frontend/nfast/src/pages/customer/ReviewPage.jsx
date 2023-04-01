@@ -1,14 +1,11 @@
 import React from "react";
-import styled from "styled-components";
-import NFastCard from "../../components/commons/NFastCard";
+// import styled from "styled-components";
+import WriteReview from "../../components/storepage/WriteReview";
 
-const Wrapper = styled.div``;
-function ReviewPage() {
+export default function ReviewPage() {
   return (
-    <Wrapper>
-      <NFastCard> </NFastCard>
-    </Wrapper>
+    <div>
+      <WriteReview />
+    </div>
   );
 }
-
-export default ReviewPage;

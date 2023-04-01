@@ -80,6 +80,16 @@ public class StoreMainRestController {
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
+    // 북마크 조회
+    @GetMapping("/{storeSequence}/bookmark/{userSequence}")
+    public ResponseEntity<Map<String, Object>> bookmarkIsMine(@PathVariable("storeSequence") long storeSequence, @PathVariable("userSequence") long userSequence){
+        // 해당 유저로 북마크 존재하면 0, 존재하지 않으면 1
+        Byte isMine = userMainService.isMyBookmark(storeSequence, userSequence);
+        Map<String, Object> resultMap=new HashMap<>();
+        resultMap.put("result", SUCCESS);
+        resultMap.put("bookmark", isMine);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
     //판매 차익 계산
     @GetMapping("/{nfastSequence}/sale")
     public ResponseEntity<Map<String,Object>> tradeBenefit(@PathVariable("nfastSequence") long nfastSequence){

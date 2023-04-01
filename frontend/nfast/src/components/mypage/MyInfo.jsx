@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
@@ -6,6 +6,9 @@ import TextField from "@mui/material/TextField";
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { mypageAction } from "../../redux/actions/mypageAction";
 
 const Styledh2 = styled.div`
   text-align: center;
@@ -34,7 +37,56 @@ const StyleBtn = styled.div`
     font-size: 20px;
   }
 `;
-function MyInfo() {
+
+function MyInfo(props) {
+  const { userSequence, userWallet, userNickname, userImage } = props;
+  const dispatch = useDispatch();
+  const [image, setImage] = useState([]);
+  const [picture, setPicture] = useState([]);
+  const [inputs, setInputs] = useState({
+    userSequence,
+    userWallet,
+    userNickname,
+  });
+
+  const fileInput = useRef(null);
+
+  const onDrop = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+      setPicture(e.target.files[0]);
+    } else {
+      setImage(
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+      );
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImage(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  const modifyUserInfo = () => {
+    console.log("INPUTS", inputs);
+    const params = new FormData();
+    const json = JSON.stringify(inputs);
+    const blob = new Blob([json], { type: "application/json" });
+    params.append("user", blob);
+    params.append("userImage", picture);
+    dispatch(mypageAction.modifyUserInfo(userSequence, params));
+    // navigate(`/`);
+  };
+
+  const onChangeHandler = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    const nextInputs = { ...inputs, [name]: value };
+    setInputs(nextInputs);
+  };
   return (
     <div>
       <Styledh2>
@@ -42,12 +94,26 @@ function MyInfo() {
         <IconButton sx={{ width: 200, height: 200 }}>
           <Avatar
             alt="Remy Sharp"
-            src="cat.png"
+            src={image}
             sx={{ width: 200, height: 200 }}
+            onClick={() => {
+              fileInput.current.click();
+            }}
+            defaultValue={userImage}
+          />
+          <input
+            type="file"
+            style={{ display: "none" }}
+            accept="image/jpg,impge/png,image/jpeg"
+            name="profile_img"
+            id="profile_img"
+            onChange={onDrop}
+            ref={fileInput}
           />
         </IconButton>
-        <p>프로필 편집</p>
-        <EditIcon />
+        <label htmlFor="profile_img">
+          프로필 편집 <EditIcon />
+        </label>
         <Box
           sx={{
             width: "70%",
@@ -56,7 +122,7 @@ function MyInfo() {
           <p style={{ textAlign: "left", fontSize: "medium" }}>연동지갑 주소</p>
           <TextField
             id="filled-read-only-input"
-            defaultValue="지갑주소에요 우하핫"
+            defaultValue={userWallet}
             fullWidth
             InputProps={{
               readOnly: true,
@@ -68,14 +134,33 @@ function MyInfo() {
             label="변경할 닉네임을 입력하세요."
             variant="outlined"
             fullWidth
+            name="userNickname"
+            onChange={onChangeHandler}
+            defaultValue={userNickname}
           />
           <StyleBtn>
-            <Button variant="contained">수정</Button>
+            <Button variant="contained" onClick={modifyUserInfo}>
+              수정
+            </Button>
           </StyleBtn>
         </Box>
       </Styledh2>
     </div>
   );
 }
+
+MyInfo.defaultProps = {
+  userWallet: "",
+  userNickname: "",
+  userImage: "",
+  userSequence: "",
+};
+
+MyInfo.propTypes = {
+  userWallet: PropTypes.string,
+  userNickname: PropTypes.string,
+  userImage: PropTypes.string,
+  userSequence: PropTypes.number,
+};
 
 export default MyInfo;
