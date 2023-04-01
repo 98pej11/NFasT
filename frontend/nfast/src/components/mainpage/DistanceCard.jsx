@@ -13,14 +13,45 @@ import { mainAction } from "../../redux/actions/mainAction";
 
 export default function DistanceCard() {
   const dispatch = useDispatch();
-  const getDistance = () => {
-    dispatch(mainAction.getDistance());
+
+  const getDistance = ({ latitude, longitude }) => {
+    dispatch(mainAction.getDistance(latitude, longitude));
   };
 
   useEffect(() => {
-    getDistance();
+    if (navigator.permissions) {
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then((permissionStatus) => {
+          if (permissionStatus.state === "granted") {
+            // 위치 정보 요청
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                console.log("Latitude:", position.coords.latitude);
+                console.log("Longitude:", position.coords.longitude);
+                const { latitude, longitude } = position.coords;
+                getDistance({ latitude, longitude });
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+          } else if (permissionStatus.state === "prompt") {
+            // 위치 정보 요청 전 사용자에게 권한 요청
+            navigator.geolocation.getCurrentPosition({
+              enableHighAccuracy: true,
+            });
+          } else if (permissionStatus.state === "denied") {
+            alert("위치 정보에 대한 권한이 거부되었습니다.");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert("브라우저에서 위치 정보 접근 권한을 지원하지 않습니다.");
+    }
   }, []);
-
   const distanceList = useSelector((state) => state.mainReducer.stores);
 
   return (

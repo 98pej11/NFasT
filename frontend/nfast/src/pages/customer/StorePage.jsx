@@ -109,7 +109,7 @@ const Chart = styled(StoreChart)`
 `;
 
 const MapWrapper = styled.div`
-  width: 300px;
+  width: 400px;
   height: 300px;
   display: flex;
   flex-direction: column;
