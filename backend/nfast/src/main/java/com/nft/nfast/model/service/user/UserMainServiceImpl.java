@@ -129,7 +129,7 @@ public class UserMainServiceImpl implements UserMainService {
     @Override
     public List<NfastDto> savePurchaseNfast(long storeSequence, long userSequence, NfastPurchaseDto nfastPurchaseDto) {
         String nfastDate = nfastPurchaseDto.getNfastDate().toString();
-        BigDecimal nfastHopePrice=nfastPurchaseDto.getNfastHopePrice();
+//        BigDecimal nfastHopePrice=nfastPurchaseDto.getNfastHopePrice();
 
         int amount = nfastPurchaseDto.getAmount();
         Byte nfastMealType = nfastPurchaseDto.getNfastMealType();
@@ -141,11 +141,13 @@ public class UserMainServiceImpl implements UserMainService {
             long nfastSequence=nfast.getNfastSequence();
             nfast=nfastRepository.findAllByNfastSequence(nfastSequence);
             BigDecimal nfastPrice = nfast.getNfastPrice();
+            System.out.println("PRICE "+nfast.getNfastPrice());
+            System.out.println("HOPEPRICE "+nfast.getNfastHopePrice());
             if (nfast.getNfastSaleState() == 0) {
                 //2-1. 사장님 -> income_list에 추가
                 incomeListRepository.save(
                         IncomeListDto.builder()
-                                .incomeListPrice(nfastHopePrice)
+                                .incomeListPrice(nfast.getNfastHopePrice())
                                 .incomeListDate(new Date())
                                 .incomeListType((byte) 0)   //직접 구매
                                 .storeSequence(storeSequence)
@@ -155,7 +157,7 @@ public class UserMainServiceImpl implements UserMainService {
                 );
                 tradeListRepository.save(
                         TradeListDto.builder()
-                                .tradeListPrice(nfastHopePrice)
+                                .tradeListPrice(nfast.getNfastHopePrice())
                                 .tradeListDate(new Date())
                                 .tradeListType((byte) 0)    //구매
                                 .userSequence(userSequence)
@@ -172,7 +174,7 @@ public class UserMainServiceImpl implements UserMainService {
                 System.out.println("inputtttttttt");
                 tradeListRepository.save(
                         TradeListDto.builder()
-                                .tradeListPrice(nfastHopePrice)
+                                .tradeListPrice(nfast.getNfastHopePrice())
                                 .tradeListDate(new Date())
                                 .tradeListType((byte) 0)    //구매
                                 .userSequence(userSequence)
@@ -182,7 +184,7 @@ public class UserMainServiceImpl implements UserMainService {
                 );
                 // 판매자 지갑에 돌아가는것 = (판매희망가 - 구매가)*0.8
                 BigDecimal number1 = new BigDecimal("0.8");
-                BigDecimal sellBenefit=nfastHopePrice.subtract(nfastPrice).multiply(number1);
+                BigDecimal sellBenefit=nfast.getNfastHopePrice().subtract(nfastPrice).multiply(number1);
                 tradeListRepository.save(
                         TradeListDto.builder()
                                 .tradeListPrice(sellBenefit)
@@ -195,7 +197,7 @@ public class UserMainServiceImpl implements UserMainService {
                 );
                 // 사장님 지갑에 들어가는 것 = (판매가 - 구매가)*0.2
                 BigDecimal number2 = new BigDecimal("0.2");
-                BigDecimal storeBenefit = nfastHopePrice.subtract(nfastPrice).multiply(number2);
+                BigDecimal storeBenefit = nfast.getNfastHopePrice().subtract(nfastPrice).multiply(number2);
                 incomeListRepository.save(
                         IncomeListDto.builder()
                                 .incomeListPrice(storeBenefit)
