@@ -21,7 +21,7 @@ export default function TransCard(props) {
   return (
     <div style={{ marginTop: 30 }}>
       <Grid container spacing={3}>
-        {transList.map((card, index) => (
+        {transList.slice(0, 4).map((card, index) => (
           <Grid
             // eslint-disable-next-line react/no-array-index-key
             key={index}
