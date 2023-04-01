@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import axios from "axios";
+import { baseUrl } from "./url";
 
-const baseUrl = `https://j8a307.p.ssafy.io/api`;
+// const baseUrl = `https://j8a307.p.ssafy.io/api`;
 
 function getSearchList() {
   return async (dispatch) => {

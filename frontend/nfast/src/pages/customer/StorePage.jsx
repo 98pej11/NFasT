@@ -21,6 +21,12 @@ export default function StorePage() {
   const storedetail = useSelector(
     (state) => state.storepageReducer.storedetail
   );
+  const purchaseInfo = useSelector(
+    (state) => state.storepageReducer.purchaseInfo
+  );
+  useEffect(() => {
+    console.log("응답 정보", purchaseInfo);
+  }, [purchaseInfo]);
 
   console.log("STORE DETAIL", storedetail);
   return (
