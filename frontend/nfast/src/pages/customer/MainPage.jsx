@@ -7,9 +7,8 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import DistanceCard from "../../components/mainpage/DistanceCard";
 import TransCard from "../../components/mainpage/TransCard";
 import FloatingBtn from "../../components/commons/FloatingBtn";
-import { getAccessToken } from "../../storage/Cookie";
+import { getAccessToken, getSequence } from "../../storage/Cookie";
 import { mainAction } from "../../redux/actions/mainAction";
-import { getSequence } from "../../storage/Cookie";
 import { mypageAction } from "../../redux/actions/mypageAction";
 // import Container from "@mui/material/Container";
 // import Grid from "@mui/material/Grid";
