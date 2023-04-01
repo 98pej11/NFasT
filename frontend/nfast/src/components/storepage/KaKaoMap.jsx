@@ -7,7 +7,7 @@ export default function KaKaoMap(props) {
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
-      "https://dapi.kakao.com/v2/maps/sdk.js?appkey=ff50096a0a9e5fde1f0aad6223f3c8cb&libraries=services&autoload=false";
+      "https://dapi.kakao.com/v2/maps/sdk.js?appkey=46501186d9798d27a6d3a0e837f996a6&libraries=services&autoload=false";
     document.head.appendChild(script);
 
     const waitForKakaoMaps = new Promise((resolve) => {

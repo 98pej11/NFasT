@@ -28,7 +28,7 @@ export default function DistanceCard(props) {
         <Button onClick={handleNext}>{">"}</Button>
       </div> */}
         <Grid container spacing={3}>
-          {distanceList.map((card, index) => (
+          {distanceList.slice(0, 4).map((card, index) => (
             <Grid
               // eslint-disable-next-line react/no-array-index-key
               key={index}
