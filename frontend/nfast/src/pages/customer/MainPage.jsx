@@ -7,8 +7,12 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import DistanceCard from "../../components/mainpage/DistanceCard";
 import TransCard from "../../components/mainpage/TransCard";
 import FloatingBtn from "../../components/commons/FloatingBtn";
-import { getAccessToken } from "../../storage/Cookie";
+import { getAccessToken, getSequence } from "../../storage/Cookie";
 import { mainAction } from "../../redux/actions/mainAction";
+import { mypageAction } from "../../redux/actions/mypageAction";
+// import Container from "@mui/material/Container";
+// import Grid from "@mui/material/Grid";
+// import Typography from "@mui/material/Typography";
 
 export class Token {
   #accessToken = "";
@@ -24,6 +28,7 @@ export class Token {
 
 function MainPage() {
   const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.authReducer.isLogin);
   useEffect(() => {
     // eslint-disable-next-line
     console.log(getAccessToken());
@@ -44,6 +49,12 @@ function MainPage() {
       }
     );
   }, [getAccessToken]);
+
+  useEffect(() => {
+    if (isLogin) {
+      dispatch(mypageAction.getUserInfo(getSequence()));
+    }
+  }, [isLogin]);
 
   const distanceList = useSelector((state) => state.mainReducer.stores);
   // eslint-disable-next-line

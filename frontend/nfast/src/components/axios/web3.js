@@ -548,6 +548,26 @@ const nfastAbi = [
         type: "uint256",
       },
     ],
+    name: "getTo",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_tokenId",
+        type: "uint256",
+      },
+    ],
     name: "setIsUse",
     outputs: [],
     stateMutability: "nonpayable",
@@ -1627,7 +1647,7 @@ const ssafyTokenAbi = [
   },
 ];
 
-const NFasTCA = "0x28C74322c84c4A09ADEAEeA40bAF6c11cce796d0";
+const NFasTCA = "0xeC433409CD48348fe4D6Dd4F2DE1A3c73c156883";
 
 // const saleCA = ""
 
@@ -1651,6 +1671,7 @@ const ssafyTokenCA = "0x08B794e4Cabd52df6697476f70BBcD050BBEb47e";
 // }
 
 // overrides metamask v0.2 for our v 1.0
+// export const web3 = new Web3(window.web3.currentProvider);
 export const web3 = new Web3(window.ethereum);
 
 // export default web3;

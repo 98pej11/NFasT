@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+import PropTypes from "prop-types";
 import SalesList from "./SalesList";
 import BtnBuy from "./BtnBuy";
 import QtyPicker from "./QtyPicker";
@@ -61,18 +62,24 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 const Label = styled(FormControlLabel)`
   width: 110px;
 `;
-export default function CustomizedSwitches() {
+export default function CustomizedSwitches(props) {
+  const { setMealType } = props;
   const [time, setTime] = useState("런치");
   const [checked, setChecked] = useState(false);
   const handleSwitch = () => {
     if (time === "런치") {
       setTime("디너");
+      setMealType(1);
     }
     if (time === "디너") {
       setTime("런치");
+      setMealType(0);
     }
     setChecked((prev) => !prev);
   };
+  // const onClickHandler = () => {
+  //   console.log("buy");
+  // };
   return (
     <FormGroup>
       <Label
@@ -92,3 +99,7 @@ export default function CustomizedSwitches() {
     </FormGroup>
   );
 }
+
+CustomizedSwitches.propTypes = {
+  setMealType: PropTypes.func.isRequired,
+};
