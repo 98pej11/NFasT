@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import Chip from "@mui/material/Chip";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import DoneIcon from "@mui/icons-material/Done";
 import reviewTimer from "../../assets/Review_timer.png";
 import reviewParking from "../../assets/Review_parking.png";
@@ -15,7 +16,10 @@ function StoreReview(props) {
   console.log("내가리뷰야", review);
   return (
     <Chips>
-      <h4>리뷰</h4>
+      <h4>
+        <PersonOutlineIcon />
+        리뷰
+      </h4>
       <AlignChip>
         <Wrapper>
           <StyledChip
@@ -61,6 +65,11 @@ const Chips = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  h4 {
+    margin-left: 3%;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const AlignChip = styled.div`

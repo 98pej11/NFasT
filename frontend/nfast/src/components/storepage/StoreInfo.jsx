@@ -2,13 +2,18 @@
 import React from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-// import StoreImg from "../../assets/StoreImage.png";
+import AlarmIcon from "@mui/icons-material/Alarm";
+
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import HelpIcon from "@mui/icons-material/Help";
+import StoreImg from "../../assets/StoreImage.png";
+
 // import { storeAction } from "../../redux/actions/storeAction";
 
 function StoreInfo(props) {
   // eslint-disable-next-line react/prop-types
   const {
-    storeImage,
+    // storeImage,
     storeName,
     storeCategory,
     storeDetail,
@@ -23,21 +28,62 @@ function StoreInfo(props) {
 
   return (
     <Wrapper>
-      <Img src={storeImage} alt="car!" />
-      {/* <Img src={StoreImg} alt="car!" /> */}
+      {/* <Img src={storeImage} alt="car!" /> */}
+      <Img src={StoreImg} alt="car!" />
+
+      <h2>{storeName}</h2>
+      <h5>{storeCategory}</h5>
+      {storeDetail === null ? (
+        <h5> 등록된 가게 정보가 없습니다.</h5>
+      ) : (
+        <h5>{storeDetail}</h5>
+      )}
 
       <Info>
-        <h3>{storeName}</h3>
-        <span>{storeDetail}</span>
-        <span>카테고리 &gt; {storeCategory}</span>
-        <span>
-          런치이용시간 &gt; {storeLunchStart} ~ {storeLunchEnd}
-        </span>
-        <span>
-          디너이용시간 &gt; {storeDinnerStart} ~ {storeDinnerEnd}
-        </span>
-        <span>전화번호 &gt; {storePhone}</span>
-        <span>사용방법 &gt; {storeInformation}</span>
+        {storeLunchStart === null || storeLunchEnd === null ? (
+          <span>
+            <AlarmIcon sx={{ fontSize: "large", marginRight: "1%" }} />
+            런치타임 &gt; 등록된 시간 정보가 없습니다.
+          </span>
+        ) : (
+          <span>
+            <AlarmIcon sx={{ fontSize: "large", marginRight: "1%" }} />
+            런치타임 &gt; {storeLunchStart} ~ {storeLunchEnd}
+          </span>
+        )}
+        {storeDinnerStart === null || storeDinnerEnd === null ? (
+          <span>
+            <AlarmIcon sx={{ fontSize: "large", marginRight: "1%" }} />
+            디너타임 &gt; 등록된 시간 정보가 없습니다.
+          </span>
+        ) : (
+          <span>
+            <AlarmIcon sx={{ fontSize: "large", marginRight: "1%" }} />
+            디너타임 &gt; {storeDinnerStart} ~ {storeDinnerEnd}
+          </span>
+        )}
+        {storeDetail === null ? (
+          <span>
+            <PhoneIphoneIcon sx={{ fontSize: "large", marginRight: "1%" }} />
+            전화번호 &gt; 등록된 가게 번호가 없습니다.
+          </span>
+        ) : (
+          <span>
+            <PhoneIphoneIcon sx={{ fontSize: "large", marginRight: "1%" }} />
+            전화번호 &gt; {storePhone}
+          </span>
+        )}
+        {storeInformation === null ? (
+          <span>
+            <HelpIcon sx={{ fontSize: "large", marginRight: "1%" }} />
+            사용방법 &gt; 등록된 가게 번호가 없습니다.
+          </span>
+        ) : (
+          <span>
+            <HelpIcon sx={{ fontSize: "large", marginRight: "1%" }} />
+            사용방법 &gt; {storeInformation}
+          </span>
+        )}
       </Info>
     </Wrapper>
   );
@@ -46,6 +92,19 @@ function StoreInfo(props) {
 export default StoreInfo;
 const Wrapper = styled.div`
   margin-top: 20px;
+  h2 {
+    margin-top: 6%;
+    margin-left: 2%;
+    margin-bottom: 3%;
+  }
+  h4 {
+    margin-bottom: 0;
+  }
+  h5 {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+  }
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     height: auto;
   }
@@ -67,9 +126,12 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-
+  margin-top: 5%;
   span {
-    font-size: 12px;
+    margin-left: 1%;
+    font-size: 13px;
     color: #828282;
+    display: flex;
+    align-items: center;
   }
 `;
