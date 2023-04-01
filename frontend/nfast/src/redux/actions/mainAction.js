@@ -1,20 +1,22 @@
 import axios from "axios";
-import {
-  locationLoadSuccess,
-  locationLoadError,
-} from "../../components/storepage/KaKaoMap";
+// import {
+//   locationLoadSuccess,
+//   locationLoadError,
+// } from "../../components/storepage/KaKaoMap";
+import { baseUrl } from "./url";
 
 // const baseUrl = `http://localhost:8080/api`;
-const baseUrl = `https://j8a307.p.ssafy.io/api`;
+// const baseUrl = `https://j8a307.p.ssafy.io/api`;
 
-navigator.geolocation.getCurrentPosition((pos) => {
-  const { lat, lng } = locationLoadSuccess(pos);
-  // eslint-disable-next-line
-  console.log("위도와 경도를 받아올까용?", lat, lng);
-}, locationLoadError);
+// navigator.geolocation.getCurrentPosition((pos) => {
+//   const { lat, lng } = locationLoadSuccess(pos);
+//   // eslint-disable-next-line
+//   console.log("위도와 경도를 받아올까용?", lat, lng);
+// }, locationLoadError);
 
 function getDistance(lat, lng) {
   const data = { lat, lng };
+  console.log("내 현재위치는,", lat, lng);
   return async (dispatch) => {
     const url = `${baseUrl}/main/distance-recommendation-list`;
     await axios

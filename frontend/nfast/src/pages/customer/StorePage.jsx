@@ -21,7 +21,14 @@ export default function StorePage() {
   const storedetail = useSelector(
     (state) => state.storepageReducer.storedetail
   );
+  const purchaseInfo = useSelector(
+    (state) => state.storepageReducer.purchaseInfo
+  );
+  useEffect(() => {
+    console.log("응답 정보", purchaseInfo);
+  }, [purchaseInfo]);
 
+  console.log("STORE DETAIL", storedetail);
   return (
     storedetail && (
       <div>
@@ -39,16 +46,7 @@ export default function StorePage() {
             storeInformation={storedetail.store.storeInformation}
           />
           <Divider />
-          <Review
-            reviewTime={storedetail.review.reviewTime}
-            cntTime={storedetail.review.reviewTime}
-            reviewConvenience={storedetail.review.reviewConvenience}
-            cntConvenience={storedetail.review.reviewConvenience}
-            reviewService={storedetail.review.reviewService}
-            cntService={storedetail.review.reviewService}
-            reviewMood={storedetail.review.reviewMood}
-            cntMood={storedetail.review.reviewMood}
-          />
+          <Review review={storedetail.review} />
           <Divider />
           <Graph>
             <Chart
@@ -75,7 +73,6 @@ export default function StorePage() {
     )
   );
 }
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -109,7 +106,7 @@ const Chart = styled(StoreChart)`
 `;
 
 const MapWrapper = styled.div`
-  width: 300px;
+  width: 400px;
   height: 300px;
   display: flex;
   flex-direction: column;

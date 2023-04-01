@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import QRCode from "react-qr-code";

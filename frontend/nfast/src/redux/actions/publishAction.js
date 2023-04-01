@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import axios from "axios";
+import { baseUrl as base } from "./url";
 
-const baseUrl = `https://j8a307.p.ssafy.io/api/owner`;
+const baseUrl = `${base}/owner`;
 
 function storeTitle(storeSequence) {
   console.log("storeSequence ", storeSequence);

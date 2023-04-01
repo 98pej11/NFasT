@@ -8,18 +8,14 @@ import FloatingBtn from "./components/commons/FloatingBtn";
 import IntroSeller1 from "./pages/seller/IntroSeller1";
 import IntroSeller2 from "./pages/seller/IntroSeller2";
 import IntroSeller3 from "./pages/seller/IntroSeller3";
-// import SellerIntro1 from "./components/sellerintropage/SellerIntro1";
-// import SellerIntro2 from "./components/sellerintropage/SellerIntro2";
-// import SellerIntro3 from "./components/sellerintropage/SellerIntro3";
-// import SellerIntro4 from "./components/sellerintropage/SellerIntro4";
-// import SellerIntro5 from "./components/sellerintropage/SellerIntro5";
-// import SellerIntro6 from "./components/sellerintropage/SellerIntro6";
 import SellerRegister from "./components/sellerintropage/SellerRegister";
 import Review from "./pages/customer/ReviewPage";
 import MyNftPage from "./pages/customer/MyNftPage";
 import MyTransPage from "./pages/customer/MyTransPage";
 import MyBookmarkPage from "./pages/customer/MyBookmarkPage";
 import MainPage from "./pages/customer/MainPage";
+import DisAllPage from "./pages/customer/DisAllPage";
+import TransAllPage from "./pages/customer/TransAllPage";
 import MyInfoPage from "./pages/customer/MyInfoPage";
 import StorePage from "./pages/customer/StorePage";
 import LoginCustomer from "./pages/customer/LoginPageCustomer";
@@ -50,9 +46,12 @@ function App() {
           <Routes>
             <Route path="/" element={<CustomerIntroduce />} />
             <Route path="/mainPage" element={<MainPage />} />
+            <Route path="/disall" element={<DisAllPage />} />
+            <Route path="/transall" element={<TransAllPage />} />
+            <Route path="/mainPage" element={<MainPage />} />
             <Route path="/floating" element={<FloatingBtn />} />
             <Route path="/nFastCard" element={<NFastCard />} />
-            <Route path="/review" element={<Review />} />
+            <Route path="/review/:storeSequence" element={<Review />} />
             <Route path="/mynft" element={<MyNftPage />} />
             <Route path="/mytrans" element={<MyTransPage />} />
             <Route path="/mybookmark" element={<MyBookmarkPage />} />
@@ -64,12 +63,6 @@ function App() {
             <Route path="/introSeller1" element={<IntroSeller1 />} />
             <Route path="/introSeller2" element={<IntroSeller2 />} />
             <Route path="/introSeller3" element={<IntroSeller3 />} />
-            {/* <Route path="/sellerIntro1" element={<SellerIntro1 />} />
-            <Route path="/sellerIntro2" element={<SellerIntro2 />} />
-            <Route path="/sellerIntro3" element={<SellerIntro3 />} />
-            <Route path="/sellerIntro4" element={<SellerIntro4 />} />
-            <Route path="/sellerIntro5" element={<SellerIntro5 />} />
-            <Route path="/sellerIntro6" element={<SellerIntro6 />} /> */}
             <Route path="/sellerRegister" element={<SellerRegister />} />
           </Routes>
         </Pages>
