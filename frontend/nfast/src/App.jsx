@@ -56,7 +56,7 @@ function App() {
             <Route path="/mainPage" element={<MainPage />} />
             <Route path="/floating" element={<FloatingBtn />} />
             <Route path="/nFastCard" element={<NFastCard />} />
-            <Route path="/review/:storeSequence" element={<Review />} />
+            <Route path="/review/:nfastSequence" element={<Review />} />
             <Route path="/mynft" element={<MyNftPage />} />
             <Route path="/mytrans" element={<MyTransPage />} />
             <Route path="/mybookmark" element={<MyBookmarkPage />} />

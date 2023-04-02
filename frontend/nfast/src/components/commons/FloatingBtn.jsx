@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import FloatingIcon from "../../assets/FloatingIcon.png";
-// import FloatingCards from "./FloatingCards";
+import FloatingCards from "./FloatingCards";
 import { mainAction } from "../../redux/actions/mainAction";
 import { getSequence } from "../../storage/Cookie";
 
@@ -50,7 +50,9 @@ function FloatingBtn() {
   return (
     <div>
       <Floating>
-        <Cards isDisplay={floating}>{/* <FloatingCards /> */}</Cards>
+        <Cards isDisplay={floating}>
+          <FloatingCards />
+        </Cards>
       </Floating>
       <Btn type="button" onClick={handleClick}>
         <img src={FloatingIcon} alt="floatingIcon" />

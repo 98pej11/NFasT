@@ -8,6 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import PropTypes from "prop-types";
+import { toStringByFormatting } from "../../../api/transDate";
 
 export default function MakedTable(props) {
   const { publishNfasts } = props;
@@ -41,9 +42,7 @@ export default function MakedTable(props) {
           {publishNfasts.slice(startIndex, endIndex).map((item) => (
             <TableRow key={item.id}>
               <TableCell>
-                {`${new Date(item.nfastDate).getFullYear()}.
-                ${new Date(item.nfastDate).getMonth()}.
-                ${new Date(item.nfastDate).getDay()}`}
+                {toStringByFormatting(new Date(item.nfastDate))}
               </TableCell>
               <TableCell>{item.nfastDefaultPrice}Eth</TableCell>
               <TableCell>

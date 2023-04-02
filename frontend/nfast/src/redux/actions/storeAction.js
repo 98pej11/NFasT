@@ -21,17 +21,17 @@ function getStoreDetail(storeSequence) {
   };
 }
 
-function writeReview(storesequence, userSequence, reviews) {
-  console.log(storesequence);
+function writeReview(nfastSequence, userSequence, reviews) {
+  console.log(nfastSequence);
   console.log(reviews);
   const data = {
-    storeSequence: storesequence,
+    nfastSequence,
     userSequence,
     reviews,
   };
   console.log(data);
   return async () => {
-    const url = `${baseUrl}/review-count/${storesequence}`;
+    const url = `${baseUrl}/review-count/${nfastSequence}`;
     await axios
       .post(url, JSON.stringify(data), {
         headers: {
@@ -117,6 +117,23 @@ function saveHandler(data) {
   };
 }
 
+function getNfastUseState(userSequence, nfastSequence) {
+  return async (dispatch) => {
+    await axios
+      .get(
+        `${baseUrl}/floating-button/confirmation/${userSequence}/${nfastSequence}`
+      )
+      .then((response) => {
+        const { data } = response;
+        dispatch({ type: "GET_NFASTUSESTATE_SUCCESS", payload: { data } });
+        console.log("RESPONSE DATA ", data);
+      })
+      .catch((error) => {
+        console.log("ERROR", error);
+      });
+  };
+}
+
 export const storeAction = {
   getStoreDetail,
   writeReview,
@@ -125,4 +142,5 @@ export const storeAction = {
   saveAmount,
   saveHandler,
   postPurchase,
+  getNfastUseState,
 };
