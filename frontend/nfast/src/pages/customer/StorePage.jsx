@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import NavigationOutlinedIcon from "@mui/icons-material/NavigationOutlined";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import StoreInfo from "../../components/storepage/StoreInfo";
 import StoreReview from "../../components/storepage/StoreReview";
 import StoreChart from "../../components/storepage/StoreChart";
@@ -58,8 +58,8 @@ export default function StorePage() {
           </Graph>
           <Divider />
           <h4>
-            <LocationOnOutlinedIcon />
-            지도
+            <NavigationOutlinedIcon style={{ fontSize: 20 }} />
+            상세 주소
           </h4>
           <MapWrapper>
             <Map>
@@ -68,10 +68,10 @@ export default function StorePage() {
                 storeLng={storedetail.store.storeLng}
               />
             </Map>
-            <h4>
-              <NavigationOutlinedIcon />
+            <h5>
+              <LocationOnIcon style={{ color: "orange" }} />
               {storedetail.store.storeAddress}
-            </h4>
+            </h5>
           </MapWrapper>
           <Divider />
           <Footer>
@@ -86,8 +86,11 @@ const Wrapper = styled.div`
   margin: 0;
   height: 100vh;
 
-  h4 {
+  h4,
+  h5 {
     margin-left: 3%;
+    display: flex;
+    align-items: center;
   }
 `;
 const Divider = styled.div`

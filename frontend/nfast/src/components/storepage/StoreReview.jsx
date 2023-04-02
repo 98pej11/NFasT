@@ -18,7 +18,7 @@ function StoreReview(props) {
     <Chips>
       <h4>
         <PersonOutlineIcon />
-        리뷰
+        방문자 리뷰
       </h4>
       <AlignChip>
         <Wrapper>

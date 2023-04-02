@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Line } from "react-chartjs-2";
-import ImportExportIcon from "@mui/icons-material/ImportExport";
+import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import {
   Chart as ChartJS,
   LineElement,
@@ -77,7 +77,7 @@ function StoreChart(props) {
   return (
     <Wrapper>
       <h4>
-        <ImportExportIcon />
+        <AttachMoneyOutlinedIcon />
         지난주 시세
       </h4>
       <Line data={data} options={data.options} />
