@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -20,7 +20,7 @@ import cat from "../../assets/cat.png";
 import { authAction } from "../../redux/actions/authAction";
 
 export default function Example() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -29,8 +29,11 @@ export default function Example() {
   };
 
   const handleDrawerClose = (type) => {
+    console.log("TYPEEEEEEEEE", type);
     setOpenDrawer(false);
-    navigate(type);
+    // if (type) {
+    //   navigate(type);
+    // }
   };
 
   const logout = () => {
@@ -77,7 +80,7 @@ export default function Example() {
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText sx={{ fontSize: "50px" }}>
-                    사용한 NFT
+                    나의 NFT
                   </ListItemText>
                 </ListItemButton>
               </ListItem>
@@ -101,9 +104,9 @@ export default function Example() {
               <ListItem
                 disablePadding
                 sx={{ height: "50px" }}
-                onClick={() => handleDrawerClose("/myinfo")}
+                // onClick={() => handleDrawerClose("/myinfo")}
               >
-                <ListItemButton>
+                <ListItemButton href="/myinfo">
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
