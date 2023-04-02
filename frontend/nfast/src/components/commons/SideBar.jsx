@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -20,7 +20,6 @@ import { mypageAction } from "../../redux/actions/mypageAction";
 import { getSequence } from "../../storage/Cookie";
 
 export default function Sidebar() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [openDrawer, setOpenDrawer] = useState(false);
   const userInfo = useSelector((state) => state.mypageReducer.userInfo);
@@ -33,8 +32,11 @@ export default function Sidebar() {
   };
 
   const handleDrawerClose = (type) => {
+    console.log("TYPEEEEEEEEE", type);
     setOpenDrawer(false);
-    navigate(type);
+    // if (type) {
+    //   navigate(type);
+    // }
   };
 
   const logout = () => {

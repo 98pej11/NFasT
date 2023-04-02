@@ -40,6 +40,7 @@ const StyleBtn = styled.div`
 
 function MyInfo(props) {
   const { userSequence, userWallet, userNickname, userImage } = props;
+  console.log("userWallet", userWallet);
   const dispatch = useDispatch();
   const [image, setImage] = useState([]);
   const [picture, setPicture] = useState([]);
@@ -80,7 +81,7 @@ function MyInfo(props) {
     dispatch(mypageAction.modifyUserInfo(userSequence, params));
     // navigate(`/`);
   };
-
+  console.log(userImage);
   const onChangeHandler = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
@@ -94,12 +95,13 @@ function MyInfo(props) {
         <IconButton sx={{ width: 200, height: 200 }}>
           <Avatar
             alt="Remy Sharp"
-            src={image}
+            src={userImage}
             sx={{ width: 200, height: 200 }}
             onClick={() => {
               fileInput.current.click();
             }}
-            defaultValue={userImage}
+            value={userImage}
+            defaultValue={image}
           />
           <input
             type="file"
@@ -130,7 +132,8 @@ function MyInfo(props) {
           <p style={{ textAlign: "left", fontSize: "medium" }}>연동지갑 주소</p>
           <TextField
             id="filled-read-only-input"
-            defaultValue={userWallet}
+            name="userWallet"
+            value={userWallet}
             fullWidth
             InputProps={{
               readOnly: true,
@@ -144,7 +147,6 @@ function MyInfo(props) {
             fullWidth
             name="userNickname"
             onChange={onChangeHandler}
-            defaultValue={userNickname}
           />
           <StyleBtn>
             <Button variant="contained" onClick={modifyUserInfo}>
@@ -158,17 +160,14 @@ function MyInfo(props) {
 }
 
 MyInfo.defaultProps = {
-  userWallet: "",
-  userNickname: "",
   userImage: "",
-  userSequence: "",
 };
 
 MyInfo.propTypes = {
-  userWallet: PropTypes.string,
-  userNickname: PropTypes.string,
+  userWallet: PropTypes.string.isRequired,
+  userNickname: PropTypes.string.isRequired,
   userImage: PropTypes.string,
-  userSequence: PropTypes.number,
+  userSequence: PropTypes.number.isRequired,
 };
 
 export default MyInfo;
