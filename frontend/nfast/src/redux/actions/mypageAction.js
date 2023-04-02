@@ -139,6 +139,21 @@ function getResellIncome(storeSequence) {
   };
 }
 
+function getTransactionList(userSequence) {
+  return async (dispatch) => {
+    const url = `${baseUrl}/transaction-list/${userSequence}`;
+    await axios
+      .get(url)
+      .then((response) => {
+        const { data } = response;
+        dispatch({ type: "GET_TRANSACTIONLIST_SUCCESS", payload: { data } });
+      })
+      .catch((error) => {
+        console.log("GET TRANSACTION ERROR", error);
+      });
+  };
+}
+
 export const mypageAction = {
   getAvailableNfasts,
   getUnAvailableNfasts,
@@ -148,4 +163,5 @@ export const mypageAction = {
   getStoreInfo,
   getMintIncome,
   getResellIncome,
+  getTransactionList,
 };
