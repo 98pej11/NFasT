@@ -9,7 +9,6 @@ const Wrapper = styled.div`
   height: 100vh;
   margin-top: 60px;
   padding-bottom: 700px;
-  background-color: red;
 `;
 const Floating = styled.div`
   width: 100%;

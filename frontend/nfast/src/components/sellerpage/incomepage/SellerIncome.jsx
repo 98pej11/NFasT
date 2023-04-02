@@ -11,6 +11,8 @@ function SellerIncome() {
     dispatch(publishAction.getIncomeList(getSequence()));
   }, []);
   const incomeList = useSelector((state) => state.publishReducer.incomeList);
+  incomeList.push();
+  console.log(incomeList);
   return (
     incomeList.length !== 0 && (
       <div>

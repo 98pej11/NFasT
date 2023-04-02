@@ -11,7 +11,6 @@ import SellerIncome from "./incomepage/SellerIncome";
 import SellerMaked from "./makedpage/SellerMaked";
 import SellerMypage from "./mypage/SellerMypage";
 import { mypageAction } from "../../redux/actions/mypageAction";
-import FloatingBtnSeller from "../commons/FloatingBtnSeller";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -113,9 +112,6 @@ export default function SellerMain(props) {
           <SellerMypage />
         </TabPanel>
       </Box>
-      <div>
-        <FloatingBtnSeller>floating</FloatingBtnSeller>
-      </div>
     </Header>
   );
 }
