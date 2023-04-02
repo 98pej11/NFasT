@@ -30,14 +30,13 @@ export default function MyBookMark() {
   // `;
 
   const dispatch = useDispatch();
-  const sequence = getSequence();
 
+  useEffect(() => {
+    dispatch(mypageAction.getBookMarkList(getSequence()));
+  }, []);
   const bookmarkList = useSelector((state) => state.mypageReducer.bookmarkList);
   // eslint-disable-next-line no-console
   console.log(`${bookmarkList}없는데?`);
-  useEffect(() => {
-    dispatch(mypageAction.getBookMarkList(sequence));
-  }, []);
 
   // const [currentPage, setCurrentPage] = useState(1);
   // // const handlePageChange = (event, page) => {
@@ -74,7 +73,7 @@ export default function MyBookMark() {
                     height: "250px",
                   }}
                 >
-                  <Link to="/store">
+                  <Link to={`/store/${card.storeSequence}`}>
                     <CardMedia
                       component="img"
                       height="140"

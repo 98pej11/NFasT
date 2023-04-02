@@ -39,7 +39,7 @@ export default function TransCard(props) {
                 height: "250px",
               }}
             >
-              <Link to="/store">
+              <Link to={`/store/${card.storeSequence}`}>
                 <CardMedia
                   component="img"
                   height="140"

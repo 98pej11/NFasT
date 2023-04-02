@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import ForkRightIcon from "@mui/icons-material/ForkRight";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import NavigationOutlinedIcon from "@mui/icons-material/NavigationOutlined";
 import StoreInfo from "../../components/storepage/StoreInfo";
 import StoreReview from "../../components/storepage/StoreReview";
 import StoreChart from "../../components/storepage/StoreChart";
@@ -57,7 +58,7 @@ export default function StorePage() {
           </Graph>
           <Divider />
           <h4>
-            <ForkRightIcon />
+            <LocationOnOutlinedIcon />
             지도
           </h4>
           <MapWrapper>
@@ -67,10 +68,12 @@ export default function StorePage() {
                 storeLng={storedetail.store.storeLng}
               />
             </Map>
+            <h4>
+              <NavigationOutlinedIcon />
+              {storedetail.store.storeAddress}
+            </h4>
           </MapWrapper>
-          <h4>{storedetail.store.storeAddress}</h4>
           <Divider />
-
           <Footer>
             <StoreNav />
           </Footer>
@@ -109,11 +112,11 @@ const Chart = styled(StoreChart)`
 `;
 
 const MapWrapper = styled.div`
-  width: 400px;
+  width: 100%;
   // height: 300px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   margin-bottom: 70px;
 `;
 
