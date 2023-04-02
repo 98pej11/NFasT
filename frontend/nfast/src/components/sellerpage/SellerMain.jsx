@@ -12,6 +12,7 @@ import SellerMaked from "./makedpage/SellerMaked";
 import SellerMypage from "./mypage/SellerMypage";
 import { mypageAction } from "../../redux/actions/mypageAction";
 import FloatingBtnSeller from "../commons/FloatingBtnSeller";
+// import FloatingSample from "../commons/FloatingSample";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,6 +49,7 @@ function a11yProps(index) {
 
 const Header = styled.div`
   width: 100%;
+  height: 100vh;
   margin-top: 0;
   background-color: white;
 `;
@@ -63,7 +65,7 @@ const Profit = styled.div`
 const HeaderTab = styled(Tab)`
   width: 25%;
 `;
-
+const Floating = styled(FloatingBtnSeller)``;
 export default function SellerMain(props) {
   const { sequence } = props;
   const dispatch = useDispatch();
@@ -73,6 +75,7 @@ export default function SellerMain(props) {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log("SEQUENCE", sequence);
     dispatch(mypageAction.getStoreInfo(sequence));
     dispatch(mypageAction.getMintIncome(sequence));
@@ -114,7 +117,8 @@ export default function SellerMain(props) {
         </TabPanel>
       </Box>
       <div>
-        <FloatingBtnSeller>floating</FloatingBtnSeller>
+        {/* <Floating /> */}
+        <Floating>floating</Floating>
       </div>
     </Header>
   );

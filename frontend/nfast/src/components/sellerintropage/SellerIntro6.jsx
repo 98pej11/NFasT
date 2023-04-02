@@ -27,7 +27,7 @@ export default function SellerIntro6() {
         </Text>
       </ContentBox>
       <MoreContentIconBox>
-        <Link to="/sellerRegister">
+        <Link to="/RegisterSeller">
           <KeyboardDoubleArrowDownIcon fontSize="large" />
           <h4>가게 등록</h4>
         </Link>

@@ -23,12 +23,13 @@ function Metamask(props) {
         dispatch(authAction.userConfirm(address));
         navigate("/mainpage");
       } else if (isSeller === 1) {
+        // eslint-disable-next-line no-console
         console.log(address);
         dispatch(authAction.storeConfirm(address));
-        navigate("/sellerPage");
+        navigate("/PageSeller");
       } else if (isSeller === 2) {
         dispatch(authAction.storeRegister(address, store));
-        navigate("/sellerPage");
+        navigate("/PageSeller");
       }
     }
   }, [address, dispatch, navigate]);

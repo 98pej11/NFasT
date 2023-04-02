@@ -13,7 +13,45 @@ function Publish() {
   }, []);
 
   const publishNfasts = useSelector((state) => state.publishReducer.nfastList);
-
+  publishNfasts.push(
+    {
+      nfastDate: 1680879600000,
+      nfastDefaultPrice: 0.01,
+      nfastSaleCount: 3,
+      nfastTotalCount: 6,
+    },
+    {
+      nfastDate: 1680966000000,
+      nfastDefaultPrice: 0.01,
+      nfastSaleCount: 2,
+      nfastTotalCount: 3,
+    },
+    {
+      nfastDate: 1681052400000,
+      nfastDefaultPrice: 0.01,
+      nfastSaleCount: 1,
+      nfastTotalCount: 3,
+    },
+    {
+      nfastDate: 1680274800000,
+      nfastDefaultPrice: 0.01,
+      nfastSaleCount: 3,
+      nfastTotalCount: 3,
+    },
+    {
+      nfastDate: 1680361200000,
+      nfastDefaultPrice: 0.01,
+      nfastSaleCount: 0,
+      nfastTotalCount: 3,
+    },
+    {
+      nfastDate: 1681052400000,
+      nfastDefaultPrice: 0.01,
+      nfastSaleCount: 1,
+      nfastTotalCount: 3,
+    }
+  );
+  console.log(publishNfasts);
   return (
     <div>
       <MakedTable publishNfasts={publishNfasts} />
