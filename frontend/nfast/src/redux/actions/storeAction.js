@@ -99,6 +99,42 @@ function postPurchase(inputs, amount, userSequence) {
   };
 }
 
+function getNfastPrice(nfastSequence) {
+  return async (dispatch) => {
+    await axios
+      .get(`${baseUrl}/store/${nfastSequence}/sale`)
+      .then((response) => {
+        const { data } = response;
+        dispatch({ type: "GET_NFAST_PRICE", payload: { data } });
+        console.log("RESPONSE DATA ", data);
+      })
+      .catch((error) => {
+        console.log("ERROR", error);
+      });
+  };
+}
+
+function registSell(data) {
+  return async () => {
+    await axios
+      .post(
+        `${baseUrl}/store/${data.nfastSequence}/sale`,
+        JSON.stringify(data),
+        {
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+        }
+      )
+      .then((response) => {
+        console.log("REGISTSELL DATA ", response);
+      })
+      .catch((error) => {
+        console.log("ERROR", error);
+      });
+  };
+}
+
 function saveTotalCnt(data) {
   return async (dispatch) => {
     dispatch({ type: "SAVE_TOTALCNT", payload: { data } });
@@ -143,4 +179,6 @@ export const storeAction = {
   saveHandler,
   postPurchase,
   getNfastUseState,
+  getNfastPrice,
+  registSell,
 };

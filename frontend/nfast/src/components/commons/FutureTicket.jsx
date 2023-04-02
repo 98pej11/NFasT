@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
@@ -7,6 +8,7 @@ import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import Checkbox from "@mui/material/Checkbox";
 import { TextField } from "@mui/material";
+import { storeAction } from "../../redux/actions/storeAction";
 
 const Wrapper = styled.div`
   display: flex;
@@ -136,7 +138,8 @@ const CheckText = styled.div`
 `;
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function PastTicket(props) {
+function FutureTicket(props) {
+  const dispatch = useDispatch();
   const {
     storeName,
     nfastDate,
@@ -144,9 +147,22 @@ function PastTicket(props) {
     nfastEndTime,
     nfastPrice,
     nfastQr,
+    nfastSequence,
+    nfastMealType,
   } = props;
   const [drawer1Open, setDrawer1Open] = useState(false);
   const [drawer2Open, setDrawer2Open] = useState(false);
+  const [inputs, setInputs] = useState({
+    nfastHopePrice: "",
+    nfastSequence,
+  });
+  useEffect(() => {
+    dispatch(storeAction.getNfastPrice(nfastSequence));
+  }, []);
+
+  const comparePrice = useSelector(
+    (state) => state.storepageReducer.nfastPrice
+  );
 
   const toggleDrawer1 = () => {
     setDrawer1Open(!drawer1Open);
@@ -154,6 +170,18 @@ function PastTicket(props) {
 
   const toggleDrawer2 = () => {
     setDrawer2Open(!drawer2Open);
+  };
+
+  const sellTicket = () => {
+    dispatch(storeAction.registSell(inputs));
+  };
+
+  const onChangeHandler = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    const nextInputs = { ...inputs, [name]: value };
+    setInputs(nextInputs);
+    console.log(nextInputs);
   };
   return (
     <Wrapper>
@@ -200,18 +228,31 @@ function PastTicket(props) {
               >
                 <Input>
                   <p>내 NFT</p>
-                  <TextField sx={{ width: "70%" }} />
+                  <TextField
+                    sx={{ width: "70%" }}
+                    value={`${storeName} / ${
+                      nfastMealType === 0 ? "런치" : "디너"
+                    } `}
+                  />
                 </Input>
                 <Input>
                   <p> 판매 희망가</p>
-                  <TextField sx={{ width: "70%" }} />
+                  <TextField
+                    sx={{ width: "70%" }}
+                    value={inputs.nfastHopePrice}
+                    onChange={onChangeHandler}
+                    name="nfastHopePrice"
+                  />
                 </Input>
                 <Input>
                   <p> 구매 대비</p>
-                  <TextField sx={{ width: "70%" }} />
+                  <TextField
+                    sx={{ width: "70%" }}
+                    value={inputs.nfastHopePrice - comparePrice}
+                  />
                 </Input>
                 <ConfirmBtn>
-                  <Button variant="contained" onClick={toggleDrawer1}>
+                  <Button variant="contained" onClick={sellTicket}>
                     판매하기
                   </Button>
                 </ConfirmBtn>
@@ -260,7 +301,7 @@ function PastTicket(props) {
     </Wrapper>
   );
 }
-PastTicket.defaultProps = {
+FutureTicket.defaultProps = {
   storeName: "가게이름",
   nfastDate: "날짜",
   nfastStartTime: "시작시간",
@@ -268,12 +309,14 @@ PastTicket.defaultProps = {
   nfastPrice: 0,
   nfastQr: "qr",
 };
-PastTicket.propTypes = {
+FutureTicket.propTypes = {
   storeName: PropTypes.string,
   nfastDate: PropTypes.string,
   nfastStartTime: PropTypes.number,
   nfastEndTime: PropTypes.number,
   nfastPrice: PropTypes.number,
   nfastQr: PropTypes.string,
+  nfastSequence: PropTypes.string.isRequired,
+  nfastMealType: PropTypes.string.isRequired,
 };
-export default PastTicket;
+export default FutureTicket;
