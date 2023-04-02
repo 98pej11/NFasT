@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -14,6 +13,11 @@ export default function StorePage() {
   // eslint-disable-next-line react/destructuring-assignment, react/prop-types
   const { storeSequence } = useParams();
   const dispatch = useDispatch();
+  const [data, setData] = useState({
+    tokenId: "",
+    nfastPrice: "",
+    nfastHopePrice: "",
+  });
 
   useEffect(() => {
     dispatch(storeAction.getStoreDetail(storeSequence));
@@ -25,9 +29,19 @@ export default function StorePage() {
   const purchaseInfo = useSelector(
     (state) => state.storepageReducer.purchaseInfo
   );
+
   useEffect(() => {
-    console.log("응답 정보", purchaseInfo);
+    console.log("PURCHASE", purchaseInfo);
+    const temp = purchaseInfo.map((item) => {
+      return {
+        nfastHash: item.nfastHash,
+        nfastPrice: item.nfastPrice,
+        nfastHopePrice: item.nfastHopePrice,
+      };
+    });
+    setData(temp);
   }, [purchaseInfo]);
+  console.log(data);
 
   console.log("STORE DETAIL", storedetail);
   return (

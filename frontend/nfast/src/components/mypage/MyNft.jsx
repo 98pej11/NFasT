@@ -54,6 +54,8 @@ function MyNft() {
     (state) => state.mypageReducer.availableNfasts
   );
 
+  console.log(availableNfasts);
+
   useEffect(() => {
     dispatch(mypageAction.getUnAvailableNfasts(sequence));
   }, []);
@@ -97,6 +99,8 @@ function MyNft() {
                   nfastStartTime={nfast.nfastStartTime}
                   nfastEndTime={nfast.nfastEndTime}
                   nfastPrice={nfast.nfastPrice}
+                  nfastSequence={nfast.nfastSequence}
+                  nfastMealType={nfast.nfastMealType}
                   nfastQr={
                     <QRCode
                       value={JSON.stringify({

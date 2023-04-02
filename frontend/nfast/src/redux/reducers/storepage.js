@@ -5,6 +5,7 @@ const initialState = {
   amount: "",
   flag: "",
   purchaseInfo: [],
+  nfastPrice: "",
 };
 function storepage(state = initialState, action = {}) {
   const { type, payload } = action;
@@ -22,6 +23,8 @@ function storepage(state = initialState, action = {}) {
     case "GET_PURCHASE_INFO":
       console.log("PLAYOD", payload);
       return { ...state, purchaseInfo: payload.data.nfasts };
+    case "GET_NFAST_PRICE":
+      return { ...state, nfastPrice: payload.data.nfastPrice };
     default:
       return { ...state };
   }
