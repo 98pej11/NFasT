@@ -8,6 +8,7 @@ import StoreChart from "../../components/storepage/StoreChart";
 import KaKaoMap from "../../components/storepage/KaKaoMap";
 import StoreNav from "../../components/storepage/StoreNav";
 import { storeAction } from "../../redux/actions/storeAction";
+import FloatingBtn from "../../components/commons/FloatingBtn";
 
 export default function StorePage() {
   // eslint-disable-next-line react/destructuring-assignment, react/prop-types
@@ -84,6 +85,7 @@ export default function StorePage() {
             <StoreNav />
           </Footer>
         </Wrapper>
+        <FloatingBtn>Floating</FloatingBtn>
       </div>
     )
   );

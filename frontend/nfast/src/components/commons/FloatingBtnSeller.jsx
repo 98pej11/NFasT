@@ -1,8 +1,20 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 // import { Link } from "react-router-dom";
 // import FloatingQr from "./FloatingQr";
 import NFastQr from "./NfastQr";
+
+const FloatingAnimation = keyframes`
+0% {
+  transform: translateY(0%);	
+}
+50% {
+  transform: translateY(6%);	
+}	
+100% {
+  transform: translateY(0%);
+}	
+`;
 
 const Wrapper = styled.div`
   width: 100%;
@@ -24,7 +36,9 @@ const Cards = styled.div`
 const Btn = styled.button`
   width: 70px;
   height: 70px;
-  background-color: #ffcb45;
+  background-color: #5b5299;
+  color: white;
+  animation: ${FloatingAnimation} 2s linear infinite;
   opacity: 90%;
   font-size: 20px;
   border: none;

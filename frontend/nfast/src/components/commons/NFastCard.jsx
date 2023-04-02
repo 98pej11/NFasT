@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState } from "react";
@@ -200,7 +201,7 @@ function NFastCard() {
           <div>
             <StyleBtn>
               <Button variant="contained" onClick={useStateRoute}>
-                사용 확인
+                사용확인
               </Button>
               {!qrStatus ? (
                 <Button variant="contained" onClick={toggleDrawer2}>

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MyInfo from "../../components/mypage/MyInfo";
 import { getSequence } from "../../storage/Cookie";
 import { mypageAction } from "../../redux/actions/mypageAction";
+import FloatingBtn from "../../components/commons/FloatingBtn";
 
 function MyInfoPage() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function MyInfoPage() {
         userSequence={userInfo.userSequence}
         userImage={userInfo.userImage}
       />
+      <FloatingBtn>Floating</FloatingBtn>
     </div>
   );
 }
