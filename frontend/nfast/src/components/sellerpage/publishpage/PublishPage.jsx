@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { QrReader } from "react-qr-reader";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import PublishTicket from "./PublishTicket";
+import PublishTicket from "./PublishTicketEx";
 import PublishField from "./PublishField";
 import SwitchTime from "./SwitchTime";
 

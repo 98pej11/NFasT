@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import FloatingIcon from "../../assets/FloatingIcon.png";
 import FloatingCards from "./FloatingCards";
 import { mainAction } from "../../redux/actions/mainAction";
 import { getSequence } from "../../storage/Cookie";
@@ -55,7 +54,7 @@ function FloatingBtn() {
         </Cards>
       </Floating>
       <Btn type="button" onClick={handleClick}>
-        <img src={FloatingIcon} alt="floatingIcon" />
+        지갑
       </Btn>
     </div>
   );

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 // import { TextField, InputAdornment, IconButton } from "@mui/material";
 // import { Search as SearchIcon } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 import { searchAction } from "../../redux/actions/searchAction";
 
 export default function SearchBar() {
@@ -19,16 +20,16 @@ export default function SearchBar() {
   }, []);
 
   const [inputValue, setInputValue] = useState("");
-  const [clickedName, setClickedName] = useState("");
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [dropDownList, setDropDownList] = useState(wholeTextArray);
   const [dropDownItemIndex, setDropDownItemIndex] = useState(-1);
-
+  const navigate = useNavigate();
   let StoreSequence = 0;
-  const getStoreSequence = () => {
-    const store = searchList.find((store) => store.storeName === clickedName);
+  const getStoreSequence = (clickedItem) => {
+    const store = searchList.find((store) => store.storeName === clickedItem);
     if (store) {
       StoreSequence = store.storeSequence;
+      navigate(`/store/${StoreSequence}`);
     }
   };
 
@@ -51,9 +52,8 @@ export default function SearchBar() {
 
   const clickDropDownItem = (clickedItem) => {
     setInputValue(clickedItem);
-    setClickedName(inputValue);
-    getStoreSequence();
-    console.log(`${StoreSequence}`);
+    console.log(clickedItem);
+    getStoreSequence(clickedItem);
     setIsHaveInputValue(false);
   };
 
