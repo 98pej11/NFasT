@@ -5,8 +5,14 @@ import QRcode from "../../../assets/QRcode.png";
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const EX = styled.div`
+  color: gray;
+  margin-bottom: 10px;
 `;
 const Ticket = styled.div`
   position: relative;
@@ -24,6 +30,7 @@ const Info = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-left: 10px;
   & > div:not(:last-child) {
     margin: 6%;
   }
@@ -60,6 +67,7 @@ const Price = styled.div`
 function PublishTicket() {
   return (
     <Wrapper>
+      <EX>(예시)</EX>
       <Ticket>
         <Info>
           <div>

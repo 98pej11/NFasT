@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import FloatingIcon from "../../assets/FloatingIcon.png";
-import FloatingQr from "./FloatingQr";
+// import { Link } from "react-router-dom";
+// import FloatingQr from "./FloatingQr";
+import NFastQr from "./NfastQr";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -16,29 +16,22 @@ const Floating = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  // background-color: blue;
 `;
 const Cards = styled.div`
-  width: 100%;
-  height: 100vh;
   display: ${(props) => props.isDisplay};
 `;
 
 const Btn = styled.button`
-  background-color: transparent;
+  width: 70px;
+  height: 70px;
+  background-color: #ffcb45;
+  opacity: 90%;
+  font-size: 20px;
   border: none;
+  border-radius: 50px;
   position: fixed;
   bottom: 80px;
   right: 30px;
-  &:hover {
-    cursor: pointer;
-    opacity: 80%;
-  }
-
-  img {
-    width: 80px;
-    height: 80px;
-  }
 `;
 
 function FloatingBtnSeller() {
@@ -55,14 +48,14 @@ function FloatingBtnSeller() {
     <Wrapper>
       <Floating>
         <Cards isDisplay={floating}>
-          <FloatingQr />
+          <NFastQr />
         </Cards>
       </Floating>
       <Btn type="button" onClick={handleClick}>
-        <img src={FloatingIcon} alt="floatingIcon" />
+        QR
       </Btn>
-      <Link to="/nFastCard">Go to NFastCard</Link>
-      <Link to="/review">Go to review</Link>
+      {/* <Link to="/nFastCard">Go to NFastCard</Link>
+      <Link to="/review">Go to review</Link> */}
     </Wrapper>
   );
 }
