@@ -49,7 +49,7 @@ function removeBookMark(storeSequence, userSequence) {
   };
 }
 function isBookMark(storeSequence, userSequence) {
-  console.log("북마크게요 아니게요");
+  // console.log("북마크게요 아니게요");
   return async () => {
     await axios
       .get(`${baseUrl}/store/${storeSequence}/bookmark/${userSequence}`)

@@ -26,7 +26,7 @@ export default function Sidebar() {
   const userInfo = useSelector((state) => state.mypageReducer.userInfo);
   useEffect(() => {
     dispatch(mypageAction.getUserInfo(getSequence()));
-  }, [[userInfo]]);
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpenDrawer(true);

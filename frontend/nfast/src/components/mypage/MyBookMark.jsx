@@ -35,8 +35,6 @@ export default function MyBookMark() {
     dispatch(mypageAction.getBookMarkList(getSequence()));
   }, []);
   const bookmarkList = useSelector((state) => state.mypageReducer.bookmarkList);
-  // eslint-disable-next-line no-console
-  console.log(`${bookmarkList}없는데?`);
 
   const [currentPage, setCurrentPage] = useState(1);
   const handlePageChange = (event, page) => {
