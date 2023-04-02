@@ -1,5 +1,4 @@
-import React from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
+import React, { useState } from "react";
 import styled from "styled-components";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -12,13 +11,22 @@ import PropTypes from "prop-types";
 
 export default function MakedTable(props) {
   const { publishNfasts } = props;
-  console.log("PUBLISH", publishNfasts);
+
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 5;
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = page * itemsPerPage;
 
   const Pag = styled.div`
     margin: 10%;
-    display: flex; /* 가로 정렬을 위해 flexbox 설정 */
-    justify-content: center; /* 가운데 정렬 */
+    display: flex;
+    justify-content: center;
   `;
+
+  const handleChangePage = (event, value) => {
+    setPage(value);
+  };
+
   return (
     <div>
       <Table sx={{ textAlign: "center" }}>
@@ -30,7 +38,7 @@ export default function MakedTable(props) {
           </TableRow>
         </TableHead>
         <TableBody align="center">
-          {publishNfasts.map((item) => (
+          {publishNfasts.slice(startIndex, endIndex).map((item) => (
             <TableRow key={item.id}>
               <TableCell>
                 {`${new Date(item.nfastDate).getFullYear()}.
@@ -47,7 +55,13 @@ export default function MakedTable(props) {
       </Table>
       <Pag>
         <Stack spacing={2}>
-          <Pagination count={5} variant="outlined" color="secondary" />
+          <Pagination
+            count={Math.ceil(publishNfasts.length / itemsPerPage)}
+            page={page}
+            variant="outlined"
+            color="secondary"
+            onChange={handleChangePage}
+          />
         </Stack>
       </Pag>
     </div>
@@ -57,10 +71,10 @@ export default function MakedTable(props) {
 MakedTable.propTypes = {
   publishNfasts: PropTypes.arrayOf(
     PropTypes.shape({
-      incomeListDate: PropTypes.string,
-      incomeListPrice: PropTypes.number,
-      incomeListTransaction: PropTypes.string,
-      incomeListType: PropTypes.number,
+      nfastDate: PropTypes.string,
+      nfastDefaultPrice: PropTypes.number,
+      nfastSaleCount: PropTypes.number,
+      nfastTotalCount: PropTypes.number,
     })
   ).isRequired,
 };

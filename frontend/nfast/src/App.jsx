@@ -22,6 +22,7 @@ import LoginCustomer from "./pages/customer/LoginPageCustomer";
 import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
 import Header from "./components/commons/Header";
+import HeaderSeller from "./components/commons/HeaderSeller";
 import CustomerIntroduce from "./pages/customer/CustomerIntroduce";
 // import Footer from "./components/commons/Footer";
 
@@ -41,7 +42,11 @@ function App() {
   return (
     <Wrapper>
       <BrowserRouter>
-        <Header />
+        {window.location.pathname.includes("Seller") ? (
+          <HeaderSeller />
+        ) : (
+          <Header />
+        )}
         <Pages>
           <Routes>
             <Route path="/" element={<CustomerIntroduce />} />
@@ -59,13 +64,14 @@ function App() {
             <Route path="/store/:storeSequence" element={<StorePage />} />
             <Route path="/loginCustomer" element={<LoginCustomer />} />
             <Route path="/loginSeller" element={<LoginSeller />} />
-            <Route path="/sellerPage" element={<SellerPage />} />
+            <Route path="/PageSeller" element={<SellerPage />} />
             <Route path="/introSeller1" element={<IntroSeller1 />} />
             <Route path="/introSeller2" element={<IntroSeller2 />} />
             <Route path="/introSeller3" element={<IntroSeller3 />} />
-            <Route path="/sellerRegister" element={<SellerRegister />} />
+            <Route path="/RegisterSeller" element={<SellerRegister />} />
           </Routes>
         </Pages>
+
         {/* <Footer /> */}
       </BrowserRouter>
     </Wrapper>
