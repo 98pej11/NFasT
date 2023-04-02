@@ -41,9 +41,11 @@ const QR = styled.div`
   height: 60%;
   position: fixed;
   border-radius: 2em;
-  h2 {
+  h2,
+  p {
     display: flex;
     justify-content: center;
+    color: white;
   }
 
   content {
@@ -51,7 +53,7 @@ const QR = styled.div`
   }
 
   top: 200px;
-  background-color: #ffcb45;
+  background-color: #5b5299;
 `;
 
 function NfastQr() {

@@ -11,6 +11,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import { mainAction } from "../../redux/actions/mainAction";
+import FloatingBtn from "../../components/commons/FloatingBtn";
 
 // eslint-disable-next-line react/prop-types
 export default function TransAllPage() {
@@ -87,6 +88,7 @@ export default function TransAllPage() {
             </Grid>
           ))}
         </Grid>
+        <FloatingBtn>Floating</FloatingBtn>
       </div>
     )
   );
