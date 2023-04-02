@@ -1,5 +1,4 @@
-import React from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
+import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -30,13 +29,21 @@ function ArrowIcon({ direction }) {
   );
 }
 
-export default function IncomeTable(props) {
-  const { incomeList } = props;
+export default function IncomeTable({ incomeList }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
   const Pag = styled.div`
     margin: 10%;
-    display: flex; /* 가로 정렬을 위해 flexbox 설정 */
-    justify-content: center; /* 가운데 정렬 */
+    display: flex;
+    justify-content: center;
   `;
+
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div>
       <Table sx={{ textAlign: "center" }}>
@@ -44,21 +51,27 @@ export default function IncomeTable(props) {
           <TableRow>
             <TableCell sx={{ width: "5%" }}>
               <ArrowIcon direction="up" />
-              <ArrowIcon direction="down" />
             </TableCell>
             <TableCell sx={{ width: "20%" }}>수수료 수익</TableCell>
             <TableCell sx={{ width: "20%" }}>유효 날짜</TableCell>
           </TableRow>
         </TableHead>
         <TableBody align="center">
-          {incomeList.map((item) => (
-            <TableRow>
-              <TableCell>{item.updown}</TableCell>
+          {incomeList.slice(startIndex, endIndex).map((item, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <TableRow key={index}>
+              <TableCell>
+                <ArrowIcon
+                  direction="up"
+                  sx={{ color: "red", fontSize: "10px" }}
+                />
+                {item.incomeListPrice}Eth
+              </TableCell>
               <TableCell>{item.incomeListPrice}Eth</TableCell>
               <TableCell>
                 {`${new Date(item.incomeListDate).getFullYear()}.
                 ${new Date(item.incomeListDate).getMonth()}.
-                ${new Date(item.incomeListDate).getDay()}`}
+                ${new Date(item.incomeListDate).getDate()}`}
               </TableCell>
             </TableRow>
           ))}
@@ -66,7 +79,13 @@ export default function IncomeTable(props) {
       </Table>
       <Pag>
         <Stack spacing={2}>
-          <Pagination count={5} variant="outlined" color="secondary" />
+          <Pagination
+            count={Math.ceil(incomeList.length / itemsPerPage)}
+            page={currentPage}
+            variant="outlined"
+            color="secondary"
+            onChange={handlePageChange}
+          />
         </Stack>
       </Pag>
     </div>
