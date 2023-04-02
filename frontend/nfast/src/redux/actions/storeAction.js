@@ -1,9 +1,11 @@
 /* eslint-disable no-console */
 import axios from "axios";
 import { baseUrl as base } from "./url";
+// import { getSequence } from "../../storage/Cookie";
 
 // const baseUrl = `https://j8a307.p.ssafy.io/api`;
 const baseUrl = `${base}`;
+// const userSequence=getSequence();
 
 function getStoreDetail(storeSequence) {
   console.log("나 들어왔어");
@@ -119,6 +121,7 @@ function saveHandler(data) {
 
 function getNfastUseState(userSequence, nfastSequence) {
   return async (dispatch) => {
+    console.log("흠...............");
     await axios
       .get(
         `${baseUrl}/floating-button/confirmation/${userSequence}/${nfastSequence}`

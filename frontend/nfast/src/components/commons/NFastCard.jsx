@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
 import styled from "styled-components";
@@ -144,7 +144,11 @@ const StyleBtn = styled.div`
 // const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function NFastCard() {
+  const dispatch = useDispatch();
   const floatingNfast = useSelector((state) => state.mainReducer.nfast);
+
+  // console.log(nfastUsage);
+  const navigate = useNavigate();
   const {
     storeName,
     nfastDate,
@@ -153,25 +157,28 @@ function NFastCard() {
     nfastPrice,
     nfastSequence,
   } = floatingNfast;
+  // const { nfastUsage } = nfastUse;
   // const [drawer1Open, setDrawer1Open] = useState(false);
   // const [drawer2Open, setDrawer2Open] = useState(false);
   const [qrStatus, setQrStatus] = useState(false);
   const userSequence = getSequence();
-  const navigate = useNavigate();
-  // const useQr = () => {
-  //   getNfastUseState();
-  // };
 
-  const useStateRoute = () => {
-    if (storeAction.getNfastUseState(nfastSequence, userSequence) === 1) {
+  const nfastUse = useSelector((state) => state.mainReducer.usage);
+  // const [nfastUse, setNfastUse] = useState([]);
+  useEffect(() => {
+    console.log(nfastUse);
+    dispatch(storeAction.getNfastUseState(userSequence, nfastSequence));
+  }, nfastUse);
+
+  const useStateRoute = (nfastSequence) => {
+    console.log("======사용확인 누르면?!=====", nfastUse);
+
+    if (nfastUse === 1) {
       // 네비ㄱ이터 해서 이동
       console.log("======리뷰쓸거아ㅑ아아======", nfastSequence);
       navigate(`/review/${nfastSequence}`);
     } else {
-      // alret 에러
-      // alert("에러");
-      console.log("======리뷰쓸거아ㅑ아아======", nfastSequence);
-      navigate(`/review/${nfastSequence}`);
+      alert("미사용 NFasT입니다.");
     }
   };
   const toggleDrawer2 = () => {
@@ -199,8 +206,11 @@ function NFastCard() {
           </div>
           <div>
             <StyleBtn>
-              <Button variant="contained" onClick={useStateRoute}>
-                사용 확인
+              <Button
+                variant="contained"
+                onClick={() => useStateRoute(nfastSequence)}
+              >
+                사용확인
               </Button>
               {!qrStatus ? (
                 <Button variant="contained" onClick={toggleDrawer2}>
