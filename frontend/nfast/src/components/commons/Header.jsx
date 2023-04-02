@@ -1,5 +1,6 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,8 +11,28 @@ import LoginBtn from "../loginpage/LoginButton";
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
 import NFastLogo from "../../assets/HeaderLogo.png";
+// eslint-disable-next-line import/named
+import { getSession } from "../../storage/Cookie";
 
 function Header() {
+  const [isLogin, setIsLogin] = useState(false);
+  const isLoggedIn = useSelector((state) => state.authReducer.isLogin);
+
+  // 세션에서 로그인 정보 확인
+  useEffect(() => {
+    const session = getSession();
+    if (session) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
+
+  // Redux store에 저장된 로그인 여부 값 업데이트
+  useEffect(() => {
+    setIsLogin(isLoggedIn);
+  }, [isLoggedIn]);
+
   return (
     <AppBar
       elevation={0}
@@ -59,8 +80,7 @@ function Header() {
           </Box>
 
           <div style={{ display: "flex", alignItems: "center" }}>
-            <LoginBtn />
-            <SideBar />
+            {isLogin ? <SideBar /> : <LoginBtn />}
           </div>
         </Toolbar>
       </Container>

@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import RecordVoiceOverTwoToneIcon from "@mui/icons-material/RecordVoiceOverTwoTone";
 import Typography from "@mui/material/Typography";
@@ -23,6 +25,18 @@ export default function TransAllPage() {
   // eslint-disable-next-line
   console.log(transList);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+  const cardsPerPage = 4;
+  const getCardList = () => {
+    const startIndex = (currentPage - 1) * cardsPerPage;
+    const endIndex = startIndex + cardsPerPage;
+
+    return transList.slice(startIndex, endIndex);
+  };
+
   // distanceList를 이용한 코드 구현
   return (
     transList && (
@@ -34,7 +48,7 @@ export default function TransAllPage() {
           </Title>
         </Line>
         <Grid container spacing={3}>
-          {transList.map((card, index) => (
+          {getCardList().map((card, index) => (
             <Grid
               // eslint-disable-next-line react/no-array-index-key
               key={index}
@@ -87,6 +101,17 @@ export default function TransAllPage() {
             </Grid>
           ))}
         </Grid>
+        <Pag>
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(transList.length / cardsPerPage)}
+              variant="outlined"
+              color="secondary"
+              page={currentPage}
+              onChange={handlePageChange}
+            />
+          </Stack>
+        </Pag>
       </div>
     )
   );
@@ -114,4 +139,9 @@ const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+const Pag = styled.div`
+  margin: 10%;
+  display: flex; /* 가로 정렬을 위해 flexbox 설정 */
+  justify-content: center; /* 가운데 정렬 */
 `;

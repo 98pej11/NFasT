@@ -56,6 +56,7 @@ function onLogout(wallet) {
         },
       })
       .then(() => {
+        window.sessionStorage.removeItem("isLogin");
         dispatch({ type: "SET_IS_LOGIN", payload: false });
         dispatch({ type: "SET_IS_VALID_TOKEN", payload: false });
         dispatch({ type: "SET_IS_LOGIN_ERROR", payload: false });
@@ -111,6 +112,7 @@ function userConfirm(wallet) {
       .then((response) => {
         const { data } = response;
         if (data.result === "success") {
+          window.sessionStorage.setItem("isLogin", true);
           const { jwtAuthToken, jwtRefreshToken, sequence } = data;
           dispatch({ type: "SET_IS_LOGIN", payload: true });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: true });

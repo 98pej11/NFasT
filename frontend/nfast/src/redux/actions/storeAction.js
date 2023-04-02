@@ -48,6 +48,20 @@ function removeBookMark(storeSequence, userSequence) {
       });
   };
 }
+function isBookMark(storeSequence, userSequence) {
+  console.log("북마크게요 아니게요");
+  return async () => {
+    await axios
+      .get(`${baseUrl}/store/${storeSequence}/bookmark/${userSequence}`)
+      .then((response) => {
+        const { data } = response;
+        console.log("북마크 조회 결과 ", data);
+      })
+      .catch((error) => {
+        console.log("ERROR", error);
+      });
+  };
+}
 function writeReview(nfastSequence, userSequence, reviews) {
   console.log(nfastSequence);
   console.log(reviews);
@@ -165,6 +179,7 @@ export const storeAction = {
   getStoreDetail,
   addBookMark,
   removeBookMark,
+  isBookMark,
   writeReview,
   getPurchaseList,
   saveTotalCnt,

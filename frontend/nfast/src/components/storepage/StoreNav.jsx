@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -11,24 +11,37 @@ import { getSequence } from "../../storage/Cookie";
 import { storeAction } from "../../redux/actions/storeAction";
 
 export default function StoreNav() {
-  const [value, setValue] = React.useState(0);
-  const [showCalendar, setShowCalendar] = React.useState(false);
-  const [bookmark, setBookmark] = React.useState("BookmarkBorderIcon");
+  const [value, setValue] = useState(0);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [bookmark, setBookmark] = useState("BookmarkBorderIcon");
   const dispatch = useDispatch();
   const { storeSequence } = useParams();
+  // const isBookMark = useSelector((state) => state.storepageReducer.isBookMark);
+
+  // Load bookmark state from session storage
+  useEffect(() => {
+    const storedBookmark = localStorage.getItem("storeBookmark");
+    if (storedBookmark) {
+      setBookmark(storedBookmark);
+    } else {
+      setBookmark("BookmarkBorderIcon");
+    }
+  }, []);
 
   const toggleCalendar = () => {
     setShowCalendar((prev) => !prev);
   };
+
   const toggleBookmark = () => {
     if (bookmark === "BookmarkIcon") {
       dispatch(storeAction.removeBookMark(storeSequence, getSequence()));
+      localStorage.setItem("storeBookmark", "BookmarkBorderIcon");
+      setBookmark("BookmarkBorderIcon");
     } else {
       dispatch(storeAction.addBookMark(storeSequence, getSequence()));
+      localStorage.setItem("storeBookmark", "BookmarkIcon");
+      setBookmark("BookmarkIcon");
     }
-    setBookmark((prev) =>
-      prev === "BookmarkIcon" ? "BookmarkBorderIcon" : "BookmarkIcon"
-    );
   };
 
   return (

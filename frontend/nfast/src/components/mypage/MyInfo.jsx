@@ -17,8 +17,8 @@ const Styledh2 = styled.div`
   justify-content: center;
   align-items: center;
   h4 {
-    margin-top: 150px;
-    margin-bottom: 70px;
+    margin-top: 70px;
+    margin-bottom: 50px;
   }
   p {
     font-size: 16px;
@@ -30,11 +30,11 @@ const StyleBtn = styled.div`
   margin: 17%;
 
   Button {
-    width: 120px;
+    width: 90px;
     height: 50px;
     background-color: #bcb6ff;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
@@ -111,8 +111,16 @@ function MyInfo(props) {
             ref={fileInput}
           />
         </IconButton>
-        <label htmlFor="profile_img">
-          프로필 편집 <EditIcon />
+        <label
+          htmlFor="profile_img"
+          style={{
+            margin: 20,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          프로필 편집 <EditIcon sx={{ marginLeft: 1 }} />
         </label>
         <Box
           sx={{
