@@ -178,10 +178,16 @@ function PublishPage() {
       content: JSON.stringify(ipfsFile),
     };
 
-    const testc = await ipfs.add(file);
-    console.log(testc.cid.string);
-    console.log(ipfsFile.walletAddress);
-
+    // const testc = await ipfs.add(file);
+    // console.log(testc.cid.string);
+    // console.log(ipfsFile.walletAddress);
+    const testc = {
+      cid: {
+        string: "testBlank",
+      },
+    };
+    console.log(file);
+    console.log(ipfs);
     // createNfast(data, "testc.cid.string");
     createNfast(data, testc.cid.string);
 

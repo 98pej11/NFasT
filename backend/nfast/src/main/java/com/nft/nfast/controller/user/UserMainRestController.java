@@ -143,13 +143,19 @@ public class UserMainRestController {
     public ResponseEntity<Map<String, Object>> userLogin(@RequestBody Map<String,String> wallet) {
         Map<String, Object> resultMap = new HashMap<>();
         TokenDto tokenDto=userMainService.userLogin(wallet.get("wallet"));
-        System.out.println("TOKEN TYTTTTTT "+tokenDto.getTokenType());
-        resultMap.put("result", SUCCESS);
-        resultMap.put("jwtAuthToken", tokenDto.getTokenAccess());
-        resultMap.put("jwtRefreshToken", tokenDto.getTokenRefresh());
-        resultMap.put("wallet", tokenDto.getTokenWallet());
-        resultMap.put("sequence", tokenDto.getTokenUserSequence());
-        return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+        if(tokenDto!=null) {
+            System.out.println("TOKEN TYTTTTTT " + tokenDto.getTokenType());
+            resultMap.put("result", SUCCESS);
+            resultMap.put("jwtAuthToken", tokenDto.getTokenAccess());
+            resultMap.put("jwtRefreshToken", tokenDto.getTokenRefresh());
+            resultMap.put("wallet", tokenDto.getTokenWallet());
+            resultMap.put("sequence", tokenDto.getTokenUserSequence());
+            return new ResponseEntity<>(resultMap, HttpStatus.OK);
+        }
+        else{
+            resultMap.put("result", FAIL);
+            return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+        }
     }
 
     //로그아웃
