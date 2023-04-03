@@ -5,6 +5,7 @@ import React from "react";
 // import TextField from "@mui/material/TextField";
 // import FormControlLabel from "@mui/material/FormControlLabel";
 // import Checkbox from "@mui/material/Checkbox";
+import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -23,21 +24,16 @@ export default function LoginPage() {
       <Container component="main" maxWidth="xs" m={30}>
         <Box
           sx={{
-            marginTop: 15,
             gap: 3,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <img
-            src={business}
-            alt=""
-            style={{ width: 300, height: 300, marginTop: "50px" }}
-          />
+          <img src={business} alt="" style={{ width: 300, height: 300 }} />
           <Typography
             variant="h6"
-            sx={{ color: "#5B5299", marginBottom: "50px" }}
+            sx={{ color: "#5B5299", marginBottom: "10px" }}
           >
             쉽고 빠른 수익을 만나보세요!
           </Typography>
@@ -67,6 +63,16 @@ export default function LoginPage() {
             />
             소개글 보러가기
           </Button>
+          <Link
+            to="/loginCustomer"
+            style={{
+              textDecoration: "none",
+              color: "black",
+              marginBottom: "30px",
+            }}
+          >
+            손님으로 연동하기
+          </Link>
         </Box>
       </Container>
     </ThemeProvider>
