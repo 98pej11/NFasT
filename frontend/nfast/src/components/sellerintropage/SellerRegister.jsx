@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 
 import { Typography } from "@mui/material";
 import Metamask from "../loginpage/Metamask";
+import storeDefault from "../../assets/storeDefault.png";
 // import logo from "../../assets/logo.png";
 
 const StyleBtn = styled.div`
@@ -24,6 +25,7 @@ export default function Register() {
   const [inputs, setInputs] = useState({
     storeInfoNumber: null,
     storeAddress: "",
+    storeImage: storeDefault,
   });
   const onChangeHandler = (event) => {
     event.preventDefault();

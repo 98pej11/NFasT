@@ -187,6 +187,7 @@ function storeRegister(storeWallet, store) {
     storeWallet,
     storeAddress: store.storeAddress,
     storeInfoNumber: store.storeInfoNumber,
+    storeImage: store.storeImage,
   };
   console.log(inputs);
   return async (dispatch) => {

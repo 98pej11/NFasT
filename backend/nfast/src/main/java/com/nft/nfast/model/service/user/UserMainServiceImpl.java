@@ -161,6 +161,7 @@ public class UserMainServiceImpl implements UserMainService {
                                 .tradeListDate(new Date())
                                 .tradeListType((byte) 0)    //구매
                                 .userSequence(userSequence)
+                                .storeSequence(storeSequence)
                                 .tradeListTransaction("TRANSACTION")
                                 .build()
                                 .toEntity()
@@ -178,6 +179,7 @@ public class UserMainServiceImpl implements UserMainService {
                                 .tradeListDate(new Date())
                                 .tradeListType((byte) 0)    //구매
                                 .userSequence(userSequence)
+                                .storeSequence(storeSequence)
                                 .tradeListTransaction("RESELL_BUY")
                                 .build()
                                 .toEntity()
@@ -190,6 +192,7 @@ public class UserMainServiceImpl implements UserMainService {
                                 .tradeListPrice(sellBenefit)
                                 .tradeListDate(new Date())
                                 .tradeListType((byte) 1)    //판매
+                                .storeSequence(storeSequence)
                                 .userSequence(nfast.getUserSequence())
                                 .tradeListTransaction("RESELL_SELL")
                                 .build()
@@ -240,8 +243,13 @@ public class UserMainServiceImpl implements UserMainService {
         List<TradeFindDto> tradeDtoList = new ArrayList<>();
 
         for (TradeList tradeList : tradeLists) {
-            TradeFindDto dto = tradeList.toFindDto();
-            tradeDtoList.add(dto);
+            Optional<Store> storeWrapper =  storeRepository.findById(tradeList.getStoreSequence());
+            if(storeWrapper.isPresent()){
+                Store store = storeWrapper.get();
+                TradeFindDto dto = tradeList.toFindDto();
+                dto.setStoreName(store.getStoreName());
+                tradeDtoList.add(dto);
+            }
         }
         return tradeDtoList;
     }

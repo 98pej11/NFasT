@@ -19,6 +19,7 @@ public class TradeListDto {
     private Date tradeListDate;
     private Byte tradeListType;
     private long userSequence;
+    private long storeSequence;
 
     public TradeList toEntity(){
         TradeList tradeList = TradeList.builder()
@@ -28,6 +29,7 @@ public class TradeListDto {
                 .tradeListDate(tradeListDate)
                 .tradeListType(tradeListType)
                 .userSequence(userSequence)
+                .storeSequence(storeSequence)
                 .build();
         return tradeList;
     }
