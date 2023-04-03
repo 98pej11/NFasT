@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
@@ -50,6 +50,14 @@ function MyInfo(props) {
     userNickname,
   });
 
+  useEffect(() => {
+    setInputs({
+      userSequence,
+      userWallet,
+      userNickname,
+    });
+  }, [props]);
+
   const fileInput = useRef(null);
 
   const onDrop = (e) => {
@@ -82,6 +90,7 @@ function MyInfo(props) {
     // navigate(`/`);
   };
   console.log(userImage);
+  console.log(image);
   const onChangeHandler = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
@@ -101,7 +110,6 @@ function MyInfo(props) {
               fileInput.current.click();
             }}
             value={userImage}
-            defaultValue={image}
           />
           <input
             type="file"
