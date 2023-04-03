@@ -503,45 +503,50 @@ public class UserMainServiceImpl implements UserMainService {
     @Transactional
     public TokenDto userLogin(String wallet) {
         Optional<User> userWrapper = userRepository.findByUserWallet(wallet);
+        Optional<Store> storeWrapper = storeRepository.findByStoreWallet(wallet);
         TokenDto tokenDto = null;
 
-        if(userWrapper.isPresent()){
-            //로그인
-            User user = userWrapper.get();
-            String authToken = jwtUtil.createAuthToken(user.getUserSequence());
-            String refreshToken = jwtUtil.createRefreshToken();
-            Optional<Token> tokenWrapper = tokenRepository.findByTokenWallet(wallet);
-            if(tokenWrapper.isPresent()){
-                Token token = tokenWrapper.get();
-                tokenDto = token.toDto();
-                tokenDto.setTokenAccess(authToken);
-                tokenDto.setTokenRefresh(refreshToken);
-                tokenRepository.save(tokenDto.toEntity());
-            }
+        if(storeWrapper.isPresent()){
+            return tokenDto;
         }
-        else{
-            //회원가입 and 로그인
-            UserDto userDto = new UserDto();
-
-            userDto.setUserWallet(wallet);
-            userDto.setUserNickname("unNamed");
-            userRepository.save(userDto.toEntity());
-            userWrapper = userRepository.findByUserWallet(wallet);
-            if(userWrapper.isPresent()) {
+        else {
+            //회원 정보가 있으면 로그인
+            if (userWrapper.isPresent()) {
                 User user = userWrapper.get();
                 String authToken = jwtUtil.createAuthToken(user.getUserSequence());
                 String refreshToken = jwtUtil.createRefreshToken();
-                tokenDto = TokenDto.builder()
-                        .tokenAccess(authToken)
-                        .tokenRefresh(refreshToken)
-                        .tokenUserSequence(user.getUserSequence())
-                        .tokenType((byte) 0)
-                        .tokenWallet(wallet)
-                        .build();
-                tokenRepository.save(tokenDto.toEntity());
+                Optional<Token> tokenWrapper = tokenRepository.findByTokenWallet(wallet);
+                if (tokenWrapper.isPresent()) {
+                    Token token = tokenWrapper.get();
+                    tokenDto = token.toDto();
+                    tokenDto.setTokenAccess(authToken);
+                    tokenDto.setTokenRefresh(refreshToken);
+                    tokenRepository.save(tokenDto.toEntity());
+                }
+            } else {
+                //회원가입 and 로그인
+                UserDto userDto = new UserDto();
+
+                userDto.setUserWallet(wallet);
+                userDto.setUserNickname("unNamed");
+                userRepository.save(userDto.toEntity());
+                userWrapper = userRepository.findByUserWallet(wallet);
+                if (userWrapper.isPresent()) {
+                    User user = userWrapper.get();
+                    String authToken = jwtUtil.createAuthToken(user.getUserSequence());
+                    String refreshToken = jwtUtil.createRefreshToken();
+                    tokenDto = TokenDto.builder()
+                            .tokenAccess(authToken)
+                            .tokenRefresh(refreshToken)
+                            .tokenUserSequence(user.getUserSequence())
+                            .tokenType((byte) 0)
+                            .tokenWallet(wallet)
+                            .build();
+                    tokenRepository.save(tokenDto.toEntity());
+                }
             }
+            return tokenDto;
         }
-        return tokenDto;
     }
 
     //로그아웃

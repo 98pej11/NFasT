@@ -5,16 +5,15 @@ import com.nft.nfast.controller.JWTUtil;
 import com.nft.nfast.entity.business.IncomeList;
 import com.nft.nfast.entity.business.Nfast;
 import com.nft.nfast.entity.business.Store;
+import com.nft.nfast.entity.user.Token;
+import com.nft.nfast.entity.user.User;
 import com.nft.nfast.exception.Store.NFastNotExistException;
 import com.nft.nfast.exception.Store.StoreNotFoundException;
 import com.nft.nfast.exception.Store.TypeNotAvailabeException;
 import com.nft.nfast.exception.User.UserNotExistException;
 import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
-import com.nft.nfast.repository.IncomeListRepository;
-import com.nft.nfast.repository.NfastRepository;
-import com.nft.nfast.repository.StoreRepository;
-import com.nft.nfast.repository.TokenRepository;
+import com.nft.nfast.repository.*;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -49,6 +48,9 @@ public class StoreMainServiceImpl implements StoreMainService {
 
     @Autowired
     TokenRepository tokenRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     JWTUtil jwtUtil;
@@ -163,6 +165,21 @@ public class StoreMainServiceImpl implements StoreMainService {
             store.setStoreWallet(storeInfo.getStoreWallet());
             store.setStoreImage(storeInfo.getStoreImage());
             storeRepository.save(store.toEntity());
+
+            Optional<Store> storeWrapper = storeRepository.findByStoreWallet(storeInfo.getStoreWallet());
+            if (storeWrapper.isPresent()) {
+                Store storeOne = storeWrapper.get();
+                String authToken = jwtUtil.createAuthToken(storeOne.getStoreSequence());
+                String refreshToken = jwtUtil.createRefreshToken();
+                TokenDto tokenDto = TokenDto.builder()
+                        .tokenAccess(authToken)
+                        .tokenRefresh(refreshToken)
+                        .tokenUserSequence(storeOne.getStoreSequence())
+                        .tokenType((byte) 1)
+                        .tokenWallet(storeOne.getStoreWallet())
+                        .build();
+                tokenRepository.save(tokenDto.toEntity());
+            }
         } catch (Exception e) {
             throw new StoreNotFoundException();
         }
@@ -336,24 +353,31 @@ public class StoreMainServiceImpl implements StoreMainService {
     @Override
     public TokenDto storeLogin(String wallet) {
         Optional<Store> storeWrapper = storeRepository.findByStoreWallet(wallet);
+        Optional<User> userWrapper = userRepository.findByUserWallet(wallet);
         TokenDto tokenDto = null;
-        if (!storeWrapper.isPresent()) {
-            return null;
+
+        if(userWrapper.isPresent()){
+            return tokenDto;
         }
+        else {
+            if (!storeWrapper.isPresent()) {
+                tokenDto = TokenDto.builder().tokenType((byte) 2).build();
+                return tokenDto;
+            }
 //        else (storeWrapper.isPresent()) {
-        Store store = storeWrapper.get();
-        String authToken = jwtUtil.createAuthToken(store.getStoreSequence());
-        String refreshToken = jwtUtil.createRefreshToken();
-        tokenDto = TokenDto.builder()
-                .tokenAccess(authToken)
-                .tokenRefresh(refreshToken)
-                .tokenUserSequence(store.getStoreSequence())
-                .tokenType((byte) 1)
-                .tokenWallet(wallet)
-                .build();
-        tokenRepository.save(tokenDto.toEntity());
-//        }
-        return tokenDto;
+            Store store = storeWrapper.get();
+            String authToken = jwtUtil.createAuthToken(store.getStoreSequence());
+            String refreshToken = jwtUtil.createRefreshToken();
+            Optional<Token> tokenWrapper = tokenRepository.findByTokenWallet(wallet);
+            if (tokenWrapper.isPresent()) {
+                Token token = tokenWrapper.get();
+                tokenDto = token.toDto();
+                tokenDto.setTokenAccess(authToken);
+                tokenDto.setTokenRefresh(refreshToken);
+                tokenRepository.save(tokenDto.toEntity());
+            }
+            return tokenDto;
+        }
     }
 
     @Override

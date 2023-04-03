@@ -111,8 +111,10 @@ function userConfirm(wallet) {
       })
       .then((response) => {
         const { data } = response;
+        console.log(data);
         if (data.result === "success") {
           // window.sessionStorage.setItem("isLogin", true);
+          console.log("SUCCESS in");
           const { jwtAuthToken, jwtRefreshToken, sequence } = data;
           dispatch({ type: "SET_IS_LOGIN", payload: true });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: true });
@@ -122,9 +124,10 @@ function userConfirm(wallet) {
           setAccessToken(jwtAuthToken);
           setRefreshToken(jwtRefreshToken);
           setSequence(sequence);
-        } else {
+        } else if (data.result === "fail") {
           // eslint-disable-next-line react/react-in-jsx-scope
-          <Alert severity="success">아이디와 비밀번호를 확인하세요.</Alert>;
+          // <Alert severity="success">아이디와 비밀번호를 확인하세요.</Alert>;
+          console.log("FAIL in");
           dispatch({ type: "SET_IS_LOGIN", payload: false });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: false });
           dispatch({ type: "SET_IS_LOGIN_ERROR", payload: true });
@@ -144,7 +147,6 @@ function storeConfirm(wallet) {
   };
   return async (dispatch) => {
     const url = `${baseUrl}/owner/login`;
-    // let url = `http://i8a508.p.ssafy.io:8080/api/v1/login`;
     await axios
       .post(url, JSON.stringify(inputs), {
         headers: {
@@ -165,13 +167,18 @@ function storeConfirm(wallet) {
           setRefreshToken(jwtRefreshToken);
           setSequence(sequence);
           console.log("SUCCESS");
-        } else {
+        } else if (data.result === "check") {
           // eslint-disable-next-line react/react-in-jsx-scope
           <Alert severity="success">아이디와 비밀번호를 확인하세요.</Alert>;
           dispatch({ type: "SET_IS_LOGIN", payload: false });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: false });
           dispatch({ type: "SET_IS_LOGIN_ERROR", payload: true });
-          console.log("가게 로그인 FAIL, 가게 등록하러 가기");
+          console.log("가게 로그인 check, 가게 등록하러 가기");
+        } else if (data.result === "fail") {
+          dispatch({ type: "SET_IS_LOGIN", payload: false });
+          dispatch({ type: "SET_IS_VALID_TOKEN", payload: false });
+          dispatch({ type: "SET_IS_LOGIN_ERROR", payload: true });
+          console.log("유저 로그인으로 보내기");
         }
       })
       .catch((error) => {
