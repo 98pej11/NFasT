@@ -12,8 +12,8 @@ const Wrapper = styled.div`
 `;
 
 const Cards = styled.div`
-  width: 80%;
-  height: 50%;
+  width: 100%;
+  height: 30%;
   border: solid 1px #5b5299;
   color: #5b5299;
   border-radius: 2em;
@@ -29,14 +29,6 @@ function FloatingCards() {
   return (
     <Wrapper>
       <Cards>
-        <h2>오늘의 NFasT</h2>
-        <div
-          style={{
-            width: "80%",
-            borderBottom: "1px solid #5b5299",
-            marginBottom: "30px",
-          }}
-        />
         <NFastCard />
       </Cards>
     </Wrapper>

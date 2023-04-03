@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,9 +12,10 @@ import { authAction } from "../../redux/actions/authAction";
 
 function HeaderSeller() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const logout = () => {
     dispatch(authAction.onLogout());
+    return navigate("/loginSeller");
   };
   return (
     <AppBar
