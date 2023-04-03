@@ -72,14 +72,17 @@ const Info = styled.div`
     margin: 6%;
   }
 `;
+
 const Review = styled.div`
   flex: 1;
   border-left: dashed 2px #bcb6ff;
   display: flex;
   flex-direction: column;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
+
 // const EachReview = styled.div`
 //   flex: 0.5;
 //   justify-content: center;
@@ -114,6 +117,7 @@ function PastTicket({
   nfastStartTime,
   nfastEndTime,
   nfastPrice,
+  nfastReview,
   nfastReview,
 }) {
   const dispatch = useDispatch();
@@ -162,6 +166,7 @@ function PastTicket({
           </div>
         </Info>
         <Review>{nfastReview}</Review>
+        <Review>{nfastReview}</Review>
       </Ticket>
     </Wrapper>
   );
@@ -175,6 +180,7 @@ PastTicket.defaultProps = {
   nfastPrice: 0,
   nfastReview: ["시간 리뷰", "편의시설 리뷰", "서비스 리뷰", "분위기 리뷰"],
 };
+
 PastTicket.propTypes = {
   storeName: PropTypes.string,
   nfastSequence: PropTypes.number,
@@ -185,4 +191,5 @@ PastTicket.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   nfastReview: PropTypes.object,
 };
+
 export default PastTicket;
