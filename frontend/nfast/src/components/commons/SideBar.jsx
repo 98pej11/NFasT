@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -21,6 +21,7 @@ import { getSequence } from "../../storage/Cookie";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const [openDrawer, setOpenDrawer] = useState(false);
   const userInfo = useSelector((state) => state.mypageReducer.userInfo);
   useEffect(() => {
@@ -28,6 +29,9 @@ export default function Sidebar() {
     console.log("이미지내놔 ", userInfo.userImage);
   }, []);
 
+  useEffect(() => {
+    dispatch(mypageAction.getUserInfo(getSequence()));
+  }, [getSequence]);
   const handleDrawerOpen = () => {
     setOpenDrawer(true);
   };
@@ -42,9 +46,9 @@ export default function Sidebar() {
 
   const logout = () => {
     dispatch(authAction.onLogout());
-    handleDrawerClose("/loginCustomer");
   };
 
+  console.log("USER", userInfo);
   return (
     userInfo && (
       <div>
@@ -70,7 +74,7 @@ export default function Sidebar() {
               >
                 <Avatar
                   alt="Profile picture"
-                  src={userInfo.user_image}
+                  src={userInfo.userImage}
                   sx={{ width: "80px", height: "80px" }}
                 />
                 <Typography fontSize={15}>
@@ -109,11 +113,7 @@ export default function Sidebar() {
                     <ListItemText>나의 북마크</ListItemText>
                   </ListItemButton>
                 </ListItem>
-                <ListItem
-                  disablePadding
-                  sx={{ height: "50px" }}
-                  onClick={handleDrawerClose}
-                >
+                <ListItem disablePadding sx={{ height: "50px" }}>
                   <ListItemButton href="/myinfo">
                     <ListItemIcon>
                       <InboxIcon />
@@ -126,7 +126,7 @@ export default function Sidebar() {
                   sx={{ height: "50px" }}
                   onClick={() => logout()}
                 >
-                  <ListItemButton>
+                  <ListItemButton href="/loginCustomer">
                     <ListItemIcon>
                       <InboxIcon />
                     </ListItemIcon>

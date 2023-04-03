@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
@@ -12,26 +12,28 @@ import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
 import NFastLogo from "../../assets/HeaderLogo.png";
 // eslint-disable-next-line import/named
-import { getSession } from "../../storage/Cookie";
+import { getSequence } from "../../storage/Cookie";
 
 function Header() {
-  const [isLogin, setIsLogin] = useState(false);
-  const isLoggedIn = useSelector((state) => state.authReducer.isLogin);
+  // const [isLogin, setIsLogin] = useState(false);
+  // const isLoggedIn = useSelector((state) => state.authReducer.isLogin);
+  const userInfo = useSelector((state) => state.mypageReducer.userInfo);
+  console.log("USERRRRRRR", userInfo);
 
   // 세션에서 로그인 정보 확인
-  useEffect(() => {
-    const session = getSession();
-    if (session) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const session = getSession();
+  //   if (session) {
+  //     setIsLogin(true);
+  //   } else {
+  //     setIsLogin(false);
+  //   }
+  // }, []);
 
   // Redux store에 저장된 로그인 여부 값 업데이트
   useEffect(() => {
-    setIsLogin(isLoggedIn);
-  }, [isLoggedIn]);
+    console.log("userINFOOOOOo", userInfo);
+  }, [userInfo]);
 
   return (
     <AppBar
@@ -75,12 +77,12 @@ function Header() {
                 // marginLeft: "10%",
               }}
             >
-              <SearchBar />
+              {userInfo && <SearchBar />}
             </Box>
           </Box>
 
           <div style={{ display: "flex", alignItems: "center" }}>
-            {isLogin ? <SideBar /> : <LoginBtn />}
+            {getSequence() ? <SideBar /> : <LoginBtn />}
           </div>
         </Toolbar>
       </Container>

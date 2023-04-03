@@ -131,6 +131,7 @@ function userConfirm(wallet) {
           dispatch({ type: "SET_IS_LOGIN", payload: false });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: false });
           dispatch({ type: "SET_IS_LOGIN_ERROR", payload: true });
+          alert("가게 계정으로 전환해주세요.");
         }
       })
       .catch((error) => {
@@ -178,7 +179,7 @@ function storeConfirm(wallet) {
           dispatch({ type: "SET_IS_LOGIN", payload: false });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: false });
           dispatch({ type: "SET_IS_LOGIN_ERROR", payload: true });
-          console.log("유저 로그인으로 보내기");
+          alert("사용자 계정으로 전환해주세요.");
         }
       })
       .catch((error) => {
