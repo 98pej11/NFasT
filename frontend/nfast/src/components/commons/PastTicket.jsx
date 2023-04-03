@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -121,7 +121,7 @@ function PastTicket({
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [flag, setFlag] = useState(false);
   // useEffect(() => {}, []);
 
   const storeSequence = useSelector(
@@ -129,10 +129,16 @@ function PastTicket({
   );
   const handleRevisit = (nfastSequence) => {
     dispatch(mypageAction.getStoreSequence(nfastSequence));
-    navigate(`/store/${storeSequence}`);
-    // navigate(`/mainPage`);
+    setFlag(true);
     console.log("hehehehehehey");
   };
+
+  useEffect(() => {
+    if (flag === true) {
+      console.log("성공오오오오옹", storeSequence);
+      navigate(`/store/${storeSequence}`);
+    }
+  });
 
   return (
     <Wrapper>
@@ -157,14 +163,13 @@ function PastTicket({
             <StyleBtn>
               <Button
                 variant="contained"
-                onClick={handleRevisit(nfastSequence)}
+                onClick={() => handleRevisit(nfastSequence)}
               >
                 재방문
               </Button>
             </StyleBtn>
           </div>
         </Info>
-        <Review>{nfastReview}</Review>
         <Review>{nfastReview}</Review>
       </Ticket>
     </Wrapper>

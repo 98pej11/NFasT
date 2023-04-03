@@ -439,6 +439,7 @@ public class UserMainServiceImpl implements UserMainService {
 
             long storeSequence=nfast.getStoreSequence().getStoreSequence();
             nfastGetDto = NfastGetDto.builder()
+                    .nfastSequence(nfast.getNfastSequence())
                     .nfastPrice(nfast.getNfastPrice())
                     .nfastEigenvalue(nfast.getNfastEigenvalue())
                     .nfastDate(nfast.getNfastDate())
