@@ -113,6 +113,7 @@ export default function TransAllPage() {
             />
           </Stack>
         </Pag>
+        <FloatingBtn>Floating</FloatingBtn>
       </div>
     )
   );
