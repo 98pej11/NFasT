@@ -15,6 +15,8 @@ function mypageReducer(state = initialState, action = {}) {
       return { ...state, availableNfasts: payload.data.nfasts };
     case "GET_UNAVAILABLE_NFASTS_SUCCESS":
       return { ...state, unavailableNfasts: payload.data.nfasts };
+    case "GET_STORESEQUENCE_SUCCESS":
+      return { ...state, storeSequence: payload.data.storeSequence };
     case "GET_BOOKMARKLIST_SUCCESS":
       return { ...state, bookmarkList: payload.data.stores };
     case "GET_USERINFO_SUCCESS":

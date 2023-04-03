@@ -42,6 +42,24 @@ function getUnAvailableNfasts(userSequence) {
       });
   };
 }
+function getStoreSequence(nfastSequence) {
+  return async (dispatch) => {
+    console.log("흠...............");
+    await axios
+      .get(`${baseUrl}/findStoreSequence/${nfastSequence}`)
+      .then((response) => {
+        const { data } = response;
+        dispatch({
+          type: "GET_STORESEQUENCE_SUCCESS",
+          payload: { data },
+        });
+        console.log("RESPONSE DATA ", data);
+      })
+      .catch((error) => {
+        console.log("ERROR", error);
+      });
+  };
+}
 
 function getBookMarkList(userSequence) {
   return async (dispatch) => {
@@ -157,6 +175,7 @@ function getTransactionList(userSequence) {
 export const mypageAction = {
   getAvailableNfasts,
   getUnAvailableNfasts,
+  getStoreSequence,
   getBookMarkList,
   getUserInfo,
   modifyUserInfo,

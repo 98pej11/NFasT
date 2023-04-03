@@ -166,19 +166,26 @@ function NFastCard() {
 
   const nfastUse = useSelector((state) => state.mainReducer.usage);
   // const [nfastUse, setNfastUse] = useState([]);
+  // useEffect(() => {
+  //   console.log(nfastUse);
+  //   dispatch(storeAction.getNfastUseState(userSequence, nfastSequence));
+  // }, nfastUse);
+
   useEffect(() => {
-    console.log(nfastUse);
-    dispatch(storeAction.getNfastUseState(userSequence, nfastSequence));
-  }, nfastUse);
-
-  const useStateRoute = (nfastSequence) => {
-    console.log("======사용확인 누르면?!=====", nfastUse);
-
     if (nfastUse === 1) {
       // 네비ㄱ이터 해서 이동
       console.log("======리뷰쓸거아ㅑ아아======", nfastSequence);
       navigate(`/review/${nfastSequence}`);
-    } else {
+    }
+    // else {
+    //   alert("미사용 NFasT입니다.");
+    // }
+  }, [nfastUse]);
+
+  const useStateRoute = (nfastSequence) => {
+    console.log("======사용확인 누르면?!=====", nfastUse);
+    dispatch(storeAction.getNfastUseState(userSequence, nfastSequence));
+    if (nfastUse === 1) {
       alert("미사용 NFasT입니다.");
     }
   };

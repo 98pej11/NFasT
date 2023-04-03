@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -47,6 +47,7 @@ const StyleBtn = styled.div`
 `;
 export default function WriteReview() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { nfastSequence } = useParams();
   const [inputs, setInputs] = useState({
     nfastSequence,
@@ -73,6 +74,7 @@ export default function WriteReview() {
         storeAction.writeReview(nfastSequence, getSequence(), inputs.reviews)
       );
     }
+    navigate(`/mainPage`);
   };
   const handleTime = (event) => {
     const selectedValue = event.target.value;

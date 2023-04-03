@@ -40,11 +40,32 @@ const Pag = styled.div`
   display: flex; /* 가로 정렬을 위해 flexbox 설정 */
   justify-content: center; /* 가운데 정렬 */
 `;
-
+const Review = styled.div`
+  flex: 1;
+  border-left: dashed 2px #bcb6ff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+const EachReview = styled.div`
+  flex: 0.5;
+  justify-content: center;
+  text-align: center;
+  align-
+  align-items: center;
+  background-color: rgba(230, 229, 255, 1);
+  // border-radius: 30%;
+  width: 80%;
+  height: 15%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  font-size: 10pt;
+`;
 function MyNft() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const dispatch = useDispatch();
-  // 유저 시퀀스잔아
   const sequence = getSequence();
 
   useEffect(() => {
@@ -78,15 +99,6 @@ function MyNft() {
           <Tab label="미사용 NFT" />
           <Tab label="사용한 NFT" />
         </Tabs>
-        {/* <Ticket2
-          nfastQr={
-            <QRCode
-              value={JSON.stringify({ nfastSequence: 27, type: 2 })}
-              size="100"
-              style={{ fgColor: "#000123" }}
-            />
-          }
-        /> */}
       </TabsContainer>
       {selectedTabIndex === 0 &&
         (availableNfasts.length !== 0 ? (
@@ -118,18 +130,6 @@ function MyNft() {
         ) : (
           <div>
             <div>사용 가능한 NFasT가 없습니다ㅠㅠ</div>
-            {/* <div>이것은 그냥큐알 코드이다</div>
-            <QRCode
-              value={JSON.stringify({ nfastSequence: 26, type: 1 })}
-              size="100"
-              style={{ fgColor: "#000123" }}
-            />
-            <div>이것은 환불큐알 코드이다</div>
-            <QRCode
-              value={JSON.stringify({ nfastSequence: 27, type: 2 })}
-              size="100"
-              style={{ fgColor: "#000123" }}
-            /> */}
           </div>
         ))}
       {selectedTabIndex === 1 &&
@@ -144,7 +144,15 @@ function MyNft() {
                   nfastEndTime={nfast.nfast.nfastEndTime}
                   nfastPrice={nfast.nfast.nfastPrice}
                   // 리뷰 만드러야됨.
-                  nfastQr={nfast.review.reviewTime}
+                  nfastReview={
+                    <Review>
+                      <div>내 리뷰</div>
+                      <EachReview>{nfast.review.reviewTime}</EachReview>
+                      <EachReview>{nfast.review.reviewMood}</EachReview>
+                      <EachReview>{nfast.review.reviewService}</EachReview>
+                      <EachReview>{nfast.review.reviewConvenience}</EachReview>
+                    </Review>
+                  }
                 />
               </Tickets>
             );

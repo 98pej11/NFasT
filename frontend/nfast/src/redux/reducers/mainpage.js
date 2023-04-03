@@ -18,7 +18,7 @@ function mainpage(state = initialState, action = {}) {
       return { ...state, nfast: payload.data.nfast };
     case "GET_NFASTUSESTATE_SUCCESS":
       console.log("====mainReducer===", payload.data.nfastUseState);
-      return { ...state, usage: payload.data.data };
+      return { ...state, usage: payload.data.nfastUseState };
     default:
       return { ...state };
   }
