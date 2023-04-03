@@ -117,7 +117,11 @@ public class OwnerMainRestController {
         TokenDto tokenDto=storeMainService.storeLogin(wallet.get("wallet"));
         if(tokenDto==null){
             resultMap.put("result",FAIL);
-            return new ResponseEntity<>(resultMap,HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+        }
+        else if(tokenDto.getTokenType()==2){
+            resultMap.put("result", "check");
+            return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
         }
         else{
             resultMap.put("result", SUCCESS);
@@ -125,7 +129,7 @@ public class OwnerMainRestController {
             resultMap.put("jwtRefreshToken", tokenDto.getTokenRefresh());
             resultMap.put("wallet", tokenDto.getTokenWallet());
             resultMap.put("sequence",tokenDto.getTokenUserSequence());
-            return new ResponseEntity<>(resultMap,HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(resultMap,HttpStatus.OK);
         }
     }
 
