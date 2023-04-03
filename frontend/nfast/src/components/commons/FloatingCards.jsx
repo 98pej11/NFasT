@@ -12,20 +12,18 @@ const Wrapper = styled.div`
 `;
 
 const Cards = styled.div`
-  width: 95%;
-  height: 40%;
+  width: 80%;
+  height: 50%;
   border: solid 1px #5b5299;
   color: #5b5299;
   border-radius: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: whitesmoke;
   position: fixed;
-  top: 250px;
-  h2 {
-    margin-top: 50px;
-  }
+  top: 130px;
 `;
 function FloatingCards() {
   return (

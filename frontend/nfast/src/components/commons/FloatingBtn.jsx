@@ -18,16 +18,15 @@ const FloatingAnimation = keyframes`
 }	
 `;
 
+const Wrapper = styled.div``;
+
 const Floating = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  // background-color: blue;
 `;
 const Cards = styled.div`
-  width: 100%;
+  width: 50%;
   height: 100vh;
   display: ${(props) => props.isDisplay};
 `;
@@ -39,7 +38,7 @@ const Btn = styled.button`
   border: none;
   border-radius: 50px;
   position: fixed;
-  bottom: 80px;
+  bottom: 60px;
   right: 30px;
   display: flex;
   justify-content: center;
@@ -60,7 +59,7 @@ function FloatingBtn() {
     }
   };
   return (
-    <div>
+    <Wrapper>
       <Floating>
         <Cards isDisplay={floating}>
           <FloatingCards />
@@ -69,7 +68,7 @@ function FloatingBtn() {
       <Btn type="button" onClick={handleClick}>
         <ConfirmationNumberIcon fontSize="large" style={{ color: "white" }} />
       </Btn>
-    </div>
+    </Wrapper>
   );
 }
 
