@@ -33,7 +33,7 @@ const Box = styled(Paper)`
 export default function CustomerIntro5() {
   return (
     <ProfilBox>
-      <PageLink to="/mainpage">
+      <PageLink to="/mainPage">
         <Box elevation={3} sx={{ borderRadius: "50px", marginTop: "30px" }}>
           <h3> 손님으로 이용하기 </h3>
         </Box>
