@@ -608,6 +608,12 @@ public class UserMainServiceImpl implements UserMainService {
         userRepository.save(userDto.toEntity());
     }
 
+    @Override
+    public Nfast findStoreSequence(long nfastSequence) {
+        Nfast nfast = nfastRepository.findAllByNfastSequence(nfastSequence);
+        return nfast;
+    }
+
     //거리 계산
     private static double getDistance(double lat1, double lon1, double lat2, double lon2) {
         double theta = lon1 - lon2;

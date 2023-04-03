@@ -1,6 +1,7 @@
 package com.nft.nfast.controller.user;
 
 import com.amazonaws.Response;
+import com.nft.nfast.entity.business.Nfast;
 import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.dto.user.TradeFindDto;
@@ -64,6 +65,16 @@ public class UserMainRestController {
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
+    // storeSequence 조회
+    @GetMapping("/findStoreSequence/{nfastSequence}")
+    public ResponseEntity<Map<String, Object>> nftStore(@PathVariable long nfastSequence){
+        Nfast nfast=userMainService.findStoreSequence(nfastSequence);
+        long storeSequence=nfast.getStoreSequence().getStoreSequence();
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result",SUCCESS);
+        resultMap.put("storeSequence",storeSequence);
+        return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
+    }
 
 
     //거래 내역 리스트

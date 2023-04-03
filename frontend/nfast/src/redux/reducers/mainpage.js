@@ -1,6 +1,7 @@
 const initialState = {
   stores: [],
   nfast: "",
+  usage: 0,
 };
 function mainpage(state = initialState, action = {}) {
   const { type, payload } = action;
@@ -15,6 +16,9 @@ function mainpage(state = initialState, action = {}) {
       // eslint-disable-next-line no-console
       console.log(payload.data.nfast);
       return { ...state, nfast: payload.data.nfast };
+    case "GET_NFASTUSESTATE_SUCCESS":
+      console.log("====mainReducer===", payload.data.nfastUseState);
+      return { ...state, usage: payload.data.nfastUseState };
     default:
       return { ...state };
   }
