@@ -91,7 +91,7 @@ export default function MyTrans() {
           <TableBody align="center">
             {transactionList.map((item) => (
               <TableRow key={item.id}>
-                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.storeName}</TableCell>
                 <TableCell>{item.tradeListType === 0 ? "-" : "+"}</TableCell>
                 <TableCell>{item.tradeListPrice}Eth</TableCell>
                 <TableCell>
