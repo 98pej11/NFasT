@@ -44,7 +44,7 @@ const Btn = styled.button`
   border: none;
   border-radius: 50px;
   position: fixed;
-  bottom: 80px;
+  bottom: 40px;
   right: 30px;
 `;
 

@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
@@ -11,23 +8,6 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import PropTypes from "prop-types";
-
-const useStyles = makeStyles({
-  arrowIcon: {
-    color: "grey",
-  },
-});
-
-// eslint-disable-next-line react/prop-types
-function ArrowIcon({ direction }) {
-  const classes = useStyles();
-
-  return direction === "up" ? (
-    <ArrowUpwardIcon className={classes.arrowIcon} />
-  ) : (
-    <ArrowDownwardIcon className={classes.arrowIcon} />
-  );
-}
 
 export default function IncomeTable({ incomeList }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,11 +29,8 @@ export default function IncomeTable({ incomeList }) {
       <Table sx={{ textAlign: "center" }}>
         <TableHead align="center">
           <TableRow>
-            <TableCell sx={{ width: "5%" }}>
-              <ArrowIcon direction="up" />
-            </TableCell>
-            <TableCell sx={{ width: "20%" }}>수수료 수익</TableCell>
             <TableCell sx={{ width: "20%" }}>유효 날짜</TableCell>
+            <TableCell sx={{ width: "20%" }}>수수료 수익</TableCell>
           </TableRow>
         </TableHead>
         <TableBody align="center">
@@ -61,18 +38,11 @@ export default function IncomeTable({ incomeList }) {
             // eslint-disable-next-line react/no-array-index-key
             <TableRow key={index}>
               <TableCell>
-                <ArrowIcon
-                  direction="up"
-                  sx={{ color: "red", fontSize: "10px" }}
-                />
-                {item.incomeListPrice}Eth
-              </TableCell>
-              <TableCell>{item.incomeListPrice}Eth</TableCell>
-              <TableCell>
                 {`${new Date(item.incomeListDate).getFullYear()}.
                 ${new Date(item.incomeListDate).getMonth()}.
                 ${new Date(item.incomeListDate).getDate()}`}
               </TableCell>
+              <TableCell>{item.incomeListPrice}Eth</TableCell>
             </TableRow>
           ))}
         </TableBody>

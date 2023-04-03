@@ -28,7 +28,7 @@ export default function SellerIntro2() {
         </Text>
       </ContentBox>
       <MoreContentIconBox>
-        <Link to="/introSeller2">
+        <Link to="/introSeller2" style={{ color: "black" }}>
           <KeyboardDoubleArrowDownIcon fontSize="large" />
         </Link>
       </MoreContentIconBox>
@@ -82,12 +82,12 @@ const Img = styled.div`
 `;
 
 const ProfilBox = styled.div`
-  height: 40vh;
+  height: 30vh;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin: 10%;
+  margin: 0% 10%;
 `;
 const TitleBox = styled.div`
   display: flex;

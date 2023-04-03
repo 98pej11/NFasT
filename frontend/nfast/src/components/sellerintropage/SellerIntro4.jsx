@@ -29,7 +29,7 @@ export default function SellerIntro4() {
         </Img>
       </ContentBox>
       <MoreContentIconBox>
-        <Link to="/introSeller3">
+        <Link to="/introSeller3" style={{ color: "black" }}>
           <KeyboardDoubleArrowDownIcon fontSize="large" />
         </Link>
       </MoreContentIconBox>

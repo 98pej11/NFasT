@@ -3,12 +3,12 @@ import styled, { keyframes } from "styled-components";
 import intro1 from "../../assets/Intro1_Seller.png";
 
 const ProfilBox = styled.div`
-  height: 40vh;
+  height: 30vh;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin: 5% 10%;
+  margin: 40% 10%;
 `;
 
 const contentUpAnimation = keyframes`
