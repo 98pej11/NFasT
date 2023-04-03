@@ -8,7 +8,7 @@ const ProfilBox = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin: 40% 10%;
+  margin: 60% 10%;
 `;
 
 const contentUpAnimation = keyframes`

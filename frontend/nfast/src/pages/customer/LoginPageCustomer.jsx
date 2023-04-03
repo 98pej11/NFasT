@@ -24,7 +24,7 @@ export default function LoginPage() {
       <Container component="main" maxWidth="xs" m={30}>
         <Box
           sx={{
-            marginTop: 25,
+            marginTop: "140px",
             gap: 3,
             display: "flex",
             flexDirection: "column",
@@ -34,7 +34,7 @@ export default function LoginPage() {
           <img src={logo} alt="" />
           <Typography
             variant="h6"
-            sx={{ color: "#5B5299", marginBottom: "50px" }}
+            sx={{ color: "#5B5299", marginBottom: "20px" }}
           >
             줄서지말고 먹자!
           </Typography>
