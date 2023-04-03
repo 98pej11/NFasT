@@ -118,7 +118,6 @@ function PastTicket({
   nfastEndTime,
   nfastPrice,
   nfastReview,
-  nfastReview,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
