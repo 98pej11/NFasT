@@ -12,6 +12,8 @@ import FloatingBtn from "../../components/commons/FloatingBtn";
 import { getAccessToken, getSequence } from "../../storage/Cookie";
 import { mainAction } from "../../redux/actions/mainAction";
 import { mypageAction } from "../../redux/actions/mypageAction";
+import Footer from "../../components/commons/Footer";
+
 // import Container from "@mui/material/Container";
 // import Grid from "@mui/material/Grid";
 // import Typography from "@mui/material/Typography";
@@ -107,6 +109,7 @@ function MainPage() {
           <TransCard transList={transList} />
         </Card>
       </Section>
+      <Footer />
       <FloatingBtn>Floating</FloatingBtn>
     </div>
   );

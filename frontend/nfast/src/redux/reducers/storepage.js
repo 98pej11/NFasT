@@ -1,7 +1,7 @@
 const initialState = {
   storedetail: "",
   purchaseList: [],
-  isBookMark: "",
+  bookmark: null,
   totalCnt: "",
   amount: "",
   flag: "",
@@ -16,7 +16,8 @@ function storepage(state = initialState, action = {}) {
     case "GET_PURCHASE_LIST_SUCCESS":
       return { ...state, purchaseList: payload.data.nfasts };
     case "GET_BOOKMARK_SUCCESS":
-      return { ...state, isBookMark: payload.data.bookmark };
+      console.log("GET_BOOKMARK_SUCCESS", payload.bookmark);
+      return { ...state, bookmark: payload.bookmark };
     case "SAVE_TOTALCNT":
       return { ...state, totalCnt: payload.data };
     case "SAVE_AMOUNT":
