@@ -1,9 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-// import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { mypageAction } from "../../redux/actions/mypageAction";
 
 const Wrapper = styled.div`
   display: flex;
@@ -70,13 +72,31 @@ const Info = styled.div`
     margin: 6%;
   }
 `;
-const QR = styled.div`
+
+const Review = styled.div`
   flex: 1;
   border-left: dashed 2px #bcb6ff;
   display: flex;
+  flex-direction: column;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
+
+// const EachReview = styled.div`
+//   flex: 0.5;
+//   justify-content: center;
+//   text-align: center;
+//   align-
+//   align-items: center;
+//   background-color: rgba(230, 229, 255, 1);
+//   // border-radius: 30%;
+//   width: 80%;
+//   height: 15%;
+//   margin-top: 2%;
+//   margin-bottom: 2%;
+//   font-size: 10pt;
+// `;
 const StyleBtn = styled.div`
   display: flex;
   justify-content: center;
@@ -90,14 +110,31 @@ const StyleBtn = styled.div`
   }
 `;
 
-function FutureTicket({
+function PastTicket({
   storeName,
   nfastDate,
+  nfastSequence,
   nfastStartTime,
   nfastEndTime,
   nfastPrice,
-  nfastQr,
+  nfastReview,
+  nfastReview,
 }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // useEffect(() => {}, []);
+
+  const storeSequence = useSelector(
+    (state) => state.mypageReducer.storeSequence
+  );
+  const handleRevisit = (nfastSequence) => {
+    dispatch(mypageAction.getStoreSequence(nfastSequence));
+    navigate(`/store/${storeSequence}`);
+    // navigate(`/mainPage`);
+    console.log("hehehehehehey");
+  };
+
   return (
     <Wrapper>
       <Ticket>
@@ -119,30 +156,40 @@ function FutureTicket({
           </div>
           <div>
             <StyleBtn>
-              <Button variant="contained">재방문</Button>
+              <Button
+                variant="contained"
+                onClick={handleRevisit(nfastSequence)}
+              >
+                재방문
+              </Button>
             </StyleBtn>
           </div>
         </Info>
-        <QR>{nfastQr}</QR>
+        <Review>{nfastReview}</Review>
+        <Review>{nfastReview}</Review>
       </Ticket>
     </Wrapper>
   );
 }
-FutureTicket.defaultProps = {
+PastTicket.defaultProps = {
   storeName: "가게이름",
+  nfastSequence: 1,
   nfastDate: "날짜",
   nfastStartTime: "0",
   nfastEndTime: "0",
   nfastPrice: 0,
-  nfastQr: "qr",
+  nfastReview: ["시간 리뷰", "편의시설 리뷰", "서비스 리뷰", "분위기 리뷰"],
 };
-FutureTicket.propTypes = {
+
+PastTicket.propTypes = {
   storeName: PropTypes.string,
+  nfastSequence: PropTypes.number,
   nfastDate: PropTypes.string,
   nfastStartTime: PropTypes.string,
   nfastEndTime: PropTypes.string,
   nfastPrice: PropTypes.number,
   // eslint-disable-next-line react/forbid-prop-types
-  nfastQr: PropTypes.object,
+  nfastReview: PropTypes.object,
 };
-export default FutureTicket;
+
+export default PastTicket;
