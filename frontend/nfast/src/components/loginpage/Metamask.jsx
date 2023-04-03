@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import Button from "@mui/material/Button";
@@ -12,8 +12,10 @@ function Metamask(props) {
   const { isSeller, store } = props;
   const [address, setAddress] = useState("");
   const [flag, setFlag] = useState(false);
+  const [type, setType] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLogin = useSelector((state) => state.authReducer.isLogin);
 
   useEffect(() => {
     if (flag) {
@@ -21,18 +23,28 @@ function Metamask(props) {
         // dispatch(authAction.walletLogin(address));
         // console.log(address);
         dispatch(authAction.userConfirm(address));
-        navigate("/mainpage");
+        setType(1);
       } else if (isSeller === 1) {
         // eslint-disable-next-line no-console
         console.log(address);
         dispatch(authAction.storeConfirm(address));
-        navigate("/PageSeller");
+        setType(2);
       } else if (isSeller === 2) {
         dispatch(authAction.storeRegister(address, store));
-        navigate("/PageSeller");
+        setType(2);
       }
     }
-  }, [address, dispatch, navigate]);
+  }, [address, dispatch, navigate, flag]);
+
+  useEffect(() => {
+    if (type === 1) {
+      console.log("CUSTOM");
+      navigate("/mainpage");
+    } else if (type === 2) {
+      console.log("SELLER");
+      navigate("/PageSeller");
+    }
+  }, [isLogin]);
 
   const handleConnectMetamask = async () => {
     if (window.ethereum) {
@@ -55,31 +67,25 @@ function Metamask(props) {
   };
 
   return (
-    <div>
-      {address ? (
-        <p>Connected with address {address}</p>
-      ) : (
-        <Button
-          type="submit"
-          onClick={handleConnectMetamask}
-          variant="contained"
-          sx={{
-            backgroundColor: "#F3EAD1",
-            color: "black",
-            borderColor: "#924600",
-            width: "260px",
-          }}
-          disableElevation
-        >
-          <img
-            src={MetaMask}
-            alt=""
-            style={{ width: "30px", height: "30px", margin: "3%" }}
-          />
-          MetaMask로 연동하기
-        </Button>
-      )}
-    </div>
+    <Button
+      type="submit"
+      onClick={handleConnectMetamask}
+      variant="contained"
+      sx={{
+        backgroundColor: "#F3EAD1",
+        color: "black",
+        borderColor: "#924600",
+        width: "260px",
+      }}
+      disableElevation
+    >
+      <img
+        src={MetaMask}
+        alt=""
+        style={{ width: "30px", height: "30px", margin: "3%" }}
+      />
+      MetaMask로 연동하기
+    </Button>
   );
 }
 

@@ -7,10 +7,10 @@ export default function Footer() {
       sx={{
         bgcolor: "#C7C5EC",
         py: 3,
-        padding: 2,
+
         borderTop: "1px solid #DDDCDC",
         width: "100%",
-        height: "100px",
+        height: "50px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -32,7 +32,7 @@ export default function Footer() {
         © {new Date().getFullYear()} Copyright ⓒ
         <span style={{ marginLeft: "4px" }}> by A307 왕자공쥬들</span>
       </Typography>
-      <Typography
+      {/* <Typography
         variant="body2"
         align="center"
         sx={{
@@ -44,7 +44,7 @@ export default function Footer() {
       >
         all rights reserved.{" | "}
         <span style={{ marginLeft: "4px" }}>Terms of Service</span>
-      </Typography>
+      </Typography> */}
     </Box>
   );
 }

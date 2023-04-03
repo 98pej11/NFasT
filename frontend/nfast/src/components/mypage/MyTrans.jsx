@@ -35,15 +35,6 @@ function ArrowIcon({ direction }) {
 }
 
 export default function MyTrans() {
-  const Styledh2 = styled.div`
-    text-align: center;
-    margin-left: 5%;
-    margin-right: 5%;
-    h4 {
-      margin-top: 150px;
-      margin-bottom: 70px;
-    }
-  `;
   const dispatch = useDispatch();
 
   const [filter, setFilter] = useState("");
@@ -58,12 +49,22 @@ export default function MyTrans() {
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
-  console.log(transactionList);
-  const Pag = styled.div`
-    margin: 10%;
-    display: flex; /* 가로 정렬을 위해 flexbox 설정 */
-    justify-content: center; /* 가운데 정렬 */
-  `;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+  const rowsPerPage = 10;
+  const getTransList = () => {
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+
+    if (transactionList.length === 0) {
+      return transactionList;
+    }
+    return transactionList.slice(startIndex, endIndex);
+  };
+
   return (
     <div>
       <Styledh2>
@@ -89,24 +90,54 @@ export default function MyTrans() {
             </TableRow>
           </TableHead>
           <TableBody align="center">
-            {transactionList.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.storeName}</TableCell>
-                <TableCell>{item.tradeListType === 0 ? "-" : "+"}</TableCell>
-                <TableCell>{item.tradeListPrice}Eth</TableCell>
-                <TableCell>
-                  {toStringByFormatting(new Date(item.tradeListDate))}
+            {getTransList().length > 0 ? (
+              getTransList().map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.storeName}</TableCell>
+                  <TableCell>{item.tradeListType === 0 ? "-" : "+"}</TableCell>
+                  <TableCell>{item.tradeListPrice}Eth</TableCell>
+                  <TableCell>
+                    {toStringByFormatting(new Date(item.tradeListDate))}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell> </TableCell>
+
+                <TableCell colSpan={4}>
+                  &nbsp;&nbsp;거래 내역이 없습니다.
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
         <Pag>
           <Stack spacing={2}>
-            <Pagination count={5} variant="outlined" color="secondary" />
+            <Pagination
+              count={Math.ceil(transactionList.length / rowsPerPage)}
+              variant="outlined"
+              color="secondary"
+              page={currentPage}
+              onChange={handlePageChange}
+            />
           </Stack>
         </Pag>
       </Styledh2>
     </div>
   );
 }
+const Styledh2 = styled.div`
+  text-align: center;
+  margin-left: 5%;
+  margin-right: 5%;
+  h4 {
+    margin-top: 150px;
+    margin-bottom: 70px;
+  }
+`;
+const Pag = styled.div`
+  margin: 10%;
+  display: flex; /* 가로 정렬을 위해 flexbox 설정 */
+  justify-content: center; /* 가운데 정렬 */
+`;

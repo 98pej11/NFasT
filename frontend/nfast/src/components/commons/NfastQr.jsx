@@ -52,7 +52,7 @@ const QR = styled.div`
     margin-left: 20px;
   }
 
-  top: 200px;
+  top: 100px;
   background-color: #5b5299;
 `;
 

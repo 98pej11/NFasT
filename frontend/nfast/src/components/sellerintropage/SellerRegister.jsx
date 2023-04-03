@@ -135,8 +135,6 @@ export default function Register() {
             name="storeAddress"
             placeholder="상세 주소를 입력하세요."
             variant="outlined"
-            onChange={onChangeHandler}
-            value={inputs.storeAddress}
           />
           <div style={{ marginTop: 20 }}> </div>
           <Metamask isSeller={2} store={inputs} />

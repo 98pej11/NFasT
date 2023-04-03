@@ -23,7 +23,9 @@ export default function SearchBar() {
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [dropDownList, setDropDownList] = useState(wholeTextArray);
   const [dropDownItemIndex, setDropDownItemIndex] = useState(-1);
+
   const navigate = useNavigate();
+
   let StoreSequence = 0;
   const getStoreSequence = (clickedItem) => {
     const store = searchList.find((store) => store.storeName === clickedItem);

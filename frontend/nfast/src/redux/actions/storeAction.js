@@ -52,12 +52,13 @@ function removeBookMark(storeSequence, userSequence) {
 }
 function isBookMark(storeSequence, userSequence) {
   // console.log("북마크게요 아니게요");
-  return async () => {
+  return async (dispatch) => {
     await axios
       .get(`${baseUrl}/store/${storeSequence}/bookmark/${userSequence}`)
       .then((response) => {
         const { data } = response;
         console.log("북마크 조회 결과 ", data);
+        dispatch({ type: "GET_BOOKMARK_SUCCESS", payload: data });
       })
       .catch((error) => {
         console.log("ERROR", error);
