@@ -2,6 +2,7 @@ const initialState = {
   availableNfasts: [],
   unavailableNfasts: [],
   bookmarkList: [],
+  transactionList: [],
   userInfo: "",
   storeInfo: "",
   mintIncome: "",
@@ -24,6 +25,8 @@ function mypageReducer(state = initialState, action = {}) {
       return { ...state, mintIncome: payload.data.monthlyMintIncome };
     case "GET_RESELLINCOME_SUCCESS":
       return { ...state, resellIncome: payload.data.monthlyResellIncome };
+    case "GET_TRANSACTIONLIST_SUCCESS":
+      return { ...state, transactionList: payload.data.nfasts };
     default:
       return { ...state };
   }

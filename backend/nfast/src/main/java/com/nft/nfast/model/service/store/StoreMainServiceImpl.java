@@ -161,6 +161,7 @@ public class StoreMainServiceImpl implements StoreMainService {
             // 이름, 위도, 경도로 가게 정보 불러오기
             StoreDto store = getStoreInfo(storeName, lat, lng);
             store.setStoreWallet(storeInfo.getStoreWallet());
+            store.setStoreImage(storeInfo.getStoreImage());
             storeRepository.save(store.toEntity());
         } catch (Exception e) {
             throw new StoreNotFoundException();

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -12,6 +13,9 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TextField from "@mui/material/TextField";
+import { mypageAction } from "../../redux/actions/mypageAction";
+import { getSequence } from "../../storage/Cookie";
+import { toStringByFormatting } from "../../api/transDate";
 
 const useStyles = makeStyles({
   arrowIcon: {
@@ -40,21 +44,21 @@ export default function MyTrans() {
       margin-bottom: 70px;
     }
   `;
-  const [data] = useState([
-    { id: 1, name: "Apple", updown: "", price: 1.99, date: "2023.03.12" },
-    { id: 2, name: "Banana", updown: "", price: 0.99, date: "2023.03.12" },
-    { id: 3, name: "Orange", updown: "", price: 1.49, date: "2023.03.12" },
-    { id: 4, name: "Grapes", updown: "", price: 2.99, date: "2023.03.12" },
-  ]);
+  const dispatch = useDispatch();
+
   const [filter, setFilter] = useState("");
 
+  useEffect(() => {
+    dispatch(mypageAction.getTransactionList(getSequence()));
+  }, []);
+
+  const transactionList = useSelector(
+    (state) => state.mypageReducer.transactionList
+  );
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
-
-  const filteredData = data.filter((item) =>
-    item.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  console.log(transactionList);
   const Pag = styled.div`
     margin: 10%;
     display: flex; /* 가로 정렬을 위해 flexbox 설정 */
@@ -85,12 +89,14 @@ export default function MyTrans() {
             </TableRow>
           </TableHead>
           <TableBody align="center">
-            {filteredData.map((item) => (
+            {transactionList.map((item) => (
               <TableRow key={item.id}>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.updown}</TableCell>
-                <TableCell>{item.price}Eth</TableCell>
-                <TableCell>{item.date}</TableCell>
+                <TableCell>{item.storeName}</TableCell>
+                <TableCell>{item.tradeListType === 0 ? "-" : "+"}</TableCell>
+                <TableCell>{item.tradeListPrice}Eth</TableCell>
+                <TableCell>
+                  {toStringByFormatting(new Date(item.tradeListDate))}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

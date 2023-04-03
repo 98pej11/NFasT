@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
@@ -17,8 +17,8 @@ const Styledh2 = styled.div`
   justify-content: center;
   align-items: center;
   h4 {
-    margin-top: 150px;
-    margin-bottom: 70px;
+    margin-top: 70px;
+    margin-bottom: 50px;
   }
   p {
     font-size: 16px;
@@ -30,16 +30,17 @@ const StyleBtn = styled.div`
   margin: 17%;
 
   Button {
-    width: 120px;
+    width: 90px;
     height: 50px;
     background-color: #bcb6ff;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
 function MyInfo(props) {
   const { userSequence, userWallet, userNickname, userImage } = props;
+  console.log("userWallet", userWallet);
   const dispatch = useDispatch();
   const [image, setImage] = useState([]);
   const [picture, setPicture] = useState([]);
@@ -48,6 +49,14 @@ function MyInfo(props) {
     userWallet,
     userNickname,
   });
+
+  useEffect(() => {
+    setInputs({
+      userSequence,
+      userWallet,
+      userNickname,
+    });
+  }, [props]);
 
   const fileInput = useRef(null);
 
@@ -80,7 +89,8 @@ function MyInfo(props) {
     dispatch(mypageAction.modifyUserInfo(userSequence, params));
     // navigate(`/`);
   };
-
+  console.log(userImage);
+  console.log(image);
   const onChangeHandler = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
@@ -94,12 +104,12 @@ function MyInfo(props) {
         <IconButton sx={{ width: 200, height: 200 }}>
           <Avatar
             alt="Remy Sharp"
-            src={image}
+            src={userImage}
             sx={{ width: 200, height: 200 }}
             onClick={() => {
               fileInput.current.click();
             }}
-            defaultValue={userImage}
+            value={userImage}
           />
           <input
             type="file"
@@ -111,8 +121,16 @@ function MyInfo(props) {
             ref={fileInput}
           />
         </IconButton>
-        <label htmlFor="profile_img">
-          프로필 편집 <EditIcon />
+        <label
+          htmlFor="profile_img"
+          style={{
+            margin: 20,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          프로필 편집 <EditIcon sx={{ marginLeft: 1 }} />
         </label>
         <Box
           sx={{
@@ -122,7 +140,8 @@ function MyInfo(props) {
           <p style={{ textAlign: "left", fontSize: "medium" }}>연동지갑 주소</p>
           <TextField
             id="filled-read-only-input"
-            defaultValue={userWallet}
+            name="userWallet"
+            value={userWallet}
             fullWidth
             InputProps={{
               readOnly: true,
@@ -136,7 +155,6 @@ function MyInfo(props) {
             fullWidth
             name="userNickname"
             onChange={onChangeHandler}
-            defaultValue={userNickname}
           />
           <StyleBtn>
             <Button variant="contained" onClick={modifyUserInfo}>
@@ -150,17 +168,14 @@ function MyInfo(props) {
 }
 
 MyInfo.defaultProps = {
-  userWallet: "",
-  userNickname: "",
   userImage: "",
-  userSequence: "",
 };
 
 MyInfo.propTypes = {
-  userWallet: PropTypes.string,
-  userNickname: PropTypes.string,
+  userWallet: PropTypes.string.isRequired,
+  userNickname: PropTypes.string.isRequired,
   userImage: PropTypes.string,
-  userSequence: PropTypes.number,
+  userSequence: PropTypes.number.isRequired,
 };
 
 export default MyInfo;
