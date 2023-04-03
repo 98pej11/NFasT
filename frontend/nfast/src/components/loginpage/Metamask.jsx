@@ -28,6 +28,7 @@ function Metamask(props) {
         // eslint-disable-next-line no-console
         console.log(address);
         dispatch(authAction.storeConfirm(address));
+        console.log("check STORECONFIRM");
         setType(2);
       } else if (isSeller === 2) {
         dispatch(authAction.storeRegister(address, store));
@@ -39,7 +40,7 @@ function Metamask(props) {
   useEffect(() => {
     if (type === 1) {
       console.log("CUSTOM");
-      navigate("/mainpage");
+      navigate("/mainPage");
     } else if (type === 2) {
       console.log("SELLER");
       navigate("/PageSeller");

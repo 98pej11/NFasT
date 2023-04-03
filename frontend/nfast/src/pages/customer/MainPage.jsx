@@ -20,7 +20,7 @@ import Footer from "../../components/commons/Footer";
 
 function MainPage() {
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.authReducer.isLogin);
+  // const isLogin = useSelector((state) => state.authReducer.isLogin);
   useEffect(() => {
     // eslint-disable-next-line
     console.log(getAccessToken());
@@ -43,10 +43,8 @@ function MainPage() {
   }, [getAccessToken]);
 
   useEffect(() => {
-    if (isLogin) {
-      dispatch(mypageAction.getUserInfo(getSequence()));
-    }
-  }, [isLogin]);
+    dispatch(mypageAction.getUserInfo(getSequence()));
+  }, []);
 
   const distanceList = useSelector((state) => state.mainReducer.stores);
   // eslint-disable-next-line
