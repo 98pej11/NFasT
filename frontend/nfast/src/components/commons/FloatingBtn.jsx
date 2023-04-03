@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import FloatingCards from "./FloatingCards";
 import { mainAction } from "../../redux/actions/mainAction";
 import { getSequence } from "../../storage/Cookie";
 
+const FloatingAnimation = keyframes`
+0% {
+  transform: translateY(0%);	
+}
+50% {
+  transform: translateY(6%);	
+}	
+100% {
+  transform: translateY(0%);
+}	
+`;
+
 const Floating = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,20 +33,18 @@ const Cards = styled.div`
 `;
 
 const Btn = styled.button`
-  background-color: transparent;
+  background-color: #5b5299;
+  width: 60px;
+  height: 60px;
   border: none;
+  border-radius: 50px;
   position: fixed;
   bottom: 80px;
   right: 30px;
-  &:hover {
-    cursor: pointer;
-    opacity: 80%;
-  }
-
-  img {
-    width: 80px;
-    height: 80px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${FloatingAnimation} 2s linear infinite;
 `;
 function FloatingBtn() {
   const [floating, setFloating] = useState("none");
@@ -54,7 +67,7 @@ function FloatingBtn() {
         </Cards>
       </Floating>
       <Btn type="button" onClick={handleClick}>
-        지갑
+        <ConfirmationNumberIcon fontSize="large" style={{ color: "white" }} />
       </Btn>
     </div>
   );
