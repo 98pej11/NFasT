@@ -3,9 +3,31 @@ import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
 
+export const getSession = () => {
+  console.log("쿠키에서 세션 가져오기");
+  const accessToken = cookies.get("jwtAccessToken");
+  const refreshToken = cookies.get("jwtRefreshToken");
+  const sequence = cookies.get("sequence");
+
+  // 토큰이 없거나 만료된 경우
+  if (!accessToken) {
+    console.log("Access token is expired or not exists");
+    return null;
+  }
+
+  // 쿠키에 로그인 정보가 없는 경우
+  if (!refreshToken || !sequence) {
+    console.log("No refresh token or sequence in cookies");
+    return null;
+  }
+
+  return { accessToken, refreshToken, sequence };
+};
+
 export const setAccessToken = (accessToken) => {
   const today = new Date();
   const expireDate = today.setHours(today.getHours() + 1);
+
   return cookies.set("jwtAccessToken", accessToken, {
     sameSite: "strict",
     path: "/",

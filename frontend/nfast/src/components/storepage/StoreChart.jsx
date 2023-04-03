@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Line } from "react-chartjs-2";
+import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import {
   Chart as ChartJS,
   LineElement,
@@ -12,15 +13,16 @@ import {
 
 ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale);
 const Wrapper = styled.div`
+  h4 {
+    display: flex;
+    align-items: center;
+  }
   @media only screen and (min-width: 320px) and (max-width: 1000px) {
     width: 100%;
   }
   @media only screen and (min-width: 0px) and (max-width: 320px) {
     width: 50%;
   }
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 function StoreChart(props) {
@@ -74,7 +76,10 @@ function StoreChart(props) {
 
   return (
     <Wrapper>
-      <h4>지난주 시세</h4>
+      <h4>
+        <AttachMoneyOutlinedIcon />
+        지난주 시세
+      </h4>
       <Line data={data} options={data.options} />
     </Wrapper>
   );

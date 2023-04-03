@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import NavigationOutlinedIcon from "@mui/icons-material/NavigationOutlined";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import StoreInfo from "../../components/storepage/StoreInfo";
 import StoreReview from "../../components/storepage/StoreReview";
 import StoreChart from "../../components/storepage/StoreChart";
@@ -71,7 +73,10 @@ export default function StorePage() {
             />
           </Graph>
           <Divider />
-          <h4>지도</h4>
+          <h4>
+            <NavigationOutlinedIcon style={{ fontSize: 20 }} />
+            상세 주소
+          </h4>
           <MapWrapper>
             <Map>
               <KaKaoMap
@@ -79,6 +84,10 @@ export default function StorePage() {
                 storeLng={storedetail.store.storeLng}
               />
             </Map>
+            <h5>
+              <LocationOnIcon style={{ color: "orange" }} />
+              {storedetail.store.storeAddress}
+            </h5>
           </MapWrapper>
           <Divider />
           <Footer>
@@ -91,14 +100,14 @@ export default function StorePage() {
   );
 }
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0;
-  height: auto;
+  height: 100vh;
 
-  h4 {
-    width: 100%;
+  h4,
+  h5 {
+    margin-left: 3%;
+    display: flex;
+    align-items: center;
   }
 `;
 const Divider = styled.div`
@@ -112,28 +121,28 @@ const Review = styled(StoreReview)`
 `;
 const Graph = styled.div`
   width: 100%;
-  height: 100%;
+  // height: 100%;
   display: flex;
   justify-content: center;
 `;
 
 const Chart = styled(StoreChart)`
   width: 100%;
-  height: 100%;
+  // height: 100%;
 `;
 
 const MapWrapper = styled.div`
-  width: 400px;
-  height: 300px;
+  width: 100%;
+  // height: 300px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 100px;
+
+  margin-bottom: 70px;
 `;
 
 const Map = styled.div`
   width: 100%;
-  height: 100%;
+  // height: 100%;
   z-index: 0; /* Set z-index to 0 */
 `;
 const Footer = styled.div`
