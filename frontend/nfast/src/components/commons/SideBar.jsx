@@ -25,6 +25,7 @@ export default function Sidebar() {
   const userInfo = useSelector((state) => state.mypageReducer.userInfo);
   useEffect(() => {
     dispatch(mypageAction.getUserInfo(getSequence()));
+    console.log("이미지내놔 ", userInfo.userImage);
   }, []);
 
   const handleDrawerOpen = () => {
@@ -50,7 +51,7 @@ export default function Sidebar() {
         <div>
           <Tooltip>
             <IconButton onClick={handleDrawerOpen} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src={userInfo.user_image} />
+              <Avatar alt="Remy Sharp" src={userInfo.userImage} />
             </IconButton>
           </Tooltip>
           <Drawer anchor="right" open={openDrawer} onClose={handleDrawerClose}>
@@ -73,7 +74,10 @@ export default function Sidebar() {
                   sx={{ width: "80px", height: "80px" }}
                 />
                 <Typography fontSize={15}>
-                  <span style={{ color: "purple" }}>은동동</span>님, 환영합니다.
+                  <span style={{ color: "purple" }}>
+                    {userInfo.userNickname}
+                  </span>
+                  님, 환영합니다.
                 </Typography>
               </Box>
               <Divider />
@@ -108,9 +112,9 @@ export default function Sidebar() {
                 <ListItem
                   disablePadding
                   sx={{ height: "50px" }}
-                  onClick={() => handleDrawerClose("/myinfo")}
+                  onClick={handleDrawerClose}
                 >
-                  <ListItemButton>
+                  <ListItemButton href="/myinfo">
                     <ListItemIcon>
                       <InboxIcon />
                     </ListItemIcon>

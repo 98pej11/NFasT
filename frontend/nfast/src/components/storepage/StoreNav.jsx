@@ -16,7 +16,7 @@ export default function StoreNav() {
   const [bookmark, setBookmark] = useState("BookmarkBorderIcon");
   const dispatch = useDispatch();
   const { storeSequence } = useParams();
-  const isBookMark = useSelector((state) => state.storepageReducer.isBookMark);
+  const isBookMark = useSelector((state) => state.storepageReducer.bookmark);
 
   useEffect(() => {
     dispatch(storeAction.isBookMark(storeSequence, getSequence()));
@@ -26,10 +26,11 @@ export default function StoreNav() {
     } else {
       setBookmark("BookmarkBorderIcon");
     }
-  }, []);
+  }, [isBookMark]);
 
   // Load bookmark state from session storage
   useEffect(() => {
+    console.log("redux에서 어떻게 넘어오니 : ", isBookMark);
     console.log(bookmark);
   }, [bookmark]);
 
