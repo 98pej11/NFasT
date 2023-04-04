@@ -35,17 +35,21 @@ public class TradeList {
     @Column(nullable = false)
     private Byte tradeListType;
 
-    @Column
+    @Column(nullable = false)
+    private long storeSequence;
+
+    @Column(nullable = false)
     private long userSequence;
 
     @Builder
-    public TradeList(long tradeListSequence, String tradeListTransaction, BigDecimal tradeListPrice, Date tradeListDate, Byte tradeListType, long userSequence) {
+    public TradeList(long tradeListSequence, String tradeListTransaction, BigDecimal tradeListPrice, Date tradeListDate, Byte tradeListType, long storeSequence, long userSequence) {
         this.tradeListSequence = tradeListSequence;
         this.tradeListTransaction = tradeListTransaction;
         this.tradeListPrice = tradeListPrice;
         this.tradeListDate = tradeListDate;
         this.tradeListType = tradeListType;
         this.userSequence = userSequence;
+        this.storeSequence = storeSequence;
     }
 
     public TradeListDto toDto(){
@@ -55,6 +59,7 @@ public class TradeList {
                 .tradeListPrice(tradeListPrice)
                 .tradeListDate(tradeListDate)
                 .tradeListType(tradeListType)
+                .storeSequence(storeSequence)
                 .userSequence(userSequence)
                 .build();
         return tradeListDto;

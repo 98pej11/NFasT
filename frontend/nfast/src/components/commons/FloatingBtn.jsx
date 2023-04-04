@@ -1,69 +1,85 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import FloatingIcon from "../../assets/FloatingIcon.png";
+import { useDispatch } from "react-redux";
+import styled, { keyframes } from "styled-components";
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import FloatingCards from "./FloatingCards";
+import { mainAction } from "../../redux/actions/mainAction";
+import { getSequence } from "../../storage/Cookie";
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  margin-top: 60px;
-  padding-bottom: 700px;
-  background-color: red;
+const FloatingAnimation = keyframes`
+0% {
+  transform: translateY(0%);	
+}
+50% {
+  transform: translateY(6%);	
+}	
+100% {
+  transform: translateY(0%);
+}	
 `;
+
+const Wrapper = styled.div``;
+
 const Floating = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  // background-color: blue;
 `;
 const Cards = styled.div`
-  width: 100%;
+  width: 50%;
   height: 100vh;
   display: ${(props) => props.isDisplay};
 `;
 
 const Btn = styled.button`
-  background-color: transparent;
+  background-color: #5b5299;
+  width: 60px;
+  height: 60px;
   border: none;
+  border-radius: 50px;
   position: fixed;
-  bottom: 80px;
+  bottom: 60px;
   right: 30px;
-  &:hover {
-    cursor: pointer;
-    opacity: 80%;
-  }
-
-  img {
-    width: 80px;
-    height: 80px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${FloatingAnimation} 2s linear infinite;
+`;
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  display: ${(props) => props.isDisplay};
 `;
 
 function FloatingBtn() {
   const [floating, setFloating] = useState("none");
 
+  const dispatch = useDispatch();
+
   const handleClick = () => {
     if (floating === "none") {
+      dispatch(mainAction.getFloatingNfast(getSequence()));
       setFloating("auto");
     } else {
       setFloating("none");
     }
   };
+
   return (
     <Wrapper>
+      <Overlay isDisplay={floating} />
       <Floating>
         <Cards isDisplay={floating}>
           <FloatingCards />
         </Cards>
       </Floating>
       <Btn type="button" onClick={handleClick}>
-        <img src={FloatingIcon} alt="floatingIcon" />
+        <ConfirmationNumberIcon fontSize="large" style={{ color: "white" }} />
       </Btn>
-      <Link to="/nFastCard">Go to NFastCard</Link>
-      <Link to="/review">Go to review</Link>
     </Wrapper>
   );
 }

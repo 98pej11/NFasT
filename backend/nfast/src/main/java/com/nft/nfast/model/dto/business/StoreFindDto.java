@@ -12,5 +12,4 @@ import lombok.*;
 public class StoreFindDto {
     private long storeSequence;
     private String storeName;
-
 }

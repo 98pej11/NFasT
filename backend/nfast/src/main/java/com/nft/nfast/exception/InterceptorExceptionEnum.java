@@ -19,11 +19,6 @@ public enum InterceptorExceptionEnum {
     private final String code;
     private String message;
 
-    InterceptorExceptionEnum(HttpStatus status, String code) {
-        this.status = status;
-        this.code = code;
-    }
-
     InterceptorExceptionEnum(HttpStatus status, String code, String message) {
         this.status = status;
         this.code = code;
