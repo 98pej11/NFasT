@@ -12,7 +12,6 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import TextField from "@mui/material/TextField";
 import { mypageAction } from "../../redux/actions/mypageAction";
 import { getSequence } from "../../storage/Cookie";
 import { toStringByFormatting } from "../../api/transDate";
@@ -37,8 +36,6 @@ function ArrowIcon({ direction }) {
 export default function MyTrans() {
   const dispatch = useDispatch();
 
-  const [filter, setFilter] = useState("");
-
   useEffect(() => {
     dispatch(mypageAction.getTransactionList(getSequence()));
   }, []);
@@ -46,9 +43,6 @@ export default function MyTrans() {
   const transactionList = useSelector(
     (state) => state.mypageReducer.transactionList
   );
-  const handleFilterChange = (event) => {
-    setFilter(event.target.value);
-  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const handlePageChange = (event, page) => {
@@ -73,14 +67,7 @@ export default function MyTrans() {
         <Table sx={{ textAlign: "center" }}>
           <TableHead align="center">
             <TableRow>
-              <TableCell sx={{ width: "20%" }}>
-                <TextField
-                  label="가게 이름"
-                  value={filter}
-                  onChange={handleFilterChange}
-                />
-              </TableCell>
-
+              <TableCell sx={{ width: "20%" }}>가게명</TableCell>
               <TableCell sx={{ width: "5%" }}>
                 <ArrowIcon direction="up" />
                 <ArrowIcon direction="down" />

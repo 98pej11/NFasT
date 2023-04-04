@@ -84,6 +84,34 @@ function MyNft() {
   const unavailableNfasts = useSelector(
     (state) => state.mypageReducer.unavailableNfasts
   );
+
+  const [currentAvailablePage, setCurrentAvailablePage] = useState(1);
+  const [currentUnavailablePage, setCurrentUnavailablePage] = useState(1);
+
+  const handleAvailablePageChange = (event, page) => {
+    setCurrentAvailablePage(page);
+  };
+
+  const handleUnavailablePageChange = (event, page) => {
+    setCurrentUnavailablePage(page);
+  };
+
+  const availableCardsPerPage = 4;
+  const getAvailableCardList = () => {
+    const startIndex = (currentAvailablePage - 1) * availableCardsPerPage;
+    const endIndex = startIndex + availableCardsPerPage;
+
+    return availableNfasts.slice(startIndex, endIndex);
+  };
+
+  const unavailableCardsPerPage = 4;
+  const getUnavailableCardList = () => {
+    const startIndex = (currentUnavailablePage - 1) * unavailableCardsPerPage;
+    const endIndex = startIndex + unavailableCardsPerPage;
+
+    return unavailableNfasts.slice(startIndex, endIndex);
+  };
+
   console.log("사용한 NFT를 보여주마", unavailableNfasts);
   return (
     <Wrapper>
@@ -102,7 +130,7 @@ function MyNft() {
       </TabsContainer>
       {selectedTabIndex === 0 &&
         (availableNfasts.length !== 0 ? (
-          availableNfasts.map((nfast) => {
+          getAvailableCardList().map((nfast) => {
             return (
               <Tickets>
                 <Ticket1
@@ -128,13 +156,20 @@ function MyNft() {
             );
           })
         ) : (
-          <div>
-            <div>사용 가능한 NFasT가 없습니다ㅠㅠ</div>
+          <div
+            style={{
+              textAlign: "center",
+              margin: "20%",
+              // display: "flex",
+              // justifyContent: "center",
+            }}
+          >
+            <span>사용 예정된 NFasT가 없습니다.</span>
           </div>
         ))}
       {selectedTabIndex === 1 &&
         (unavailableNfasts.length !== 0 ? (
-          unavailableNfasts.map((nfast) => {
+          getUnavailableCardList().map((nfast) => {
             return (
               <Tickets>
                 <Ticket2
@@ -158,13 +193,45 @@ function MyNft() {
             );
           })
         ) : (
-          <div>사용한 NFasT가 없습니다!</div>
+          <div
+            style={{
+              textAlign: "center",
+              margin: "20%",
+              // display: "flex",
+              // justifyContent: "center",
+            }}
+          >
+            <span>사용 완료한 NFasT가 없습니다.</span>
+          </div>
         ))}
-      <Pag>
-        <Stack spacing={2}>
-          <Pagination count={5} variant="outlined" color="secondary" />
-        </Stack>
-      </Pag>
+      {selectedTabIndex === 0 && (
+        <Pag>
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(availableNfasts.length / availableCardsPerPage)}
+              variant="outlined"
+              color="secondary"
+              page={currentAvailablePage}
+              onChange={handleAvailablePageChange}
+            />
+          </Stack>
+        </Pag>
+      )}
+      {selectedTabIndex === 1 && (
+        <Pag>
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(
+                unavailableNfasts.length / unavailableCardsPerPage
+              )}
+              variant="outlined"
+              color="secondary"
+              page={currentUnavailablePage}
+              onChange={handleUnavailablePageChange}
+            />
+          </Stack>
+        </Pag>
+      )}
     </Wrapper>
   );
 }
