@@ -66,6 +66,7 @@ function checkQR(nfastInfo, storeSequence) {
         if (data.result === "success") {
           console.log("RESPONSE DATA ", data);
         } else {
+          // eslint-disable-next-line no-alert
           alert(data.result);
         }
       })
