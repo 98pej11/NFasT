@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 // import DoneIcon from "@mui/icons-material/Done";
 import RoomIcon from "@mui/icons-material/Room";
-import reviewTime from "../../assets/Review_time.png";
+import reviewTimer from "../../assets/Review_timer.png";
 import reviewParking from "../../assets/Review_parking.png";
 import reviewKind from "../../assets/Review_kind.png";
 import reviewVeiw from "../../assets/Review_view.png";
@@ -92,7 +92,7 @@ function MyNftCard2() {
               label="바로 들어갔어요"
               onClick={handleClick}
               variant="outlined"
-              avatar={<img src={reviewTime} alt="d" />}
+              avatar={<img src={reviewTimer} alt="d" />}
             />
             <ReviewChip
               style={{ margin: 2, backgroundColor: "white" }}

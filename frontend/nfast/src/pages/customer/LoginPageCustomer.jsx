@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 // import Collapse from "@mui/material/Collapse";
 import Typography from "@mui/material/Typography";
-import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import logo from "../../assets/NFast_Logo.png";
 import moneylogin from "../../assets/moneylogin.png";
@@ -50,11 +49,6 @@ export default function LoginPage() {
               disabled={open}
               isSeller={0}
             />
-            {open &&
-              (<Alert severity="success">로그인에 성공했단다.</Alert>)(
-                // eslint-disable-next-line no-console
-                console.log("나 여기")
-              )}
           </div>
 
           <Button
