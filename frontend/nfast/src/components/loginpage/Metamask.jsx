@@ -4,12 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import Button from "@mui/material/Button";
-<<<<<<< HEAD
-=======
-import Alert from "@mui/material/Alert";
-import Slide from "@mui/material/Slide";
-import Stack from "@mui/material/Stack";
->>>>>>> 7bd96888725930297aa51dd402554a50adb29f06
 import MetaMask from "../../assets/Metamask.png";
 import { authAction } from "../../redux/actions/authAction";
 
