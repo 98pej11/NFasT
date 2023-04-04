@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import QRcode from "../../../assets/QRcode.png";
 
 const Wrapper = styled.div`
@@ -64,7 +65,7 @@ const Price = styled.div`
   margin-top: 15px;
 `;
 
-function PublishTicket() {
+function PublishTicket({ title }) {
   return (
     <Wrapper>
       <EX>(예시)</EX>
@@ -73,7 +74,7 @@ function PublishTicket() {
           <div>
             <Date>2023.01.01</Date>
             <Title>
-              <h4>NFasT가게</h4>
+              <h4>{title}</h4>
               <span>10:00</span>
             </Title>
             <Price>0.0042eth</Price>
@@ -86,5 +87,8 @@ function PublishTicket() {
     </Wrapper>
   );
 }
+PublishTicket.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default PublishTicket;
