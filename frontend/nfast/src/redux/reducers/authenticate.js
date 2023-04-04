@@ -40,6 +40,7 @@ function authReducer(state = initialState, action = {}) {
       console.log("SET_AUTH_TOKEN", payload);
       return { ...state, accessToken: payload };
     case "GET_USER_INFO_SUCCESS":
+      // eslint-disable-next-line no-console
       console.log("SEQUENCEEEEEEEEE", payload);
       return { ...state, sequence: payload };
     default:

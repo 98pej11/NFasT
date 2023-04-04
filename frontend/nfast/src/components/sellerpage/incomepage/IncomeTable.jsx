@@ -29,8 +29,8 @@ export default function IncomeTable({ incomeList }) {
       <Table sx={{ textAlign: "center" }}>
         <TableHead align="center">
           <TableRow>
-            <TableCell sx={{ width: "20%" }}>유효 날짜</TableCell>
-            <TableCell sx={{ width: "20%" }}>수수료 수익</TableCell>
+            <TableCell sx={{ width: "30%" }}>유효 날짜</TableCell>
+            <TableCell sx={{ width: "30%" }}>수수료 수익</TableCell>
           </TableRow>
         </TableHead>
         <TableBody align="center">

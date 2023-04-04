@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -5,7 +6,7 @@ import styled from "styled-components";
 import NavigationOutlinedIcon from "@mui/icons-material/NavigationOutlined";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import StoreInfo from "../../components/storepage/StoreInfo";
-import StoreReview from "../../components/storepage/StoreReview";
+// import StoreReview from "../../components/storepage/StoreReview";
 import StoreChart from "../../components/storepage/StoreChart";
 import KaKaoMap from "../../components/storepage/KaKaoMap";
 import StoreNav from "../../components/storepage/StoreNav";
@@ -171,9 +172,9 @@ const Divider = styled.div`
   margin-top: 20px;
 `;
 
-const Review = styled(StoreReview)`
-  width: 100%;
-`;
+// const Review = styled(StoreReview)`
+//   width: 100%;
+// `;
 const Graph = styled.div`
   width: 100%;
   // height: 100%;
