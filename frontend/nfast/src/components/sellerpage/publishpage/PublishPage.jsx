@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-console */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -233,6 +234,8 @@ function PublishPage() {
     await createNfast(data);
     // eslint-disable-next-line no-console
     console.log("DATAAAAAAA", data);
+    alert("발행이 완료되었습니다.");
+    window.location.reload();
   };
 
   return (
