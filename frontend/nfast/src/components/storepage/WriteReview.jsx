@@ -69,6 +69,7 @@ export default function WriteReview() {
       // eslint-disable-next-line no-alert
       alert("리뷰 작성을 완료해주세요");
     } else {
+      // eslint-disable-next-line no-console
       console.log("나야나", nfastSequence);
       dispatch(
         storeAction.writeReview(nfastSequence, getSequence(), inputs.reviews)

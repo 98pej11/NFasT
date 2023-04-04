@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const initialState = {
   storedetail: "",
   purchaseList: [],

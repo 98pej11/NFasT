@@ -32,6 +32,7 @@ export default function Register() {
     const { name, value } = event.target;
     const nextInputs = { ...inputs, [name]: value };
     setInputs(nextInputs);
+    // eslint-disable-next-line no-console
     console.log(nextInputs);
   };
 
