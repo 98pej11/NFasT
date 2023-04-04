@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,9 +9,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 // import Button from "@mui/material/Button";
 import LoginBtn from "../loginpage/LoginButton";
+import HeaderSeller from "./HeaderSeller";
+// import LoginSellerBtn from "../loginpage/LoginButtonSeller";
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
 import NFastLogo from "../../assets/HeaderLogo.png";
+
 // eslint-disable-next-line import/named
 import { getSequence } from "../../storage/Cookie";
 
@@ -35,6 +39,10 @@ function Header() {
     console.log("userINFOOOOOo", userInfo);
   }, [userInfo]);
 
+  // 사장님 페이지의 Header
+  if (window.location.pathname === "/PageSeller") return <HeaderSeller />;
+  // 로그인 페이지의 Header
+  // 소비자페이지 로그인한 상태와 안한상태
   return (
     <AppBar
       elevation={0}
@@ -80,7 +88,6 @@ function Header() {
               {userInfo && <SearchBar />}
             </Box>
           </Box>
-
           <div style={{ display: "flex", alignItems: "center" }}>
             {getSequence() ? <SideBar /> : <LoginBtn />}
           </div>
