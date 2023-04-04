@@ -3,10 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import Button from "@mui/material/Button";
-
-import Alert from "@mui/material/Alert";
-import Slide from "@mui/material/Slide";
-import Stack from "@mui/material/Stack";
 import MetaMask from "../../assets/Metamask.png";
 import { authAction } from "../../redux/actions/authAction";
 
@@ -18,20 +14,6 @@ function Metamask(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.authReducer.isLogin);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (flag) {
-      setOpen(true);
-    }
-  }, [flag]);
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
 
   const handleConnectMetamask = async () => {
     if (window.ethereum) {
@@ -56,19 +38,13 @@ function Metamask(props) {
   useEffect(() => {
     if (flag) {
       if (isSeller === 0) {
-        dispatch(authAction.userConfirm(address)).then(() => {
-          setOpen(true);
-        });
+        dispatch(authAction.userConfirm(address)).then(() => {});
         setType(1);
       } else if (isSeller === 1) {
-        dispatch(authAction.storeConfirm(address)).then(() => {
-          setOpen(true);
-        });
+        dispatch(authAction.storeConfirm(address)).then(() => {});
         setType(2);
       } else if (isSeller === 2) {
-        dispatch(authAction.storeRegister(address, store)).then(() => {
-          setOpen(true);
-        });
+        dispatch(authAction.storeRegister(address, store)).then(() => {});
         setType(2);
       }
     }
@@ -77,6 +53,7 @@ function Metamask(props) {
   useEffect(() => {
     if (type === 1) {
       console.log("CUSTOM");
+      // alert("연동이 완료되었습니다.");
       navigate("/mainpage");
     } else if (type === 2) {
       console.log("SELLER");
@@ -86,7 +63,7 @@ function Metamask(props) {
 
   return (
     <div>
-      <div style={{ position: "fixed", top: 80 }}>
+      {/* <div style={{ position: "fixed", top: 80 }}>
         <Stack sx={{ width: "100%" }} spacing={2}>
           <Slide
             in={open}
@@ -95,6 +72,7 @@ function Metamask(props) {
             unmountOnExit
             timeout={500}
           >
+
             <Alert
               onClose={handleClose}
               severity="success"
@@ -104,7 +82,7 @@ function Metamask(props) {
             </Alert>
           </Slide>
         </Stack>
-      </div>
+      </div> */}
       <Button
         type="submit"
         onClick={handleConnectMetamask}
