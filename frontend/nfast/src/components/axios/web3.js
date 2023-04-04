@@ -1797,19 +1797,11 @@ const ssafyTokenAbi = [
   },
 ];
 
-<<<<<<< HEAD
 const NFasTCA = "0x36219a14cBF9730c002f9E854a8986a806797058";
 
 // const saleCA = ""
 
 const saleFactoryCA = "0x83D81233c155a90e93C7804e91cf947eAc3f458B";
-=======
-const NFasTCA = "0xD77ed5f1734175A1CA22E48b80EAa0f74349EB27";
-
-// const saleCA = ""
-
-const saleFactoryCA = "0xDc73BD56f4941D49128D9f0128666fbc147B070e";
->>>>>>> b06e10392a846980a8359815ba5256e5d0a96c26
 
 const ssafyTokenCA = "0x37792f697877e9BcFB978C0c81F0889c2dA66399";
 
