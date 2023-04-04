@@ -69,13 +69,21 @@ function FloatingBtn() {
     }
   };
 
+  const floatingCards =
+    floating === "none" ? (
+      <div>
+        <div>예정된 nft 카드가</div>
+        <div>존재하지 않습니다.</div>
+      </div>
+    ) : (
+      <FloatingCards />
+    );
+
   return (
     <Wrapper>
       <Overlay isDisplay={floating} />
       <Floating>
-        <Cards isDisplay={floating}>
-          <FloatingCards />
-        </Cards>
+        <Cards isDisplay={floating}>{floatingCards}</Cards>
       </Floating>
       <Btn type="button" onClick={handleClick}>
         <ConfirmationNumberIcon fontSize="large" style={{ color: "white" }} />
