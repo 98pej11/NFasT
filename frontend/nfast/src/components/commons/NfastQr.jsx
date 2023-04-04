@@ -40,7 +40,6 @@ const QR = styled.div`
   width: 80%;
   height: 60%;
   position: fixed;
-  border-radius: 2em;
   h2,
   p {
     display: flex;
@@ -90,6 +89,7 @@ function NfastQr() {
           <Btn>
             <button
               type="button"
+              style={{ backgroundColor: "#bcb6ff", color: "white" }}
               onClick={() => {
                 setStartScan(!startScan);
               }}
