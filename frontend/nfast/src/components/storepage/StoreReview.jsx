@@ -14,6 +14,7 @@ function StoreReview(props) {
   const { review } = props;
   // eslint-disable-next-line
   console.log("내가리뷰야", review);
+
   return (
     <Chips>
       <h4>
@@ -23,7 +24,11 @@ function StoreReview(props) {
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label={`${review.reviewTime[0]} ${review.reviewTime[1]}`}
+            label={`${
+              review.reviewTime
+                ? review.reviewTime[0]
+                : "등록된 리뷰가 없습니다."
+            } ${review.reviewTime ? review.reviewTime[1] : ""}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewTimer} alt="d" />}
@@ -31,7 +36,11 @@ function StoreReview(props) {
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label={`${review.reviewConvenience[0]} ${review.reviewConvenience[1]}`}
+            label={`${
+              review.reviewConvenience
+                ? review.reviewConvenience[0]
+                : "등록된 리뷰가 없습니다."
+            } ${review.reviewConvenience ? review.reviewConvenience[1] : ""}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewParking} alt="d" />}
@@ -41,7 +50,12 @@ function StoreReview(props) {
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label={`${review.reviewService[0]} ${review.reviewService[1]}`}
+            label={`${
+              review.reviewService
+                ? review.reviewService[0]
+                : "등록된 리뷰가 없습니다."
+            } ${review.reviewService ? review.reviewService[1] : ""}`}
+            // label={`${review.reviewService[0]} ${review.reviewService[1]}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewKind} alt="d" />}
@@ -49,7 +63,11 @@ function StoreReview(props) {
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label={`${review.reviewMood[0]} ${review.reviewMood[1]}`}
+            label={`${
+              review.reviewMood
+                ? review.reviewMood[0]
+                : "등록된 리뷰가 없습니다."
+            } ${review.reviewMood ? review.reviewMood[1] : ""}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewVeiw} alt="d" />}

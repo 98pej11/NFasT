@@ -1,9 +1,13 @@
 /* eslint-disable no-console */
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 import { baseUrl as base } from "./url";
+
+// import { getSequence } from "../../storage/Cookie";
 
 // const baseUrl = `https://j8a307.p.ssafy.io/api`;
 const baseUrl = `${base}`;
+// const userSequence=getSequence();
 
 function getStoreDetail(storeSequence) {
   console.log("나 들어왔어");
@@ -63,17 +67,18 @@ function isBookMark(storeSequence, userSequence) {
       });
   };
 }
-function writeReview(nfastSequence, userSequence, reviews) {
-  console.log(nfastSequence);
+function writeReview(storeSequence, userSequence, reviews) {
+  // const navigate = useNavigate();
+  console.log(storeSequence);
   console.log(reviews);
   const data = {
-    nfastSequence,
+    storeSequence,
     userSequence,
     reviews,
   };
   console.log(data);
   return async () => {
-    const url = `${baseUrl}/review-count/${nfastSequence}`;
+    const url = `${baseUrl}/review-count/${storeSequence}`;
     await axios
       .post(url, JSON.stringify(data), {
         headers: {
@@ -82,6 +87,7 @@ function writeReview(nfastSequence, userSequence, reviews) {
       })
       .then((response) => {
         console.log(response);
+        // navigate(`/mainPage`);
       })
       .catch((error) => {
         console.log(error);
@@ -197,6 +203,7 @@ function saveHandler(data) {
 
 function getNfastUseState(userSequence, nfastSequence) {
   return async (dispatch) => {
+    console.log("흠...............");
     await axios
       .get(
         `${baseUrl}/floating-button/confirmation/${userSequence}/${nfastSequence}`

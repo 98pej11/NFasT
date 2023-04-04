@@ -47,6 +47,7 @@ const StyleBtn = styled.div`
 `;
 export default function WriteReview() {
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const { nfastSequence } = useParams();
   const [inputs, setInputs] = useState({
     nfastSequence,
@@ -68,7 +69,7 @@ export default function WriteReview() {
       // eslint-disable-next-line no-alert
       alert("리뷰 작성을 완료해주세요");
     } else {
-      console.log(nfastSequence);
+      console.log("나야나", nfastSequence);
       dispatch(
         storeAction.writeReview(nfastSequence, getSequence(), inputs.reviews)
       );

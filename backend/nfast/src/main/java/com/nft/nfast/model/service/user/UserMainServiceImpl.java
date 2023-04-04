@@ -439,6 +439,7 @@ public class UserMainServiceImpl implements UserMainService {
 
             long storeSequence=nfast.getStoreSequence().getStoreSequence();
             nfastGetDto = NfastGetDto.builder()
+                    .nfastSequence(nfast.getNfastSequence())
                     .nfastPrice(nfast.getNfastPrice())
                     .nfastEigenvalue(nfast.getNfastEigenvalue())
                     .nfastDate(nfast.getNfastDate())
@@ -606,6 +607,12 @@ public class UserMainServiceImpl implements UserMainService {
     public void userModify(UserDto userDto) {
         System.out.println("USERDTO "+ userDto);
         userRepository.save(userDto.toEntity());
+    }
+
+    @Override
+    public Nfast findStoreSequence(long nfastSequence) {
+        Nfast nfast = nfastRepository.findAllByNfastSequence(nfastSequence);
+        return nfast;
     }
 
     //거리 계산

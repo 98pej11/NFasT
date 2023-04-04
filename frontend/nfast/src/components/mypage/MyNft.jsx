@@ -40,11 +40,32 @@ const Pag = styled.div`
   display: flex; /* 가로 정렬을 위해 flexbox 설정 */
   justify-content: center; /* 가운데 정렬 */
 `;
-
+const Review = styled.div`
+  flex: 1;
+  border-left: dashed 2px #bcb6ff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+const EachReview = styled.div`
+  flex: 0.5;
+  justify-content: center;
+  text-align: center;
+  align-
+  align-items: center;
+  background-color: rgba(230, 229, 255, 1);
+  // border-radius: 30%;
+  width: 80%;
+  height: 15%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  font-size: 10pt;
+`;
 function MyNft() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const dispatch = useDispatch();
-  // 유저 시퀀스잔아
   const sequence = getSequence();
 
   useEffect(() => {
@@ -63,6 +84,34 @@ function MyNft() {
   const unavailableNfasts = useSelector(
     (state) => state.mypageReducer.unavailableNfasts
   );
+
+  const [currentAvailablePage, setCurrentAvailablePage] = useState(1);
+  const [currentUnavailablePage, setCurrentUnavailablePage] = useState(1);
+
+  const handleAvailablePageChange = (event, page) => {
+    setCurrentAvailablePage(page);
+  };
+
+  const handleUnavailablePageChange = (event, page) => {
+    setCurrentUnavailablePage(page);
+  };
+
+  const availableCardsPerPage = 4;
+  const getAvailableCardList = () => {
+    const startIndex = (currentAvailablePage - 1) * availableCardsPerPage;
+    const endIndex = startIndex + availableCardsPerPage;
+
+    return availableNfasts.slice(startIndex, endIndex);
+  };
+
+  const unavailableCardsPerPage = 4;
+  const getUnavailableCardList = () => {
+    const startIndex = (currentUnavailablePage - 1) * unavailableCardsPerPage;
+    const endIndex = startIndex + unavailableCardsPerPage;
+
+    return unavailableNfasts.slice(startIndex, endIndex);
+  };
+
   console.log("사용한 NFT를 보여주마", unavailableNfasts);
   return (
     <Wrapper>
@@ -78,19 +127,10 @@ function MyNft() {
           <Tab label="미사용 NFT" />
           <Tab label="사용한 NFT" />
         </Tabs>
-        {/* <Ticket2
-          nfastQr={
-            <QRCode
-              value={JSON.stringify({ nfastSequence: 27, type: 2 })}
-              size="100"
-              style={{ fgColor: "#000123" }}
-            />
-          }
-        /> */}
       </TabsContainer>
       {selectedTabIndex === 0 &&
         (availableNfasts.length !== 0 ? (
-          availableNfasts.map((nfast) => {
+          getAvailableCardList().map((nfast) => {
             return (
               <Tickets>
                 <Ticket1
@@ -116,25 +156,20 @@ function MyNft() {
             );
           })
         ) : (
-          <div>
-            <div>사용 가능한 NFasT가 없습니다ㅠㅠ</div>
-            {/* <div>이것은 그냥큐알 코드이다</div>
-            <QRCode
-              value={JSON.stringify({ nfastSequence: 26, type: 1 })}
-              size="100"
-              style={{ fgColor: "#000123" }}
-            />
-            <div>이것은 환불큐알 코드이다</div>
-            <QRCode
-              value={JSON.stringify({ nfastSequence: 27, type: 2 })}
-              size="100"
-              style={{ fgColor: "#000123" }}
-            /> */}
+          <div
+            style={{
+              textAlign: "center",
+              margin: "20%",
+              // display: "flex",
+              // justifyContent: "center",
+            }}
+          >
+            <span>사용 예정된 NFasT가 없습니다.</span>
           </div>
         ))}
       {selectedTabIndex === 1 &&
         (unavailableNfasts.length !== 0 ? (
-          unavailableNfasts.map((nfast) => {
+          getUnavailableCardList().map((nfast) => {
             return (
               <Tickets>
                 <Ticket2
@@ -144,19 +179,59 @@ function MyNft() {
                   nfastEndTime={nfast.nfast.nfastEndTime}
                   nfastPrice={nfast.nfast.nfastPrice}
                   // 리뷰 만드러야됨.
-                  nfastQr={nfast.review.reviewTime}
+                  nfastReview={
+                    <Review>
+                      <div>내 리뷰</div>
+                      <EachReview>{nfast.review.reviewTime}</EachReview>
+                      <EachReview>{nfast.review.reviewMood}</EachReview>
+                      <EachReview>{nfast.review.reviewService}</EachReview>
+                      <EachReview>{nfast.review.reviewConvenience}</EachReview>
+                    </Review>
+                  }
                 />
               </Tickets>
             );
           })
         ) : (
-          <div>사용한 NFasT가 없습니다!</div>
+          <div
+            style={{
+              textAlign: "center",
+              margin: "20%",
+              // display: "flex",
+              // justifyContent: "center",
+            }}
+          >
+            <span>사용 완료한 NFasT가 없습니다.</span>
+          </div>
         ))}
-      <Pag>
-        <Stack spacing={2}>
-          <Pagination count={5} variant="outlined" color="secondary" />
-        </Stack>
-      </Pag>
+      {selectedTabIndex === 0 && (
+        <Pag>
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(availableNfasts.length / availableCardsPerPage)}
+              variant="outlined"
+              color="secondary"
+              page={currentAvailablePage}
+              onChange={handleAvailablePageChange}
+            />
+          </Stack>
+        </Pag>
+      )}
+      {selectedTabIndex === 1 && (
+        <Pag>
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(
+                unavailableNfasts.length / unavailableCardsPerPage
+              )}
+              variant="outlined"
+              color="secondary"
+              page={currentUnavailablePage}
+              onChange={handleUnavailablePageChange}
+            />
+          </Stack>
+        </Pag>
+      )}
     </Wrapper>
   );
 }

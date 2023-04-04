@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
@@ -42,7 +43,8 @@ function MyInfo(props) {
   const { userSequence, userWallet, userNickname, userImage } = props;
   console.log("userWallet", userWallet);
   const dispatch = useDispatch();
-  const [image, setImage] = useState([]);
+  const navigate = useNavigate();
+  const [image, setImage] = useState("");
   const [picture, setPicture] = useState([]);
   const [inputs, setInputs] = useState({
     userSequence,
@@ -56,6 +58,7 @@ function MyInfo(props) {
       userWallet,
       userNickname,
     });
+    setImage(userImage);
   }, [props]);
 
   const fileInput = useRef(null);
@@ -87,7 +90,7 @@ function MyInfo(props) {
     params.append("user", blob);
     params.append("userImage", picture);
     dispatch(mypageAction.modifyUserInfo(userSequence, params));
-    // navigate(`/`);
+    navigate(`/mainpage`);
   };
   console.log(userImage);
   console.log(image);
@@ -104,12 +107,12 @@ function MyInfo(props) {
         <IconButton sx={{ width: 200, height: 200 }}>
           <Avatar
             alt="Remy Sharp"
-            src={userImage}
+            src={image}
             sx={{ width: 200, height: 200 }}
             onClick={() => {
               fileInput.current.click();
             }}
-            value={userImage}
+            value={image}
           />
           <input
             type="file"

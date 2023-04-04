@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,10 +12,12 @@ import { authAction } from "../../redux/actions/authAction";
 
 function HeaderSeller() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const logout = () => {
     dispatch(authAction.onLogout());
+    return navigate("/loginSeller");
   };
+
   return (
     <AppBar
       elevation={0}
@@ -45,7 +47,7 @@ function HeaderSeller() {
               // marginLeft: "10%",
             }}
           >
-            <Box component={Link} to="/PageSeller">
+            <Box component={Link} to="/mainPage">
               {/* 로고이미지가 나와야되는데? */}
               <img src={NFastLogo} alt="logo" height="20px" />
             </Box>

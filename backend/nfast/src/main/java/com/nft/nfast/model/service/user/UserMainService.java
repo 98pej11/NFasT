@@ -1,5 +1,6 @@
 package com.nft.nfast.model.service.user;
 
+import com.nft.nfast.entity.business.Nfast;
 import com.nft.nfast.model.dto.business.*;
 import com.nft.nfast.model.dto.user.TokenDto;
 import com.nft.nfast.model.dto.user.TradeFindDto;
@@ -35,5 +36,5 @@ public interface UserMainService {
     NfastGetDto findNowAvailableNfast(long userSequence);
     UserDto userDetail(long userSequence);
     void userModify(UserDto user);
-
+    Nfast findStoreSequence(long nfastSequence);
 }

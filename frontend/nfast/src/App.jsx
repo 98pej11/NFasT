@@ -22,7 +22,7 @@ import LoginCustomer from "./pages/customer/LoginPageCustomer";
 import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
 import Header from "./components/commons/Header";
-import HeaderSeller from "./components/commons/HeaderSeller";
+// import HeaderSeller from "./components/commons/HeaderSeller";
 import CustomerIntroduce from "./pages/customer/CustomerIntroduce";
 // import Footer from "./components/commons/Footer";
 
@@ -42,11 +42,7 @@ function App() {
   return (
     <Wrapper>
       <BrowserRouter>
-        {window.location.pathname.includes("Seller") ? (
-          <HeaderSeller />
-        ) : (
-          <Header />
-        )}
+        <Header />
         <Pages>
           <Routes>
             <Route path="/" element={<CustomerIntroduce />} />
@@ -71,7 +67,6 @@ function App() {
             <Route path="/RegisterSeller" element={<SellerRegister />} />
           </Routes>
         </Pages>
-
         {/* <Footer /> */}
       </BrowserRouter>
     </Wrapper>
