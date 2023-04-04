@@ -23,7 +23,7 @@ function StoreReview(props) {
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label={`${review.reviewTime[0]} ${review.reviewTime[1]}`}
+            label={`${review.reviewTime} ${review.reviewTime}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewTimer} alt="d" />}
@@ -31,7 +31,7 @@ function StoreReview(props) {
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label={`${review.reviewConvenience[0]} ${review.reviewConvenience[1]}`}
+            label={`${review.reviewConvenience} ${review.reviewConvenience}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewParking} alt="d" />}
@@ -41,7 +41,7 @@ function StoreReview(props) {
       <AlignChip>
         <Wrapper>
           <StyledChip
-            label={`${review.reviewService[0]} ${review.reviewService[1]}`}
+            label={`${review.reviewService} ${review.reviewService}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewKind} alt="d" />}
@@ -49,7 +49,7 @@ function StoreReview(props) {
         </Wrapper>
         <Wrapper>
           <StyledChip
-            label={`${review.reviewMood[0]} ${review.reviewMood[1]}`}
+            label={`${review.reviewMood} ${review.reviewMood}`}
             deleteIcon={<DoneIcon />}
             variant="outlined"
             avatar={<img src={reviewVeiw} alt="d" />}

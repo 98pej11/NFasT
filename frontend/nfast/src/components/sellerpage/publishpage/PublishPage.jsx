@@ -11,7 +11,7 @@ import SwitchTime from "./SwitchTime";
 import {
   web3,
   NFasTContract,
-  // saleFactory,
+  saleFactory,
   // ssafyTokenContract,
   // createSaleContract,
 } from "../../axios/web3";
@@ -109,75 +109,91 @@ function PublishPage() {
     return m * 60 * 60 + s * 60;
   }
 
-  async function createNfast(data, cid) {
+  // 사장님 생성 후 거래 생성
+  // 사장님 생성 후 거래 생성
+  async function createAllSale(data, nfastIds) {
+    console.log("start sale");
+    console.log(data);
+    // nfast id, 가격, 시작시간, 종료시간
+    const startDate = dateToUint(data.date) - 60 * 60 * 24 * 7;
+    const tx = await saleFactory.methods
+      .createAllSale(
+        nfastIds,
+        data.price,
+        startDate,
+        dateToUint(data.date) + timeToUint(data.end)
+      )
+      .send({
+        from: data.walletAddress,
+        // value: web3.utils.toWei("0.01", "ether"),
+      });
+    // await nfastIds.forEach(async (nfastId) => {
+    //   // 판매일로부터 일주일전
+    //   console.log(saleFactory.methods);
+    // });
+    dispatch(publishAction.publishNfast(getSequence(), data));
+    console.log(tx);
+    console.log("여기까지 오나");
+  }
+
+  async function createNfast(data) {
     // nft 발행
     // 발행할 개수, admin 주소, tokenurl, 가게주소, 날짜, 점심저녁구분, 시작시간, 종료시간, 가격, 수수료
     const tx = await NFasTContract.methods
       .createAll(
         data.count,
         data.walletAddress,
-        cid,
+        data.cid,
         data.walletAddress,
         dateToUint(data.date),
         data.time,
         dateToUint(data.date) + timeToUint(data.start),
         dateToUint(data.date) + timeToUint(data.end),
         data.price,
-        5
+        0
       )
       .send({
         from: data.walletAddress,
-        value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
+        // value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
       });
     console.log("여기값");
     console.log(tx);
-    // NFasTContract.events
-    //   .CreateAll({ fromBlock: tx.blockNumber }, (error, event) => {
-    //     console.log(event);
-    //   })
-    //   .on("connected", (subscriptionId) => {
-    //     console.log(subscriptionId);
-    //   })
-    //   .on("data", (event) => {
-    //     console.log(event.returnValues[1]);
-    //   })
-    //   .on("changed", (event) => {
-    //     console.log(event.returnValues);
-    //   })
-    //   .on("error", (error, receipt) => {
-    //     console.log(receipt);
-    //   });
-
-    NFasTContract.getPastEvents(
-      "CreateAll",
-      {
-        fromBlock: tx.blockNumber,
-        toBlock: "latest",
-      },
-      async (error, events) => {
-        console.log(events[0].returnValues[1]);
-        // await createAllSale(data, events[0].returnValues[1]);
-        // db에 저장
-        data.nfastHash.push(events[0].returnValues[1]);
-        console.log("DATAAAA", data);
-        dispatch(publishAction.publishNfast(getSequence(), data));
-      }
-    );
+    NFasTContract.events
+      .CreateAll({ fromBlock: tx.blockNumber }, (error, event) => {
+        console.log(event);
+      })
+      .on("connected", (subscriptionId) => {
+        console.log("subscriptionId : ", subscriptionId);
+      })
+      .on("data", (event) => {
+        console.log(event);
+        console.log("event.returnValues : ", event.returnValues);
+        console.log("event.returnValues[1] : ", event.returnValues[1]);
+        data.nfastHash.push(event.returnValues[1]);
+        createAllSale(data, event.returnValues[1]);
+      })
+      .on("changed", (event) => {
+        console.log("event.returnValues : ", event.returnValues);
+      })
+      .on("error", (error, receipt) => {
+        console.log("receipt : ", receipt);
+      });
   }
 
   const jsonSubmit = async (data) => {
+    await window.ethereum.request({ method: "eth_requestAccounts" });
     const accounts = await web3.eth.getAccounts();
     // const ethAddress = await storehash.options.address; CA주소
     console.log(accounts[0]);
     const ipfsFile = data;
     console.log(ipfsFile);
     ipfsFile.walletAddress = await accounts[0];
-    console.log(await accounts[0]);
     const file = {
       path: "/tmp/myfile.txt",
       content: JSON.stringify(ipfsFile),
     };
-
+    console.log("ipfs 업로그 막기 위해 잠시 변경1", file); // ipfs 업로그 막기 위해 잠시 변경
+    console.log("ipfs 업로그 막기 위해 잠시 변경2", ipfs);
     // const testc = await ipfs.add(file);
     // console.log(testc.cid.string);
     // console.log(ipfsFile.walletAddress);
@@ -188,8 +204,6 @@ function PublishPage() {
     };
     console.log(file);
     console.log(ipfs);
-    // createNfast(data, "testc.cid.string");
-    createNfast(data, testc.cid.string);
 
     // return;
     return { cid: testc.cid.string, walletAddress: accounts[0] };
@@ -213,14 +227,10 @@ function PublishPage() {
       nfastHash: [],
       sequence,
     };
-    // rest api
-    // data.storeName = 가게이름
-    // console.log(e.target[2]);
-    // console.log(e.target[2].value);
-    // await jsonSubmit(data);
     const tempData = await jsonSubmit(data);
     data.cid = tempData.cid;
     data.walletAddress = tempData.walletAddress;
+    await createNfast(data);
     // eslint-disable-next-line no-console
     console.log("DATAAAAAAA", data);
   };
