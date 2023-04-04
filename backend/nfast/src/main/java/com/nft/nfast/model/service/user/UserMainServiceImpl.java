@@ -313,8 +313,8 @@ public class UserMainServiceImpl implements UserMainService {
         List<ReviewFind> reviewList = reviewRepository.findByStoreSequence(storeSequence);
         ReviewFindDto reviewFindDto = new ReviewFindDto();
 
-        List<Object> nfastMaxList = nfastRepository.findMaxNfastPriceGroupByNfastDate();
-        List<Object> nfastMinList = nfastRepository.findMinNfastPriceGroupByNfastDate();
+        List<Object> nfastMaxList = nfastRepository.findMaxNfastPriceGroupByNfastDate(storeSequence);
+        List<Object> nfastMinList = nfastRepository.findMinNfastPriceGroupByNfastDate(storeSequence);
 
         StoreDetailDto storeDetailDto = new StoreDetailDto();
         if (storeWrapper.isPresent()) {

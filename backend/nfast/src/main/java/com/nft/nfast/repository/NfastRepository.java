@@ -47,12 +47,12 @@ public interface NfastRepository extends JpaRepository<Nfast,Long> {
     BigDecimal findDefaultPriceByNfastDate(@Param("mintedDate") Date mintedDate);
 
     //가게명 검색(일주일치 최고 가격)
-    @Query(value="SELECT MAX(nfast_price) as nfastPrice FROM nfast GROUP BY nfast_date HAVING nfast_date BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 7) DAY), '%Y-%m-%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 1) DAY), '%Y-%m-%d');", nativeQuery = true)
-    List<Object> findMaxNfastPriceGroupByNfastDate();
+    @Query(value="SELECT MAX(nfast_price) as nfastPrice FROM nfast WHERE store_sequence=:storeSequence GROUP BY nfast_date HAVING nfast_date BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 7) DAY), '%Y-%m-%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 1) DAY), '%Y-%m-%d');", nativeQuery = true)
+    List<Object> findMaxNfastPriceGroupByNfastDate(@Param("storeSequence") long storeSequence);
 
     //가게명 검색(일주일치 최저 가격)
-    @Query(value="SELECT MIN(nfast_price) as nfast_price FROM nfast GROUP BY nfast_date HAVING nfast_date BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 7) DAY), '%Y-%m-%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 1) DAY), '%Y-%m-%d');", nativeQuery = true)
-    List<Object> findMinNfastPriceGroupByNfastDate();
+    @Query(value="SELECT MIN(nfast_price) as nfast_price FROM nfast WHERE store_sequence=:storeSequence GROUP BY nfast_date HAVING nfast_date BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 7) DAY), '%Y-%m-%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL (WEEKDAY(NOW()) + 1) DAY), '%Y-%m-%d');", nativeQuery = true)
+    List<Object> findMinNfastPriceGroupByNfastDate(@Param("storeSequence") long storeSequence);
 
     //NFT 사용 완료 확인
     Optional<Nfast> findByUserSequenceAndNfastSequence(long userSequence, long nfastSequence);
