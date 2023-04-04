@@ -75,6 +75,7 @@ function Metamask(props) {
       sx={{
         backgroundColor: "#F3EAD1",
         color: "black",
+
         borderColor: "#924600",
         width: "260px",
       }}
