@@ -6,14 +6,14 @@ import AlarmIcon from "@mui/icons-material/Alarm";
 
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import HelpIcon from "@mui/icons-material/Help";
-import StoreImg from "../../assets/StoreImage.png";
+// import StoreImg from "../../assets/StoreImage.png";
 
 // import { storeAction } from "../../redux/actions/storeAction";
 
 function StoreInfo(props) {
   // eslint-disable-next-line react/prop-types
   const {
-    // storeImage,
+    storeImage,
     storeName,
     storeCategory,
     storeDetail,
@@ -28,8 +28,8 @@ function StoreInfo(props) {
 
   return (
     <Wrapper>
-      {/* <Img src={storeImage} alt="car!" /> */}
-      <Img src={StoreImg} alt="car!" />
+      <Img src={storeImage} alt="car!" />
+      {/* <Img src={StoreImg} alt="car!" /> */}
 
       <h2>{storeName}</h2>
       <h5>{storeCategory}</h5>
@@ -117,9 +117,10 @@ const Img = styled.img`
   width: 100%;
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     height: auto;
+    max-height: 300px;
   }
   @media only screen and (min-width: 768px) {
-    height: 500px;
+    height: auto;
   }
 `;
 const Info = styled.div`

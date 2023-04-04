@@ -25,9 +25,31 @@ const Wrapper = styled.div`
   }
 `;
 
-function StoreChart(props) {
+export default function StoreChart(props) {
   // eslint-disable-next-line react/prop-types
   const { PriceMax, PriceMin } = props;
+
+  if (!PriceMax || !PriceMin) {
+    return (
+      <Wrapper style={{ position: "relative" }}>
+        <Line data={{}} options={{}} />
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            textAlign: "center",
+            fontSize: "18px",
+            color: "rgba(0, 0, 0, 0.3)",
+            textShadow: "1px 1px rgba(255, 255, 255, 0.5)",
+          }}
+        >
+          최근 시세가 없습니다.
+        </div>
+      </Wrapper>
+    );
+  }
 
   const data = {
     labels: [
@@ -66,9 +88,8 @@ function StoreChart(props) {
             display: false,
             text: "값(Eth)",
           },
-          // type: "linear",
           min: 0,
-          max: 2,
+          max: 10,
         },
       },
     },
@@ -84,4 +105,3 @@ function StoreChart(props) {
     </Wrapper>
   );
 }
-export default StoreChart;
