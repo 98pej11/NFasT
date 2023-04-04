@@ -80,7 +80,6 @@ function PublishField({
           }}
           required
           variant={variant}
-          label="숫자만 입력"
           type="number"
           fullWidth
           // eslint-disable-next-line react/jsx-props-no-spreading
@@ -89,29 +88,30 @@ function PublishField({
       );
     case "price":
       return (
-        <TextField
-          sx={{
-            ...sx,
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "20px",
-            },
-            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-              {
-                borderColor: activeBorderColor,
+        <div>
+          <TextField
+            sx={{
+              ...sx,
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "20px",
               },
-            "& .MuiInputLabel-outlined.Mui-focused": {
-              color: activeLabelColor,
-            },
-          }}
-          required
-          label="숫자만 입력"
-          type="text"
-          placeholder={placeholder}
-          variant={variant}
-          fullWidth
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...otherProps}
-        />
+              "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                {
+                  borderColor: activeBorderColor,
+                },
+              "& .MuiInputLabel-outlined.Mui-focused": {
+                color: activeLabelColor,
+              },
+            }}
+            required
+            type="number"
+            placeholder={placeholder}
+            variant={variant}
+            fullWidth
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...otherProps}
+          />
+        </div>
       );
     default:
       return <TextField />;

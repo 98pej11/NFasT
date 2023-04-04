@@ -131,7 +131,7 @@ function userConfirm(wallet) {
           dispatch({ type: "SET_IS_LOGIN", payload: false });
           dispatch({ type: "SET_IS_VALID_TOKEN", payload: false });
           dispatch({ type: "SET_IS_LOGIN_ERROR", payload: true });
-          alert("가게 계정으로 전환해주세요.");
+          alert("고객 계정으로 전환해주세요.");
         }
       })
       .catch((error) => {

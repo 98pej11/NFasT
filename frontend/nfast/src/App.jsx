@@ -60,10 +60,10 @@ function App() {
             <Route path="/store/:storeSequence" element={<StorePage />} />
             <Route path="/loginCustomer" element={<LoginCustomer />} />
             <Route path="/loginSeller" element={<LoginSeller />} />
-            <Route path="/PageSeller" element={<SellerPage />} />
             <Route path="/introSeller1" element={<IntroSeller1 />} />
             <Route path="/introSeller2" element={<IntroSeller2 />} />
             <Route path="/introSeller3" element={<IntroSeller3 />} />
+            <Route path="/PageSeller" element={<SellerPage />} />
             <Route path="/RegisterSeller" element={<SellerRegister />} />
           </Routes>
         </Pages>
