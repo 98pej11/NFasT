@@ -17,6 +17,7 @@ function mainpage(state = initialState, action = {}) {
       console.log(payload.data.nfast);
       return { ...state, nfast: payload.data.nfast };
     case "GET_NFASTUSESTATE_SUCCESS":
+      // eslint-disable-next-line no-console
       console.log("====mainReducer===", payload.data.nfastUseState);
       return { ...state, usage: payload.data.nfastUseState };
     default:

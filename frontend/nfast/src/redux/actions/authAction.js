@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-filename-extension */
 import axios from "axios";
 import Alert from "@mui/material/Alert";

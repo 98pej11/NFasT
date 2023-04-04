@@ -186,6 +186,7 @@ function NFastCard() {
     console.log("======사용확인 누르면?!=====", nfastUse);
     dispatch(storeAction.getNfastUseState(userSequence, nfastSequence));
     if (nfastUse === 1) {
+      // eslint-disable-next-line no-alert
       alert("미사용 NFasT입니다.");
     }
   };

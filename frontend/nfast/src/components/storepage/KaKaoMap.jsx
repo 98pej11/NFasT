@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 export default function KaKaoMap(props) {
   // eslint-disable-next-line react/prop-types
   const { storeLat, storeLng } = props;
+  // eslint-disable-next-line no-console
   console.log(storeLat, storeLng);
   useEffect(() => {
     const script = document.createElement("script");
