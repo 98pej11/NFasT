@@ -74,6 +74,8 @@ export default function WriteReview() {
       dispatch(
         storeAction.writeReview(nfastSequence, getSequence(), inputs.reviews)
       );
+      // eslint-disable-next-line no-alert
+      alert("리뷰작성이 완료되었습니다.");
     }
   };
   const handleTime = (event) => {

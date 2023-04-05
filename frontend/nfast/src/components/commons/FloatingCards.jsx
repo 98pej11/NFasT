@@ -21,6 +21,7 @@ const Cards = styled.div`
   align-items: center;
   justify-content: center;
   background-color: whitesmoke;
+  border-radius: 30;
   position: fixed;
   top: 130px;
 `;
@@ -28,6 +29,7 @@ function FloatingCards() {
   return (
     <Wrapper>
       <Cards>
+        <span style={{ marginBottom: 30 }}>최근 예정 NFT</span>
         <NFastCard />
       </Cards>
     </Wrapper>

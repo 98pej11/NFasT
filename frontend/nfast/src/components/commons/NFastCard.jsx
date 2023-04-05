@@ -136,9 +136,6 @@ function NFastCard() {
     }
   };
   const toggleDrawer2 = () => {
-    if (qrStatus) {
-      return;
-    }
     dispatch(storeAction.refundNfast(nfastSequence));
     setIsRefunded(true); // update refund status
     setQrStatus(!qrStatus);
@@ -176,7 +173,7 @@ function NFastCard() {
                 </Button>
               ) : (
                 <Button variant="contained" onClick={toggleDrawer2}>
-                  {qrStatus ? "사용하기" : "환불하기"}
+                  환불하기
                 </Button>
               )}
             </StyleBtn>

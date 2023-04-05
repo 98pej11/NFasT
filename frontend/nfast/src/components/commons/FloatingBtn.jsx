@@ -81,6 +81,7 @@ function FloatingBtn() {
   return (
     <Wrapper>
       <Overlay isDisplay={floating} />
+      <p>뭔데뭔데</p>
       <Floating>
         <Cards isDisplay={floating}>{floatingCards}</Cards>
       </Floating>
