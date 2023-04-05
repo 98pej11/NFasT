@@ -160,8 +160,12 @@ export default function SellerPublish() {
           <Time>
             <h4>런치</h4>
             <MyField content="time" variant="outlined" />
-            <div style={{ marginLeft: 30 }} />
+            <MyField content="time" variant="outlined" />
+          </Time>
+          <div style={{ marginLeft: 30 }} />
+          <Time>
             <h4>디너</h4>
+            <MyField content="time" variant="outlined" />
             <MyField content="time" variant="outlined" />
           </Time>
           <Count>
