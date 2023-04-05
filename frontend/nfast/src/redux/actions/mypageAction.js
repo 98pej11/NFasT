@@ -44,7 +44,6 @@ function getUnAvailableNfasts(userSequence) {
 }
 function getStoreSequence(nfastSequence) {
   return async (dispatch) => {
-    console.log("흠...............");
     await axios
       .get(`${baseUrl}/findStoreSequence/${nfastSequence}`)
       .then((response) => {
