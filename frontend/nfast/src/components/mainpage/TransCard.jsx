@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled, { keyframes } from "styled-components";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -10,6 +11,19 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 // import { mainAction } from "../../redux/actions/mainAction";
 
+const positionAnimation = keyframes`
+
+from {
+transform : translate(0px , 40px)
+}
+to {
+  transform : translate(0)
+}
+
+`;
+const Cards = styled.div`
+  animation: ${positionAnimation} 1s ease-out;
+`;
 export default function TransCard(props) {
   // eslint-disable-next-line react/prop-types
   const { transList } = props;
@@ -19,7 +33,7 @@ export default function TransCard(props) {
   };
 
   return (
-    <div style={{ marginTop: 30 }}>
+    <Cards style={{ marginTop: 30 }}>
       <Grid container spacing={3}>
         {transList.slice(0, 4).map((card, index) => (
           <Grid
@@ -74,6 +88,6 @@ export default function TransCard(props) {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Cards>
   );
 }

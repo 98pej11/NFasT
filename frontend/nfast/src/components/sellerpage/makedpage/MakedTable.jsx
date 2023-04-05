@@ -33,9 +33,9 @@ export default function MakedTable(props) {
       <Table sx={{ textAlign: "center" }}>
         <TableHead align="center">
           <TableRow>
-            <TableCell sx={{ width: "20%" }}>날짜</TableCell>
-            <TableCell sx={{ width: "20%" }}>발행 가격</TableCell>
-            <TableCell sx={{ width: "20%" }}>판매/총 개수</TableCell>
+            <TableCell sx={{ width: "40%" }}>날짜</TableCell>
+            <TableCell sx={{ width: "25%" }}>발행 가격</TableCell>
+            <TableCell sx={{ width: "30%" }}>판매/총 개수</TableCell>
           </TableRow>
         </TableHead>
         <TableBody align="center">
