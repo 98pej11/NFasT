@@ -16,4 +16,6 @@ public class TradeFindDto {
     private BigDecimal tradeListPrice;
     private Date tradeListDate;
     private Byte tradeListType;
+    private String storeName;
 }
+

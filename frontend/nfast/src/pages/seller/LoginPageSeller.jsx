@@ -1,88 +1,83 @@
 import React from "react";
+// import styled from "styled-components";
+// import Avatar from "@mui/material/Avatar";
+// import CssBaseline from "@mui/material/CssBaseline";
+// import TextField from "@mui/material/TextField";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
 import { Link } from "react-router-dom";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import styled from "styled-components";
-// import LoginButton from "../../components/LoginPage/LoginButton";
+// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Metamask from "../../components/loginpage/Metamask";
+import moneylogin from "../../assets/moneylogin.png";
+import business from "../../assets/business.png";
 
-const Wrapper = styled.div`
-  background-color: whitesmoke;
-`;
+const theme = createTheme();
 
-const Logo = styled.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 120px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const PurpleBox = styled.div`
-  display: flex;
-  padding-top: 50px;
-  flex-direction: column;
-  align-items: center;
-  background-color: #4a46b5;
-  border-top-left-radius: 120px;
-  height: 420px;
-
-  h1 {
-    margin-top: 5;
-    color: whitesmoke;
-  }
-
-  h2 {
-    margin: 0;
-    color: #0a0c37;
-  }
-  h3 {
-    margintop: 10;
-    color: #888ce9;
-  }
-`;
-
-function LoginPageSeller() {
+export default function LoginPage() {
   return (
-    <Wrapper>
-      <Button href="/loginCustomer">손님 로그인</Button>
-      <Logo>
-        <Link to="/login">
-          <img src="logo.png" alt="logo" width="100px" />
-        </Link>
-      </Logo>
-      <PurpleBox>
-        <h1>HELLO</h1>
-        <h2>Welcome to NFasT!</h2>
-        <h3>기다리지 말고 먹자</h3>
-        {/* <LoginButton /> */}
-        <div>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs" m={30}>
+        <Box
+          sx={{
+            gap: 3,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <img src={business} alt="" style={{ width: 300, height: 300 }} />
+          <Typography
+            variant="h6"
+            sx={{ color: "#5B5299", marginBottom: "10px" }}
+          >
+            쉽고 빠른 수익을 만나보세요!
+          </Typography>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Metamask isSeller={1} />
+          </div>
           <Button
             variant="contained"
+            href="/introSeller1"
             sx={{
-              margin: "10px",
-              color: "#4A46B5",
-              backgroundColor: "#B8B6F5",
+              backgroundColor: "#BCB6FF",
+              color: "white",
+              width: "260px",
             }}
             disableElevation
           >
-            소개보기
+            <img
+              src={moneylogin}
+              alt=""
+              style={{ width: "30px", height: "30px", margin: "3%" }}
+            />
+            소개글 보러가기
           </Button>
-          <Button
-            variant="contained"
-            sx={{
-              margin: "10px",
-              color: "#4A46B5",
-              backgroundColor: "#8E8AFF",
+          <Link
+            to="/loginCustomer"
+            style={{
+              textDecoration: "none",
+              color: "black",
+              marginBottom: "30px",
             }}
-            disableElevation
+            onClick={() => {
+              window.location.href = "/loginCustomer";
+            }}
           >
-            로그인
-          </Button>
-        </div>
-      </PurpleBox>
-    </Wrapper>
+            손님으로 연동하기
+          </Link>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
-
-export default LoginPageSeller;

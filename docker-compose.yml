@@ -5,7 +5,7 @@ services:
     container_name: be
     build: ./backend
     ports:
-      - "8082:8080"
+      - "8084:8080"
     depends_on:
       - db
     restart: on-failure
@@ -23,14 +23,17 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /mysql:/var/lib/mysql
-      - /mysql/config/my.cnf:/etc/mysql/my.cnf
+      - /db:/var/lib/mysql
+      - /db/config/my.cnf:/etc/mysql/my.cnf
     environment:
       MYSQL_DATABASE: nfast
       MYSQL_ROOT_PASSWORD: 1004cjstk
       MYSQL_USER: a307
       MYSQL_PASSWORD: a307a307
+      LANG: C.UTF_8
     restart: on-failure
     command:
-      - --character-set-server=utf8 
-      - --collation-server=utf8_general_ci
+      - --character-set-server=utf8
+      - --collation-server=utf8_unicode_ci
+#      - --init_connect = "SET collation_connection = utf8_general_ci"
+#      - --init_connect = "SET NAMES utf8"

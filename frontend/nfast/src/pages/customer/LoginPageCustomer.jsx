@@ -1,79 +1,75 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import styled from "styled-components";
-// import LoginButton from "../../components/LoginPage/LoginButton";
+// import Collapse from "@mui/material/Collapse";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import logo from "../../assets/NFast_Logo.png";
+import moneylogin from "../../assets/moneylogin.png";
+import Metamask from "../../components/loginpage/Metamask";
 
-const Wrapper = styled.div`
-  background-color: whitesmoke;
-`;
+export default function LoginPage() {
+  const theme = createTheme();
+  const [open, setOpen] = React.useState(false);
 
-const Logo = styled.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 120px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+  const handleMetamaskClick = () => {
+    setOpen(true);
+  };
 
-const YellowBox = styled.div`
-  display: flex;
-  padding-top: 50px;
-  flex-direction: column;
-  align-items: center;
-  background-color: #ffcb45;
-  border-top-left-radius: 120px;
-  height: 420px;
-
-  h1 {
-    margin-top: 5;
-  }
-
-  h2 {
-    margin: 0;
-    color: #756436;
-  }
-  h3 {
-    margintop: 10;
-    color: #ff5f2d;
-  }
-`;
-
-function LoginPageCustomer() {
   return (
-    <Wrapper>
-      <Button href="/loginSeller">사장님 로그인</Button>
-      <Logo>
-        <Link to="/login">
-          <img src="logo.png" alt="logo" width="100px" />
-        </Link>
-      </Logo>
-      <YellowBox>
-        <h1>HELLO</h1>
-        <h2>Welcome to NFasT!</h2>
-        <h3>기다리지 말고 먹자</h3>
-        {/* <LoginButton /> */}
-        <div>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs" m={30}>
+        <Box
+          sx={{
+            marginTop: "140px",
+            gap: 3,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <img src={logo} alt="" />
+          <Typography
+            variant="h6"
+            sx={{ color: "#5B5299", marginBottom: "20px" }}
+          >
+            줄서지말고 먹자!
+          </Typography>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Metamask
+              onClick={handleMetamaskClick}
+              disabled={open}
+              isSeller={0}
+            />
+          </div>
+
           <Button
             variant="contained"
-            sx={{ margin: "10px", backgroundColor: "#FF5F2D" }}
+            href="/loginSeller"
+            sx={{
+              backgroundColor: "#BCB6FF",
+              color: "white",
+              width: "260px",
+            }}
             disableElevation
           >
-            소개보기
+            <img
+              src={moneylogin}
+              alt=""
+              style={{ width: "30px", height: "30px", margin: "3%" }}
+            />
+            비즈니스 계정으로 이용하기
           </Button>
-          <Button
-            variant="contained"
-            sx={{ margin: "10px", backgroundColor: "#FF5F2D" }}
-            disableElevation
-          >
-            회원가입
-          </Button>
-        </div>
-      </YellowBox>
-    </Wrapper>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
-
-export default LoginPageCustomer;

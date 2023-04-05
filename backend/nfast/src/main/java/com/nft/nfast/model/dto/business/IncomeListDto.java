@@ -21,7 +21,8 @@ public class IncomeListDto {
     private long storeSequence;
 
     public IncomeList toEntity(){
-        IncomeList incomelist = IncomeList.builder()
+        IncomeList incomeList = IncomeList.builder()
+
                 .incomeListSequence(incomeListSequence)
                 .incomeListTransaction(incomeListTransaction)
                 .incomeListPrice(incomeListPrice)
@@ -29,6 +30,6 @@ public class IncomeListDto {
                 .incomeListType(incomeListType)
                 .storeSequence(storeSequence)
                 .build();
-        return incomelist;
+        return incomeList;
     }
 }

@@ -17,21 +17,37 @@ import java.util.List;
 public class NfastMintDto {
     private Long storeSequence;
     private Date nfastDate;
-    private BigDecimal nfastPrice;
     private BigDecimal nfastDefaultPrice;
-    private String nfastQr;
-    private List<String> nfastEigenvalue;
+    private String nfastStartTime;
+    private String nfastEndTime;
     private int nfastSupply;
-    private String storeWallet;
+    private String nfastEigenvalue;
+    private List<String> nfastHash;
+//    private List<String> nfastTokenId;
+    private List<String> nfastQr;
+    private List<String> nfastRefundQr;
+    private Byte nfastMealType;
+    private Byte nfastUseState;
+    private Byte nfastSaleState;
 
-    public Nfast toEntity(Store store, String eigenvalue){
+
+    public Nfast toMintEntity(Store store,String nfastHash,String nfastQr, String nfastRefundQr){
         Nfast nfast = Nfast.builder()
-                .nfastPrice(nfastPrice)
-                .nfastDefaultPrice(nfastPrice)
+                .nfastPrice(nfastDefaultPrice)
+                .nfastDefaultPrice(nfastDefaultPrice)
+                .nfastHopePrice(nfastDefaultPrice)
                 .nfastDate(nfastDate)
                 .nfastQr(nfastQr)
-                .nfastEigenvalue(eigenvalue)
+                .nfastRefundQr(nfastRefundQr)
+                .nfastEigenvalue(nfastEigenvalue)
+                .nfastHash(nfastHash)
                 .storeSequence(store)
+                .nfastMealType(nfastMealType)
+                .nfastStartTime(nfastStartTime)
+                .nfastEndTime(nfastEndTime)
+                .nfastUseState(nfastUseState)
+                .nfastSaleState(nfastSaleState)
+                .nfastHash(nfastHash)
                 .build();
         return nfast;
     }

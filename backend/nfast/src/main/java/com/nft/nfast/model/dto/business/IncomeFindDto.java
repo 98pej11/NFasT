@@ -17,7 +17,5 @@ public class IncomeFindDto {
     private BigDecimal incomeListPrice;
     private Date incomeListDate;
     private Byte incomeListType;
-//    private Long storeSequence;
-
 
 }

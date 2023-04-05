@@ -1,29 +1,50 @@
 import React from "react";
-import styled from "styled-components";
-import FooterLogo from "../../assets/NFasT_footer_logo.png";
+import { Typography, Box } from "@mui/material";
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 25px;
-  position: fixed;
-  bottom: 0;
-  padding: 20px;
-  display: flex;
-  justify-content: flex-right;
-  background-color: blue;
-
-  img {
-    margin-left: 10px;
-    padding-bottom: 10px;
-  }
-`;
-
-function Header() {
+export default function Footer() {
   return (
-    <Wrapper>
-      <img src={FooterLogo} alt="logo" />
-    </Wrapper>
+    <Box
+      sx={{
+        bgcolor: "#C7C5EC",
+        py: 3,
+
+        borderTop: "1px solid #DDDCDC",
+        width: "100%",
+        height: "50px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 0,
+        position: "relative",
+      }}
+    >
+      <Typography
+        variant="body2"
+        align="center"
+        sx={{
+          color: "common.white",
+          mb: 1,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        © {new Date().getFullYear()} Copyright ⓒ
+        <span style={{ marginLeft: "4px" }}> by A307 왕자공쥬들</span>
+      </Typography>
+      {/* <Typography
+        variant="body2"
+        align="center"
+        sx={{
+          color: "common.white",
+          mb: 1,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        all rights reserved.{" | "}
+        <span style={{ marginLeft: "4px" }}>Terms of Service</span>
+      </Typography> */}
+    </Box>
   );
 }
-
-export default Header;
