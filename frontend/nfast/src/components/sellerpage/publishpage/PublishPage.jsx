@@ -31,6 +31,7 @@ const Wrapper = styled.div`
 const Ticket = styled(PublishTicket)`
   margin-bottom: 20px;
 `;
+
 const Publish = styled.div`
   height: 70%;
   margin-top: 20px;
@@ -39,7 +40,7 @@ const Publish = styled.div`
   align-items: center;
   justify-content: space-evenly;
   h4 {
-    width: 40%;
+    width: 40px;
     margin-right: 10px;
     display: flex;
     align-items: center;
@@ -47,6 +48,7 @@ const Publish = styled.div`
 `;
 const Form = styled.form`
   height: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -277,21 +279,17 @@ function PublishPage() {
             <h4>날짜</h4>
             <PublishField content="date" variant="outlined" />
           </DateTime>
-          <Time>
+          <div>
             <h4>시간</h4>
             <SwitchTime />
-            <div>
-              <PublishField
-                sx={{ marginLeft: "20px" }}
-                content="time"
-                variant="outlined"
-              />
-              <PublishField
-                sx={{ marginLeft: "20px" }}
-                content="time"
-                variant="outlined"
-              />
-            </div>
+          </div>
+          <Time>
+            <h4>시작</h4>
+            <PublishField content="time" variant="outlined" />
+          </Time>
+          <Time>
+            <h4>종료</h4>
+            <PublishField content="time" variant="outlined" />
           </Time>
           <Count>
             <h4>수량</h4>
