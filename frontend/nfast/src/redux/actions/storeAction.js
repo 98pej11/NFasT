@@ -219,6 +219,20 @@ function getNfastUseState(userSequence, nfastSequence) {
   };
 }
 
+function refundNfast(nfastSequence) {
+  return async () => {
+    await axios
+      .patch(`${baseUrl}/owner/qr/refund/${nfastSequence}`)
+      .then((response) => {
+        const { data } = response;
+        console.log("RESPONSE DATA ", data);
+      })
+      .catch((error) => {
+        console.log("ERROR", error);
+      });
+  };
+}
+
 export const storeAction = {
   getStoreDetail,
   addBookMark,
@@ -233,4 +247,5 @@ export const storeAction = {
   getNfastUseState,
   getNfastPrice,
   registSell,
+  refundNfast,
 };

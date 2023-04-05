@@ -82,11 +82,11 @@ export default function StorePage() {
       },
       (err, event) => {
         // console.log(address);
-        console.log(err);
-        console.log(event);
-        console.log(event[0].returnValues[2]); // tokenId , data[tokenCnt].nfastHash +1 == event[0].returnValues[2]
+        // console.log(err);
+        // console.log(event);
+        // console.log(event[0].returnValues[2]); // tokenId , data[tokenCnt].nfastHash +1 == event[0].returnValues[2]
         // eslint-disable-next-line no-underscore-dangle
-        console.log(event[0].returnValues._saleContract); // sale 주소
+        // console.log(event[0].returnValues._saleContract); // sale 주소
         let tokenCnt;
         for (tokenCnt = 0; tokenCnt < data.length; tokenCnt += 1) {
           const saleIdx = data[tokenCnt].nfastHash;

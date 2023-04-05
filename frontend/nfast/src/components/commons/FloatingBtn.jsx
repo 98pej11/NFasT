@@ -57,7 +57,6 @@ const Overlay = styled.div`
 
 function FloatingBtn() {
   const [floating, setFloating] = useState("none");
-
   const dispatch = useDispatch();
 
   const handleClick = () => {
