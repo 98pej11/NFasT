@@ -1,5 +1,3 @@
-// // web3.js
-// // //overrides metamask v0.2 for our 1.0 version
 // // 1.0 lets us use async and await instead of promises
 
 // import Web3 from "web3";
@@ -189,19 +187,6 @@ const nfastAbi = [
       },
     ],
     name: "approveAndTransfer",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-    ],
-    name: "approveSaleFactory",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -1797,11 +1782,11 @@ const ssafyTokenAbi = [
   },
 ];
 
-const NFasTCA = "0x36219a14cBF9730c002f9E854a8986a806797058";
+const NFasTCA = "0xb3d042Abc8C86A8aF10F6F5166d939deE619C90F";
 
 // const saleCA = ""
 
-const saleFactoryCA = "0x83D81233c155a90e93C7804e91cf947eAc3f458B";
+const saleFactoryCA = "0x36e46263E792A8c0C97EA58f1e1f092827f565d7";
 
 const ssafyTokenCA = "0x37792f697877e9BcFB978C0c81F0889c2dA66399";
 

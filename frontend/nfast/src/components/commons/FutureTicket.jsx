@@ -9,6 +9,7 @@ import Drawer from "@mui/material/Drawer";
 import Checkbox from "@mui/material/Checkbox";
 import { TextField } from "@mui/material";
 import { storeAction } from "../../redux/actions/storeAction";
+import { toStringByFormatting } from "../../api/transDate";
 
 const Wrapper = styled.div`
   display: flex;
@@ -193,11 +194,7 @@ function FutureTicket(props) {
             <span>{nfastPrice} ETH</span>
           </div>
           <div>
-            <span>
-              {`${new Date(nfastDate).getFullYear()}.
-                ${new Date(nfastDate).getMonth()}.
-                ${new Date(nfastDate).getDay()}`}
-            </span>
+            <span>{toStringByFormatting(new Date(nfastDate))}</span>
             <div>
               <span>{nfastStartTime}</span>
               <span>{nfastEndTime}</span>

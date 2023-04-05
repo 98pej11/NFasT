@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
@@ -19,9 +19,18 @@ import NFastLogo from "../../assets/HeaderLogo.png";
 import { getSequence } from "../../storage/Cookie";
 
 function Header() {
-  // const [isLogin, setIsLogin] = useState(false);
+  const [checkLogin, setCheckLogin] = useState(false);
+
   // const isLoggedIn = useSelector((state) => state.authReducer.isLogin);
   const userInfo = useSelector((state) => state.mypageReducer.userInfo);
+  const isLogin = useSelector((state) => state.authReducer.isLogin);
+  useEffect(() => {
+    const seq = getSequence();
+    if (seq) {
+      setCheckLogin(true);
+    }
+  }, [isLogin]);
+
   console.log("USERRRRRRR", userInfo);
 
   // 세션에서 로그인 정보 확인
@@ -85,11 +94,11 @@ function Header() {
                 // marginLeft: "10%",
               }}
             >
-              {userInfo && <SearchBar />}
+              {checkLogin && <SearchBar />}
             </Box>
           </Box>
           <div style={{ display: "flex", alignItems: "center" }}>
-            {getSequence() ? <SideBar /> : <LoginBtn />}
+            {checkLogin ? <SideBar /> : <LoginBtn />}
           </div>
         </Toolbar>
       </Container>

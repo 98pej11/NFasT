@@ -70,6 +70,9 @@ export default function LoginPage() {
               color: "black",
               marginBottom: "30px",
             }}
+            onClick={() => {
+              window.location.href = "/loginCustomer";
+            }}
           >
             손님으로 연동하기
           </Link>
