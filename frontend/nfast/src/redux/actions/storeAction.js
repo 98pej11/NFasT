@@ -67,18 +67,17 @@ function isBookMark(storeSequence, userSequence) {
       });
   };
 }
-function writeReview(storeSequence, userSequence, reviews) {
+function writeReview(nfastSequence, userSequence, reviews) {
   // const navigate = useNavigate();
-  console.log(storeSequence);
   console.log(reviews);
   const data = {
-    storeSequence,
+    nfastSequence,
     userSequence,
     reviews,
   };
   console.log(data);
   return async () => {
-    const url = `${baseUrl}/review-count/${storeSequence}`;
+    const url = `${baseUrl}/review-count/${nfastSequence}`;
     await axios
       .post(url, JSON.stringify(data), {
         headers: {

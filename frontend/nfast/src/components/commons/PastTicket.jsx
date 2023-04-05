@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import { mypageAction } from "../../redux/actions/mypageAction";
+import { toStringByFormatting } from "../../api/transDate";
 
 const Wrapper = styled.div`
   display: flex;
@@ -150,11 +151,7 @@ function PastTicket({
             <span>{nfastPrice} ETH</span>
           </div>
           <div>
-            <span>
-              {`${new Date(nfastDate).getFullYear()}.
-                ${new Date(nfastDate).getMonth()}.
-                ${new Date(nfastDate).getDay()}`}
-            </span>
+            <span>{toStringByFormatting(new Date(nfastDate))}</span>
             <div>
               <span>{nfastStartTime}</span>
               <span>{nfastEndTime}</span>

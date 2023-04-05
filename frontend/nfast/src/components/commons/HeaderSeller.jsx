@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+// import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,13 +12,21 @@ import NFastLogo from "../../assets/HeaderLogo.png";
 import { authAction } from "../../redux/actions/authAction";
 
 function HeaderSeller() {
+  const [checkInfo, setCheckInfo] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logout = () => {
     dispatch(authAction.onLogout());
     return navigate("/loginSeller");
   };
+  const storeInfo = useSelector((state) => state.mypageReducer.storeInfo);
+  const isLogin = useSelector((state) => state.authReducer.isLogin);
 
+  useEffect(() => {
+    console.log("Store INFOOOOOOOOOO", storeInfo);
+    setCheckInfo(storeInfo);
+  }, [storeInfo]);
+  console.log(checkInfo);
   return (
     <AppBar
       elevation={0}
@@ -47,10 +56,17 @@ function HeaderSeller() {
               // marginLeft: "10%",
             }}
           >
-            <Box component={Link} to="/mainPage">
-              {/* 로고이미지가 나와야되는데? */}
-              <img src={NFastLogo} alt="logo" height="20px" />
-            </Box>
+            {isLogin ? (
+              <Box component={Link} to="/PageSeller">
+                {/* 로고이미지가 나와야되는데? */}
+                <img src={NFastLogo} alt="logo" height="20px" />
+              </Box>
+            ) : (
+              <Box component={Link} to="/loginSeller">
+                {/* 로고이미지가 나와야되는데? */}
+                <img src={NFastLogo} alt="logo" height="20px" />
+              </Box>
+            )}
             <Box
               sx={{
                 display: "flex",
@@ -63,20 +79,28 @@ function HeaderSeller() {
               {" "}
             </Box>
           </Box>
-          <div>
-            <Button
-              sx={{ backgroundColor: "#BCB6FF", color: "white" }}
-              type="submit"
-              variant="contained"
-              disableElevation
-              onClick={() => logout()}
-            >
-              로그아웃
-            </Button>
-          </div>
+          {isLogin ? (
+            <div>
+              <Button
+                sx={{ backgroundColor: "#BCB6FF", color: "white" }}
+                type="submit"
+                variant="contained"
+                disableElevation
+                onClick={() => logout()}
+              >
+                로그아웃
+              </Button>
+            </div>
+          ) : (
+            <div> </div>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
 export default HeaderSeller;
+
+// HeaderSeller.propTypes = {
+//   userInfo: PropTypes.string.isRequired,
+// };
