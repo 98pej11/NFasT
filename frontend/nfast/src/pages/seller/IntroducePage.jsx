@@ -7,7 +7,7 @@ import Intro4 from "../../components/sellerintropage/SellerIntro4";
 import Intro5 from "../../components/sellerintropage/SellerIntro5";
 import Intro6 from "../../components/sellerintropage/SellerIntro6";
 import Register from "../../components/sellerintropage/SellerRegister";
-import ProgressBar from "../../components/commons/ProgressBar";
+// import ProgressBar from "../../components/commons/ProgressBar";
 import MovePageBtn from "../../components/commons/MovePageBtn";
 // import ContentsWrapper from "../../components/commons/ContentsWrapper";
 // import {
@@ -72,7 +72,7 @@ export default function IntroducePage() {
     <>
       <GlobalStyles />
       <OuterPageBox ref={OuterPageBoxRef}>
-        <ProgressBar OuterPageBoxRef={OuterPageBoxRef} />
+        {/* <ProgressBar OuterPageBoxRef={OuterPageBoxRef} /> */}
         <Intro1 />
         <Intro2 />
         <Intro3 />

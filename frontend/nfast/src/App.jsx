@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -21,13 +21,13 @@ import StorePage from "./pages/customer/StorePage";
 import LoginCustomer from "./pages/customer/LoginPageCustomer";
 import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
-import Header from "./components/commons/Header";
-import HeaderSeller from "./components/commons/HeaderSeller";
+// import Header from "./components/commons/Header";
+// import HeaderSeller from "./components/commons/HeaderSeller";
 import CustomerIntroduce from "./pages/customer/CustomerIntroduce";
 // import Footer from "./components/commons/Footer";
 
 const Pages = styled.div`
-  margin-top: 80px;
+  // margin-top: 80px;
   // margin-left: 10%;
   // margin-right: 10%;
   position: relative;
@@ -39,19 +39,25 @@ const Wrapper = styled.div`
   }
 `;
 function App() {
-  const [flag, setFlag] = useState(true);
+  // const [flag, setFlag] = useState(true);
 
-  useEffect(() => {
-    console.log("URL Check");
-    if (window.location.href.indexOf("Seller") !== -1) {
-      setFlag(false);
-    }
-  }, [window.location.href]);
+  // useEffect(() => {
+  //   console.log("URL Check");
+  //   if (window.location.href.indexOf("Seller") !== -1) {
+  //     setFlag(false);
+  //   }
+  // }, [window.location.href]);
 
   return (
     <Wrapper>
       <BrowserRouter>
-        {flag ? <Header /> : <HeaderSeller />}
+        <div style={{ maxWidth: 412 }}>
+          {/* {flag ? (
+            <Header style={{ maxWidth: 412 }} />
+          ) : (
+            <HeaderSeller style={{ maxWidth: 412 }} />
+          )} */}
+        </div>
         <Pages>
           <Routes>
             <Route path="/" element={<CustomerIntroduce />} />

@@ -1,7 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import { Link } from "react-router-dom";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import Intro1 from "../../assets/Intro1_Customer.png";
+import back from "../../assets/back.png";
 
 const ProfilBox = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const ProfilBox = styled.div`
 
 const ContentBox = styled.div`
   width: 100%;
-  height: 100%;
+  height: 912px;
   display: flex;
   flex-direction: column;
   h1 {
@@ -37,22 +38,29 @@ const downIconAnimation = keyframes`
     }
 `;
 const MoreContentIconBox = styled.div`
-  animation-duration: 2s;
-  animation-delay: 3s;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  // animation-duration: 2s;
+  // animation-delay: 3s;
   animation-name: ${downIconAnimation};
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  // animation-iteration-count: infinite;
+  // animation-direction: alternate;
+  z-index: 1;
 `;
 
 export default function CustomerIntro1() {
   return (
     <ProfilBox>
       <ContentBox>
-        <img src={Intro1} alt="" />
+        <img src={back} alt="" style={{ width: "100%", minHeight: "912px" }} />
+        <MoreContentIconBox>
+          <Link to="/introSeller3" style={{ color: "black" }}>
+            <KeyboardDoubleArrowDownIcon fontSize="large" />
+          </Link>
+        </MoreContentIconBox>
       </ContentBox>
-      <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
-      </MoreContentIconBox>
     </ProfilBox>
   );
 }

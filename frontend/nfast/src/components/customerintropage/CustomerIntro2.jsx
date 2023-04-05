@@ -5,6 +5,8 @@ import styled, { keyframes } from "styled-components";
 // import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import intro2 from "../../assets/Intro2_Customer.png";
+import introOne from "../../assets/Intro_Reseller1.png";
+// import introTwo from "../../assets/Intro_Reseller2.png";
 // import HighLight from "../commons/HighLight";
 
 const contentUpAnimation = keyframes`
@@ -98,27 +100,49 @@ const MoreContentIconBox = styled.div`
 
 export default function CustomerIntro2() {
   return (
-    <ProfilBox>
-      <ContentBox>
-        <Text>
-          <TitleBox>
-            <div>
-              <h4>NFasT에서는</h4>
-              <h4>가능하다!</h4>
-            </div>
-            <Img>
-              <img src={intro2} alt="프로필 이미지" />
-            </Img>
-          </TitleBox>
-          <SubTitleBox>
-            <span>줄이 너무 길어서 못가던 맛집</span>
-            <span>바로 들어갈 수 있어요!</span>
-          </SubTitleBox>
-        </Text>
-      </ContentBox>
-      <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
-      </MoreContentIconBox>
-    </ProfilBox>
+    <>
+      <ProfilBox>
+        <ContentBox>
+          <Text>
+            <TitleBox>
+              <div>
+                <h4>NFasT에서는</h4>
+                <h4>가능하다!</h4>
+              </div>
+              <Img>
+                <img src={intro2} alt="프로필 이미지" />
+              </Img>
+            </TitleBox>
+            <SubTitleBox>
+              <span>줄이 너무 길어서 못가던 맛집</span>
+              <span>바로 들어갈 수 있어요!</span>
+            </SubTitleBox>
+          </Text>
+        </ContentBox>
+      </ProfilBox>
+      <ProfilBox>
+        <ContentBox>
+          <Text>
+            <TitleBox>
+              <div>
+                <h4>못구해도 괜찮다!</h4>
+                <h4>사고 팔면 되니까~</h4>
+              </div>
+            </TitleBox>
+            <SubTitleBox>
+              <span>구매한 NFasT는</span>
+              <span>개인간의 거래가 가능해요!</span>
+            </SubTitleBox>
+          </Text>
+          <Img>
+            <img src={introOne} alt="프로필 이미지" />
+            {/* <img src={introTwo} alt="프로필 이미지" /> */}
+          </Img>
+        </ContentBox>
+        <MoreContentIconBox>
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </MoreContentIconBox>
+      </ProfilBox>
+    </>
   );
 }

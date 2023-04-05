@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Intro1 from "../../components/customerintropage/CustomerIntro1";
 import Intro2 from "../../components/customerintropage/CustomerIntro2";
-import Intro3 from "../../components/customerintropage/CustomerIntro3";
+// import Intro3 from "../../components/customerintropage/CustomerIntro3";
 import Intro4 from "../../components/customerintropage/CustomerIntro4";
 import ProgressBar from "../../components/commons/ProgressBar";
 import MovePageBtn from "../../components/commons/MovePageBtn";
@@ -32,7 +32,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 const OuterPageBox = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 915px;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 0;
@@ -87,7 +87,7 @@ export default function IntroducePage() {
         <ProgressBar OuterPageBoxRef={OuterPageBoxRef} />
         <Intro1 />
         <Intro2 />
-        <Intro3 />
+        {/* <Intro3 /> */}
         <Intro4 />
         {showTopBtn && <MovePageBtn handleClick={handleClick} />}
         {/* <Footer /> */}
