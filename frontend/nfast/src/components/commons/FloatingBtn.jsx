@@ -68,15 +68,7 @@ function FloatingBtn() {
     }
   };
 
-  const floatingCards =
-    floating === "none" ? (
-      <div>
-        <div>예정된 nft 카드가</div>
-        <div>존재하지 않습니다.</div>
-      </div>
-    ) : (
-      <FloatingCards />
-    );
+  const floatingCards = <FloatingCards />;
 
   return (
     <Wrapper>

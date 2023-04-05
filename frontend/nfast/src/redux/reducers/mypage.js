@@ -20,8 +20,6 @@ function mypageReducer(state = initialState, action = {}) {
     case "GET_BOOKMARKLIST_SUCCESS":
       return { ...state, bookmarkList: payload.data.stores };
     case "GET_USERINFO_SUCCESS":
-      // eslint-disable-next-line no-console
-      console.log(payload.data.user);
       return { ...state, userInfo: payload.data.user };
     case "GET_STOREINFO_SUCCESS":
       return { ...state, storeInfo: payload.data.store };

@@ -58,7 +58,11 @@ function Metamask(props) {
       navigate("/mainpage");
     } else if (type === 2) {
       console.log("SELLER");
-      navigate("/PageSeller");
+      if (isLogin) {
+        navigate("/PageSeller");
+      } else {
+        navigate("/loginSeller");
+      }
     }
   }, [isLogin, type]);
 

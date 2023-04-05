@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -47,7 +47,7 @@ const StyleBtn = styled.div`
 `;
 export default function WriteReview() {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { nfastSequence } = useParams();
   const [inputs, setInputs] = useState({
     nfastSequence,
@@ -74,6 +74,9 @@ export default function WriteReview() {
       dispatch(
         storeAction.writeReview(nfastSequence, getSequence(), inputs.reviews)
       );
+      // eslint-disable-next-line no-alert
+      alert("리뷰작성이 완료되었습니다.");
+      navigate("/mainpage");
     }
   };
   const handleTime = (event) => {
