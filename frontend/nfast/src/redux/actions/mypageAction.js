@@ -86,6 +86,7 @@ function getUserInfo(userSequence) {
       .get(url)
       .then((response) => {
         const { data } = response;
+        console.log("dataaaaaaaaaaaa", data);
         dispatch({ type: "GET_USERINFO_SUCCESS", payload: { data } });
       })
       .catch((error) => {
