@@ -141,67 +141,84 @@ function NFastCard() {
     setQrStatus(!qrStatus);
   };
   return (
-    <Wrapper>
-      <Ticket>
-        <Info>
-          <div>
-            <span>{storeName}</span>
-            <span>{nfastPrice} ETH</span>
-          </div>
-          <div>
-            <span>
-              {`${new Date(nfastDate).getFullYear()}.
+    <div>
+      <Wrapper>
+        <Ticket>
+          <Info>
+            <div>
+              <span>{storeName}</span>
+              <span>{nfastPrice} ETH</span>
+            </div>
+            <div>
+              <span>
+                {`${new Date(nfastDate).getFullYear()}.
                 ${new Date(nfastDate).getMonth()}.
                 ${new Date(nfastDate).getDay()}`}
-            </span>
-            <div>
-              <span>{nfastStartTime}</span>
-              <span>{nfastEndTime}</span>
+              </span>
+              <div>
+                <span>{nfastStartTime}</span>
+                <span>{nfastEndTime}</span>
+              </div>
             </div>
-          </div>
-          <div>
-            <StyleBtn>
-              <Button
-                variant="contained"
-                onClick={() => useStateRoute(nfastSequence)}
-              >
-                사용확인
-              </Button>
-              {isRefunded ? (
-                <Button variant="contained" disabled>
-                  판매완료
+            <div>
+              <StyleBtn>
+                <Button
+                  variant="contained"
+                  onClick={() => useStateRoute(nfastSequence)}
+                >
+                  사용확인
                 </Button>
-              ) : (
-                <Button variant="contained" onClick={toggleDrawer2}>
-                  환불하기
-                </Button>
-              )}
-            </StyleBtn>
-          </div>
-        </Info>
-        <QR>
-          {!qrStatus ? (
-            <QRCode
-              value={JSON.stringify({
-                nfastSequence,
-                type: 1,
-              })}
-              size="100"
-              fgColor="rgba(37, 74, 205, 1)"
-            />
-          ) : (
-            <QRCode
-              value={JSON.stringify({
-                nfastSequence,
-                type: 2,
-              })}
-              size="100"
-              fgColor="rgba(255, 55, 55, 1)"
-            />
-          )}
-        </QR>
-      </Ticket>
-    </Wrapper>
+                {isRefunded ? (
+                  <div>
+                    <Button variant="contained" disabled>
+                      판매완료
+                    </Button>
+                  </div>
+                ) : (
+                  <Button variant="contained" onClick={toggleDrawer2}>
+                    환불하기
+                  </Button>
+                )}
+              </StyleBtn>
+            </div>
+          </Info>
+
+          <QR>
+            {!qrStatus ? (
+              <QRCode
+                value={JSON.stringify({
+                  nfastSequence,
+                  type: 1,
+                })}
+                size="100"
+                fgColor="rgba(37, 74, 205, 1)"
+              />
+            ) : (
+              <QRCode
+                value={JSON.stringify({
+                  nfastSequence,
+                  type: 2,
+                })}
+                size="100"
+                fgColor="rgba(255, 55, 55, 1)"
+              />
+            )}
+          </QR>
+        </Ticket>
+      </Wrapper>
+      {isRefunded ? (
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: 30,
+          }}
+        >
+          환불 QR 코드를 사장님께 보여주세요!
+        </div>
+      ) : (
+        <div> </div>
+      )}
+    </div>
   );
 }
 NFastCard.defaultProps = {
