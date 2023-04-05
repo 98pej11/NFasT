@@ -16,15 +16,9 @@ const FloatingAnimation = keyframes`
 }	
 `;
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  margin-top: 60px;
-  padding-bottom: 700px;
-`;
 const Floating = styled.div`
   width: 100%;
-  height: 100vh;
+  // height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +53,7 @@ function FloatingBtnSeller() {
     }
   };
   return (
-    <Wrapper>
+    <div>
       <Floating>
         <Cards isDisplay={floating}>
           <NFastQr />
@@ -70,7 +64,7 @@ function FloatingBtnSeller() {
       </Btn>
       {/* <Link to="/nFastCard">Go to NFastCard</Link>
       <Link to="/review">Go to review</Link> */}
-    </Wrapper>
+    </div>
   );
 }
 

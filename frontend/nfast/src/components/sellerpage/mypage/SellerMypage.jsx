@@ -10,7 +10,7 @@ import { web3 } from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
 
 const Publish = styled.div`
-  height: 100vh;
+  // height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -178,7 +178,7 @@ export default function SellerPublish() {
           </Price>
           <ButtonBox>
             <Button
-              sx={{ backgroundColor: "#BCB6FF" }}
+              sx={{ backgroundColor: "#BCB6FF", margin: 5 }}
               type="submit"
               variant="contained"
               disableElevation

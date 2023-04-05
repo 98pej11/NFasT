@@ -11,7 +11,7 @@ import { publishAction } from "../../redux/actions/publishAction";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  // height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
