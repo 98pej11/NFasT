@@ -97,10 +97,10 @@ export default function SellerMain(props) {
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <HeaderTab label="NFasT 발행" {...a11yProps(0)} />
-            <HeaderTab label="현재 수익" {...a11yProps(1)} />
-            <HeaderTab label="뱔행한 NFasT" {...a11yProps(2)} />
-            <HeaderTab label="마이페이지" {...a11yProps(3)} />
+            <HeaderTab label="발행하기" {...a11yProps(0)} />
+            <HeaderTab label="현재수익" {...a11yProps(1)} />
+            <HeaderTab label="발행확인" {...a11yProps(2)} />
+            <HeaderTab label="정보수정" {...a11yProps(3)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
