@@ -93,7 +93,7 @@ export default function Sidebar() {
                       <InboxIcon />
                     </ListItemIcon>
                     <ListItemText sx={{ fontSize: "50px" }}>
-                      사용한 NFT
+                      나의 NFT
                     </ListItemText>
                   </ListItemButton>
                 </ListItem>

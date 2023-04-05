@@ -48,7 +48,7 @@ export default function MyTrans() {
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
   };
-  const rowsPerPage = 10;
+  const rowsPerPage = 6;
   const getTransList = () => {
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
@@ -119,8 +119,8 @@ const Styledh2 = styled.div`
   margin-left: 5%;
   margin-right: 5%;
   h4 {
-    margin-top: 150px;
-    margin-bottom: 70px;
+    margin-top: 130px;
+    margin-bottom: 40px;
   }
 `;
 const Pag = styled.div`

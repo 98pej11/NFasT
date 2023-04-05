@@ -99,19 +99,19 @@ const ConfirmBtn = styled.div`
   display: flex;
   justify-content: center;
   Button {
-    margin: 2%;
-    width: 120px;
-    height: 50px;
+    margin: 10%;
+    width: 100px;
+    height: 45px;
     background-color: #bcb6ff;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
   }
 `;
 const MyDrawer = styled(Drawer)`
   text-align: center;
   & .MuiDrawer-paper {
     width: 100%;
-    height: 40%;
+    height: 50%;
     overflow-y: auto;
     border-radius: 50px 50px 0 0;
     display: flex;
@@ -125,7 +125,7 @@ const Input = styled.div`
   align-items: center;
   p {
     margin-right: 5%;
-    font-size: 20px;
+    font-size: 15px;
   }
 `;
 const CheckText = styled.div`
@@ -213,12 +213,12 @@ function FutureTicket(props) {
               open={drawer1Open}
               onClose={toggleDrawer1}
             >
-              <div>
-                <h2>판매 희망 NFT</h2>
+              <div style={{ margin: 25 }}>
+                <h3>판매 희망 NFT</h3>
               </div>
               <Box
                 sx={{
-                  width: "60%",
+                  width: "80%",
                   display: "flex",
                   flexDirection: "column",
                   "& > *:not(:last-child)": { marginBottom: "8px" },
