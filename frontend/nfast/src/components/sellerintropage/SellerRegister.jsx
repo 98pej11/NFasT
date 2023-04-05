@@ -146,7 +146,7 @@ export default function Register() {
 }
 
 const ProfilBox = styled.div`
-  height: 100vh;
+  // height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
