@@ -42,6 +42,7 @@ function App() {
   const [flag, setFlag] = useState(true);
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log("URL Check");
     if (window.location.href.indexOf("Seller") !== -1) {
       setFlag(false);

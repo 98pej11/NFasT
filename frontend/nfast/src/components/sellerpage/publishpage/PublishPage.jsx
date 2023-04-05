@@ -24,12 +24,12 @@ import { getSequence } from "../../../storage/Cookie";
 // styled-components 시작
 
 const Wrapper = styled.div`
-  height: 70vh;
+  height: 90vh;
   margin-top: 20px;
 `;
 
 const Ticket = styled(PublishTicket)`
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 `;
 
 const Publish = styled.div`
@@ -245,6 +245,10 @@ function PublishPage() {
   console.log("TICKET", ticket);
   const handleRegist = async (e) => {
     e.preventDefault();
+    if (e.target[9].value < 0 || e.target[7].value < 0) {
+      alert("가격과 수량은 0 이상으로 기재해주세요");
+      return;
+    }
     // eslint-disable-next-line
     console.log(e.target[2].checked);
     const data = {
@@ -260,6 +264,7 @@ function PublishPage() {
       nfastHash: [],
       sequence,
     };
+
     const tempData = await jsonSubmit(data);
     data.cid = tempData.cid;
     data.walletAddress = tempData.walletAddress;
@@ -285,11 +290,19 @@ function PublishPage() {
           </div>
           <Time>
             <h4>시작</h4>
-            <PublishField content="time" variant="outlined" />
+            <PublishField
+              defaultTime="10:00"
+              content="time"
+              variant="outlined"
+            />
           </Time>
           <Time>
             <h4>종료</h4>
-            <PublishField content="time" variant="outlined" />
+            <PublishField
+              defaultTime="22:00"
+              content="time"
+              variant="outlined"
+            />
           </Time>
           <Count>
             <h4>수량</h4>

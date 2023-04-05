@@ -7,6 +7,7 @@ function PublishField({
   type,
   sx,
   placeholder,
+  defaultTime,
   variant,
   ...otherProps
 }) {
@@ -61,6 +62,7 @@ function PublishField({
           variant={variant}
           type="time"
           fullWidth
+          defaultValue={defaultTime}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...otherProps}
         />
@@ -137,6 +139,7 @@ PublishField.defaultProps = {
   type: "",
   placeholder: "",
   variant: "",
+  defaultTime: "10:00",
 };
 
 PublishField.propTypes = {
@@ -146,6 +149,7 @@ PublishField.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   variant: PropTypes.string,
+  defaultTime: PropTypes.string,
 };
 
 export default PublishField;
