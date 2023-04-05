@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 // import Drawer from "@mui/material/Drawer";
-import NFastLogo from "../../assets/HeaderLogo.png";
+import NFastLogo from "../../assets/NFast_Logo.png";
 
 function HeaderSeller() {
   return (

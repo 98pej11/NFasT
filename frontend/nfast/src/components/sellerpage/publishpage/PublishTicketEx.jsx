@@ -54,7 +54,7 @@ const Title = styled.div`
   align-items: center;
   h4 {
     margin-right: 15px;
-    font-size: 14px;
+    font-size: 12px;
   }
   span {
     font-size: 13px;
