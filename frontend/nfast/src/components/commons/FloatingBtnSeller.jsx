@@ -18,10 +18,10 @@ const FloatingAnimation = keyframes`
 
 const Floating = styled.div`
   width: 100%;
-  // height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: ${FloatingAnimation} 2s linear easein;
 `;
 const Cards = styled.div`
   display: ${(props) => props.isDisplay};
@@ -41,7 +41,16 @@ const Btn = styled.button`
   bottom: 40px;
   right: 30px;
 `;
-
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  display: ${(props) => props.isDisplay};
+  z-index: 0; /* set a higher z-index than the floating element */
+`;
 function FloatingBtnSeller() {
   const [floating, setFloating] = useState("none");
 
@@ -54,7 +63,8 @@ function FloatingBtnSeller() {
   };
   return (
     <div>
-      <Floating>
+      <Overlay isDisplay={floating === "auto" ? "auto" : "none"} />
+      <Floating isFloating={floating}>
         <Cards isDisplay={floating}>
           <NFastQr />
         </Cards>

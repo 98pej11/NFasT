@@ -13,7 +13,7 @@ import HeaderSeller from "./HeaderSeller";
 // import LoginSellerBtn from "../loginpage/LoginButtonSeller";
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
-import NFastLogo from "../../assets/HeaderLogo.png";
+import NFastLogo from "../../assets/NFast_Logo.png";
 
 // eslint-disable-next-line import/named
 import { getSequence } from "../../storage/Cookie";
@@ -83,7 +83,7 @@ function Header() {
           >
             <Box component={Link} to="/mainPage">
               {/* 로고이미지가 나와야되는데? */}
-              <img src={NFastLogo} alt="logo" height="20px" />
+              <img src={NFastLogo} alt="logo" height="40px" />
             </Box>
             <Box
               sx={{
