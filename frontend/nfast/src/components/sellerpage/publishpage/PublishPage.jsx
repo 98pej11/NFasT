@@ -110,7 +110,16 @@ function PublishPage() {
     return m * 60 * 60 + s * 60;
   }
 
-  // 사장님 생성 후 거래 생성
+  async function approve(data, saleInfo) {
+    console.log(saleInfo);
+    const tx = await NFasTContract.methods
+      .approve(saleInfo[0], saleInfo[2])
+      .send({
+        from: data.walletAddress,
+      });
+    console.log(tx);
+    console.log("승인 완료");
+  }
   // 사장님 생성 후 거래 생성
   async function createAllSale(data, nfastIds) {
     console.log("start sale");
@@ -135,6 +144,27 @@ function PublishPage() {
     dispatch(publishAction.publishNfast(getSequence(), data));
     console.log(tx);
     console.log("여기까지 오나");
+
+    saleFactory.events
+      .NewSale({ fromBlock: tx.blockNumber }, (error, event) => {
+        console.log(event);
+      })
+      .on("connected", (subscriptionId) => {
+        console.log("subscriptionId : ", subscriptionId);
+      })
+      .on("data", (event) => {
+        console.log(event);
+        console.log("event.returnValues : ", event.returnValues);
+        console.log("event.returnValues[1] : ", event.returnValues[1]);
+        data.nfastHash.push(event.returnValues[0]);
+        approve(data, event.returnValues);
+      })
+      .on("changed", (event) => {
+        console.log("event.returnValues : ", event.returnValues);
+      })
+      .on("error", (error, receipt) => {
+        console.log("receipt : ", receipt);
+      });
   }
 
   async function createNfast(data) {

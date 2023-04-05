@@ -82,7 +82,7 @@ const Img = styled.div`
 `;
 
 const ProfilBox = styled.div`
-  height: 30vh;
+  height: 10vh;
   display: flex;
   align-items: center;
   flex-direction: column;
