@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
@@ -11,22 +11,22 @@ export default function MovePageBtn({ handleClick }) {
     </GoToContentBtn>
   );
 }
-const startAnimation = keyframes`
-  0% {
-    filter: blur(0.1rem);
-    -webkit-transform: translateY(50px);
-            transform: translateY(50px);
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    text-shadow: none;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-  }
-`;
+// const startAnimation = keyframes`
+//   0% {
+//     filter: blur(0.1rem);
+//     -webkit-transform: translateY(50px);
+//             transform: translateY(50px);
+//     -webkit-transform-origin: 50% 50%;
+//             transform-origin: 50% 50%;
+//     text-shadow: none;
+//   }
+//   100% {
+//     -webkit-transform: translateY(0);
+//             transform: translateY(0);
+//     -webkit-transform-origin: 50% 50%;
+//             transform-origin: 50% 50%;
+//   }
+// `;
 
 const GoToContentBtn = styled.div`
   width: 4vw;
@@ -49,7 +49,7 @@ const GoToContentBtn = styled.div`
   justify-content: center;
   padding: 50;
   text-decoration: none;
-  animation: ${startAnimation} 0.8s 1 ease-in normal;
+
   &:hover {
     cursor: pointer;
 

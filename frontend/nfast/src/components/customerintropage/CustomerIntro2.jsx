@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -37,18 +38,19 @@ const Text = styled.div`
   }
 `;
 const ContentBox = styled.div`
+  margin-top: 40%;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   animation: ${contentUpAnimation} 1s 1 ease-in normal;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 `;
 const Img = styled.div`
   img {
-    width: 170px;
-    height: 80px;
+    width: 180px;
+    height: 100px;
   }
 `;
 const ProfilBox = styled.div`
@@ -56,9 +58,6 @@ const ProfilBox = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin: 10%;
-  margin-top: 100px;
-  margin-bottom: 120px;
 `;
 const TitleBox = styled.div`
   display: flex;
@@ -89,11 +88,12 @@ const downIconAnimation = keyframes`
     }
 `;
 const MoreContentIconBox = styled.div`
-  animation-duration: 2s;
-  animation-delay: 3s;
-  animation-name: ${downIconAnimation};
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  margin-top: 50;
+  // animation-duration: 2s;
+  // animation-delay: 3s;
+  // animation-name: ${downIconAnimation};
+  // animation-iteration-count: infinite;
+  // animation-direction: alternate;
 `;
 
 export default function CustomerIntro2() {
@@ -117,7 +117,9 @@ export default function CustomerIntro2() {
         </Text>
       </ContentBox>
       <MoreContentIconBox>
-        <KeyboardDoubleArrowDownIcon fontSize="large" />
+        <Link to="/introCustomer3" style={{ color: "black" }}>
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </Link>
       </MoreContentIconBox>
     </ProfilBox>
   );
