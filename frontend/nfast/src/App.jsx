@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -22,7 +22,7 @@ import LoginCustomer from "./pages/customer/LoginPageCustomer";
 import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
 import Header from "./components/commons/Header";
-// import HeaderSeller from "./components/commons/HeaderSeller";
+import HeaderSeller from "./components/commons/HeaderSeller";
 import CustomerIntroduce from "./pages/customer/CustomerIntroduce";
 // import Footer from "./components/commons/Footer";
 
@@ -39,17 +39,27 @@ const Wrapper = styled.div`
   }
 `;
 function App() {
+  const [flag, setFlag] = useState(true);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log("URL Check");
+    if (window.location.href.indexOf("Seller") !== -1) {
+      setFlag(false);
+    }
+  }, [window.location.href]);
+
   return (
     <Wrapper>
       <BrowserRouter>
-        <Header />
+        {flag ? <Header /> : <HeaderSeller />}
         <Pages>
           <Routes>
             <Route path="/" element={<CustomerIntroduce />} />
             <Route path="/mainPage" element={<MainPage />} />
             <Route path="/disall" element={<DisAllPage />} />
             <Route path="/transall" element={<TransAllPage />} />
-            <Route path="/mainPage" element={<MainPage />} />
+            {/* <Route path="/mainPage" element={<MainPage />} /> */}
             <Route path="/floating" element={<FloatingBtn />} />
             <Route path="/nFastCard" element={<NFastCard />} />
             <Route path="/review/:nfastSequence" element={<Review />} />

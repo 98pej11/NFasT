@@ -11,7 +11,7 @@ import { publishAction } from "../../redux/actions/publishAction";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  // height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,20 +31,21 @@ const Btn = styled.div`
   }
 
   select {
-    border: none;
+    border: solid 1px #5b5299;
+    border-radius: 1em;
     height: 40px;
   }
 `;
 
 const QR = styled.div`
   width: 80%;
-  height: 60%;
+  height: 80%;
   position: fixed;
   h2,
   p {
     display: flex;
     justify-content: center;
-    color: white;
+    color: #5b5299;
   }
 
   content {
@@ -52,7 +53,8 @@ const QR = styled.div`
   }
 
   top: 100px;
-  background-color: #5b5299;
+  background-color: white;
+  border-radius: 1em;
 `;
 
 function NfastQr() {
@@ -109,11 +111,14 @@ function NfastQr() {
                   onError={handleError}
                   onResult={handleScan}
                   // chooseDeviceId={()=>selected}
-                  style={{ width: "300px" }}
                 />
               </>
             )}
-            {loadingScan && <p>Loading</p>}
+            {loadingScan && (
+              <p style={{ fontSize: "11px" }}>
+                코드를 스캔하기 위해 Start Scan 버튼을 눌러주세요
+              </p>
+            )}
             {data !== "" && <p>{data}</p>}
           </Btn>
         </div>

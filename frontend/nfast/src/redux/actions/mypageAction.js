@@ -44,7 +44,6 @@ function getUnAvailableNfasts(userSequence) {
 }
 function getStoreSequence(nfastSequence) {
   return async (dispatch) => {
-    console.log("흠...............");
     await axios
       .get(`${baseUrl}/findStoreSequence/${nfastSequence}`)
       .then((response) => {
@@ -86,6 +85,7 @@ function getUserInfo(userSequence) {
       .get(url)
       .then((response) => {
         const { data } = response;
+        console.log("dataaaaaaaaaaaa", data);
         dispatch({ type: "GET_USERINFO_SUCCESS", payload: { data } });
       })
       .catch((error) => {

@@ -1,5 +1,3 @@
-// // web3.js
-// // //overrides metamask v0.2 for our 1.0 version
 // // 1.0 lets us use async and await instead of promises
 
 // import Web3 from "web3";
@@ -1802,11 +1800,11 @@ const ssafyTokenAbi = [
   },
 ];
 
-const NFasTCA = "0x1CF49C51C6059385A5E6E9A45d3cd090F857c9Ad";
+const NFasTCA = "0xeD6A51BBFe69a2b07690d03B6Cf56808aCdEA0A1";
 
 // const saleCA = ""
 
-const saleFactoryCA = "0x8cA2b7C1E2F5E1ACf9f7Aef250dA996C064dC483";
+const saleFactoryCA = "0x945Dd4Be7AcCd6122e20cF10E816a1945d730876";
 
 const ssafyTokenCA = "0x37792f697877e9BcFB978C0c81F0889c2dA66399";
 

@@ -10,7 +10,7 @@ import { web3 } from "../../axios/web3";
 import ipfs from "../../axios/ipfs";
 
 const Publish = styled.div`
-  height: 100vh;
+  // height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -160,8 +160,12 @@ export default function SellerPublish() {
           <Time>
             <h4>런치</h4>
             <MyField content="time" variant="outlined" />
-            <div style={{ marginLeft: 30 }} />
+            <MyField content="time" variant="outlined" />
+          </Time>
+          <div style={{ marginLeft: 30 }} />
+          <Time>
             <h4>디너</h4>
+            <MyField content="time" variant="outlined" />
             <MyField content="time" variant="outlined" />
           </Time>
           <Count>
@@ -178,7 +182,7 @@ export default function SellerPublish() {
           </Price>
           <ButtonBox>
             <Button
-              sx={{ backgroundColor: "#BCB6FF" }}
+              sx={{ backgroundColor: "#BCB6FF", margin: 5 }}
               type="submit"
               variant="contained"
               disableElevation

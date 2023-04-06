@@ -5,7 +5,6 @@ import SellerMain from "../../components/sellerpage/SellerMain";
 
 const PublishNft = styled.div`
   width: 100%;
-  // height: 100vh;
   background-color: white;
 `;
 function SellerPage() {

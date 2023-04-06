@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
@@ -13,15 +13,24 @@ import HeaderSeller from "./HeaderSeller";
 // import LoginSellerBtn from "../loginpage/LoginButtonSeller";
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
-import NFastLogo from "../../assets/HeaderLogo.png";
+import NFastLogo from "../../assets/NFast_Logo.png";
 
 // eslint-disable-next-line import/named
 import { getSequence } from "../../storage/Cookie";
 
 function Header() {
-  // const [isLogin, setIsLogin] = useState(false);
+  const [checkLogin, setCheckLogin] = useState(false);
+
   // const isLoggedIn = useSelector((state) => state.authReducer.isLogin);
   const userInfo = useSelector((state) => state.mypageReducer.userInfo);
+  const isLogin = useSelector((state) => state.authReducer.isLogin);
+  useEffect(() => {
+    const seq = getSequence();
+    if (seq) {
+      setCheckLogin(true);
+    }
+  }, [isLogin]);
+
   console.log("USERRRRRRR", userInfo);
 
   // 세션에서 로그인 정보 확인
@@ -74,7 +83,7 @@ function Header() {
           >
             <Box component={Link} to="/mainPage">
               {/* 로고이미지가 나와야되는데? */}
-              <img src={NFastLogo} alt="logo" height="20px" />
+              <img src={NFastLogo} alt="logo" height="40px" />
             </Box>
             <Box
               sx={{
@@ -85,11 +94,11 @@ function Header() {
                 // marginLeft: "10%",
               }}
             >
-              {userInfo && <SearchBar />}
+              {checkLogin && <SearchBar />}
             </Box>
           </Box>
           <div style={{ display: "flex", alignItems: "center" }}>
-            {getSequence() ? <SideBar /> : <LoginBtn />}
+            {checkLogin ? <SideBar /> : <LoginBtn />}
           </div>
         </Toolbar>
       </Container>

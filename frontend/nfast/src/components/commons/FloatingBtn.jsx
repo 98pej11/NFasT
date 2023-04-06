@@ -57,7 +57,6 @@ const Overlay = styled.div`
 
 function FloatingBtn() {
   const [floating, setFloating] = useState("none");
-
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -69,13 +68,13 @@ function FloatingBtn() {
     }
   };
 
+  const floatingCards = <FloatingCards />;
+
   return (
     <Wrapper>
       <Overlay isDisplay={floating} />
       <Floating>
-        <Cards isDisplay={floating}>
-          <FloatingCards />
-        </Cards>
+        <Cards isDisplay={floating}>{floatingCards}</Cards>
       </Floating>
       <Btn type="button" onClick={handleClick}>
         <ConfirmationNumberIcon fontSize="large" style={{ color: "white" }} />

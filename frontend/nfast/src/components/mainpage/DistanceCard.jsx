@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import styled, { keyframes } from "styled-components";
 // import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -12,13 +13,27 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Typography from "@mui/material/Typography";
 // import { mainAction } from "../../redux/actions/mainAction";
 
+const positionAnimation = keyframes`
+
+from {
+transform : translate(0px , 40px)
+}
+to {
+  transform : translate(0)
+}
+
+`;
+const Cards = styled.div`
+  animation: ${positionAnimation} 1s ease-out;
+`;
+
 export default function DistanceCard(props) {
   // eslint-disable-next-line react/prop-types
   const { distanceList } = props;
 
   return (
     distanceList && (
-      <div style={{ marginTop: 30 }}>
+      <Cards style={{ marginTop: 30 }}>
         {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Button onClick={handlePrev}>{"<"}</Button>
         <Button onClick={handleNext}>{">"}</Button>
@@ -77,7 +92,7 @@ export default function DistanceCard(props) {
             </Grid>
           ))}
         </Grid>
-      </div>
+      </Cards>
     )
   );
 }

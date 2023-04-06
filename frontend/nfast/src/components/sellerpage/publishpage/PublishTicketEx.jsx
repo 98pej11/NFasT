@@ -11,14 +11,10 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const EX = styled.div`
-  color: gray;
-  margin-bottom: 10px;
-`;
 const Ticket = styled.div`
   position: relative;
   background-color: whitesmoke;
-  width: 380px;
+  width: 320px;
   height: 140px;
   border-top: groove 20px #bcb6ff;
   display: flex;
@@ -31,7 +27,7 @@ const Info = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-left: 10px;
+  margin-left: 20px;
   & > div:not(:last-child) {
     margin: 6%;
   }
@@ -50,25 +46,27 @@ const QR = styled.div`
   }
 `;
 const Date = styled.div`
-  margin-bottom: 5px;
+  font-size: 14px;
+  margin-top: 10px;
 `;
 const Title = styled.div`
   display: flex;
   align-items: center;
   h4 {
     margin-right: 15px;
-    font-weight: bolder;
+    font-size: 12px;
+  }
+  span {
+    font-size: 13px;
   }
 `;
 const Price = styled.div`
   font-size: 12px;
-  margin-top: 15px;
 `;
 
 function PublishTicket({ title }) {
   return (
     <Wrapper>
-      <EX>(예시)</EX>
       <Ticket>
         <Info>
           <div>

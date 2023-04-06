@@ -53,7 +53,6 @@ const EachReview = styled.div`
   flex: 0.5;
   justify-content: center;
   text-align: center;
-  align-
   align-items: center;
   background-color: rgba(230, 229, 255, 1);
   // border-radius: 30%;

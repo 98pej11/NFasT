@@ -7,12 +7,14 @@ function PublishField({
   type,
   sx,
   placeholder,
+  defaultTime,
   variant,
   ...otherProps
 }) {
   const activeBorderColor = "#BCB6FF";
   const activeLabelColor = "#BCB6FF";
-
+  const defaultDateValue = new Date();
+  defaultDateValue.setDate(defaultDateValue.getDate() + 7);
   switch (content) {
     case "date":
       return (
@@ -34,6 +36,8 @@ function PublishField({
           variant={variant}
           type="date"
           fullWidth
+          defaultValue={defaultDateValue.toISOString().slice(0, 10)}
+          placeholder={defaultDateValue.toISOString().slice(0, 10)}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...otherProps}
         />
@@ -58,6 +62,7 @@ function PublishField({
           variant={variant}
           type="time"
           fullWidth
+          defaultValue={defaultTime}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...otherProps}
         />
@@ -82,6 +87,11 @@ function PublishField({
           variant={variant}
           type="number"
           fullWidth
+          onKeyPress={(event) => {
+            if (event.key === "-" || event.key === "+") {
+              event.preventDefault();
+            }
+          }}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...otherProps}
         />
@@ -108,6 +118,11 @@ function PublishField({
             placeholder={placeholder}
             variant={variant}
             fullWidth
+            onKeyPress={(event) => {
+              if (event.key === "-" || event.key === "+") {
+                event.preventDefault();
+              }
+            }}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...otherProps}
           />
@@ -124,6 +139,7 @@ PublishField.defaultProps = {
   type: "",
   placeholder: "",
   variant: "",
+  defaultTime: "10:00",
 };
 
 PublishField.propTypes = {
@@ -133,6 +149,7 @@ PublishField.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   variant: PropTypes.string,
+  defaultTime: PropTypes.string,
 };
 
 export default PublishField;

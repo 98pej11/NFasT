@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-console */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,13 +24,14 @@ import { getSequence } from "../../../storage/Cookie";
 // styled-components 시작
 
 const Wrapper = styled.div`
-  height: 70vh;
+  height: 90vh;
   margin-top: 20px;
 `;
 
 const Ticket = styled(PublishTicket)`
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 `;
+
 const Publish = styled.div`
   height: 70%;
   margin-top: 20px;
@@ -38,7 +40,7 @@ const Publish = styled.div`
   align-items: center;
   justify-content: space-evenly;
   h4 {
-    width: 40%;
+    width: 40px;
     margin-right: 10px;
     display: flex;
     align-items: center;
@@ -46,6 +48,7 @@ const Publish = styled.div`
 `;
 const Form = styled.form`
   height: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -249,6 +252,10 @@ function PublishPage() {
   console.log("TICKET", ticket);
   const handleRegist = async (e) => {
     e.preventDefault();
+    if (e.target[9].value < 0 || e.target[7].value < 0) {
+      alert("가격과 수량은 0 이상으로 기재해주세요");
+      return;
+    }
     // eslint-disable-next-line
     console.log(e.target[2].checked);
     const data = {
@@ -264,12 +271,15 @@ function PublishPage() {
       nfastHash: [],
       sequence,
     };
+
     const tempData = await jsonSubmit(data);
     data.cid = tempData.cid;
     data.walletAddress = tempData.walletAddress;
     await createNfast(data);
     // eslint-disable-next-line no-console
     console.log("DATAAAAAAA", data);
+    // alert("발행이 완료되었습니다.");
+    // window.location.reload();
   };
 
   return (
@@ -281,21 +291,25 @@ function PublishPage() {
             <h4>날짜</h4>
             <PublishField content="date" variant="outlined" />
           </DateTime>
-          <Time>
+          <div>
             <h4>시간</h4>
             <SwitchTime />
-            <div>
-              <PublishField
-                sx={{ marginLeft: "20px" }}
-                content="time"
-                variant="outlined"
-              />
-              <PublishField
-                sx={{ marginLeft: "20px" }}
-                content="time"
-                variant="outlined"
-              />
-            </div>
+          </div>
+          <Time>
+            <h4>시작</h4>
+            <PublishField
+              defaultTime="10:00"
+              content="time"
+              variant="outlined"
+            />
+          </Time>
+          <Time>
+            <h4>종료</h4>
+            <PublishField
+              defaultTime="22:00"
+              content="time"
+              variant="outlined"
+            />
           </Time>
           <Count>
             <h4>수량</h4>

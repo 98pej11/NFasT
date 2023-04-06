@@ -65,7 +65,7 @@ function MainPage() {
           </Title>
           <Sub>
             <span>가까운 거리의 맛집들을 빠르게!</span>
-            <Link to="/disall">
+            <Link to="/disall" style={{ color: "black" }}>
               <span
                 style={{
                   float: "right",
@@ -90,7 +90,7 @@ function MainPage() {
           </Title>
           <Sub>
             <span>최신 많은 거래가 있는 맛집들을 빠르게!</span>
-            <Link to="/transall">
+            <Link to="/transall" style={{ color: "black" }}>
               <span
                 style={{
                   float: "right",

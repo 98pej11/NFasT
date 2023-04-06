@@ -67,18 +67,17 @@ function isBookMark(storeSequence, userSequence) {
       });
   };
 }
-function writeReview(storeSequence, userSequence, reviews) {
+function writeReview(nfastSequence, userSequence, reviews) {
   // const navigate = useNavigate();
-  console.log(storeSequence);
   console.log(reviews);
   const data = {
-    storeSequence,
+    nfastSequence,
     userSequence,
     reviews,
   };
   console.log(data);
   return async () => {
-    const url = `${baseUrl}/review-count/${storeSequence}`;
+    const url = `${baseUrl}/review-count/${nfastSequence}`;
     await axios
       .post(url, JSON.stringify(data), {
         headers: {
@@ -219,6 +218,20 @@ function getNfastUseState(userSequence, nfastSequence) {
   };
 }
 
+function refundNfast(nfastSequence) {
+  return async () => {
+    await axios
+      .patch(`${baseUrl}/owner/qr/refund/${nfastSequence}`)
+      .then((response) => {
+        const { data } = response;
+        console.log("RESPONSE DATA ", data);
+      })
+      .catch((error) => {
+        console.log("ERROR", error);
+      });
+  };
+}
+
 export const storeAction = {
   getStoreDetail,
   addBookMark,
@@ -233,4 +246,5 @@ export const storeAction = {
   getNfastUseState,
   getNfastPrice,
   registSell,
+  refundNfast,
 };
