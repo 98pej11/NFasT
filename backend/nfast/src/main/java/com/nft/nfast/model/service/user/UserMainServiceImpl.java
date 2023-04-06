@@ -17,10 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import javax.xml.stream.Location;
-import java.awt.print.Book;
 import java.math.BigDecimal;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -257,19 +254,19 @@ public class UserMainServiceImpl implements UserMainService {
     //판매 등록
     @Override
     @Transactional
-    public void saveTradeNfast(NfastTradeDoneDto nfastTradeDoneDto) {
+    public NfastDto saveTradeNfast(NfastTradeDoneDto nfastTradeDoneDto) {
         long nfastSequence = nfastTradeDoneDto.getNfastSequence();
         BigDecimal nfastHopePrice = nfastTradeDoneDto.getNfastHopePrice();
         Optional<Nfast> nfastWrapper = nfastRepository.findById(nfastSequence);
-
+        NfastDto dto = null;
         if (nfastWrapper.isPresent()) {
             Nfast nfast = nfastWrapper.get();
-            NfastDto dto = nfast.toDto();
+            dto = nfast.toDto();
             dto.setNfastHopePrice(nfastHopePrice);
             dto.setNfastSaleState((byte) 2);
             nfastRepository.save(dto.toEntity());
-
         }
+        return dto;
     }
 
     //북마크 등록

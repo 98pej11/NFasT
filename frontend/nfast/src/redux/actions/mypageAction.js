@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import axios from "axios";
+import { getAccessToken } from "../../storage/Cookie";
 import { baseUrl } from "./url";
 
 // const baseUrl = `http://localhost:8080/api`;
@@ -79,6 +80,7 @@ function getBookMarkList(userSequence) {
 }
 
 function getUserInfo(userSequence) {
+  console.log("ACCESS TOKEN", getAccessToken());
   return async (dispatch) => {
     const url = `${baseUrl}/my-data/${userSequence}`;
     await axios

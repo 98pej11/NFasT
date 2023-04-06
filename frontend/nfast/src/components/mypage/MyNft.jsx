@@ -177,6 +177,7 @@ function MyNft() {
                   nfastStartTime={nfast.nfast.nfastStartTime}
                   nfastEndTime={nfast.nfast.nfastEndTime}
                   nfastPrice={nfast.nfast.nfastPrice}
+                  nfastSequence={nfast.nfast.nfastSequence}
                   // 리뷰 만드러야됨.
                   nfastReview={
                     <Review>
