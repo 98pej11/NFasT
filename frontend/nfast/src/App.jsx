@@ -27,9 +27,6 @@ import CustomerIntroduce from "./pages/customer/CustomerIntroduce";
 // import Footer from "./components/commons/Footer";
 
 const Pages = styled.div`
-  margin-top: 80px;
-  // margin-left: 10%;
-  // margin-right: 10%;
   position: relative;
 `;
 const Wrapper = styled.div`

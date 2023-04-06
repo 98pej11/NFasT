@@ -22,7 +22,7 @@ export default function TransAllPage() {
     dispatch(mainAction.getTrans());
   }, []);
 
-  const transList = useSelector((state) => state.mainReducer.stores);
+  const transList = useSelector((state) => state.mainReducer.storesTrans);
   // eslint-disable-next-line
   console.log(transList);
 
@@ -41,7 +41,7 @@ export default function TransAllPage() {
   // distanceList를 이용한 코드 구현
   return (
     transList && (
-      <div style={{ marginTop: 100 }}>
+      <div>
         <Line>
           <Title>
             <RecordVoiceOverTwoToneIcon />

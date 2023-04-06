@@ -73,7 +73,7 @@ export default function StoreNav() {
   }, [open]);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ maxWidth: "412px", position: "relative" }}>
       {showCalendar && <CalendarList />}
       <BottomNavigation
         showLabels
