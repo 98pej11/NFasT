@@ -172,6 +172,8 @@ function FutureTicket(props) {
 
   const sellTicket = () => {
     dispatch(storeAction.registSell(inputs));
+    toggleDrawer1(false);
+    alert("판매 등록되었습니다.");
   };
 
   const onChangeHandler = (event) => {
@@ -333,7 +335,7 @@ FutureTicket.defaultProps = {
   nfastStartTime: "시작시간",
   nfastEndTime: "종료시간",
   nfastPrice: 0,
-  nfastQr: "qr",
+  nfastQr: "리셀 중...",
 };
 FutureTicket.propTypes = {
   storeName: PropTypes.string,
