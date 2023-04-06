@@ -1800,11 +1800,11 @@ const ssafyTokenAbi = [
   },
 ];
 
-const NFasTCA = "0xfeF7B5e6Dd8a036603EB2d712ee666ed7451b6B9";
+const NFasTCA = "0xcD713647074Daa74C491085DF1B812123Fe9b61B";
 
 // const saleCA = ""
 
-const saleFactoryCA = "0xC2b2465d42561c603D0d4148b8aEe1B6b8a0Ee6C";
+const saleFactoryCA = "0xF4f4C03378301f5139BAFC09BF23370B6d335a39";
 
 const ssafyTokenCA = "0x37792f697877e9BcFB978C0c81F0889c2dA66399";
 
