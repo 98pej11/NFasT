@@ -31,9 +31,10 @@ function HeaderSeller() {
   return (
     <AppBar
       elevation={0}
-      position="absolute"
       variant="outlined"
       style={{
+        maxWidth: "412px",
+        position: "relative",
         backgroundColor: "transparent",
         height: "80px",
         boxShadow: "none",
@@ -88,7 +89,7 @@ function HeaderSeller() {
                   border: "solid 1px #5B5299",
                   borderRadius: "50px",
                   color: "#5B5299",
-                  width: "70px",
+                  width: "80px",
                   height: "30px",
                   fontSize: "10px",
                   margin: "0px 5px",
