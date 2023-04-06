@@ -67,18 +67,21 @@ function MyNft() {
   const dispatch = useDispatch();
   const sequence = getSequence();
 
-  useEffect(() => {
-    dispatch(mypageAction.getAvailableNfasts(sequence));
-  }, []);
+  const resellNfast = useSelector(
+    (state) => state.storepageReducer.resellNfast
+  );
   const availableNfasts = useSelector(
     (state) => state.mypageReducer.availableNfasts
   );
 
-  console.log(availableNfasts);
-
   useEffect(() => {
+    dispatch(mypageAction.getAvailableNfasts(sequence));
     dispatch(mypageAction.getUnAvailableNfasts(sequence));
   }, []);
+  useEffect(() => {
+    dispatch(mypageAction.getAvailableNfasts(sequence));
+  }, [resellNfast]);
+  console.log(availableNfasts);
 
   const unavailableNfasts = useSelector(
     (state) => state.mypageReducer.unavailableNfasts
@@ -130,7 +133,7 @@ function MyNft() {
       {selectedTabIndex === 0 &&
         (availableNfasts.length !== 0 ? (
           getAvailableCardList().map((nfast) => {
-            return (
+            return nfast.nfastSaleState === 1 ? (
               <Tickets>
                 <Ticket1
                   storeName={nfast.storeName}
@@ -150,6 +153,18 @@ function MyNft() {
                       style={{ fgColor: "#000123" }}
                     />
                   }
+                />
+              </Tickets>
+            ) : (
+              <Tickets>
+                <Ticket1
+                  storeName={nfast.storeName}
+                  nfastDate={nfast.nfastDate}
+                  nfastStartTime={nfast.nfastStartTime}
+                  nfastEndTime={nfast.nfastEndTime}
+                  nfastPrice={nfast.nfastPrice}
+                  nfastSequence={nfast.nfastSequence}
+                  nfastMealType={nfast.nfastMealType}
                 />
               </Tickets>
             );
