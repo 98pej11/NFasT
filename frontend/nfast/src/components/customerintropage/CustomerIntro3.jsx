@@ -89,12 +89,13 @@ const downIconAnimation = keyframes`
     }
 `;
 const MoreContentIconBox = styled.div`
+  margin-top: 50px;
   margin-bottom: 20px;
-  animation-duration: 2s;
-  animation-delay: 3s;
-  animation-name: ${downIconAnimation};
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  // animation-duration: 2s;
+  // animation-delay: 3s;
+  // animation-name: ${downIconAnimation};
+  // animation-iteration-count: infinite;
+  // animation-direction: alternate;
 `;
 
 export default function CustomerIntro3() {

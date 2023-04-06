@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React, { useRef, useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Intro1 from "../../components/customerintropage/CustomerIntro1";
+// import Intro1 from "./CustomerIntro1";
 import Intro2 from "../../components/customerintropage/CustomerIntro2";
 import Intro3 from "../../components/customerintropage/CustomerIntro3";
 import Intro4 from "../../components/customerintropage/CustomerIntro4";
@@ -43,20 +42,7 @@ const OuterPageBox = styled.div`
 export default function IntroducePage() {
   const OuterPageBoxRef = useRef();
   const [showTopBtn, setShowTopBtn] = useState(false);
-  // const [currentPosition, setCurrentPosition] = useState(null);
-
   useEffect(() => {
-    // const success = (position) => {
-    //   const { latitude, longitude } = position.coords;
-    //   setCurrentPosition({ lat: latitude, lng: longitude });
-    // };
-
-    // const error = (error) => {
-    //   // eslint-disable-next-line
-    //   console.error(error);
-    // };
-
-    // navigator.geolocation.getCurrentPosition(success, error);
     const wheelHandler = () => {
       const { scrollTop } = OuterPageBoxRef.current;
       if (scrollTop > 0) {
@@ -67,7 +53,6 @@ export default function IntroducePage() {
     };
     const boxRefCurrent = OuterPageBoxRef.current;
     boxRefCurrent.addEventListener("scroll", wheelHandler);
-
     return () => {
       boxRefCurrent.removeEventListener("scroll", wheelHandler);
     };
@@ -85,7 +70,7 @@ export default function IntroducePage() {
       <GlobalStyles />
       <OuterPageBox ref={OuterPageBoxRef}>
         <ProgressBar OuterPageBoxRef={OuterPageBoxRef} />
-        <Intro1 />
+        {/* <Intro1 /> */}
         <Intro2 />
         <Intro3 />
         <Intro4 />

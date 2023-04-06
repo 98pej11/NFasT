@@ -23,7 +23,9 @@ import LoginSeller from "./pages/seller/LoginPageSeller";
 import SellerPage from "./pages/seller/SellerPage";
 import Header from "./components/commons/Header";
 import HeaderSeller from "./components/commons/HeaderSeller";
-import CustomerIntroduce from "./pages/customer/CustomerIntroduce";
+import IntroCustomer1 from "./pages/customer/IntroCustomer1";
+import IntroCustomer2 from "./pages/customer/IntroCustomer2";
+import IntroCustomer3 from "./pages/customer/IntroCustomer3";
 // import Footer from "./components/commons/Footer";
 
 const Pages = styled.div`
@@ -49,10 +51,15 @@ function App() {
   return (
     <Wrapper>
       <BrowserRouter>
-        {flag ? <Header /> : <HeaderSeller />}
+        <Routes>
+          <Route path="/" element={<IntroCustomer1 />} />
+        </Routes>
+
         <Pages>
+          {flag ? <Header /> : <HeaderSeller />}
           <Routes>
-            <Route path="/" element={<CustomerIntroduce />} />
+            <Route path="/introCustomer2" element={<IntroCustomer2 />} />
+            <Route path="/introCustomer3" element={<IntroCustomer3 />} />
             <Route path="/mainPage" element={<MainPage />} />
             <Route path="/disall" element={<DisAllPage />} />
             <Route path="/transall" element={<TransAllPage />} />
@@ -67,6 +74,7 @@ function App() {
             <Route path="/store/:storeSequence" element={<StorePage />} />
             <Route path="/loginCustomer" element={<LoginCustomer />} />
             <Route path="/loginSeller" element={<LoginSeller />} />
+
             <Route path="/introSeller1" element={<IntroSeller1 />} />
             <Route path="/introSeller2" element={<IntroSeller2 />} />
             <Route path="/introSeller3" element={<IntroSeller3 />} />
