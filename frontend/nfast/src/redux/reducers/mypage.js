@@ -7,6 +7,7 @@ const initialState = {
   storeInfo: "",
   mintIncome: "",
   resellIncome: "",
+  storeSequence: "",
 };
 function mypageReducer(state = initialState, action = {}) {
   const { type, payload } = action;

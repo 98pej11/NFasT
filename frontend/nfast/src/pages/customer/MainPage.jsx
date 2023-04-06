@@ -46,11 +46,11 @@ function MainPage() {
     dispatch(mypageAction.getUserInfo(getSequence()));
   }, []);
 
-  const distanceList = useSelector((state) => state.mainReducer.stores);
+  const distanceList = useSelector((state) => state.mainReducer.storesDistance);
   // eslint-disable-next-line
   console.log(distanceList);
 
-  const transList = useSelector((state) => state.mainReducer.stores);
+  const transList = useSelector((state) => state.mainReducer.storesTrans);
   // eslint-disable-next-line no-console
   console.log(transList);
 

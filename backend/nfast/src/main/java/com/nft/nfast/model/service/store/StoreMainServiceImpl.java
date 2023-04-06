@@ -86,7 +86,7 @@ public class StoreMainServiceImpl implements StoreMainService {
     @Override
     public List<IncomeFindDto> findAllIncomes(Long storeSequence) {
         // 해당 가게의 수입 내역 저장
-        List<IncomeList> incomes = incomeListRepository.findAllByStoreSequence(storeSequence);
+        List<IncomeList> incomes = incomeListRepository.findAllByStoreSequenceOrderByIncomeListDateDesc(storeSequence);
         List<IncomeFindDto> incomeListGetDto = new ArrayList<>();
         for (IncomeList income : incomes) {
             incomeListGetDto.add(IncomeFindDto.builder()

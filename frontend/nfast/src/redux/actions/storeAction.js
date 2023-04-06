@@ -162,7 +162,7 @@ function getNfastPrice(nfastSequence) {
 }
 
 function registSell(data) {
-  return async () => {
+  return async (dispatch) => {
     await axios
       .post(
         `${baseUrl}/store/${data.nfastSequence}/sale`,
@@ -174,7 +174,9 @@ function registSell(data) {
         }
       )
       .then((response) => {
-        console.log("REGISTSELL DATA ", response);
+        const { data } = response;
+        dispatch({ type: "GET_RESELL_NFAST", payload: { data } });
+        console.log("REGISTSELLㅣㅣㅣㅣ DATA ", response);
       })
       .catch((error) => {
         console.log("ERROR", error);
