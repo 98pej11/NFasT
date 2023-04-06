@@ -179,6 +179,11 @@ const nfastAbi = [
     inputs: [
       {
         internalType: "address",
+        name: "_from",
+        type: "address",
+      },
+      {
+        internalType: "address",
         name: "_to",
         type: "address",
       },
@@ -189,19 +194,6 @@ const nfastAbi = [
       },
     ],
     name: "approveAndTransfer",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-    ],
-    name: "approveSaleFactory",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -1301,6 +1293,19 @@ const saleAbi = [
   },
   {
     inputs: [],
+    name: "getsellerAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "nftAddress",
     outputs: [
       {
@@ -1797,11 +1802,11 @@ const ssafyTokenAbi = [
   },
 ];
 
-const NFasTCA = "0x36219a14cBF9730c002f9E854a8986a806797058";
+const NFasTCA = "0x1CF49C51C6059385A5E6E9A45d3cd090F857c9Ad";
 
 // const saleCA = ""
 
-const saleFactoryCA = "0x83D81233c155a90e93C7804e91cf947eAc3f458B";
+const saleFactoryCA = "0x8cA2b7C1E2F5E1ACf9f7Aef250dA996C064dC483";
 
 const ssafyTokenCA = "0x37792f697877e9BcFB978C0c81F0889c2dA66399";
 

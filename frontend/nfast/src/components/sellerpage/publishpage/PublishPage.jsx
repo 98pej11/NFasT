@@ -111,8 +111,14 @@ function PublishPage() {
 
   async function approve(data, saleInfo) {
     console.log(saleInfo);
+    console.log("여기 sale 주소 줄게!!!");
+    console.log("sale주소 : ", saleInfo[0], "토큰 ID : ", saleInfo[2]);
+    console.log("sale주소 : ", saleInfo[0], "토큰 ID : ", saleInfo[2]);
+    console.log("sale주소 : ", saleInfo[0], "토큰 ID : ", saleInfo[2]);
+    console.log("sale주소 : ", saleInfo[0], "토큰 ID : ", saleInfo[2]);
+    console.log("가져갔늬?");
     const tx = await NFasTContract.methods
-      .approve(saleInfo[0], saleInfo[2])
+      .approve("0xFF771D1615931a69fcaC581d47832A5323Aa647f", saleInfo[2])
       .send({
         from: data.walletAddress,
       });
@@ -155,8 +161,9 @@ function PublishPage() {
         console.log(event);
         console.log("event.returnValues : ", event.returnValues);
         console.log("event.returnValues[1] : ", event.returnValues[1]);
-        data.nfastHash.push(event.returnValues[0]);
+        // data.nfastHash.push(event.returnValues[0]);
         approve(data, event.returnValues);
+        // console.log(approve);
       })
       .on("changed", (event) => {
         console.log("event.returnValues : ", event.returnValues);
