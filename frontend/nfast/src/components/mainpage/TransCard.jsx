@@ -41,8 +41,8 @@ export default function TransCard(props) {
             key={index}
             item
             xs={6}
-            sm={3} // change to 6 for Galaxy S20 Ultra
-            md={3} // change to 6 for Galaxy S20 Ultra
+            sm={6} // change to 6 for Galaxy S20 Ultra
+            md={6} // change to 6 for Galaxy S20 Ultra
             display="flex"
             justifyContent="center"
             alignItems="center"

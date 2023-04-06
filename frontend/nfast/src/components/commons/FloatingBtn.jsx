@@ -19,7 +19,9 @@ const FloatingAnimation = keyframes`
 }	
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 100%;
+`;
 
 const Floating = styled.div`
   width: 412px;
@@ -40,7 +42,7 @@ const Btn = styled.button`
   border-radius: 50px;
   position: fixed;
   bottom: 40px;
-  right: 330px;
+  right: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
