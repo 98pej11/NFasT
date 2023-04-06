@@ -19,7 +19,7 @@ public interface UserMainService {
     List<NfastPurchaseDto> findAllByNfastDate(long storeSequence, NfastDetailDto nfastDto);
     List<NfastDto> savePurchaseNfast(long storeSequence, long userSequence, NfastPurchaseDto nfast);
     List<TradeFindDto> findAllTrade(long userSequence) throws ParseException;
-    void saveTradeNfast(NfastTradeDoneDto nfastTradeDoneDto);
+    NfastDto saveTradeNfast(NfastTradeDoneDto nfastTradeDoneDto);
     void saveBookmark(long storeSeqeuence, long useSequence);
     void deleteBookmark(long storeSeqeuence, long useSequence);
     Byte isMyBookmark(long storeSequence, long userSequence);

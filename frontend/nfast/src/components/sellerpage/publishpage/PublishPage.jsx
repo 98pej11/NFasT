@@ -87,6 +87,7 @@ function PublishPage() {
   const dispatch = useDispatch();
   const ticket = useSelector((state) => state.mypageReducer.storeInfo);
   const sequence = useSelector((state) => state.authReducer.sequence);
+  // const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     dispatch(publishAction.storeTitle(sequence));
