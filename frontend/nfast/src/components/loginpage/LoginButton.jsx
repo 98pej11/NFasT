@@ -7,30 +7,31 @@ const Wrapper = styled.div`
   height: 100%;
   alignitems: center;
 `;
-const LoginBtn = styled(Button)`
-  margin-right: 20px;
-  background-color: #ff9e45;
-  &:hover {
-    background-color: #ffb800;
-  }
-`;
+
 function LoginButton() {
   return (
     <Wrapper>
-      <LoginBtn
+      <Button
         variant="contained"
         sx={{
-          backgroundColor: "#BCB6FF",
-          width: "40px",
+          backgroundColor: "white",
+          border: "solid 1px #5B5299",
+          borderRadius: "50px",
+          color: "#5B5299",
+          width: "70px",
           height: "30px",
           fontSize: "10px",
           margin: "0px 5px",
+          "&:hover": {
+            backgroundColor: "#5B5299",
+            color: "white",
+          },
         }}
         href="/loginCustomer"
         disableElevation
       >
         로그인
-      </LoginBtn>
+      </Button>
     </Wrapper>
   );
 }
