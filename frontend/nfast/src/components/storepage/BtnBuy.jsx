@@ -19,7 +19,6 @@ function BtnBye() {
   const onClickHandler = () => {
     dispatch(storeAction.saveHandler(1));
     alert("구매가 완료되었습니다.");
-    // window.location.reload();
   };
 
   return (

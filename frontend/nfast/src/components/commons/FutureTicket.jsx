@@ -143,6 +143,7 @@ function FutureTicket(props) {
   } = props;
   const [drawer1Open, setDrawer1Open] = useState(false);
   const [drawer2Open, setDrawer2Open] = useState(false);
+  const [flag, setFlag] = useState(false);
   const [inputs, setInputs] = useState({
     nfastHopePrice: "",
     nfastSequence,
@@ -155,9 +156,9 @@ function FutureTicket(props) {
     (state) => state.storepageReducer.resellNfast
   );
 
-  useEffect(() => {
-    dispatch(storeAction.getNfastPrice(nfastSequence));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(storeAction.getNfastPrice(nfastSequence));
+  // }, []);
 
   async function approveToSell(tokenId) {
     await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -175,17 +176,31 @@ function FutureTicket(props) {
     // 0xB51b46860041F1E0e0e27ba2Ab44c05C74CC746c
     const tokenId = resellNfast.nfastHash;
     console.log(tokenId);
+    const owner = NFasTContract.methods.ownerOf(tokenId);
+    console.log("owner(1번 소비자) : ", owner);
     approveToSell(tokenId);
   }, [resellNfast]);
 
   useEffect(() => {
-    const nextInputs = { ...inputs, nfastHopePrice: comparePrice };
-    setInputs(nextInputs);
-  }, [comparePrice]);
+    if (flag) {
+      console.log(comparePrice);
+      const nextInputs = {
+        nfastHopePrice: comparePrice,
+        nfastSequence,
+      };
+      console.log("NEXTTTTTTTT", nextInputs);
+      setInputs(nextInputs);
+    }
+  }, [flag]);
 
-  console.log(comparePrice);
-  const toggleDrawer1 = () => {
+  const toggleDrawer = () => {
+    console.log("check");
     dispatch(storeAction.getNfastPrice(nfastSequence));
+    setDrawer1Open(!drawer1Open);
+    setFlag(true);
+  };
+
+  const toggleDrawer1 = () => {
     setDrawer1Open(!drawer1Open);
   };
 
@@ -195,6 +210,7 @@ function FutureTicket(props) {
 
   const sellTicket = () => {
     dispatch(storeAction.registSell(inputs));
+    console.log("INPUTS", inputs);
     toggleDrawer1(false);
     alert("판매 등록되었습니다.");
   };
@@ -238,7 +254,7 @@ function FutureTicket(props) {
                 },
               }}
               variant="contained"
-              onClick={toggleDrawer1}
+              onClick={toggleDrawer}
             >
               판매하기
             </Button>
