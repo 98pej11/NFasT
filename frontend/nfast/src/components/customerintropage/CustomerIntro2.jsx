@@ -88,7 +88,7 @@ const downIconAnimation = keyframes`
     }
 `;
 const MoreContentIconBox = styled.div`
-  margin-top: 50;
+  margin-top: 100;
   // animation-duration: 2s;
   // animation-delay: 3s;
   // animation-name: ${downIconAnimation};
