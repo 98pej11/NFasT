@@ -10,6 +10,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { TextField } from "@mui/material";
 import { storeAction } from "../../redux/actions/storeAction";
 import { toStringByFormatting } from "../../api/transDate";
+import { web3, NFasTContract } from "../axios/web3";
 
 const Wrapper = styled.div`
   display: flex;
@@ -158,11 +159,33 @@ function FutureTicket(props) {
     dispatch(storeAction.getNfastPrice(nfastSequence));
   }, []);
 
+  async function approveToSell(tokenId) {
+    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const accounts = await web3.eth.getAccounts();
+    const tx = await NFasTContract.methods
+      .approve("0xB51b46860041F1E0e0e27ba2Ab44c05C74CC746c", tokenId)
+      .send({
+        from: accounts[0],
+      });
+    console.log(tx);
+  }
+
   useEffect(() => {
     console.log("RESELLNfast", resellNfast);
+    // 0xB51b46860041F1E0e0e27ba2Ab44c05C74CC746c
+    const tokenId = resellNfast.nfastHash;
+    console.log(tokenId);
+    approveToSell(tokenId);
   }, [resellNfast]);
 
+  useEffect(() => {
+    const nextInputs = { ...inputs, nfastHopePrice: comparePrice };
+    setInputs(nextInputs);
+  }, [comparePrice]);
+
+  console.log(comparePrice);
   const toggleDrawer1 = () => {
+    dispatch(storeAction.getNfastPrice(nfastSequence));
     setDrawer1Open(!drawer1Open);
   };
 

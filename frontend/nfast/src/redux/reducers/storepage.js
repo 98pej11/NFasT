@@ -30,6 +30,7 @@ function storepage(state = initialState, action = {}) {
       console.log("PLAYOD", payload);
       return { ...state, purchaseInfo: payload.data.nfasts };
     case "GET_NFAST_PRICE":
+      console.log("SSSSSSSSSSSSSSSSSSSS", payload.data);
       return { ...state, nfastPrice: payload.data.nfastPrice };
     case "GET_RESELL_NFAST":
       console.log("ddddddddddd", payload.data);

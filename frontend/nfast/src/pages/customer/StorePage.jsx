@@ -62,7 +62,7 @@ export default function StorePage() {
     const tx = await NFasTContract.methods
       .transferFrom(owner, accounts[0], _tokenId)
       .send({
-        from: accounts[0],
+        from: "0xFF771D1615931a69fcaC581d47832A5323Aa647f",
         // value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
       });
     console.log("??? 됏니?");
