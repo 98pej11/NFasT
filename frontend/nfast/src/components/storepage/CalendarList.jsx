@@ -105,7 +105,7 @@ function CalendarList() {
 
   return (
     <Wrapper>
-      <h2>구매하기</h2>
+      <h4>구매하기</h4>
       <Calendar onClickDay={handleDayClick} value={value} />
       {showButtons && <StoreSwitch setMealType={setMealType} />}
       {/* {mealData && <p>선택한 식사: {mealData}</p>} */}

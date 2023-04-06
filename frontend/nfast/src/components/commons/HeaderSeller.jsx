@@ -83,7 +83,20 @@ function HeaderSeller() {
           {isLogin ? (
             <div>
               <Button
-                sx={{ backgroundColor: "#BCB6FF", color: "white" }}
+                sx={{
+                  backgroundColor: "white",
+                  border: "solid 1px #5B5299",
+                  borderRadius: "50px",
+                  color: "#5B5299",
+                  width: "70px",
+                  height: "30px",
+                  fontSize: "10px",
+                  margin: "0px 5px",
+                  "&:hover": {
+                    backgroundColor: "#5B5299",
+                    color: "white",
+                  },
+                }}
                 type="submit"
                 variant="contained"
                 disableElevation

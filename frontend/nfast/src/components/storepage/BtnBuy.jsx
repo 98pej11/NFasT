@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React from "react";
 
 import { useDispatch } from "react-redux";
@@ -10,19 +11,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-const StyleBtn = styled(Button)`
-  margin: 17%;
-  width: 120px;
-  height: 50px;
-  && {
-    background-color: #bcb6ff;
-    color: white;
-    &:hover {
-      background-color: #c9c5fc;
-    }
-  }
-  font-size: 20px;
-`;
+
 function BtnBye() {
   const dispatch = useDispatch();
 
@@ -34,9 +23,26 @@ function BtnBye() {
 
   return (
     <Wrapper>
-      <StyleBtn variant="contained" onClick={onClickHandler}>
+      <Button
+        sx={{
+          backgroundColor: "white",
+          border: "solid 1px #bcb6ff",
+          borderRadius: "50px",
+          color: "#5B5299",
+          width: "110px",
+          height: "40px",
+          fontSize: "13px",
+          margin: "0px 5px",
+          "&:hover": {
+            backgroundColor: "#5B5299",
+            color: "white",
+          },
+        }}
+        variant="contained"
+        onClick={onClickHandler}
+      >
         구매
-      </StyleBtn>
+      </Button>
     </Wrapper>
   );
 }

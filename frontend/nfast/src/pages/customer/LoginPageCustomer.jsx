@@ -30,7 +30,7 @@ export default function LoginPage() {
             alignItems: "center",
           }}
         >
-          <img src={logo} alt="" />
+          <img style={{ width: "300px" }} src={logo} alt="" />
           <Typography
             variant="h6"
             sx={{ color: "#5B5299", marginBottom: "20px" }}
