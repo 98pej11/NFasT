@@ -91,7 +91,6 @@ function StoreInfo(props) {
 
 export default StoreInfo;
 const Wrapper = styled.div`
-  margin-top: 20px;
   h2 {
     margin-top: 6%;
     margin-left: 2%;

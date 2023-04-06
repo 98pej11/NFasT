@@ -22,8 +22,8 @@ const slideUpAnimation = keyframes`
 const Wrapper = styled.div`
   padding-top: 0px;
   background-color: white;
-  position: fixed;
-  bottom: 56px; // Height of the BottomNavigation component
+  position: relative;
+
   left: 0;
   right: 0;
   height: calc(100% - 136px); // Height of the BottomNavigation component

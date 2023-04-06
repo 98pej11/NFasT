@@ -19,7 +19,7 @@ export default function MyBookMark() {
   const Styled = styled.div`
     text-align: center;
     h4 {
-      margin-top: 150px;
+      margin-top: 50px;
       margin-bottom: 70px;
     }
   `;

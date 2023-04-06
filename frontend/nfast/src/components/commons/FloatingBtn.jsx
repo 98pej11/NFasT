@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled, { keyframes } from "styled-components";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+// import FloatingCodePen from "./FloatingCodePen";
 import FloatingCards from "./FloatingCards";
 import { mainAction } from "../../redux/actions/mainAction";
 import { getSequence } from "../../storage/Cookie";
@@ -21,7 +22,7 @@ const FloatingAnimation = keyframes`
 const Wrapper = styled.div``;
 
 const Floating = styled.div`
-  width: 100%;
+  width: 412px;
   display: flex;
   justify-content: center;
 `;
@@ -38,8 +39,8 @@ const Btn = styled.button`
   border: none;
   border-radius: 50px;
   position: fixed;
-  bottom: 60px;
-  right: 30px;
+  bottom: 40px;
+  right: 330px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,6 +64,9 @@ function FloatingBtn() {
     if (floating === "none") {
       dispatch(mainAction.getFloatingNfast(getSequence()));
       setFloating("auto");
+      // const { target } = event;
+      // const currentBottom = parseInt(target.style.bottom, 10) || 0;
+      // target.style.bottom = `${currentBottom + 300}px`;
     } else {
       setFloating("none");
     }

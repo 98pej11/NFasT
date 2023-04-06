@@ -36,7 +36,7 @@ export default function DisAllPage() {
     );
   }, []);
 
-  const distanceList = useSelector((state) => state.mainReducer.stores);
+  const distanceList = useSelector((state) => state.mainReducer.storesDistance);
   // eslint-disable-next-line
   console.log(distanceList);
 
@@ -54,7 +54,7 @@ export default function DisAllPage() {
   // distanceList를 이용한 코드 구현
   return (
     distanceList && (
-      <div style={{ marginTop: 100 }}>
+      <div>
         <Line>
           <Title>
             <DepartureBoardTwoToneIcon />

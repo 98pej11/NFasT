@@ -7,6 +7,7 @@ const Wrap = styled.div`
 const Ticket = styled.div`
   display: inline-block;
   margin: 0 auto;
+  height: 20px;
   border: 2px solid #9facbc;
   font-family: "Variable Bahnschrift", "FF DIN", "Franklin Gothic",
     "Helvetica Neue", sans-serif;
@@ -105,9 +106,12 @@ const TicketBarcode = styled.img`
   max-width: 100%;
 `;
 
+const CodePen = styled.div`
+  height: 50%;
+`;
 function FloatingCodePen() {
   return (
-    <div>
+    <CodePen>
       <Wrap aria-label="A fake boat ticket demonstrating mixing font weights and widths">
         <Ticket aria-hidden="true">
           <TicketHeader>
@@ -169,7 +173,7 @@ function FloatingCodePen() {
           </TicketBody>
         </Ticket>
       </Wrap>
-    </div>
+    </CodePen>
   );
 }
 

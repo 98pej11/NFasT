@@ -119,7 +119,7 @@ const Styledh2 = styled.div`
   margin-left: 5%;
   margin-right: 5%;
   h4 {
-    margin-top: 130px;
+    margin-top: 50px;
     margin-bottom: 40px;
   }
 `;

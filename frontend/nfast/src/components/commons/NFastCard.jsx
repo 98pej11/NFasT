@@ -64,8 +64,9 @@ const Ticket = styled.div`
     left: auto;
   }
   background-color: whitesmoke;
-  width: 380px;
-  height: 140px;
+  border: 3px solid #9f9bb5;
+  width: 350px;
+  height: 150px;
   border-top: groove 20px #bcb6ff;
   display: flex;
   flex-wrap: wrap;
@@ -91,13 +92,14 @@ const QR = styled.div`
 const StyleBtn = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   Button {
     margin: 2%;
-    width: 80px;
+    width: 75px;
     height: 30px;
     background-color: #bcb6ff;
     color: white;
-    font-size: 12px;
+    font-size: 10px;
   }
 `;
 
@@ -146,18 +148,17 @@ function NFastCard() {
         <Ticket>
           <Info>
             <div>
-              <span>{storeName}</span>
-              <span>{nfastPrice} ETH</span>
+              <div>{storeName}</div>
+              <div>{nfastPrice} ETH</div>
             </div>
             <div>
-              <span>
+              <div>
                 {`${new Date(nfastDate).getFullYear()}.
                 ${new Date(nfastDate).getMonth()}.
                 ${new Date(nfastDate).getDay()}`}
-              </span>
+              </div>
               <div>
-                <span>{nfastStartTime}</span>
-                <span>{nfastEndTime}</span>
+                <span>{nfastStartTime}</span> ~ <span>{nfastEndTime}</span>
               </div>
             </div>
             <div>
@@ -210,7 +211,9 @@ function NFastCard() {
         <div
           style={{
             textAlign: "center",
-            marginTop: 30,
+            marginTop: 20,
+            fontSize: 13,
+            color: "Red",
           }}
         >
           환불 QR 코드를 사장님께 보여주세요!
