@@ -55,12 +55,13 @@ function Header() {
   return (
     <AppBar
       elevation={0}
-      position="absolute"
+      position="relative"
       variant="outlined"
       style={{
         backgroundColor: "transparent",
         height: "80px",
         boxShadow: "none",
+        maxWidth: "412px",
       }}
     >
       <Container maxWidth="xl">
