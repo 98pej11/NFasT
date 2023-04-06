@@ -73,6 +73,7 @@ const Ticket = styled.div`
 `;
 const Info = styled.div`
   flex: 1;
+
   width: 150px;
   height: 140px;
   display: flex;
@@ -80,6 +81,9 @@ const Info = styled.div`
   flex-direction: column;
   & > div:not(:last-child) {
     margin: 6%;
+  }
+  div {
+    font-size: 14px;
   }
 `;
 const QR = styled.div`
@@ -93,6 +97,7 @@ const StyleBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 7%;
   Button {
     margin: 2%;
     width: 75px;
@@ -148,63 +153,83 @@ function NFastCard() {
         <Ticket>
           <Info>
             <div>
-              <div>{storeName}</div>
-              <div>{nfastPrice} ETH</div>
-            </div>
-            <div>
-              <div>
-                {`${new Date(nfastDate).getFullYear()}.
+              {floatingNfast ? (
+                <div>
+                  <div style={{ margin: "2% 0% 0% 2%" }}>
+                    <div
+                      style={{
+                        marginBottom: "5%",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {storeName}
+                    </div>
+                    <div>{nfastPrice} ETH</div>
+                  </div>
+                  <div>
+                    <div style={{ margin: "2% 0% 0% 2%" }}>
+                      {`${new Date(nfastDate).getFullYear()}.
                 ${new Date(nfastDate).getMonth()}.
                 ${new Date(nfastDate).getDay()}`}
-              </div>
-              <div>
-                <span>{nfastStartTime}</span> ~ <span>{nfastEndTime}</span>
-              </div>
-            </div>
-            <div>
-              <StyleBtn>
-                <Button
-                  variant="contained"
-                  onClick={() => useStateRoute(nfastSequence)}
-                >
-                  사용확인
-                </Button>
-                {isRefunded ? (
-                  <div>
-                    <Button variant="contained" disabled>
-                      판매완료
-                    </Button>
+                    </div>
+                    <div style={{ margin: "2% 0% 0% 2%" }}>
+                      <span>{nfastStartTime}</span> ~{" "}
+                      <span>{nfastEndTime}</span>
+                    </div>
                   </div>
-                ) : (
-                  <Button variant="contained" onClick={toggleDrawer2}>
-                    환불하기
-                  </Button>
-                )}
-              </StyleBtn>
+                  <div>
+                    <StyleBtn>
+                      <Button
+                        variant="contained"
+                        onClick={() => useStateRoute(nfastSequence)}
+                      >
+                        사용확인
+                      </Button>
+                      {isRefunded ? (
+                        <div>
+                          <Button variant="contained" disabled>
+                            판매완료
+                          </Button>
+                        </div>
+                      ) : (
+                        <Button variant="contained" onClick={toggleDrawer2}>
+                          환불하기
+                        </Button>
+                      )}
+                    </StyleBtn>
+                  </div>
+                </div>
+              ) : (
+                <div style={{ textAlign: "center" }}>
+                  예정된 NFT가 없습니다.
+                </div>
+              )}
             </div>
           </Info>
-
-          <QR>
-            {!qrStatus ? (
-              <QRCode
-                value={JSON.stringify({
-                  nfastSequence,
-                  type: 1,
-                })}
-                size="100"
-                fgColor="rgba(37, 74, 205, 1)"
-              />
-            ) : (
-              <QRCode
-                value={JSON.stringify({
-                  nfastSequence,
-                  type: 2,
-                })}
-                size="100"
-                fgColor="rgba(255, 55, 55, 1)"
-              />
-            )}
-          </QR>
+          {floatingNfast && (
+            <QR>
+              {!qrStatus ? (
+                <QRCode
+                  value={JSON.stringify({
+                    nfastSequence,
+                    type: 1,
+                  })}
+                  size="100"
+                  fgColor="rgba(37, 74, 205, 1)"
+                />
+              ) : (
+                <QRCode
+                  value={JSON.stringify({
+                    nfastSequence,
+                    type: 2,
+                  })}
+                  size="100"
+                  fgColor="rgba(255, 55, 55, 1)"
+                />
+              )}
+            </QR>
+          )}
         </Ticket>
       </Wrapper>
       {isRefunded ? (

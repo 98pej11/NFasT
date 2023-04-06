@@ -24,6 +24,7 @@ export default function LoginPage() {
       <Container component="main" maxWidth="xs" m={30}>
         <Box
           sx={{
+            marginTop: 10,
             gap: 3,
             display: "flex",
             flexDirection: "column",

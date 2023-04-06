@@ -12,12 +12,15 @@ function SellerIncome() {
   }, []);
   const incomeList = useSelector((state) => state.publishReducer.incomeList);
   console.log(incomeList);
-  return (
-    incomeList.length !== 0 && (
-      <div>
-        <IncomeTable incomeList={incomeList} />
-      </div>
-    )
+  return incomeList.length !== 0 ? (
+    <div>
+      <IncomeTable incomeList={incomeList} />
+    </div>
+  ) : (
+    <div style={{ textAlign: "center", marginTop: 30 }}>
+      {" "}
+      현재 수익이 없습니다.{" "}
+    </div>
   );
 }
 export default SellerIncome;
