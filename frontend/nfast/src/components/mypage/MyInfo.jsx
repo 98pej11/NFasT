@@ -19,7 +19,7 @@ const Styledh2 = styled.div`
   justify-content: center;
   align-items: center;
   h4 {
-    margin-top: 70px;
+    margin-top: 40px;
     margin-bottom: 50px;
   }
   p {

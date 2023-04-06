@@ -13,7 +13,7 @@ import { getAccessToken, getSequence } from "../../storage/Cookie";
 import { mainAction } from "../../redux/actions/mainAction";
 import { mypageAction } from "../../redux/actions/mypageAction";
 import Footer from "../../components/commons/Footer";
-import FloatingCodePen from "../../components/commons/FloatingCodePen";
+// import FloatingCodePen from "../../components/commons/FloatingCodePen";
 
 // import Container from "@mui/material/Container";
 // import Grid from "@mui/material/Grid";
@@ -58,7 +58,6 @@ function MainPage() {
   return (
     <div>
       <Section>
-        <div style={{ marginTop: 100 }} />
         <Line>
           <Title>
             <DepartureBoardTwoToneIcon />
@@ -110,7 +109,7 @@ function MainPage() {
       </Section>
       <Footer />
       <FloatingBtn>Floating</FloatingBtn>
-      <FloatingCodePen />
+      {/* <FloatingCodePen /> */}
     </div>
   );
 }
@@ -118,7 +117,7 @@ function MainPage() {
 export default MainPage;
 
 const Section = styled.div`
-  margin-top: 50px;
+  margin-top: 10px;
   margin-bottom: 50px;
 `;
 const Line = styled.div`

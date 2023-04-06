@@ -8,6 +8,7 @@ import { storeAction } from "../../redux/actions/storeAction";
 
 const Wrapper = styled.div`
   width: 100%;
+  margin-bottom: 20px;
   display: flex;
   justify-content: flex-end;
 `;
@@ -29,7 +30,7 @@ function BtnBye() {
           border: "solid 1px #bcb6ff",
           borderRadius: "50px",
           color: "#5B5299",
-          width: "110px",
+          width: "100px",
           height: "40px",
           fontSize: "13px",
           margin: "0px 5px",
