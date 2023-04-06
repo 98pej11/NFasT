@@ -162,6 +162,7 @@ function getNfastPrice(nfastSequence) {
 }
 
 function registSell(data) {
+  console.log("REGISTSELL", data);
   return async (dispatch) => {
     await axios
       .post(

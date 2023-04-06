@@ -58,11 +58,17 @@ export default function StorePage() {
     // });
     console.log(tokenOwner);
     console.log(accounts[0]);
+    let proxyOwner;
+    if (accounts[0] === "0xFF771D1615931a69fcaC581d47832A5323Aa647f") {
+      proxyOwner = owner;
+    } else {
+      proxyOwner = "0xFF771D1615931a69fcaC581d47832A5323Aa647f";
+    }
     console.log(_tokenId);
     const tx = await NFasTContract.methods
-      .transferFrom(owner, accounts[0], _tokenId)
+      .transferFrom(proxyOwner, accounts[0], _tokenId)
       .send({
-        from: "0xFF771D1615931a69fcaC581d47832A5323Aa647f",
+        from: accounts[0],
         // value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
       });
     console.log("??? 됏니?");
