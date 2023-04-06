@@ -51,13 +51,10 @@ function App() {
   return (
     <Wrapper>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<IntroCustomer1 />} />
-        </Routes>
-
+        {flag ? <Header /> : <HeaderSeller />}
         <Pages>
-          {flag ? <Header /> : <HeaderSeller />}
           <Routes>
+            <Route path="/" element={<IntroCustomer1 />} />
             <Route path="/introCustomer2" element={<IntroCustomer2 />} />
             <Route path="/introCustomer3" element={<IntroCustomer3 />} />
             <Route path="/mainPage" element={<MainPage />} />

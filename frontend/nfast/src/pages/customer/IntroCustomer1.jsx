@@ -87,7 +87,7 @@ const Text = styled.div`
 `;
 const Img = styled.div`
   width: 412px;
-  height: 915px;
+  height: 850px;
   display: flex;
   justify-content: flex-start;
 
@@ -96,9 +96,9 @@ const Img = styled.div`
   }
 `;
 const TextImg = styled.div`
-  width: 52%;
+  width: 50%;
   height: 15%;
-  margin-top: 200px;
+  margin-top: 180px;
   margin-left: 40px;
   display: flex;
   justify-content: flex-start;
@@ -108,7 +108,7 @@ const TextImg = styled.div`
   }
 `;
 const OnImg = styled.div`
-  margin-top: 30px;
+  margin-top: 35px;
   margin-left: 90px;
   width: 50%;
   height: 15%;
@@ -142,7 +142,7 @@ const ProfilBox = styled.div`
 const SubTitleBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 325px;
+  margin-top: 290px;
   font-color: rgb(0, 0, 0);
   span {
     width: 100%;
