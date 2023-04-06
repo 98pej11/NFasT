@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
-import { mypageAction } from "../../redux/actions/mypageAction";
 import { toStringByFormatting } from "../../api/transDate";
+import { mypageAction } from "../../redux/actions/mypageAction";
 
 const Wrapper = styled.div`
   display: flex;
@@ -112,23 +112,23 @@ function PastTicket({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [flag, setFlag] = useState(false);
-  // useEffect(() => {}, []);
-
   const storeSequence = useSelector(
     (state) => state.mypageReducer.storeSequence
   );
   const handleRevisit = (nfastSequence) => {
+    console.log("NNNNNNNNNN", nfastSequence);
     dispatch(mypageAction.getStoreSequence(nfastSequence));
     setFlag(true);
     console.log("hehehehehehey");
   };
 
   useEffect(() => {
-    if (flag === true) {
+    if (flag) {
       console.log("성공오오오오옹", storeSequence);
+      setFlag(false);
       navigate(`/store/${storeSequence}`);
     }
-  });
+  }, [storeSequence]);
 
   return (
     <Wrapper>

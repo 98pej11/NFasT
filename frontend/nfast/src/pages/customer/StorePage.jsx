@@ -14,10 +14,10 @@ import { storeAction } from "../../redux/actions/storeAction";
 import FloatingBtn from "../../components/commons/FloatingBtn";
 import {
   web3,
-  // NFasTContract,
+  NFasTContract,
   saleFactory,
   // ssafyTokenContract,
-  createSaleContract,
+  // createSaleContract,
 } from "../../components/axios/web3";
 
 export default function StorePage() {
@@ -31,20 +31,48 @@ export default function StorePage() {
   });
 
   // 구매
-  async function purchase(sale, saleInfo) {
+  async function purchase(owner, saleCA, _tokenId) {
     console.log("purchase sale");
-    console.log(sale);
-    console.log(saleInfo);
+    console.log(_tokenId);
     await window.ethereum.request({ method: "eth_requestAccounts" });
     const accounts = await web3.eth.getAccounts();
+    // const ap = await NFasTContract.methods
+    //   .approve(accounts[0], _tokenId)
+    //   .send({ from: "0x1CF49C51C6059385A5E6E9A45d3cd090F857c9Ad" });
+    // console.log("승인 줬을텐데~ 외않되", ap);
     console.log("??? 될까?");
-    const tx = await sale.methods.purchase().send({
-      from: accounts[0],
-      // value: web3.utils.toWei("0.0", "ether"),
-    });
+    const preTX = await NFasTContract.methods.getApproved(_tokenId).call();
+    const tokenOwner = NFasTContract.methods.ownerOf(_tokenId).call();
+    console.log("토큰 주인도 얘가 맞잖아 :", tokenOwner);
+    console.log(
+      "여기 좀 봐! 권한을 받았어 못 받았어?! 권한이 있는 주소가 반환 돼: ",
+      preTX
+    );
+    console.log("??? saleCA?", saleCA);
+    console.log("??? saleCA?", saleCA);
+    console.log("??? saleCA?", saleCA);
+    console.log("??? saleCA?", saleCA);
+    // const saleContract = createSaleContract(saleCA);
+    // const tx = await saleContract.methods.purchase().send({
+    //   from: saleCA,
+    // });
+    console.log(tokenOwner);
+    console.log(accounts[0]);
+    console.log(_tokenId);
+    const tx = await NFasTContract.methods
+      .transferFrom(owner, accounts[0], _tokenId)
+      .send({
+        from: accounts[0],
+        // value: web3.utils.toWei("0.1", "ether"), // Optional: set the amount of ether to send with the transaction
+      });
     console.log("??? 됏니?");
     console.log(tx);
   }
+
+  // async function getSellerAddress(saleContract) {
+  //   console.log(saleContract);
+  //   return saleContract.methods.getSellerAddress().call();
+  // }
   useEffect(() => {
     dispatch(storeAction.getStoreDetail(storeSequence));
   }, []);
@@ -72,35 +100,59 @@ export default function StorePage() {
   useEffect(() => {
     console.log("123");
     console.log(data);
-    saleFactory.getPastEvents(
-      "NewSale",
-      {
-        // filter: { _workId: 10 }, // nftId가 1번인 것으로 필터해서 보여주기
-        // filter: { _owner: `${address}` }, // 가게 사장 거래 중 nft들 모두 불러오기
-        fromBlock: 0,
-        toBlock: "latest",
-      },
-      (err, event) => {
-        // console.log(address);
-        // console.log(err);
-        // console.log(event);
-        // console.log(event[0].returnValues[2]); // tokenId , data[tokenCnt].nfastHash +1 == event[0].returnValues[2]
-        // eslint-disable-next-line no-underscore-dangle
-        // console.log(event[0].returnValues._saleContract); // sale 주소
-        let tokenCnt;
-        for (tokenCnt = 0; tokenCnt < data.length; tokenCnt += 1) {
-          const saleIdx = data[tokenCnt].nfastHash;
-          const saleInfo = event[saleIdx].returnValues;
-          // eslint-disable-next-line no-underscore-dangle
-          const saleCA = saleInfo._saleContract;
-          const saleContract = createSaleContract(saleCA);
-          console.log(saleContract);
-          console.log(purchase);
-          // purchase(saleContract, saleInfo);
-        }
+    saleFactory.getPastEvents("NewSale", { fromBlock: 0 }, (error, events) => {
+      console.log(error);
+      console.log("newSale 이벤트 배열 : ", events);
+      console.log("data(데이타) : ", data);
+      for (let i = 0; i < data.length; i += 1) {
+        const saleIdx = data[i].nfastHash - 1;
+        const purchaseData = events[saleIdx].returnValues;
+        console.log("purchaseData : ", purchaseData);
+        purchase(purchaseData[1], purchaseData[0], data[i].nfastHash);
       }
-    );
+    });
+    // saleFactory.events
+    //   .NewSale({ fromBlock: 0 }, (err, event) => {
+    //     console.log(event);
+    //   })
+    //   .on("connected", (subscriptionId) => {
+    //     console.log("subscriptionId : ", subscriptionId);
+    //   })
+    //   .on("data", (event) => {
+    //     console.log(event);
+    //     console.log("event.returnValues : ", event.returnValues);
+    //     console.log("event.returnValues[1] : ", event.returnValues[1]);
+    //     const purchaseData = event.returnValues;
+    //     // data.nfastHash.push(event.returnValues[1]);
+    //     purchase(purchaseData[1], purchaseData[0], purchaseData[2]);
+    //     console.log(purchase);
+    //   })
+    //   .on("changed", (event) => {
+    //     console.log("event.returnValues : ", event.returnValues);
+    //   })
+    //   .on("error", (error, receipt) => {
+    //     console.log("receipt : ", receipt);
+    //   });
   }, [data]);
+  // console.log(address);
+  // for (let i = 0; i < data.length; i += 1) {
+  //   const eigenValue = data[i].nfastHash; // nfastHah - 1 이 sale arr의 index
+  //   const saleIdx = eigenValue - 1;
+  //   console.log("판매 희망 토큰 아이디", eigenValue);
+  //   console.log(event[saleIdx]);
+  //   const saleInfo = event[saleIdx].returnValues;
+  //   console.log(saleInfo);
+  //   console.log(event[saleIdx].returnValues[0]);
+  //   // eslint-disable-next-line no-underscore-dangle
+  //   const saleCA = event[saleIdx].returnValues[0];
+  //   const saleContract = createSaleContract(saleCA);
+  //   console.log("외않되:", saleContract);
+  //   const SA = saleContract.methods.getsellerAddress().call();
+  //   console.log(SA);
+  //   purchase(saleCA, SA, eigenValue);
+  // }
+  // }
+  // );
 
   console.log("STORE DETAIL", storedetail);
   return (

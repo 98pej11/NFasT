@@ -146,13 +146,21 @@ function FutureTicket(props) {
     nfastHopePrice: "",
     nfastSequence,
   });
+  const comparePrice = useSelector(
+    (state) => state.storepageReducer.nfastPrice
+  );
+
+  const resellNfast = useSelector(
+    (state) => state.storepageReducer.resellNfast
+  );
+
   useEffect(() => {
     dispatch(storeAction.getNfastPrice(nfastSequence));
   }, []);
 
-  const comparePrice = useSelector(
-    (state) => state.storepageReducer.nfastPrice
-  );
+  useEffect(() => {
+    console.log("RESELLNfast", resellNfast);
+  }, [resellNfast]);
 
   const toggleDrawer1 = () => {
     setDrawer1Open(!drawer1Open);

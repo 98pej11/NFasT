@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface IncomeListRepository extends JpaRepository<IncomeList,Long> {
-    List<IncomeList> findAllByStoreSequence(Long storeSequence);
+    List<IncomeList> findAllByStoreSequenceOrderByIncomeListDateDesc(Long storeSequence);
 
     // 전체 수익 중 민팅 수입
     @Query(value="select * from income_list where store_sequence=:storeSequence and month(income_list_date)=month(now()) and income_list_type=0", nativeQuery = true)

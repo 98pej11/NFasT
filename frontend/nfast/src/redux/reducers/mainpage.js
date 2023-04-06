@@ -1,5 +1,6 @@
 const initialState = {
-  stores: [],
+  storesDistance: [],
+  storesTrans: [],
   nfast: "",
   usage: 0,
 };
@@ -8,10 +9,10 @@ function mainpage(state = initialState, action = {}) {
   switch (type) {
     case "GET_DISTANCE_LIST_SUCCESS":
       //   console.log(payload);
-      return { ...state, stores: payload.data };
+      return { ...state, storesDistance: payload.data };
     case "GET_TRANS_LIST_SUCCESS":
       //   console.log(payload);
-      return { ...state, stores: payload.data };
+      return { ...state, storesTrans: payload.data };
     case "GET_FLOATING_NFAST":
       // eslint-disable-next-line no-console
       console.log(payload.data.nfast);

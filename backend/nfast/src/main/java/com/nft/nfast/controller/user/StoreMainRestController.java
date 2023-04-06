@@ -58,9 +58,10 @@ public class StoreMainRestController {
     //판매 등록
     @PostMapping("/{storeSequence}/sale")
     public ResponseEntity<Map<String,Object>> tradeDone(@PathVariable("storeSequence") long storeSequence, @RequestBody NfastTradeDoneDto nfastTradeDoneDto){
-        userMainService.saveTradeNfast(nfastTradeDoneDto);
+        NfastDto nfastDto = userMainService.saveTradeNfast(nfastTradeDoneDto);
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("result",SUCCESS);
+        resultMap.put("nfast",nfastDto);
         return new ResponseEntity<>(resultMap, HttpStatus.ACCEPTED);
     }
 
