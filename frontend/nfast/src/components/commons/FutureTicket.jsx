@@ -83,18 +83,7 @@ const QR = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const StyleBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  Button {
-    margin: 2%;
-    width: 80px;
-    height: 30px;
-    background-color: #bcb6ff;
-    color: white;
-    font-size: 12px;
-  }
-`;
+
 const ConfirmBtn = styled.div`
   display: flex;
   justify-content: center;
@@ -201,11 +190,25 @@ function FutureTicket(props) {
             </div>
           </div>
           <div>
-            <StyleBtn>
-              <Button variant="contained" onClick={toggleDrawer1}>
-                판매하기
-              </Button>
-            </StyleBtn>
+            <Button
+              sx={{
+                backgroundColor: "#bcb6ff",
+                borderRadius: "50px",
+                color: "white",
+                width: "90px",
+                height: "30px",
+                fontSize: "10px",
+                margin: "0px 5px",
+                "&:hover": {
+                  backgroundColor: "#5B5299",
+                  color: "white",
+                },
+              }}
+              variant="contained"
+              onClick={toggleDrawer1}
+            >
+              판매하기
+            </Button>
 
             {/* 첫 번째 Drawer 내용 */}
             <MyDrawer
@@ -250,7 +253,24 @@ function FutureTicket(props) {
                   />
                 </Input>
                 <ConfirmBtn>
-                  <Button variant="contained" onClick={sellTicket}>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "white",
+                      border: "solid 1px #bcb6ff",
+                      borderRadius: "50px",
+                      color: "#5B5299",
+                      width: "110px",
+                      height: "40px",
+                      fontSize: "13px",
+                      margin: "0px 5px",
+                      "&:hover": {
+                        backgroundColor: "#5B5299",
+                        color: "white",
+                      },
+                    }}
+                    onClick={sellTicket}
+                  >
                     판매하기
                   </Button>
                 </ConfirmBtn>

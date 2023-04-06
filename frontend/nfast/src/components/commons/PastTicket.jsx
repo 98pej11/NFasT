@@ -99,18 +99,6 @@ const Review = styled.div`
 //   margin-bottom: 2%;
 //   font-size: 10pt;
 // `;
-const StyleBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  Button {
-    margin: 2%;
-    width: 80px;
-    height: 30px;
-    background-color: #bcb6ff;
-    color: white;
-    font-size: 12px;
-  }
-`;
 
 function PastTicket({
   storeName,
@@ -158,14 +146,25 @@ function PastTicket({
             </div>
           </div>
           <div>
-            <StyleBtn>
-              <Button
-                variant="contained"
-                onClick={() => handleRevisit(nfastSequence)}
-              >
-                재방문
-              </Button>
-            </StyleBtn>
+            <Button
+              sx={{
+                backgroundColor: "#bcb6ff",
+                borderRadius: "50px",
+                color: "white",
+                width: "90px",
+                height: "30px",
+                fontSize: "10px",
+                margin: "0px 5px",
+                "&:hover": {
+                  backgroundColor: "#5B5299",
+                  color: "white",
+                },
+              }}
+              variant="contained"
+              onClick={() => handleRevisit(nfastSequence)}
+            >
+              재방문
+            </Button>
           </div>
         </Info>
         <Review>{nfastReview}</Review>

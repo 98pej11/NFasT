@@ -13,6 +13,7 @@ import { getAccessToken, getSequence } from "../../storage/Cookie";
 import { mainAction } from "../../redux/actions/mainAction";
 import { mypageAction } from "../../redux/actions/mypageAction";
 import Footer from "../../components/commons/Footer";
+import FloatingCodePen from "../../components/commons/FloatingCodePen";
 
 // import Container from "@mui/material/Container";
 // import Grid from "@mui/material/Grid";
@@ -109,6 +110,7 @@ function MainPage() {
       </Section>
       <Footer />
       <FloatingBtn>Floating</FloatingBtn>
+      <FloatingCodePen />
     </div>
   );
 }

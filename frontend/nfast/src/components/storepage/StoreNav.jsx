@@ -38,7 +38,6 @@ export default function StoreNav() {
     console.log("redux에서 어떻게 넘어오니 : ", isBookMark);
     console.log(bookmark);
   }, [bookmark]);
-
   const toggleCalendar = () => {
     setShowCalendar((prev) => !prev);
   };
@@ -86,14 +85,23 @@ export default function StoreNav() {
         <BottomNavigationAction
           icon={
             bookmark === "BookmarkIcon" ? (
-              <BookmarkIcon />
+              <BookmarkIcon sx={{ color: "#5B5299" }} />
             ) : (
-              <BookmarkBorderIcon />
+              <BookmarkBorderIcon sx={{ color: "#5B5299" }} />
             )
           }
           onClick={toggleBookmark}
         />
-        <BottomNavigationAction label="구매하기" onClick={toggleCalendar} />
+        <BottomNavigationAction
+          label={showCalendar ? "돌아가기" : "구매하기"}
+          onClick={toggleCalendar}
+          sx={{
+            color: "#5B5299",
+            "&:hover": {
+              color: "#5B5299",
+            },
+          }}
+        />
       </BottomNavigation>
       <div
         style={{
