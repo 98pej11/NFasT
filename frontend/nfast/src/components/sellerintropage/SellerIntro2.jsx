@@ -133,4 +133,5 @@ const MoreContentIconBox = styled.div`
   animation-name: ${downIconAnimation};
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  bottom: 0;
 `;

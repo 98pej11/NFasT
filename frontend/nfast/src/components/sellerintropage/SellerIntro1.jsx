@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import intro1 from "../../assets/Intro1_Seller.png";
 
 const ProfilBox = styled.div`
-  height: 10vh;
+  height: 1vh;
   display: flex;
   align-items: center;
   flex-direction: column;

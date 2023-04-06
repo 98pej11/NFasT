@@ -19,8 +19,8 @@ const PageLink = styled(Link)`
   width: 500px;
 `;
 const Box = styled(Paper)`
-  width: 60%;
-  height: 120px;
+  width: 50%;
+  height: 100px;
   background-color: blue;
   margin: 20px 0px;
   border-radius: 100%;
