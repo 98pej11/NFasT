@@ -1,6 +1,4 @@
-/**
- *  PJT Ⅲ - Req.1-SC3) 시나리오 테스트
- */
+
 const SsafyToken = artifacts.require("SsafyToken");
 const Nfast = artifacts.require("Nfast");
 const SaleFactory = artifacts.require("SaleFactory");
@@ -66,8 +64,6 @@ contract("Sale Contract Testing", (accounts) => {
     salesContract = (
       await factory.createSale(1, price, getTime(), getTime() + 1000000)
     ).logs[0].address;
-    //        console.log(salesContract)
-    //        console.log(await factory.allSales())
     assert.equal(salesContract, (await factory.allSales())[0], "create sale");
   });
 
@@ -101,7 +97,6 @@ contract("Sale Contract Testing", (accounts) => {
     console.log(await token.balanceOf(buyer2));
     console.log(await token.balanceOf(salesContract));
     console.log(await token.balanceOf(salesContract2));
-    //        assert.equal(await nfast.getIsUse(1), 1, "nft is use");
   });
 
   it("4_withdraw", async () => {
@@ -121,8 +116,6 @@ contract("Sale Contract Testing", (accounts) => {
     console.log(await token.balanceOf(buyer2));
     console.log(await token.balanceOf(salesContract));
     console.log(await token.balanceOf(salesContract2));
-
-    //        assert.equal(await nfast.getIsUse(1), 1, "nft is use");
   });
 
   function getTime() {

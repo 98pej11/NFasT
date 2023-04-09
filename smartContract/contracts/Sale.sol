@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./access/Ownable.sol";
-import "./token/ERC20/ERC20.sol";
-import "./token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
+import "./token/ERC20/IERC20.sol";
 import "./Nfast.sol";
-import "./SaleFactory.sol";
 import "./utils/math/SafeMath.sol";
 
 contract Sale is Ownable,IERC721Receiver {
@@ -32,6 +31,8 @@ contract Sale is Ownable,IERC721Receiver {
     address public currencyAddress;
     //nfast 주소
     address public nftAddress;
+    //SaleFactory 주소
+    address public saleFactoryAddress;
 
 
 
@@ -47,9 +48,9 @@ contract Sale is Ownable,IERC721Receiver {
     event Refund(uint256 indexed _nftId,address _to);
 
 
-    constructor (uint256 _nftId, uint256 _price, bool _isStore, uint256 _startDate, uint256 _endDate, address _currencyAddress, address _nftAddress, address _sellerAddress){
-        require(_price > 0, "price error");
-//        require(_endDate > block.timestamp,"time error");
+    constructor (uint256 _nftId, uint256 _price, bool _isStore, uint256 _startDate, uint256 _endDate, address _currencyAddress, address _nftAddress, address _sellerAddress, address _saleFactoryAddress){
+        // require(_price > 0, "price error");
+        // require(_endDate > block.timestamp,"time error");
         nftId = _nftId;
         price = _price;
         sellerAddress = _sellerAddress;
@@ -61,26 +62,31 @@ contract Sale is Ownable,IERC721Receiver {
         erc20Contract = IERC20(_currencyAddress);
         erc721Contract = Nfast(_nftAddress);
         isStore=_isStore;
+        saleFactoryAddress = _saleFactoryAddress;
     }
 
 
     function purchase()
     public
     payable
-    onlyAfterStart onlyEndDate {
+    {
+    // onlyAfterStart onlyEndDate {
         //판매 판매시간 확인
         // 판매자가 티켓 주인인지 확인
-        require(sellerAddress == erc721Contract.ownerOf(nftId), "seller is not owner");
+        // require(sellerAddress == erc721Contract.ownerOf(nftId), "seller is not owner");
         // 금액이 있는지 확인
-        require(price <= erc20Contract.balanceOf(msg.sender), "balance is not enough");
+        // require(price <= erc20Contract.balanceOf(msg.sender), "balance is not enough");
         //todo approve
         //금액 전송
-        erc20Contract.transferFrom(msg.sender, address(this), price);
-        //nft 전송
-        erc721Contract.safeTransferFrom(sellerAddress, msg.sender, nftId);
+        // erc20Contract.transferFrom(msg.sender, address(this), price);
+        // //nft 전송
+        erc721Contract.transferFrom(sellerAddress, msg.sender, nftId);
+
 
         buyerAddress = msg.sender;
-        end();
+
+        isEnd = true;
+        emit Purchase(nftId,sellerAddress,buyerAddress);
     }
 
     function refund()
@@ -132,14 +138,12 @@ contract Sale is Ownable,IERC721Receiver {
     returns (uint256, uint256, uint256, uint256, address, bool, address, address)    {
         return (startDate, endDate, price, nftId, erc721Contract.getStoreAddress(nftId), isEnd, currencyAddress, nftAddress);
     }
-
-    // function balanceOf() public view returns (uint256) {
-    //     return currencyAddress.balanceOf(address(this));
-    // }
-
-    function end() private {
-        isEnd = true;
-        emit Purchase(nftId,sellerAddress,buyerAddress);
+    function getsellerAddress()
+    public
+    view
+    returns (address)
+    {
+        return sellerAddress;
     }
 
     function onERC721Received (address operator, address from, uint256 tokenId, bytes memory data)

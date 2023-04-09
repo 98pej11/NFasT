@@ -1,4 +1,3 @@
-//const Migrations = artifacts.require("Migrations");
 const SsafyToken = artifacts.require("SsafyToken");
 const Nfast = artifacts.require("Nfast");
 const SaleFactory = artifacts.require("SaleFactory")

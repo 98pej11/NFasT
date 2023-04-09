@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./token/ERC721/ERC721.sol";
-import "../node_modules/@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Nfast is ERC721 {
+contract Nfast is ERC721, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private tokenIds;
@@ -27,6 +28,9 @@ contract Nfast is ERC721 {
     mapping(uint256 => uint256) price;
     //수수료
     mapping(uint256 => uint) charge;
+    //판매 관리 객체
+    address private _saleFactoryAddress;
+
 
     event CreateAll(address indexed _store, uint256[] tokenIds);
 
@@ -39,15 +43,23 @@ contract Nfast is ERC721 {
         return tokenIds.current();
     }
 
+    function setSaleFactoryAddress(address saleFactoryAddress) public {
+        _saleFactoryAddress = saleFactoryAddress;
+    }
+
+    // 이건 SaleFactory 객체에서 이용하기 위해 생성
+    function approveSaleFactory(address owner) public {
+        _setApprovalForAll(owner, _saleFactoryAddress, true);
+    }
+
     function create(address _to, string memory _tokenURI, address _storeAddress, uint256 _date, bool _mealType, uint256 _startTime, uint256 _endTime, uint256 _price, uint _charge)
     public
-    payable
     returns (uint256)
     {
 
         tokenIds.increment();
         uint256 newTokenId = tokenIds.current();
-        _mint(_storeAddress, newTokenId);
+        _mint(msg.sender, newTokenId);
 
         tokenURIs[newTokenId] = _tokenURI;
         isUse[newTokenId] = false;
@@ -59,22 +71,26 @@ contract Nfast is ERC721 {
         price[newTokenId] = _price;
         charge[newTokenId] = _charge;
 
-        //가게에게 판매 허용
-        //        approve(_to, newTokenId);
         return newTokenId;
+    }
+
+    function approveAndTransfer(address _from, address _to, uint256 _tokenId) public {
+        require(_isApprovedOrOwner(msg.sender, _tokenId), "ERC721: transfer caller is not owner nor approved");
+
+        _approve(_to, _tokenId);
+        transferFrom(_from, _to, _tokenId);
     }
 
     function createAll(uint256 _numTokens, address  _to, string  calldata _tokenURI, address  _storeAddress, uint256  _date, bool  _mealType, uint256  _startTime, uint256  _endTime, uint256  _price, uint256  _charge
     )
     public
-    payable
     returns (uint256[] memory) {
         require(_numTokens > 0, "Number of tokens must be greater than zero");
 
-        uint256[] memory tokenIds = new uint256[](_numTokens);
+        uint256[] memory returnTokenIds = new uint256[](_numTokens);
 
         for (uint256 i = 0; i < _numTokens; i++) {
-            tokenIds[i] = create(
+            returnTokenIds[i] = create(
                 _to,
                 _tokenURI,
                 _storeAddress,
@@ -87,8 +103,8 @@ contract Nfast is ERC721 {
             );
         }
 
-        emit CreateAll(_storeAddress,tokenIds);
-        return tokenIds;
+        emit CreateAll(_storeAddress,returnTokenIds);
+        return returnTokenIds;
     }
 
     function _burn(uint256 _tokenId)
